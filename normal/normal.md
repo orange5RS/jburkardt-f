@@ -1,6 +1,5 @@
 
-# NORMAL
-Normal Random Number Generators
+# NORMAL: Normal Random Number Generators
 
 NORMAL is a FORTRAN90 library which returns a sequence of normally distributed pseudorandom numbers.
 
