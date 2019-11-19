@@ -1,0 +1,361 @@
+# R4LIB: A Single Precision Real Arithmetic Utility Library
+R4LIB is a FORTRAN90 library which contains a number of utility routines for "R4" or "single precision real" arithmetic.
+
+## Licensing:
+The computer code and data files described and made available on this web page are distributed under the GNU LGPL license.
+
+## Languages:
+R4LIB is available in a C version and a C++ version and a FORTRAN77 version and a FORTRAN90 version.
+
+## Related Data and Programs:
+- C4LIB, a FORTRAN90 library which implements certain elementary functions for "C4" or single precision complex variables;
+- C8LIB, a FORTRAN90 library which implements certain elementary functions for "C8" or double precision complex variables;
+- I4LIB, a FORTRAN90 library which contains many utility routines, using "I4" or "single precision integer" arithmetic.
+- I8LIB, a FORTRAN90 library which contains many utility routines, using "I8" or "double precision integer" arithmetic.
+- R16LIB, a FORTRAN90 library which contains many utility routines, using "R16" or "quadruple precision real" arithmetic.
+- R8LIB, a FORTRAN90 library which contains many utility routines, using "R8" or "double precision real" arithmetic.
+- SUBPAK, a FORTRAN90 library which contains many utility routines;
+
+## Source Code:
+- r4lib.f90, the source code;
+- r4lib.sh, commands to compile the source code;
+
+## Examples and Tests:
+- r4lib_prb.f90, a sample calling program;
+- r4lib_prb.sh, commands to compile, link and run the sample calling program;
+- r4lib_prb_output.txt, the output file.
+
+## List of Routines:
+- GET_UNIT returns a free FORTRAN unit number.
+- I4_LOG_10 returns the integer part of the logarithm base 10 of an I4.
+- I4_MODP returns the nonnegative remainder of I4 division.
+- I4_UNIFORM returns a scaled pseudorandom I4.
+- I4_WRAP forces an I4 to lie between given limits by wrapping.
+- I4INT_TO_R4INT maps an I4INT to an R4INT.
+- I4VEC_INDICATOR sets an I4VEC to the indicator vector.
+- I4VEC_PERMUTE permutes an I4VEC in place.
+- I4VEC_PRINT prints an I4VEC.
+- PERM_CHECK checks that a vector represents a permutation.
+- PERM_UNIFORM selects a random permutation of N objects.
+- R4_ABS returns the absolute value of an R4.
+- R4_ADD returns the sum of two R4's.
+- R4_ATAN computes the inverse tangent of the ratio Y / X.
+- R4_CAS returns the "casine" of an R4.
+- R4_CEILING rounds an R4 "up" (towards +oo) to the next I4.
+- R4_CHOOSE computes the binomial coefficient C(N,K) as an R4.
+- R4_CHOP chops an R4 to a given number of binary places.
+- R4_CSQRT returns the complex square root of an R4.
+- R4_CUBE_ROOT returns the cube root of an R4.
+- R4_DIFF computes the difference of two R4's to a specified accuracy.
+- R4_DIGIT returns a particular decimal digit of an R4.
+- R4_EPSILON returns the R4 roundoff unit.
+- R4_EXP computes the exponential function, avoiding overflow and underflow.
+- R4_FACTORIAL computes the factorial of N.
+- R4_FACTORIAL2 computes the double factorial function.
+- R4_FLOOR rounds an R4 "down" (towards -oo) to the next integer.
+- R4_FRACTION uses real arithmetic on an integer ratio.
+- R4_FRACTIONAL returns the fraction part of an R4.
+- R4_HUGE returns the largest legal R4.
+- R4_IN_01 is TRUE if an R4 is in the range [0,1].
+- R4_IS_INT determines if an R4 represents an integer value.
+- R4_LOG_2 returns the logarithm base 2 of an R4.
+- R4_LOG_10 returns the logarithm base 10 of an R4.
+- R4_LOG_B returns the logarithm base B of an R4.
+- R4_MANT computes the "mantissa" or "fraction part" of an R4.
+- R4_MOD returns the remainder of R4 division.
+- R4_MODP returns the nonnegative remainder of R4 division.
+- R4_MOP returns the I-th power of -1 as an R4.
+- R4_NINT returns the nearest integer to an R4.
+- R4_NORMAL returns a scaled pseudonormal R4.
+- R4_NORMAL_01 returns a unit pseudonormal R4.
+- R4_PI returns the value of pi as an R4.
+- R4_POWER computes the P-th power of an R4.
+- R4_POWER_FAST computes an integer power of an R4.
+- R4_PYTHAG computes sqrt ( A * A + B * B ), avoiding overflow and underflow.
+- R4_ROUND2 rounds an R4 to a specified number of binary digits.
+- R4_ROUNDB rounds an R4 to a given number of digits in a given base.
+- R4_ROUNDX rounds an R4.
+- R4_SIGN returns the sign of an R4.
+- R4_SIGN_OPPOSITE is TRUE if two R4's are not of the same sign.
+- R4_SIGN_OPPOSITE_STRICT is TRUE if two R4's are strictly of opposite sign.
+- R4_SWAP swaps two R4's.
+- R4_SWAP3 swaps three R4's.
+- R4_TINY returns the smallest positive R4.
+- R4_TO_R4_DISCRETE maps R to RD in [RMIN, RMAX] with NR possible values.
+- R4_TO_DHMS converts decimal days into days, hours, minutes, seconds.
+- R4_TO_I4 maps X in [XMIN, XMAX] to integer IX in [IXMIN, IXMAX].
+- R4_UNIFORM returns a scaled pseudorandom R4.
+- R4_UNIFORM_01 returns a unit pseudorandom R4.
+- R4_UNSWAP3 unswaps three R4's.
+- R4_WALSH_1D evaluates the Walsh function.
+- R4COL_COMPARE compares columns in an R4COL.
+- R4COL_DUPLICATES generates an R4COL with some duplicate columns.
+- R4COL_FIND seeks a column value in an R4COL.
+- R4COL_FIRST_INDEX indexes the first occurrence of values in an R4COL.
+- R4COL_INSERT inserts a column into an R4COL.
+- R4COL_MAX returns the maximums in an R4COL.
+- R4COL_MAX_INDEX returns the indices of column maximums in an R4COL.
+- R4COL_MAX_ONE rescales an R4COL so each column maximum is 1.
+- R4COL_MEAN returns the column means of an R4COL.
+- R4COL_MIN returns the column minimums of an R4COL.
+- R4COL_MIN_INDEX returns the indices of column minimums in an R4COL.
+- R4COL_PART_QUICK_A reorders the columns of an R4COL.
+- R4COL_PERMUTE permutes an R4COL in place.
+- R4COL_SORT_HEAP_A ascending heapsorts an R4COL.
+- R4COL_SORT_HEAP_INDEX_A does an indexed heap ascending sort of an R4COL.
+- R4COL_SORT_QUICK_A ascending quick sorts an R4COL.
+- R4COL_SORTED_TOL_UNDEX indexes tolerably unique entries in a sorted R4COL.
+- R4COL_SORTED_TOL_UNIQUE keeps tolerably unique elements in a sorted R4COL.
+- R4COL_SORTED_TOL_UNIQUE_COUNT: tolerably unique elements in a sorted R4COL.
+- R4COL_SORTED_UNDEX returns unique sorted indexes for a sorted R4COL.
+- R4COL_SORTED_UNIQUE keeps unique elements in a sorted R4COL.
+- R4COL_SORTED_UNIQUE_COUNT counts unique elements in a sorted R4COL.
+- R4COL_SORTR_A ascending sorts one column of an R4COL, adjusting all columns.
+- R4COL_SUM sums the columns of an R4COL.
+- R4COL_SWAP swaps columns I and J of an R4COL.
+- R4COL_TO_R8VEC converts an R4COL to an R4VEC.
+- R4COL_TOL_UNDEX indexes tolerably unique entries of an R4COL.
+- R4COL_TOL_UNIQUE_COUNT counts tolerably unique entries in an R4COL.
+- R4COL_TOL_UNIQUE_INDEX indexes tolerably unique entries in an R4COL.
+- R4COL_UNDEX returns unique sorted indexes for an R4COL.
+- R4COL_UNIQUE_COUNT counts the unique columns in an unsorted R4COL.
+- R4COL_UNIQUE_INDEX indexes the unique occurrence of values in an R4COL.
+- R4COL_VARIANCE returns the variances of an R4COL.
+- R4MAT_BORDER_ADD adds a "border" to an R4MAT.
+- R4MAT_BORDER_CUT cuts the "border" of an R4MAT.
+- R4MAT_CHOLESKY_FACTOR computes the Cholesky factor of a symmetric matrix.
+- R4MAT_CHOLESKY_SOLVE solves a Cholesky factored linear system A * x = b.
+- R4MAT_CHORESKY_FACTOR computes the "Choresky" factor of a symmetric matrix.
+- R4MAT_COPY copies an R4MAT.
+- R4MAT_DET computes the determinant of an R4MAT.
+- R4MAT_DET_2D computes the determinant of a 2 by 2 R4MAT.
+- R4MAT_DET_3D computes the determinant of a 3 by 3 R4MAT.
+- R4MAT_DET_4D computes the determinant of a 4 by 4 R4MAT.
+- R4MAT_DET_5D computes the determinant of a 5 by 5 R4MAT.
+- R4MAT_DIAG_ADD_SCALAR adds a scalar to the diagonal of an R4MAT.
+- R4MAT_DIAG_ADD_VECTOR adds a vector to the diagonal of an R4MAT.
+- R4MAT_DIAG_GET_VECTOR gets the value of the diagonal of an R4MAT.
+- R4MAT_DIAG_SET_SCALAR sets the diagonal of an R4MAT to a scalar value.
+- R4MAT_DIAG_SET_VECTOR sets the diagonal of an R4MAT to a vector.
+- R4MAT_EXPAND_LINEAR linearly interpolates new data into an R4MAT.
+- R4MAT_EXPAND_LINEAR2 expands an R4MAT by linear interpolation.
+- R4MAT_GIVENS_POST computes the Givens postmultiplier rotation matrix.
+- R4MAT_GIVENS_PRE computes the Givens premultiplier rotation matrix.
+- R4MAT_HESS approximates a Hessian matrix via finite differences.
+- R4MAT_HOUSE_AXH computes A*H where H is a compact Householder matrix.
+- R4MAT_HOUSE_FORM constructs a Householder matrix from its compact form.
+- R4MAT_HOUSE_HXA computes H*A where H is a compact Householder matrix.
+- R4MAT_HOUSE_POST computes a Householder post-multiplier matrix.
+- R4MAT_HOUSE_PRE computes a Householder pre-multiplier matrix.
+- R4MAT_IDENTITY stores the identity matrix in an R4MAT.
+- R4MAT_IN_01 is TRUE if the entries of an R4MAT are in the range [0,1].
+- R4MAT_INDICATOR sets up an "indicator" R4MAT.
+- R4MAT_INVERSE_2D inverts a 2 by 2 R4MAT using Cramer's rule.
+- R4MAT_INVERSE_3D inverts a 3 by 3 R4MAT using Cramer's rule.
+- R4MAT_INVERSE_4D inverts a 4 by 4 R4MAT using Cramer's rule.
+- R4MAT_JAC estimates a dense jacobian matrix of the function FX.
+- R4MAT_L_INVERSE inverts a lower triangular R4MAT.
+- R4MAT_L_PRINT prints a lower triangular R4MAT.
+- R4MAT_L_SOLVE solves a lower triangular linear system.
+- R4MAT_L1_INVERSE inverts a unit lower triangular R4MAT.
+- R4MAT_LT_SOLVE solves a transposed lower triangular linear system.
+- R4MAT_LU computes the LU factorization of a rectangular R4MAT.
+- R4MAT_MAX returns the maximum entry of an R4MAT.
+- R4MAT_MAX_INDEX returns the location of the maximum entry of an R4MAT.
+- R4MAT_MAXCOL_MINROW gets the maximum column minimum row of an M by N R4MAT.
+- R4MAT_MAXROW_MINCOL gets the maximum row minimum column of an M by N R4MAT.
+- R4MAT_MIN returns the minimum entry of an M by N R4MAT.
+- R4MAT_MIN_INDEX returns the location of the minimum entry of an R4MAT.
+- R4MAT_MINCOL_MAXROW gets the minimum column maximum row of an M by N R4MAT.
+- R4MAT_MINROW_MAXCOL gets the minimum row maximum column of an M by N R4MAT.
+- R4MAT_MM multiplies two R4MAT's.
+- R4MAT_MTV multiplies a transposed matrix times a vector
+- R4MAT_MV multiplies a matrix times a vector.
+- R4MAT_NINT rounds the entries of an R4MAT.
+- R4MAT_NORM_EIS returns the EISPACK norm of an R4MAT.
+- R4MAT_NORM_FRO returns the Frobenius norm of an R4MAT.
+- R4MAT_NORM_L1 returns the matrix L1 norm of an R4MAT.
+- R4MAT_NORM_L2 returns the matrix L2 norm of an R4MAT.
+- R4MAT_NORM_LI returns the matrix L-oo norm of an R4MAT.
+- R4MAT_NULLSPACE computes the nullspace of a matrix.
+- R4MAT_NULLSPACE_SIZE computes the size of the nullspace of a matrix.
+- R4MAT_ORTH_UNIFORM returns a random orthogonal R4MAT.
+- R4MAT_PLOT "plots" an R4MAT, with an optional title.
+- R4MAT_PLOT_SYMBOL returns a symbol for an element of an R4MAT.
+- R4MAT_POLY_CHAR computes the characteristic polynomial of an R4MAT.
+- R4MAT_POWER computes a nonnegative power of an R4MAT.
+- R4MAT_POWER_METHOD applies the power method to an R4MAT.
+- R4MAT_PRINT prints an R4MAT.
+- R4MAT_PRINT_SOME prints some of an R4MAT.
+- R4VEC_01_TO_AB shifts and rescales an R4VEC to lie within given bounds.
+- R4VEC_AB_TO_01 shifts and rescales an R4VEC to lie within [0,1].
+- R4VEC_AB_TO_CD shifts and rescales an R4VEC from one interval to another.
+- R4VEC_AMAX returns the maximum absolute value in an R4VEC.
+- R4VEC_AMAX_INDEX returns the index of the maximum absolute value in an R4VEC.
+- R4VEC_AMIN returns the minimum absolute value in an R4VEC.
+- R4VEC_AMIN_INDEX returns the index of the minimum absolute value in an R4VEC.
+- R4VEC_ANY_NORMAL returns some normal vector to V1.
+- R4VEC_ASCENDS determines if an R4VEC is (weakly) ascending.
+- R4VEC_ASCENDS_STRICTLY determines if an R4VEC is strictly ascending.
+- R4VEC_BLEND performs weighted interpolation of two R4VEC's.
+- R4VEC_BRACKET searches a sorted R4VEC for successive brackets of a value.
+- R4VEC_BRACKET2 searches a sorted R4VEC for successive brackets of a value.
+- R4VEC_BRACKET3 finds the interval containing or nearest a given value.
+- R4VEC_BRACKET4 finds the nearest interval to each of a vector of values.
+- R4VEC_CEILING rounds "up" (towards +oo) entries of an R4VEC.
+- R4VEC_CIRCULAR_VARIANCE returns the circular variance of an R4VEC.
+- R4VEC_COMPARE compares two R4VEC's.
+- R4VEC_CONVOLVE_CIRC returns the discrete circular convolution of two R4VEC's.
+- R4VEC_COPY copies an R4VEC.
+- R4VEC_CORRELATION returns the correlation of two R4VEC's.
+- R4VEC_CROSS_PRODUCT_2D finds the cross product of a pair of vectors in 2D.
+- R4VEC_CROSS_PRODUCT_AFFINE_2D finds the affine cross product in 2D.
+- R4VEC_CROSS_PRODUCT_3D computes the cross product of two R4VEC's in 3D.
+- R4VEC_CROSS_PRODUCT_AFFINE_3D computes the affine cross product in 3D.
+- R4VEC_CUM computes the cumulutive sum of the entries of an R4VEC.
+- R4VEC_DIF computes coefficients for estimating the N-th derivative.
+- R4VEC_DIFF_NORM returns the L2 norm of the difference of R4VEC's.
+- R4VEC_DIFF_NORM_L1 returns the L1 norm of the difference of R4VEC's.
+- R4VEC_DIFF_NORM_L2 returns the L2 norm of the difference of R4VEC's.
+- R4VEC_DIFF_NORM_LI returns the L-oo norm of the difference of R4VEC's.
+- R4VEC_DIRECT_PRODUCT creates a direct product of R4VEC's.
+- R4VEC_DIRECT_PRODUCT2 creates a direct product of R4VEC's.
+- R4VEC_DISTANCE returns the Euclidean distance between two R4VEC's.
+- R4VEC_DISTINCT is true if the entries in an R4VEC are distinct.
+- R4VEC_DOT_PRODUCT finds the dot product of a pair of R4VEC's.
+- R4VEC_DOT_PRODUCT_AFFINE computes the affine dot product V1-V0 * V2-V0.
+- R4VEC_EQ is true if two R4VECs are equal.
+- R4VEC_EVEN returns an R4VEC of evenly spaced values.
+- R4VEC_EVEN_SELECT returns the I-th of N evenly spaced values in [ XLO, XHI ].
+- R4VEC_EVEN2 linearly interpolates new numbers into an R4VEC.
+- R4VEC_EVEN3 evenly interpolates new data into an R4VEC.
+- R4VEC_EXPAND_LINEAR linearly interpolates new data into an R4VEC.
+- R4VEC_EXPAND_LINEAR2 linearly interpolates new data into an R4VEC.
+- R4VEC_FIRST_INDEX indexes the first occurrence of values in an R4VEC.
+- R4VEC_FLOOR rounds "down" (towards -oo) entries of an R4VEC.
+- R4VEC_FRAC searches for the K-th smallest entry in an R4VEC.
+- R4VEC_FRACTION returns the fraction parts of an R4VEC.
+- R4VEC_GT == ( A1 > A2 ) for R4VEC's.
+- R4VEC_HEAP_A reorders an R4VEC into an ascending heap.
+- R4VEC_HEAP_D reorders an R4VEC into an descending heap.
+- R4VEC_HEAP_D_EXTRACT: extract maximum from a heap descending sorted R4VEC.
+- R4VEC_HEAP_D_INSERT inserts a value into a heap descending sorted R4VEC.
+- R4VEC_HEAP_D_MAX returns the maximum value in a heap descending sorted R4VEC.
+- R4VEC_HISTOGRAM histograms an R4VEC.
+- R4VEC_HOUSE_COLUMN defines a Householder premultiplier that "packs" a column.
+- R4VEC_I4VEC_DOT_PRODUCT finds the dot product of an R4VEC and an I4VEC.
+- R4VEC_IN_01 is TRUE if the entries of an R4VEC are in the range [0,1].
+- R4VEC_INDEX_DELETE_ALL deletes a value from an indexed sorted R4VEC.
+- R4VEC_INDEX_DELETE_DUPES deletes duplicates from an indexed sorted R4VEC.
+- R4VEC_INDEX_DELETE_ONE deletes one copy of a value from indexed sorted R4VEC.
+- R4VEC_INDEX_INSERT inserts a value in an indexed sorted R4VEC.
+- R4VEC_INDEX_INSERT_UNIQUE inserts a unique value in an indexed sorted R4VEC.
+- R4VEC_INDEX_ORDER sorts an R4VEC using an index vector.
+- R4VEC_INDEX_SEARCH searches for a value in an indexed sorted R4VEC.
+- R4VEC_INDEX_SORT_UNIQUE creates a sorted unique index for an R4VEC.
+- R4VEC_INDEX_SORTED_RANGE: search index sorted vector for elements in a range.
+- R4VEC_INDEXED_HEAP_D creates a descending heap from an indexed R4VEC.
+- R4VEC_INDEXED_HEAP_D_EXTRACT: extract from heap descending indexed R4VEC.
+- R4VEC_INDEXED_HEAP_D_INSERT: insert value into heap descending indexed R4VEC.
+- R4VEC_INDEXED_HEAP_D_MAX: maximum value in heap descending indexed R4VEC.
+- R4VEC_INDICATOR sets an R4VEC to the indicator vector.
+- R4VEC_INSERT inserts a value into an R4VEC.
+- R4VEC_IS_INT is TRUE if the entries of an R4VEC are integers.
+- R4VEC_LINSPACE creates a vector of linearly spaced values.
+- R4VEC_LT == ( A1 < A2 ) for R4VEC's.
+- R4VEC_MASK_PRINT prints a masked R4VEC.
+- R4VEC_MAX returns the maximum value in an R4VEC.
+- R4VEC_MAX_INDEX returns the index of the maximum value in an R4VEC.
+- R4VEC_MEAN returns the mean of an R4VEC.
+- R4VEC_MEDIAN returns the median of an unsorted R4VEC.
+- R4VEC_MIN returns the minimum value of an R4VEC.
+- R4VEC_MIN_INDEX returns the index of the minimum value in an R4VEC.
+- R4VEC_MIN_POS returns the minimum positive value of an R4VEC.
+- R4VEC_MIRROR_NEXT steps through all sign variations of an R4VEC.
+- R4VEC_NEGATIVE_STRICT: every element of an R4VEC is strictly negative.
+- R4VEC_NINT rounds entries of an R4VEC.
+- R4VEC_NORM returns the L2 norm of an R4VEC.
+- R4VEC_NORM_AFFINE returns the affine norm of an R4VEC.
+- R4VEC_NORM_L1 returns the L1 norm of an R4VEC.
+- R4VEC_NORM_L2 returns the L2 norm of an R4VEC.
+- R4VEC_NORM_LI returns the L-oo norm of an R4VEC.
+- R4VEC_NORM_LP returns the LP norm of an R4VEC.
+- R4VEC_NORM_SQUARED returns the square of the L2 norm of an R4VEC.
+- R4VEC_NORMAL_01 returns a unit pseudonormal R4VEC.
+- R4VEC_NORMALIZE normalizes an R4VEC in the Euclidean norm.
+- R4VEC_NORMALIZE_L1 normalizes an R4VEC to have unit sum.
+- R4VEC_NORMSQ returns the square of the L2 norm of an R4VEC.
+- R4VEC_NORMSQ_AFFINE returns the affine squared norm of an R4VEC.
+- R4VEC_ORDER_TYPE determines if R4VEC is (non)strictly ascending/descending.
+- R4VEC_PART_QUICK_A reorders an R4VEC as part of a quick sort.
+- R4VEC_PERMUTE permutes an R4VEC in place.
+- R4VEC_PERMUTE_CYCLIC performs a cyclic permutation of an R4VEC.
+- R4VEC_PERMUTE_UNIFORM randomly permutes an R4VEC.
+- R4VEC_POLARIZE decomposes an R4VEC into normal and parallel components.
+- R4VEC_POSITIVE_STRICT: every element of an R4VEC is strictly positive.
+- R4VEC_PRINT prints an R4VEC.
+- R4VEC_PRINT_PART prints "part" of an R4VEC.
+- R4VEC_PRINT_SOME prints "some" of an R4VEC.
+- R4VEC_PRINT2 prints out an R4VEC.
+- R4VEC_PRODUCT returns the product of the entries of an R4VEC.
+- R4VEC_RANGE finds the range of Y's within a restricted X range.
+- R4VEC_RANGE_2 updates a range to include a new array.
+- R4VEC_REVERSE reverses the elements of an R4VEC.
+- R4VEC_ROTATE "rotates" the entries of an R4VEC in place.
+- R4VEC_SCALAR_TRIPLE_PRODUCT computes the scalar triple product.
+- R4VEC_SEARCH_BINARY_A searches an ascending sorted R4VEC.
+- R4VEC_SHIFT performs a shift on an R4VEC.
+- R4VEC_SHIFT_CIRCULAR performs a circular shift on an R4VEC.
+- R4VEC_SORT_BUBBLE_A ascending sorts an R4VEC using bubble sort.
+- R4VEC_SORT_BUBBLE_D descending sorts an R4VEC using bubble sort.
+- R4VEC_SORT_HEAP_A ascending sorts an R4VEC using heap sort.
+- R4VEC_SORT_HEAP_D descending sorts an R4VEC using heap sort.
+- R4VEC_SORT_HEAP_INDEX_A does an indexed heap ascending sort of an R4VEC.
+- R4VEC_SORT_HEAP_INDEX_D does an indexed heap descending sort of an R4VEC.
+- R4VEC_SORT_HEAP_MASK_A: indexed heap ascending sort of a masked R4VEC.
+- R4VEC_SORT_INSERT_A ascending sorts an R4VEC using an insertion sort.
+- R4VEC_SORT_INSERT_INDEX_A ascending index sorts an R4VEC using insertion.
+- R4VEC_SORT_INSERT_INDEX_D descending index sorts an R4VEC using insertion.
+- R4VEC_SORT_QUICK_A ascending sorts an R4VEC using quick sort.
+- R4VEC_SORT_SHELL_A ascending sorts an R4VEC using Shell's sort.
+- R4VEC_SORT2_A ascending sorts an R4VEC and adjusts an associated R4VEC.
+- R4VEC_SORTED_MERGE_A merges two ascending sorted R4VEC's.
+- R4VEC_SORTED_NEAREST returns the nearest element in a sorted R4VEC.
+- R4VEC_SORTED_RANGE searches a sorted vector for elements in a range.
+- R4VEC_SORTED_SPLIT "splits" a sorted R4VEC, given a splitting value.
+- R4VEC_SORTED_UNDEX returns unique sorted indexes for a sorted R4VEC.
+- R4VEC_SORTED_UNIQUE keeps the unique elements in a sorted R4VEC.
+- R4VEC_SORTED_UNIQUE_COUNT counts the unique elements in a sorted R4VEC.
+- R4VEC_SORTED_UNIQUE_HIST histograms the unique elements of a sorted R4VEC.
+- R4VEC_SPLIT "splits" an unsorted R4VEC based on a splitting value.
+- R4VEC_STD returns the standard deviation of an R4VEC.
+- R4VEC_STUTTER makes a "stuttering" copy of an R4VEC.
+- R4VEC_SUM returns the sum of the entries of an R4VEC.
+- R4VEC_SWAP swaps the entries of two R4VECs.
+- R4VEC_TRANSPOSE_PRINT prints an R4VEC "transposed".
+- R4VEC_UNDEX returns unique sorted indexes for an R4VEC.
+- R4VEC_UNIFORM returns a scaled pseudorandom R4VEC.
+- R4VEC_UNIFORM_01 returns a unit pseudorandom R4VEC.
+- R4VEC_UNIQUE_COUNT counts the unique elements in an unsorted R4VEC.
+- R4VEC_UNIQUE_INDEX indexes the unique occurrence of values in an R4VEC.
+- R4VEC_VARIANCE returns the variance of an R4VEC.
+- R4VEC_VECTOR_TRIPLE_PRODUCT computes the vector triple product.
+- R4VEC_WRITE writes an R4VEC to a file.
+- R4VEC_ZERO zeroes out an R4VEC.
+- R4VEC2_COMPARE compares two entries in an R4VEC2.
+- R4VEC2_PRINT prints an R4VEC2.
+- R4VEC2_PRINT_SOME prints "some" of an R4VEC2.
+- R4VEC2_SORT_A ascending sorts an R4VEC2.
+- R4VEC2_SORT_D descending sorts an R4VEC2.
+- R4VEC2_SORT_HEAP_INDEX_A does an indexed heap ascending sort of an R4VEC2.
+- R4VEC2_SORTED_UNIQUE keeps unique elements in a sorted R4VEC2.
+- R4VEC2_SORTED_UNIQUE_INDEX indexes unique elements in a sorted R4VEC2.
+- R4VEC2_SUM_MAX_INDEX returns the index of the maximum sum of two R4VEC's.
+- R4VEC3_PRINT prints an R4VEC3.
+- ROOTS_TO_R4POLY converts polynomial roots to polynomial coefficients.
+- SORT_HEAP_EXTERNAL externally sorts a list of items into ascending order.
+- TIMESTAMP prints the current YMDHMS date as a time stamp.
+
+You can go up one level to the FORTRAN90 source codes.
+
+Last revised on 01 May 2011. 
