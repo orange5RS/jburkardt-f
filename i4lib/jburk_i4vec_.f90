@@ -141,10 +141,10 @@ implicit none
    end interface       i4vec_heap_d_insert
    public             i4vec_heap_d_insert
 
-   interface          i4vec_heap_d_max
+   interface           i4vec_heap_d_max
       module procedure i4vec_heap_d_max
    end interface       i4vec_heap_d_max
-   public             i4vec_heap_d_max
+   public              i4vec_heap_d_max
 
    interface          i4vec_indicator
       module procedure i4vec_indicator
@@ -156,15 +156,15 @@ implicit none
    end interface       i4vec_median
    public             i4vec_median
 
-   ! interface          i4vec_pop
+   ! interface           i4vec_pop
    !    module procedure i4vec_pop
    ! end interface       i4vec_pop
-   ! public             i4vec_pop
+   ! public              i4vec_pop
 
-   interface          i4vec_print
+   interface           i4vec_print
       module procedure i4vec_print
    end interface       i4vec_print
-   public             i4vec_print
+   public              i4vec_print
 
    ! interface          i4vec_push
    !    module procedure i4vec_push
@@ -181,10 +181,10 @@ implicit none
    end interface       i4vec_sort_heap_d
    public              i4vec_sort_heap_d
 
-   ! interface          i4vec_split_unsort
-   !    module procedure i4vec_split_unsort
-   ! end interface       i4vec_split_unsort
-   ! public             i4vec_split_unsort
+   interface           i4vec_split_unsort
+      module procedure i4vec_split_unsort
+   end interface       i4vec_split_unsort
+   public              i4vec_split_unsort
 
 
 contains
@@ -213,21 +213,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries.
+   !   Input, integer (kind=4) :: N, the number of entries.
    !
-   !   Input, integer ( kind = 4 ) A(N), the first vector.
+   !   Input, integer (kind=4) :: A(N), the first vector.
    !
-   !   Input, integer ( kind = 4 ) B(N), the second vector.
+   !   Input, integer (kind=4) :: B(N), the second vector.
    !
-   !   Output, integer ( kind = 4 ) C(N), the sum of the vectors.
+   !   Output, integer (kind=4) :: C(N), the sum of the vectors.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) b(n)
-      integer ( kind = 4 ) c(n)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: b(n)
+      integer (kind=4) :: c(n)
    
       c(1:n) = a(1:n) + b(1:n)
    
@@ -259,18 +259,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries.
+   !   Input, integer (kind=4) :: N, the number of entries.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_ALL_NONPOSITIVE is TRUE if all entries
    !   of A are less than or equal to zero.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_all_nonpositive
    
       i4vec_all_nonpositive = all ( a(1:n) <= 0 )
@@ -301,20 +301,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be searched.
+   !   Input, integer (kind=4) :: A(N), the vector to be searched.
    !
-   !   Output, integer ( kind = 4 ) AAMAX, the value of the entry of
+   !   Output, integer (kind=4) :: AAMAX, the value of the entry of
    !   largest magnitude.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aamax
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aamax
+      integer (kind=4) :: i
    
       if ( n <= 0 ) then
    
@@ -356,21 +356,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be searched.
+   !   Input, integer (kind=4) :: A(N), the vector to be searched.
    !
-   !   Output, integer ( kind = 4 ) AMAX_INDEX, the index of the entry
+   !   Output, integer (kind=4) :: AMAX_INDEX, the index of the entry
    !   of largest magnitude.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aamax
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) amax_index
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aamax
+      integer (kind=4) :: i
+      integer (kind=4) :: amax_index
    
       if ( n <= 0 ) then
    
@@ -418,19 +418,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries to be checked.
+   !   Input, integer (kind=4) :: N, the number of entries to be checked.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be checked.
+   !   Input, integer (kind=4) :: A(N), the vector to be checked.
    !
    !   Output, integer AAMIN, the value of the smallest magnitude.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aamin
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aamin
+      integer (kind=4) :: i
    
       if ( n <= 0 ) then
    
@@ -472,21 +472,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries to be checked.
+   !   Input, integer (kind=4) :: N, the number of entries to be checked.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be checked.
+   !   Input, integer (kind=4) :: A(N), the vector to be checked.
    !
-   !   Output, integer ( kind = 4 ) AMIN_INDEX, the entry of the smallest
+   !   Output, integer (kind=4) :: AMIN_INDEX, the entry of the smallest
    !   magnitude.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aamin
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) amin_index
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aamin
+      integer (kind=4) :: i
+      integer (kind=4) :: amin_index
    
       if ( n <= 0 ) then
    
@@ -534,21 +534,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries to be checked.
+   !   Input, integer (kind=4) :: N, the number of entries to be checked.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be checked.
+   !   Input, integer (kind=4) :: A(N), the vector to be checked.
    !
-   !   Output, integer ( kind = 4 ) AMINZ, the value of the smallest nonzero
+   !   Output, integer (kind=4) :: AMINZ, the value of the smallest nonzero
    !   magnitude.  If all entries are zero, AMINZ is 0.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aminz
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) iset
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aminz
+      integer (kind=4) :: i
+      integer (kind=4) :: iset
    
       aminz = 0
       iset = 0
@@ -594,21 +594,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries to be checked.
+   !   Input, integer (kind=4) :: N, the number of entries to be checked.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be checked.
+   !   Input, integer (kind=4) :: A(N), the vector to be checked.
    !
-   !   Output, integer ( kind = 4 ) AMINZ_INDEX, the entry of the smallest
+   !   Output, integer (kind=4) :: AMINZ_INDEX, the entry of the smallest
    !   nonzero magnitude.  If all entries are zero, AMINZ_INDEX is 0.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aminz
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) aminz_index
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aminz
+      integer (kind=4) :: i
+      integer (kind=4) :: aminz_index
    
       aminz = 0
       aminz_index = 0
@@ -652,21 +652,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries.
+   !   Input, integer (kind=4) :: N, the number of entries.
    !
-   !   Input, integer ( kind = 4 ) A(N), the first vector.
+   !   Input, integer (kind=4) :: A(N), the first vector.
    !
-   !   Input, integer ( kind = 4 ) B(N), the second vector.
+   !   Input, integer (kind=4) :: B(N), the second vector.
    !
    !   Output, logical I4VEC_ANY_LT is TRUE if any entry
    !   of A is less than the corresponding entry of B.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) b(n)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: b(n)
       logical i4vec_any_lt
    
       i4vec_any_lt = any ( a(1:n) < b(1:n) )
@@ -697,17 +697,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries.
+   !   Input, integer (kind=4) :: N, the number of entries.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_ANY_NEGATIVE is TRUE if any entry is negative.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_any_negative
    
       i4vec_any_negative = any ( a(1:n) < 0 )
@@ -738,17 +738,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries.
+   !   Input, integer (kind=4) :: N, the number of entries.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_ANY_NONZERO is TRUE if any entry is nonzero.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_any_nonzero
    
       i4vec_any_nonzero = any ( a(1:n) /= 0 )
@@ -781,28 +781,28 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the length of the vector.
+   !   Input, integer (kind=4) :: N, the length of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be examined.
+   !   Input, integer (kind=4) :: A(N), the vector to be examined.
    !
-   !   Output, integer ( kind = 4 ) LENGTH, the length of the longest
+   !   Output, integer (kind=4) :: LENGTH, the length of the longest
    !   increasing subsequence.
    !
-   !   Output, integer ( kind = 4 ) SUB(N), contains in entries 1 through LENGTH
+   !   Output, integer (kind=4) :: SUB(N), contains in entries 1 through LENGTH
    !   a longest increasing subsequence of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) length
-      integer ( kind = 4 ) sub(n)
-      integer ( kind = 4 ) top(n)
-      integer ( kind = 4 ) top_prev(n)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4) :: length
+      integer (kind=4) :: sub(n)
+      integer (kind=4) :: top(n)
+      integer (kind=4) :: top_prev(n)
    
       top(1:n) = 0
       top_prev(1:n) = 0
@@ -885,19 +885,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the array.
+   !   Input, integer (kind=4) :: N, the size of the array.
    !
-   !   Input, integer ( kind = 4 ) X(N), the array to be examined.
+   !   Input, integer (kind=4) :: X(N), the array to be examined.
    !
    !   Output, logical I4VEC_ASCENDS, is TRUE if the entries of X ascend.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
+      integer (kind=4) :: i
       logical i4vec_ascends
-      integer ( kind = 4 ) x(n)
+      integer (kind=4) :: x(n)
    
       i4vec_ascends = .false.
    
@@ -944,35 +944,35 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries of X and Y.
+   !   Input, integer (kind=4) :: N, the number of entries of X and Y.
    !
-   !   Input, integer ( kind = 4 ) IA, the scalar value by which each entry
+   !   Input, integer (kind=4) :: IA, the scalar value by which each entry
    !   of X is multiplied before being added to Y.
    !
-   !   Input, integer ( kind = 4 ) X(*), the vector, a multiple of which is to be
+   !   Input, integer (kind=4) :: X(*), the vector, a multiple of which is to be
    !   added to Y.
    !
-   !   Input, integer ( kind = 4 ) INCX, the increment between successive
+   !   Input, integer (kind=4) :: INCX, the increment between successive
    !   entries of X.
    !
-   !   Input/output, integer ( kind = 4 ) Y(*).
+   !   Input/output, integer (kind=4) :: Y(*).
    !   On output, each entry of Y has been increased by
    !   IA times the corresponding entry of X.
    !
-   !   Input, integer ( kind = 4 ) INCY, the increment between successive
+   !   Input, integer (kind=4) :: INCY, the increment between successive
    !   entries of Y.
    !
       implicit none
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) ia
-      integer ( kind = 4 ) incx
-      integer ( kind = 4 ) incy
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) indy
-      integer ( kind = 4 ) n
-      integer ( kind = 4 ) x(*)
-      integer ( kind = 4 ) y(*)
+      integer (kind=4) :: i
+      integer (kind=4) :: ia
+      integer (kind=4) :: incx
+      integer (kind=4) :: incy
+      integer (kind=4) :: indx
+      integer (kind=4) :: indy
+      integer (kind=4) :: n
+      integer (kind=4) :: x(*)
+      integer (kind=4) :: y(*)
    
       indx = 1
       indy = 1
@@ -1016,14 +1016,14 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, length of input array.
+   !   Input, integer (kind=4) :: N, length of input array.
    !
-   !   Input, integer ( kind = 4 ) A(N), an array that has been sorted
+   !   Input, integer (kind=4) :: A(N), an array that has been sorted
    !   into ascending order.
    !
-   !   Input, integer ( kind = 4 ) XVAL, a value to be bracketed.
+   !   Input, integer (kind=4) :: XVAL, a value to be bracketed.
    !
-   !   Output, integer ( kind = 4 ) LEFT, RIGHT, the results of the search.
+   !   Output, integer (kind=4) :: LEFT, RIGHT, the results of the search.
    !   In the most common case, 1 <= LEFT < LEFT + 1 = RIGHT <= N,
    !   and A(LEFT) <= XVAL <= A(RIGHT).
    !
@@ -1037,15 +1037,15 @@ contains
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) high
-      integer ( kind = 4 ) left
-      integer ( kind = 4 ) low
-      integer ( kind = 4 ) mid
-      integer ( kind = 4 ) right
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: high
+      integer (kind=4) :: left
+      integer (kind=4) :: low
+      integer (kind=4) :: mid
+      integer (kind=4) :: right
+      integer (kind=4) :: xval
    !
    !  XVAL < A(1).
    !
@@ -1144,23 +1144,23 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vectors.
+   !   Input, integer (kind=4) :: N, the number of entries in the vectors.
    !
-   !   Input, integer ( kind = 4 ) A1(N), A2(N), the vectors to be compared.
+   !   Input, integer (kind=4) :: A1(N), A2(N), the vectors to be compared.
    !
-   !   Output, integer ( kind = 4 ) ISGN, the results of the comparison:
+   !   Output, integer (kind=4) :: ISGN, the results of the comparison:
    !   -1, A1 < A2,
    !    0, A1 = A2,
    !   +1, A2 < A1.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) k
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: isgn
+      integer (kind=4) :: k
    
       isgn = 0
    
@@ -1206,18 +1206,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the length of the vectors.
+   !   Input, integer (kind=4) :: N, the length of the vectors.
    !
-   !   Input, integer ( kind = 4 ) A1(N), the vector to be copied.
+   !   Input, integer (kind=4) :: A1(N), the vector to be copied.
    !
-   !   Output, integer ( kind = 4 ) A2(N), a copy of A1.
+   !   Output, integer (kind=4) :: A2(N), a copy of A1.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
    
       a2(1:n) = a1(1:n)
    
@@ -1257,20 +1257,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be summed.
+   !   Input, integer (kind=4) :: A(N), the vector to be summed.
    !
-   !   Output, integer ( kind = 4 ) A_CUM(N), the cumulative sum of the
+   !   Output, integer (kind=4) :: A_CUM(N), the cumulative sum of the
    !   entries of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) a_cum(n)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: a_cum(n)
+      integer (kind=4) :: i
    
       a_cum(1) = a(1)
    
@@ -1317,20 +1317,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be summed.
+   !   Input, integer (kind=4) :: A(N), the vector to be summed.
    !
-   !   Output, integer ( kind = 4 ) A_CUM(0:N), the cumulative sum of the
+   !   Output, integer (kind=4) :: A_CUM(0:N), the cumulative sum of the
    !   entries of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) a_cum(0:n)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: a_cum(0:n)
+      integer (kind=4) :: i
    
       a_cum(0) = 0
    
@@ -1370,19 +1370,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the array.
+   !   Input, integer (kind=4) :: N, the size of the array.
    !
-   !   Input, integer ( kind = 4 ) X(N), the array to be examined.
+   !   Input, integer (kind=4) :: X(N), the array to be examined.
    !
    !   Output, logical I4VEC_DESCENDS, is TRUE if the entries of X descend.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
+      integer (kind=4) :: i
       logical i4vec_descends
-      integer ( kind = 4 ) x(n)
+      integer (kind=4) :: x(n)
    
       i4vec_descends = .false.
    
@@ -1491,17 +1491,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) FACTOR_INDEX, the index of the factor being
+   !   Input, integer (kind=4) :: FACTOR_INDEX, the index of the factor being
    !   processed.  The first factor processed must be factor 1!
    !
-   !   Input, integer ( kind = 4 ) FACTOR_ORDER, the order of the factor.
+   !   Input, integer (kind=4) :: FACTOR_ORDER, the order of the factor.
    !
-   !   Input, integer ( kind = 4 ) FACTOR_VALUE(FACTOR_ORDER), the factor values
+   !   Input, integer (kind=4) :: FACTOR_VALUE(FACTOR_ORDER), the factor values
    !   for factor FACTOR_INDEX.
    !
-   !   Input, integer ( kind = 4 ) FACTOR_NUM, the number of factors.
+   !   Input, integer (kind=4) :: FACTOR_NUM, the number of factors.
    !
-   !   Input, integer ( kind = 4 ) POINT_NUM, the number of elements in the
+   !   Input, integer (kind=4) :: POINT_NUM, the number of elements in the
    !   direct product.
    !
    !   Input/output, integer X(FACTOR_NUM,POINT_NUM), the elements of the
@@ -1509,32 +1509,32 @@ contains
    !
    !  Local Parameters:
    !
-   !   Local, integer ( kind = 4 ) START, the first location of a block of
+   !   Local, integer (kind=4) :: START, the first location of a block of
    !   values to set.
    !
-   !   Local, integer ( kind = 4 ) CONTIG, the number of consecutive values
+   !   Local, integer (kind=4) :: CONTIG, the number of consecutive values
    !   to set.
    !
-   !   Local, integer ( kind = 4 ) SKIP, the distance from the current value
+   !   Local, integer (kind=4) :: SKIP, the distance from the current value
    !   of START to the next location of a block of values to set.
    !
-   !   Local, integer ( kind = 4 ) REP, the number of blocks of values to set.
+   !   Local, integer (kind=4) :: REP, the number of blocks of values to set.
    !
       implicit none
    
-      integer ( kind = 4 ) factor_num
-      integer ( kind = 4 ) factor_order
-      integer ( kind = 4 ) point_num
+      integer (kind=4) :: factor_num
+      integer (kind=4) :: factor_order
+      integer (kind=4) :: point_num
    
-      integer ( kind = 4 ), save :: contig
-      integer ( kind = 4 ) factor_index
-      integer ( kind = 4 ) factor_value(factor_order)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ), save :: rep
-      integer ( kind = 4 ), save :: skip
-      integer ( kind = 4 ) start
-      integer ( kind = 4 ) x(factor_num,point_num)
+      integer (kind=4), save :: contig
+      integer (kind=4) :: factor_index
+      integer (kind=4) :: factor_value(factor_order)
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4), save :: rep
+      integer (kind=4), save :: skip
+      integer (kind=4) :: start
+      integer (kind=4) :: x(factor_num,point_num)
    
       if ( factor_index == 1 ) then
        contig = 1
@@ -1656,50 +1656,50 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) FACTOR_INDEX, the index of the factor being
+   !   Input, integer (kind=4) :: FACTOR_INDEX, the index of the factor being
    !   processed.  The first factor processed must be factor 1!
    !
-   !   Input, integer ( kind = 4 ) FACTOR_ORDER, the order of the factor.
+   !   Input, integer (kind=4) :: FACTOR_ORDER, the order of the factor.
    !
-   !   Input, integer ( kind = 4 ) FACTOR_VALUE(FACTOR_ORDER), the factor values
+   !   Input, integer (kind=4) :: FACTOR_VALUE(FACTOR_ORDER), the factor values
    !   for factor FACTOR_INDEX.
    !
-   !   Input, integer ( kind = 4 ) FACTOR_NUM, the number of factors.
+   !   Input, integer (kind=4) :: FACTOR_NUM, the number of factors.
    !
-   !   Input, integer ( kind = 4 ) POINT_NUM, the number of elements in the
+   !   Input, integer (kind=4) :: POINT_NUM, the number of elements in the
    !   direct product.
    !
-   !   Input/output, integer ( kind = 4 ) W(POINT_NUM), the elements of the
+   !   Input/output, integer (kind=4) :: W(POINT_NUM), the elements of the
    !   direct product, which are built up gradually.
    !
    !  Local Parameters:
    !
-   !   Local, integer ( kind = 4 ) START, the first location of a block of
+   !   Local, integer (kind=4) :: START, the first location of a block of
    !   values to set.
    !
-   !   Local, integer ( kind = 4 ) CONTIG, the number of consecutive values to
+   !   Local, integer (kind=4) :: CONTIG, the number of consecutive values to
    !   set.
    !
-   !   Local, integer ( kind = 4 ) SKIP, the distance from the current value
+   !   Local, integer (kind=4) :: SKIP, the distance from the current value
    !   of START to the next location of a block of values to set.
    !
-   !   Local, integer ( kind = 4 ) REP, the number of blocks of values to set.
+   !   Local, integer (kind=4) :: REP, the number of blocks of values to set.
    !
       implicit none
    
-      integer ( kind = 4 ) factor_num
-      integer ( kind = 4 ) factor_order
-      integer ( kind = 4 ) point_num
+      integer (kind=4) :: factor_num
+      integer (kind=4) :: factor_order
+      integer (kind=4) :: point_num
    
-      integer ( kind = 4 ), save :: contig
-      integer ( kind = 4 ) factor_index
-      integer ( kind = 4 ) factor_value(factor_order)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ), save :: rep
-      integer ( kind = 4 ), save :: skip
-      integer ( kind = 4 ) start
-      integer ( kind = 4 ) w(point_num)
+      integer (kind=4), save :: contig
+      integer (kind=4) :: factor_index
+      integer (kind=4) :: factor_value(factor_order)
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4), save :: rep
+      integer (kind=4), save :: skip
+      integer (kind=4) :: start
+      integer (kind=4) :: w(point_num)
    
       if ( factor_index == 1 ) then
        contig = 1
@@ -1750,19 +1750,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the array.
+   !   Input, integer (kind=4) :: N, the size of the array.
    !
-   !   Input, integer ( kind = 4 ) X(N), Y(N), the arrays.
+   !   Input, integer (kind=4) :: X(N), Y(N), the arrays.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_DOT_PRODUCT, the dot product of X and Y.
+   !   Output, integer (kind=4) :: I4VEC_DOT_PRODUCT, the dot product of X and Y.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i4vec_dot_product
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) y(n)
+      integer (kind=4) :: i4vec_dot_product
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: y(n)
    
       i4vec_dot_product = dot_product ( x(1:n), y(1:n) )
    
@@ -1792,19 +1792,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vectors.
+   !   Input, integer (kind=4) :: N, the number of entries in the vectors.
    !
-   !   Input, integer ( kind = 4 ) A1(N), A2(N), two vectors to compare.
+   !   Input, integer (kind=4) :: A1(N), A2(N), two vectors to compare.
    !
    !   Output, logical I4VEC_EQ, is TRUE if every pair of elements A1(I)
    !   and A2(I) are equal, and FALSE otherwise.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
       logical i4vec_eq
    
       i4vec_eq = ( all ( a1(1:n) == a2(1:n) ) )
@@ -1835,17 +1835,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_EVEN_ALL, TRUE if all entries are even.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_even_all
    
       i4vec_even_all = all ( mod ( a(1:n), 2 ) == 0 )
@@ -1876,17 +1876,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_EVEN_ANY, TRUE if any entry is even.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_even_any
    
       i4vec_even_any = any ( mod ( a(1:n), 2 ) == 0 )
@@ -1917,23 +1917,23 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Input, integer ( kind = 4 ) VALUE, the value being sought.
+   !   Input, integer (kind=4) :: VALUE, the value being sought.
    !
-   !   Output, integer ( kind = 4 ) LOCATION, the first location in A where 
+   !   Output, integer (kind=4) :: LOCATION, the first location in A where 
    !   VALUE occurs, or -1 if VALUE never occurs.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) location
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: location
+      integer (kind=4) :: value
    
       location = -1
    
@@ -1975,20 +1975,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) FIRST_INDEX(N), the first occurrence index.
+   !   Output, integer (kind=4) :: FIRST_INDEX(N), the first occurrence index.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) first_index(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: first_index(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
    
       first_index(1:n) = -1
    
@@ -2010,8 +2010,135 @@ contains
    
       return
    end
+
+subroutine i4vec_frac_2000 ( n, a, k, iafrac )
+
+!*****************************************************************************80
+!
+!! I4VEC_FRAC searches for the K-th smallest element in an N-vector.
+!
+!  Discussion:
+!
+!    Hoare's algorithm is used.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    17 July 2000
+!
+!  Author:
+!
+!    FORTRAN90 version by John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer (kind=4) :: N, the number of elements of A.
+!
+!    Input/output, integer (kind=4) :: A(N), array to search.  On output,
+!    the elements of A have been somewhat rearranged.
+!
+!    Input, integer (kind=4) :: K, the fractile to be sought.  If K = 1, the
+!    minimum entry is sought.  If K = N, the maximum is sought.
+!    Other values of K search for the entry which is K-th in size.
+!    K must be at least 1, and no greater than N.
+!
+!    Output, integer (kind=4) :: IAFRAC, the value of the K-th fractile of A.
+!
+!> @see dutch.f90
+
+  implicit none
+
+  integer (kind=4) :: n
+
+  integer (kind=4) :: i
+  integer (kind=4) :: a(n)
+  integer (kind=4) :: iafrac
+  integer (kind=4) :: iryt
+  integer (kind=4) :: ix
+  integer (kind=4) :: j
+  integer (kind=4) :: k
+  integer (kind=4) :: left
+
+  if ( n <= 0 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_FRAC  - Fatal error!'
+    write ( *, '(a,i6)' ) '  Illegal nonpositive value of N = ', n
+    stop
+  end if
+
+  if ( k <= 0 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_FRAC  - Fatal error!'
+    write ( *, '(a,i6)' ) '  Illegal nonpositive value of K = ', k
+    stop
+  end if
+
+  if ( n < k ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_FRAC  - Fatal error!'
+    write ( *, '(a,i6)' ) '  Illegal N < K, K = ', k
+    stop
+  end if
+
+  left = 1
+  iryt = n
+
+  do
+
+    if ( iryt <= left ) then
+      iafrac = a(k)
+      exit
+    end if
+
+    ix = a(k)
+    i = left
+    j = iryt
+
+    do
+
+      if ( j < i ) then
+
+        if ( j < k ) then
+          left = i
+        end if
+
+        if ( k < i ) then
+          iryt = j
+        end if
+
+        exit
+
+      end if
+!
+!  Find I so that IX <= A(I).
+!
+      do while ( a(i) < ix )
+        i = i + 1
+      end do
+!
+!  Find J so that A(J) <= IX.
+!
+      do while ( ix < a(j) )
+        j = j - 1
+      end do
+
+      if ( i <= j ) then
+        call i4_swap ( a(i), a(j) )
+        i = i + 1
+        j = j - 1
+      end if
+
+    end do
+
+  end do
+
+  return
+end subroutine i4vec_frac_2000
+
    subroutine i4vec_frac ( n, a, k, frac )
-   
    !*****************************************************************************80
    !
    !! I4VEC_FRAC searches for the K-th smallest element in an I4VEC.
@@ -2036,31 +2163,31 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), array to search.  On output,
+   !   Input/output, integer (kind=4) :: A(N), array to search.  On output,
    !   the elements of A have been somewhat rearranged.
    !
-   !   Input, integer ( kind = 4 ) K, the fractile to be sought.  If K = 1, the
+   !   Input, integer (kind=4) :: K, the fractile to be sought.  If K = 1, the
    !   minimum entry is sought.  If K = N, the maximum is sought.
    !   Other values of K search for the entry which is K-th in size.
    !   K must be at least 1, and no greater than N.
    !
-   !   Output, integer ( kind = 4 ) FRAC, the value of the K-th fractile of A.
+   !   Output, integer (kind=4) :: FRAC, the value of the K-th fractile of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) frac
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) iryt
-      integer ( kind = 4 ) ix
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) left
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: frac
+      integer (kind=4) :: i
+      integer (kind=4) :: iryt
+      integer (kind=4) :: ix
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4) :: left
+      integer (kind=4) :: t
    
       if ( n <= 0 ) then
        write ( *, '(a)' ) ' '
@@ -2141,7 +2268,8 @@ contains
       end do
    
       return
-   end
+   end subroutine i4vec_frac
+
    subroutine i4vec_gcd ( n, v, gcd )
    
    !*****************************************************************************80
@@ -2174,20 +2302,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the order of V.
+   !   Input, integer (kind=4) :: N, the order of V.
    !
-   !   Input, integer ( kind = 4 ) V(N), the vector.
+   !   Input, integer (kind=4) :: V(N), the vector.
    !
-   !   Output, integer ( kind = 4 ) GCD, the greatest common divisor of V.
+   !   Output, integer (kind=4) :: GCD, the greatest common divisor of V.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) gcd
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_gcd
-      integer ( kind = 4 ) v(n)
+      integer (kind=4) :: gcd
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_gcd
+      integer (kind=4) :: v(n)
    
       gcd = 0
    
@@ -2211,6 +2339,8 @@ contains
    
       return
    end
+
+
    subroutine i4vec_heap_a ( n, a )
    
    !*****************************************************************************80
@@ -2255,21 +2385,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the input array.
+   !   Input, integer (kind=4) :: N, the size of the input array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, an unsorted array.
    !   On output, the array has been reordered into a heap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) ifree
-      integer ( kind = 4 ) key
-      integer ( kind = 4 ) m
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: ifree
+      integer (kind=4) :: key
+      integer (kind=4) :: m
    !
    !  Only nodes N/2 down to 1 can be "parent" nodes.
    !
@@ -2327,7 +2457,10 @@ contains
       end do
    
       return
-   end
+   end subroutine i4vec_heap_a
+
+
+
    subroutine i4vec_heap_d ( n, a )
    
    !*****************************************************************************80
@@ -2372,21 +2505,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the input array.
+   !   Input, integer (kind=4) :: N, the size of the input array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, an unsorted array.
    !   On output, the array has been reordered into a heap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) ifree
-      integer ( kind = 4 ) key
-      integer ( kind = 4 ) m
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: ifree
+      integer (kind=4) :: key
+      integer (kind=4) :: m
    !
    !  Only nodes N/2 down to 1 can be "parent" nodes.
    !
@@ -2444,9 +2577,11 @@ contains
       end do
    
       return
-   end
+   end subroutine i4vec_heap_d
+
+
+
    subroutine i4vec_heap_d_extract ( n, a, value )
-   
    !*****************************************************************************80
    !
    !! I4VEC_HEAP_D_EXTRACT extracts the maximum value from a heap descending I4VEC.
@@ -2483,18 +2618,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the number of items in the heap.
+   !   Input/output, integer (kind=4) :: N, the number of items in the heap.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the heap.
+   !   Input/output, integer (kind=4) :: A(N), the heap.
    !
-   !   Output, integer ( kind = 4 ) VALUE, the item of maximum value, which has
+   !   Output, integer (kind=4) :: VALUE, the item of maximum value, which has
    !   been removed from the heap.
    !
       implicit none
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) n
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: n
+      integer (kind=4) :: value
    
       if ( n < 1 ) then
        write ( *, '(a)' ) ' '
@@ -2522,8 +2657,11 @@ contains
       call i4vec_sort_heap_d ( n, a )
    
       return
-   end
-   subroutine i4vec_heap_d_insert ( n, a, value )
+   end subroutine i4vec_heap_d_extract
+
+
+
+   subroutine     i4vec_heap_d_insert ( n, a, value )
    
    !*****************************************************************************80
    !
@@ -2557,19 +2695,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the number of items in the heap.
+   !   Input/output, integer (kind=4) :: N, the number of items in the heap.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the heap.
+   !   Input/output, integer (kind=4) :: A(N), the heap.
    !
-   !   Input, integer ( kind = 4 ) VALUE, the value to be inserted.
+   !   Input, integer (kind=4) :: VALUE, the value to be inserted.
    !
       implicit none
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) n
-      integer ( kind = 4 ) parent
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: i
+      integer (kind=4) :: n
+      integer (kind=4) :: parent
+      integer (kind=4) :: value
    
       n = n + 1
       i = n
@@ -2590,9 +2728,11 @@ contains
       a(i) = value
    
       return
-   end
-   subroutine i4vec_heap_d_max ( n, a, value )
-   
+   end subroutine i4vec_heap_d_insert
+
+
+
+   subroutine     i4vec_heap_d_max ( n, a, value )
    !*****************************************************************************80
    !
    !! I4VEC_HEAP_D_MAX returns the maximum value in a heap descending I4VEC.
@@ -2625,23 +2765,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of items in the heap.
+   !   Input, integer (kind=4) :: N, the number of items in the heap.
    !
-   !   Input, integer ( kind = 4 ) A(N), the heap.
+   !   Input, integer (kind=4) :: A(N), the heap.
    !
-   !   Output, integer ( kind = 4 ) VALUE, the maximum value in the heap.
+   !   Output, integer (kind=4) :: VALUE, the maximum value in the heap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: value
    
       value = a(1)
    
       return
-   end
+   end subroutine i4vec_heap_d_max
+
+
    subroutine i4vec_histogram ( n, a, histo_num, histo_gram )
    
    !*****************************************************************************80
@@ -2669,24 +2811,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to examine.
+   !   Input, integer (kind=4) :: A(N), the array to examine.
    !
-   !   Input, integer ( kind = 4 ) HISTO_NUM, the maximum value for which a
+   !   Input, integer (kind=4) :: HISTO_NUM, the maximum value for which a
    !   histogram entry will be computed.
    !
-   !   Output, integer ( kind = 4 ) HISTO_GRAM(0:HISTO_NUM), contains the
+   !   Output, integer (kind=4) :: HISTO_GRAM(0:HISTO_NUM), contains the
    !   number of entries of A with the values of 0 through HISTO_NUM.
    !
       implicit none
    
-      integer ( kind = 4 ) histo_num
-      integer ( kind = 4 ) n
+      integer (kind=4) :: histo_num
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) histo_gram(0:histo_num)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: histo_gram(0:histo_num)
+      integer (kind=4) :: i
    
       histo_gram(0:histo_num) = 0
    
@@ -2724,23 +2866,23 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be searched.
+   !   Input, integer (kind=4) :: A(N), the vector to be searched.
    !
-   !   Input, integer ( kind = 4 ) AVAL, the value to be indexed.
+   !   Input, integer (kind=4) :: AVAL, the value to be indexed.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_INDEX, the first location in A which
+   !   Output, integer (kind=4) :: I4VEC_INDEX, the first location in A which
    !   has the value AVAL, or -1 if no such index exists.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) aval
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4vec_index
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: aval
+      integer (kind=4) :: i
+      integer (kind=4) :: i4vec_index
    
       do i = 1, n
        if ( a(i) == aval ) then
@@ -2777,29 +2919,29 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the size of the current list.
+   !   Input/output, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input/output, integer ( kind = 4 ) X(N), the list.
+   !   Input/output, integer (kind=4) :: X(N), the list.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input/output, integer (kind=4) :: INDX(N), the sort index of the list.
    !
-   !   Input, integer ( kind = 4 ) XVAL, the value to be sought.
+   !   Input, integer (kind=4) :: XVAL, the value to be sought.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) equal
-      integer ( kind = 4 ) equal1
-      integer ( kind = 4 ) equal2
-      integer ( kind = 4 ) get
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(*)
-      integer ( kind = 4 ) less
-      integer ( kind = 4 ) more
-      integer ( kind = 4 ) put
-      integer ( kind = 4 ) x(*)
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: equal
+      integer (kind=4) :: equal1
+      integer (kind=4) :: equal2
+      integer (kind=4) :: get
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(*)
+      integer (kind=4) :: less
+      integer (kind=4) :: more
+      integer (kind=4) :: put
+      integer (kind=4) :: x(*)
+      integer (kind=4) :: xval
    
       if ( n < 1 ) then
        n = 0
@@ -2912,31 +3054,31 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 )N, the size of the input list.
+   !   Input, integer (kind=4) ::N, the size of the input list.
    !
-   !   Input, integer ( kind = 4 ) X(N), the list.
+   !   Input, integer (kind=4) :: X(N), the list.
    !
-   !   Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input, integer (kind=4) :: INDX(N), the sort index of the list.
    !
-   !   Output, integer ( kind = 4 ) N2, the number of unique entries in X.
+   !   Output, integer (kind=4) :: N2, the number of unique entries in X.
    !
-   !   Output, integer ( kind = 4 ) X2(N2), a copy of the list which has
+   !   Output, integer (kind=4) :: X2(N2), a copy of the list which has
    !   been sorted, and made unique.
    !
    !   Output, integer  ( kind = 4 ) INDX2(N2), the sort index of the new list.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) indx2(n)
-      integer ( kind = 4 ) n2
-      integer ( kind = 4 ) n3
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) x2(n)
-      integer ( kind = 4 ) x3(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: indx2(n)
+      integer (kind=4) :: n2
+      integer (kind=4) :: n3
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: x2(n)
+      integer (kind=4) :: x3(n)
    
       i = 0
       n3 = 0
@@ -2994,35 +3136,35 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the current list.
+   !   Input, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input, integer ( kind = 4 ) X(N), the list.
+   !   Input, integer (kind=4) :: X(N), the list.
    !
-   !   Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input, integer (kind=4) :: INDX(N), the sort index of the list.
    !
-   !   Input, integer ( kind = 4 ) XVAL, the value to be sought.
+   !   Input, integer (kind=4) :: XVAL, the value to be sought.
    !
-   !   Output, integer ( kind = 4 ) N2, the size of the current list.
+   !   Output, integer (kind=4) :: N2, the size of the current list.
    !
-   !   Output, integer ( kind = 4 ) X2(N2), the list.
+   !   Output, integer (kind=4) :: X2(N2), the list.
    !
-   !   Output, integer ( kind = 4 ) INDX2(N2), the sort index of the list.
+   !   Output, integer (kind=4) :: INDX2(N2), the sort index of the list.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) equal
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) indx2(n)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) less
-      integer ( kind = 4 ) more
-      integer ( kind = 4 ) n2
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) x2(n)
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: equal
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: indx2(n)
+      integer (kind=4) :: j
+      integer (kind=4) :: less
+      integer (kind=4) :: more
+      integer (kind=4) :: n2
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: x2(n)
+      integer (kind=4) :: xval
    
       if ( n < 1 ) then
        n2 = 0
@@ -3073,24 +3215,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the size of the current list.
+   !   Input/output, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input/output, integer ( kind = 4 ) X(N), the list.
+   !   Input/output, integer (kind=4) :: X(N), the list.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input/output, integer (kind=4) :: INDX(N), the sort index of the list.
    !
-   !   Input, integer ( kind = 4 ) XVAL, the value to be sought.
+   !   Input, integer (kind=4) :: XVAL, the value to be sought.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) equal
-      integer ( kind = 4 ) indx(*)
-      integer ( kind = 4 ) less
-      integer ( kind = 4 ) more
-      integer ( kind = 4 ) x(*)
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: equal
+      integer (kind=4) :: indx(*)
+      integer (kind=4) :: less
+      integer (kind=4) :: more
+      integer (kind=4) :: x(*)
+      integer (kind=4) :: xval
    
       if ( n <= 0 ) then
        n = 1
@@ -3132,29 +3274,29 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the size of the current list.
+   !   Input/output, integer (kind=4) :: N, the size of the current list.
    !   If the input value XVAL does not already occur in X, then N is increased.
    !
-   !   Input/output, integer ( kind = 4 ) X(N), the list.
+   !   Input/output, integer (kind=4) :: X(N), the list.
    !   If the input value XVAL does not already occur in X, then it is added
    !   to X.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input/output, integer (kind=4) :: INDX(N), the sort index of the list.
    !   If the input value XVAL does not already occur in X, then INDX is updated.
    !
-   !   Input, integer ( kind = 4 ) XVAL, the value which will be inserted into
+   !   Input, integer (kind=4) :: XVAL, the value which will be inserted into
    !   the X vector if it is not there already.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) equal
-      integer ( kind = 4 ) indx(*)
-      integer ( kind = 4 ) less
-      integer ( kind = 4 ) more
-      integer ( kind = 4 ) x(*)
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: equal
+      integer (kind=4) :: indx(*)
+      integer (kind=4) :: less
+      integer (kind=4) :: more
+      integer (kind=4) :: x(*)
+      integer (kind=4) :: xval
    
       if ( n <= 0 ) then
        n = 1
@@ -3204,20 +3346,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the current list.
+   !   Input, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input/output, integer ( kind = 4 ) X(N), the list.  On output, the list
+   !   Input/output, integer (kind=4) :: X(N), the list.  On output, the list
    !   has been sorted.
    !
-   !   Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input, integer (kind=4) :: INDX(N), the sort index of the list.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) y(n)
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: y(n)
    
       y(1:n) = x(indx(1:n))
       x(1:n) = y(1:n)
@@ -3248,13 +3390,13 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the current list.
+   !   Input, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input, integer ( kind = 4 ) X(N), the list.
+   !   Input, integer (kind=4) :: X(N), the list.
    !
-   !   Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+   !   Input, integer (kind=4) :: INDX(N), the sort index of the list.
    !
-   !   Input, integer ( kind = 4 ) XVAL, the value to be sought.
+   !   Input, integer (kind=4) :: XVAL, the value to be sought.
    !
    !   Output, integer LESS, EQUAL, MORE, the indexes in INDX of the
    !   entries of X that are just less than, equal to, and just greater
@@ -3264,20 +3406,20 @@ contains
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) equal
-      integer ( kind = 4 ) hi
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) less
-      integer ( kind = 4 ) lo
-      integer ( kind = 4 ) mid
-      integer ( kind = 4 ) more
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) xhi
-      integer ( kind = 4 ) xlo
-      integer ( kind = 4 ) xmid
-      integer ( kind = 4 ) xval
+      integer (kind=4) :: equal
+      integer (kind=4) :: hi
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: less
+      integer (kind=4) :: lo
+      integer (kind=4) :: mid
+      integer (kind=4) :: more
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: xhi
+      integer (kind=4) :: xlo
+      integer (kind=4) :: xmid
+      integer (kind=4) :: xval
    
       if ( n <= 0 ) then
        less = 0
@@ -3366,25 +3508,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the current list.
+   !   Input, integer (kind=4) :: N, the size of the current list.
    !
-   !   Input, integer ( kind = 4 ) X(N), the list.
+   !   Input, integer (kind=4) :: X(N), the list.
    !
-   !   Output, integer ( kind = 4 ) N2, the number of unique elements in X.
+   !   Output, integer (kind=4) :: N2, the number of unique elements in X.
    !
-   !   Output, integer ( kind = 4 ) X2(N2), a list of the unique elements of X.
+   !   Output, integer (kind=4) :: X2(N2), a list of the unique elements of X.
    !
-   !   Output, integer ( kind = 4 ) INDX2(N2), the sort index of the list.
+   !   Output, integer (kind=4) :: INDX2(N2), the sort index of the list.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx2(n)
-      integer ( kind = 4 ) n2
-      integer ( kind = 4 ) x(n)
-      integer ( kind = 4 ) x2(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx2(n)
+      integer (kind=4) :: n2
+      integer (kind=4) :: x(n)
+      integer (kind=4) :: x2(n)
    
       n2 = 0
    
@@ -3438,24 +3580,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the index array.
+   !   Input, integer (kind=4) :: N, the size of the index array.
    !
-   !   Input, integer ( kind = 4 ) A(*), the data vector.
+   !   Input, integer (kind=4) :: A(*), the data vector.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the index array.
+   !   Input/output, integer (kind=4) :: INDX(N), the index array.
    !   Each entry of INDX must be a valid index for the array A.
    !   On output, the indices have been reordered into a descending heap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) ifree
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) key
-      integer ( kind = 4 ) m
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: i
+      integer (kind=4) :: ifree
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: key
+      integer (kind=4) :: m
    !
    !  Only nodes N/2 down to 1 can be "parent" nodes.
    !
@@ -3559,22 +3701,22 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the number of items in the
+   !   Input/output, integer (kind=4) :: N, the number of items in the
    !   index vector.
    !
-   !   Input, integer ( kind = 4 ) A(*), the data vector.
+   !   Input, integer (kind=4) :: A(*), the data vector.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the index vector.
+   !   Input/output, integer (kind=4) :: INDX(N), the index vector.
    !
-   !   Output, integer ( kind = 4 ) INDX_EXTRACT, the index in A of the item of
+   !   Output, integer (kind=4) :: INDX_EXTRACT, the index in A of the item of
    !   maximum value, which has now been removed from the heap.
    !
       implicit none
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) indx(*)
-      integer ( kind = 4 ) indx_extract
-      integer ( kind = 4 ) n
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: indx(*)
+      integer (kind=4) :: indx_extract
+      integer (kind=4) :: n
    
       if ( n < 1 ) then
        write ( *, '(a)' ) ' '
@@ -3644,24 +3786,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input/output, integer ( kind = 4 ) N, the number of items in the
+   !   Input/output, integer (kind=4) :: N, the number of items in the
    !   index vector.
    !
-   !   Input, integer ( kind = 4 ) A(*), the data vector.
+   !   Input, integer (kind=4) :: A(*), the data vector.
    !
-   !   Input/output, integer ( kind = 4 ) INDX(N), the index vector.
+   !   Input/output, integer (kind=4) :: INDX(N), the index vector.
    !
-   !   Input, integer ( kind = 4 ) INDX_INSERT, the index in A of the value
+   !   Input, integer (kind=4) :: INDX_INSERT, the index in A of the value
    !   to be inserted into the heap.
    !
       implicit none
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(*)
-      integer ( kind = 4 ) indx_insert
-      integer ( kind = 4 ) n
-      integer ( kind = 4 ) parent
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(*)
+      integer (kind=4) :: indx_insert
+      integer (kind=4) :: n
+      integer (kind=4) :: parent
    
       n = n + 1
       i = n
@@ -3720,28 +3862,29 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of items in the index vector.
+   !   Input, integer (kind=4) :: N, the number of items in the index vector.
    !
-   !   Input, integer ( kind = 4 ) A(*), the data vector.
+   !   Input, integer (kind=4) :: A(*), the data vector.
    !
-   !   Input, integer ( kind = 4 ) INDX(N), the index vector.
+   !   Input, integer (kind=4) :: INDX(N), the index vector.
    !
-   !   Output, integer ( kind = 4 ) INDX_MAX, the index in A of the maximum value
+   !   Output, integer (kind=4) :: INDX_MAX, the index in A of the maximum value
    !   in the heap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(*)
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) indx_max
+      integer (kind=4) :: a(*)
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: indx_max
    
       indx_max = indx(1)
    
       return
    end
-   subroutine i4vec_indicator ( n, a )
+
+   subroutine     i4vec_indicator ( n, a )
    
    !*****************************************************************************80
    !
@@ -3765,25 +3908,27 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Output, integer ( kind = 4 ) A(N), the array to be initialized.
+   !   Output, integer (kind=4) :: A(N), the array to be initialized.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
    
       do i = 1, n
        a(i) = i
       end do
    
       return
-   end
+   end subroutine i4vec_indicator
+
+
+
    subroutine i4vec_insert ( n, a, pos, value )
-   
    !*****************************************************************************80
    !
    !! I4VEC_INSERT inserts a value into an I4VEC.
@@ -3806,25 +3951,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the dimension of the array on input.
+   !   Input, integer (kind=4) :: N, the dimension of the array on input.
    !
-   !   Input/output, integer ( kind = 4 ) A(N+1), the array.  On input, A is
+   !   Input/output, integer (kind=4) :: A(N+1), the array.  On input, A is
    !   assumed to contain N entries.  On output, A actually contains N+1 entries.
    !
-   !   Input, integer ( kind = 4 ) POS, the position to be assigned the new entry.
+   !   Input, integer (kind=4) :: POS, the position to be assigned the new entry.
    !   1 <= POS <= N+1.
    !
-   !   Input, integer ( kind = 4 ) VALUE, the value to be inserted at the given
+   !   Input, integer (kind=4) :: VALUE, the value to be inserted at the given
    !   position.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n+1)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) pos
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n+1)
+      integer (kind=4) :: i
+      integer (kind=4) :: pos
+      integer (kind=4) :: value
    
       if ( pos < 1 .or. n + 1 < pos ) then
    
@@ -3876,21 +4021,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the order of V.
+   !   Input, integer (kind=4) :: N, the order of V.
    !
-   !   Input, integer ( kind = 4 ) V(N), the vector.
+   !   Input, integer (kind=4) :: V(N), the vector.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_LCM, the least common multiple of V.
+   !   Output, integer (kind=4) :: I4VEC_LCM, the least common multiple of V.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_lcm
-      integer ( kind = 4 ) i4vec_lcm
-      integer ( kind = 4 ) lcm
-      integer ( kind = 4 ) v(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_lcm
+      integer (kind=4) :: i4vec_lcm
+      integer (kind=4) :: lcm
+      integer (kind=4) :: v(n)
    
       lcm = 1
    
@@ -3933,25 +4078,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of components of the vector.
+   !   Input, integer (kind=4) :: N, the number of components of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be printed.
+   !   Input, integer (kind=4) :: A(N), the vector to be printed.
    !
-   !   Input, integer ( kind = 4 ) MASK_NUM, the number of masked elements.
+   !   Input, integer (kind=4) :: MASK_NUM, the number of masked elements.
    !
-   !   Input, integer ( kind = 4 ) MASK(MASK_NUM), the indices of the vector
+   !   Input, integer (kind=4) :: MASK(MASK_NUM), the indices of the vector
    !   to be printed.
    !
    !   Input, character ( len = * ) TITLE, a title.
    !
       implicit none
    
-      integer ( kind = 4 ) mask_num
-      integer ( kind = 4 ) n
+      integer (kind=4) :: mask_num
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) mask(mask_num)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: mask(mask_num)
       character ( len = * ) title
    
       write ( *, '(a)' ) ' '
@@ -3990,18 +4135,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) AMAX, the value of the largest entry.
+   !   Output, integer (kind=4) :: AMAX, the value of the largest entry.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) amax
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: amax
    
       amax = maxval ( a(1:n) )
    
@@ -4034,20 +4179,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) MAX_INDEX, the index of the largest entry.
+   !   Output, integer (kind=4) :: MAX_INDEX, the index of the largest entry.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) amax
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) max_index
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: amax
+      integer (kind=4) :: i
+      integer (kind=4) :: max_index
    
       if ( n <= 0 ) then
    
@@ -4101,21 +4246,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the array.
+   !   Input, integer (kind=4) :: N, the size of the array.
    !
-   !   Input, integer ( kind = 4 ) X(N), the array to be examined.
+   !   Input, integer (kind=4) :: X(N), the array to be examined.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_MAX_INDEX_LAST, the index of the
+   !   Output, integer (kind=4) :: I4VEC_MAX_INDEX_LAST, the index of the
    !   last element of X of maximal value.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4vec_max_index_last
-      integer ( kind = 4 ) max_last
-      integer ( kind = 4 ) x(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4vec_max_index_last
+      integer (kind=4) :: max_last
+      integer (kind=4) :: x(n)
    
       i4vec_max_index_last = 0
    
@@ -4155,17 +4300,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector whose mean is desired.
+   !   Input, integer (kind=4) :: A(N), the vector whose mean is desired.
    !
    !   Output, real ( kind = 8 ) MEAN, the mean of the vector entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       real ( kind = 8 ) mean
    
       mean = real ( sum ( a(1:n) ), kind = 8 ) &
@@ -4173,8 +4318,10 @@ contains
    
       return
    end
-   subroutine i4vec_median ( n, a, median )
-   
+
+
+
+   subroutine     i4vec_median ( n, a, median )
    !*****************************************************************************80
    !
    !! I4VEC_MEDIAN returns the median of an unsorted I4VEC.
@@ -4200,28 +4347,31 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the array to search.  On output,
+   !   Input/output, integer (kind=4) :: A(N), the array to search.  On output,
    !   the order of the elements of A has been somewhat changed.
    !
-   !   Output, integer ( kind = 4 ) MEDIAN, the value of the median of A.
+   !   Output, integer (kind=4) :: MEDIAN, the value of the median of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) median
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: k
+      integer (kind=4) :: median
    
       k = ( n + 1 ) / 2
    
       call i4vec_frac ( n, a, k, median )
    
       return
-   end
-   subroutine i4vec_merge_a ( na, a, nb, b, nc, c )
+   end subroutine i4vec_median
+
+
+
+   subroutine     i4vec_merge_a ( na, a, nb, b, nc, c )
    
    !*****************************************************************************80
    !
@@ -4252,36 +4402,36 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) NA, the dimension of A.
+   !   Input, integer (kind=4) :: NA, the dimension of A.
    !
-   !   Input, integer ( kind = 4 ) A(NA), the first sorted array.
+   !   Input, integer (kind=4) :: A(NA), the first sorted array.
    !
-   !   Input, integer ( kind = 4 ) NB, the dimension of B.
+   !   Input, integer (kind=4) :: NB, the dimension of B.
    !
-   !   Input, integer ( kind = 4 ) B(NB), the second sorted array.
+   !   Input, integer (kind=4) :: B(NB), the second sorted array.
    !
-   !   Output, integer ( kind = 4 ) NC, the number of elements in the output
+   !   Output, integer (kind=4) :: NC, the number of elements in the output
    !   array.  Note that C should usually be dimensioned at least NA+NB in the
    !   calling routine.
    !
-   !   Output, integer ( kind = 4 ) C(NC), the merged unique sorted array.
+   !   Output, integer (kind=4) :: C(NC), the merged unique sorted array.
    !
       implicit none
    
-      integer ( kind = 4 ) na
-      integer ( kind = 4 ) nb
+      integer (kind=4) :: na
+      integer (kind=4) :: nb
    
-      integer ( kind = 4 ) a(na)
-      integer ( kind = 4 ) b(nb)
-      integer ( kind = 4 ) c(na+nb)
-      integer ( kind = 4 ) d(na+nb)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) ja
-      integer ( kind = 4 ) jb
-      integer ( kind = 4 ) na2
-      integer ( kind = 4 ) nb2
-      integer ( kind = 4 ) nc
-      integer ( kind = 4 ) order
+      integer (kind=4) :: a(na)
+      integer (kind=4) :: b(nb)
+      integer (kind=4) :: c(na+nb)
+      integer (kind=4) :: d(na+nb)
+      integer (kind=4) :: j
+      integer (kind=4) :: ja
+      integer (kind=4) :: jb
+      integer (kind=4) :: na2
+      integer (kind=4) :: nb2
+      integer (kind=4) :: nc
+      integer (kind=4) :: order
    
       na2 = na
       nb2 = nb
@@ -4391,18 +4541,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) AMIN, the value of the smallest entry.
+   !   Output, integer (kind=4) :: AMIN, the value of the smallest entry.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) amin
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: amin
    
       amin = minval ( a(1:n) )
    
@@ -4432,20 +4582,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) IMIN, the index of the smallest entry.
+   !   Output, integer (kind=4) :: IMIN, the index of the smallest entry.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) amin
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) imin
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: amin
+      integer (kind=4) :: i
+      integer (kind=4) :: imin
    
       if ( n <= 0 ) then
    
@@ -4495,26 +4645,26 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) M, the dimension of the vectors.
+   !   Input, integer (kind=4) :: M, the dimension of the vectors.
    !
-   !   Input, integer ( kind = 4 ) N, the number of vectors in U.
+   !   Input, integer (kind=4) :: N, the number of vectors in U.
    !
-   !   Input, integer ( kind = 4 ) U(M,N), N vectors, each of length M.
+   !   Input, integer (kind=4) :: U(M,N), N vectors, each of length M.
    !
-   !   Input, integer ( kind = 4 ) V(M), a vector of length M.
+   !   Input, integer (kind=4) :: V(M), a vector of length M.
    !
-   !   Output, integer ( kind = 4 ) W(M,N), the value of U /\ W.
+   !   Output, integer (kind=4) :: W(M,N), the value of U /\ W.
    !
       implicit none
    
-      integer ( kind = 4 ) m
-      integer ( kind = 4 ) n
+      integer (kind=4) :: m
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) u(m,n)
-      integer ( kind = 4 ) v(m)
-      integer ( kind = 4 ) w(m,n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: u(m,n)
+      integer (kind=4) :: v(m)
+      integer (kind=4) :: w(m,n)
    
       do j = 1, n
        do i = 1, m
@@ -4548,20 +4698,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the size of the input array.
+   !   Input, integer (kind=4) :: N, the size of the input array.
    !
-   !   Input, integer ( kind = 4 ) A(N), an array.
+   !   Input, integer (kind=4) :: A(N), an array.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_NONZERO_COUNT, the number of
+   !   Output, integer (kind=4) :: I4VEC_NONZERO_COUNT, the number of
    !   nonzero entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4vec_nonzero_count
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4vec_nonzero_count
    
       i4vec_nonzero_count = 0
    
@@ -4600,25 +4750,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input/output, integer ( kind = 4 ) X(N), the vector to be shifted.
+   !   Input/output, integer (kind=4) :: X(N), the vector to be shifted.
    !
-   !   Output, integer ( kind = 4 ) NZ, the number of nonzero entries in
+   !   Output, integer (kind=4) :: NZ, the number of nonzero entries in
    !   the vector.
    !
-   !   Output, integer ( kind = 4 ) INDX(N), contains the original location
+   !   Output, integer (kind=4) :: INDX(N), contains the original location
    !   of each entry.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) nz
-      integer ( kind = 4 ) x(n)
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4) :: nz
+      integer (kind=4) :: x(n)
    
       nz = 0
    
@@ -4679,20 +4829,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_NORM_L0, the value of the norm.
+   !   Output, integer (kind=4) :: I4VEC_NORM_L0, the value of the norm.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4vec_norm_l0
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4vec_norm_l0
+      integer (kind=4) :: value
    
       value = 0
       do i = 1, n
@@ -4729,17 +4879,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_ODD_ALL, TRUE if all entries are odd.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_odd_all
    
       i4vec_odd_all = all ( mod ( a(1:n), 2 ) == 1 )
@@ -4770,17 +4920,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
    !   Output, logical I4VEC_ODD_ANY, TRUE if any entry is odd.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       logical i4vec_odd_any
    
       i4vec_odd_any = any ( mod ( a(1:n), 2 ) == 1 )
@@ -4811,11 +4961,11 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries of the array.
+   !   Input, integer (kind=4) :: N, the number of entries of the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to be checked.
+   !   Input, integer (kind=4) :: A(N), the array to be checked.
    !
-   !   Output, integer ( kind = 4 ) ORDER, order indicator:
+   !   Output, integer (kind=4) :: ORDER, order indicator:
    !   -1, no discernable order;
    !   0, all entries are equal;
    !   1, ascending order;
@@ -4825,11 +4975,11 @@ contains
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) order
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: order
    !
    !  Search for the first value not equal to A(1).
    !
@@ -4939,22 +5089,22 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of values to check.
+   !   Input, integer (kind=4) :: N, the number of values to check.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector of integers.
+   !   Input, integer (kind=4) :: A(N), the vector of integers.
    !
    !   Output, logical I4VEC_PAIRWISE_PRIME, is TRUE if the vector of integers
    !   is pairwise prime.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_gcd
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_gcd
       logical i4vec_pairwise_prime
-      integer ( kind = 4 ) j
+      integer (kind=4) :: j
    
       i4vec_pairwise_prime = .false.
    
@@ -5004,24 +5154,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) NVAL, the integer to be partitioned.
+   !   Input, integer (kind=4) :: NVAL, the integer to be partitioned.
    !   NVAL may be positive, zero, or negative.
    !
-   !   Output, integer ( kind = 4 ) A(N), the partition of NVAL.  The entries of
+   !   Output, integer (kind=4) :: A(N), the partition of NVAL.  The entries of
    !   A add up to NVAL.  The entries of A are either all equal, or
    !   differ by at most 1.  The entries of A all have the same sign
    !   as NVAL, and the "largest" entries occur first.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) nval
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: nval
    
       a(1:n) = 0
    
@@ -5094,12 +5244,12 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries of A.
+   !   Input, integer (kind=4) :: N, the number of entries of A.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).  On input, the array to be
+   !   Input/output, integer (kind=4) :: A(N).  On input, the array to be
    !   checked.  On output, A has been reordered as described above.
    !
-   !   Output, integer ( kind = 4 ) L, R, the indices of A that define the
+   !   Output, integer (kind=4) :: L, R, the indices of A that define the
    !   three segments.
    !   Let KEY = the input value of A(1).  Then
    !   I <= L               A(I) < KEY;
@@ -5108,15 +5258,15 @@ contains
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) key
-      integer ( kind = 4 ) l
-      integer ( kind = 4 ) m
-      integer ( kind = 4 ) r
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: key
+      integer (kind=4) :: l
+      integer (kind=4) :: m
+      integer (kind=4) :: r
+      integer (kind=4) :: t
    
       if ( n < 1 ) then
        write ( *, '(a)' ) ' '
@@ -5213,26 +5363,26 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of objects.
+   !   Input, integer (kind=4) :: N, the number of objects.
    !
-   !   Input, integer ( kind = 4 ) P(N), the permutation.  P(I) = J means
+   !   Input, integer (kind=4) :: P(N), the permutation.  P(I) = J means
    !   that the I-th element of the output array should be the J-th
    !   element of the input array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the array to be permuted.
+   !   Input/output, integer (kind=4) :: A(N), the array to be permuted.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) a_temp
-      integer ( kind = 4 ), parameter :: base = 1
-      integer ( kind = 4 ) ierror
-      integer ( kind = 4 ) iget
-      integer ( kind = 4 ) iput
-      integer ( kind = 4 ) istart
-      integer ( kind = 4 ) p(n)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: a_temp
+      integer (kind=4), parameter :: base = 1
+      integer (kind=4) :: ierror
+      integer (kind=4) :: iget
+      integer (kind=4) :: iput
+      integer (kind=4) :: istart
+      integer (kind=4) :: p(n)
    
       call perm_check ( n, p, base, ierror )
    
@@ -5321,21 +5471,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of objects.
+   !   Input, integer (kind=4) :: N, the number of objects.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the array to be permuted.
+   !   Input/output, integer (kind=4) :: A(N), the array to be permuted.
    !
-   !   Input/output, integer ( kind = 4 ) SEED, a seed for the random number
+   !   Input/output, integer (kind=4) :: SEED, a seed for the random number
    !   generator.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ), parameter :: base = 1
-      integer ( kind = 4 ) p(n)
-      integer ( kind = 4 ) seed
+      integer (kind=4) :: a(n)
+      integer (kind=4), parameter :: base = 1
+      integer (kind=4) :: p(n)
+      integer (kind=4) :: seed
    
       call perm_uniform ( n, base, seed, p )
    
@@ -5343,7 +5493,125 @@ contains
    
       return
    end
-   subroutine i4vec_print ( n, a, title )
+
+subroutine i4vec_pop ( n, x, stack1_max, stack1_num, stack1, stack2_max, &
+  stack2_num, stack2 )
+
+!*****************************************************************************80
+!
+!! I4VEC_POP pops an integer vector off of a stack.
+!
+!  Discussion:
+!
+!    If there are no more objects in the stack, N is returned as -1.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    09 November 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Output, integer ( kind = 4 ) N, the dimension of the vector.
+!
+!    Output, integer ( kind = 4 ) X(*), the value of the vector.
+!
+!    Input, integer ( kind = 4 ) STACK1_MAX, the maximum size of STACK1.
+!
+!    Input/output, integer ( kind = 4 ) STACK1_NUM, the current size of STACK1.
+!
+!    Input/output, integer ( kind = 4 ) STACK1(STACK1_MAX), the vector
+!    dimension stack.
+!
+!    Input, integer ( kind = 4 ) STACK2_MAX, the maximum size of STACK2.
+!
+!    Input/output, integer ( kind = 4 ) STACK2_NUM, the current size of STACK2.
+!
+!    Input/output, integer ( kind = 4 ) STACK2(STACK2_MAX), the vector value stack.
+!> @see dutch.f90
+  implicit none
+
+  integer ( kind = 4 ) n
+  integer ( kind = 4 ) stack1_max
+  integer ( kind = 4 ) stack2_max
+
+  integer ( kind = 4 ) stack1(stack1_max)
+  integer ( kind = 4 ) stack1_num
+  integer ( kind = 4 ) stack2(stack2_max)
+  integer ( kind = 4 ) stack2_num
+  integer ( kind = 4 ) x(*)
+
+  if ( stack1_num < 1 ) then
+    n = -1
+    return
+  end if
+
+  n = stack1(stack1_num)
+  stack1_num = stack1_num - 1
+
+  stack2_num = stack2_num - n
+  x(1:n) = stack2(stack2_num+1:stack2_num+n)
+
+  return
+end subroutine i4vec_pop
+
+
+subroutine i4vec_print_1999 ( n, a, title )
+
+!*****************************************************************************80
+!
+!! I4VEC_PRINT prints an integer vector.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    16 December 1999
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the number of components of the vector.
+!
+!    Input, integer ( kind = 4 ) A(N), the vector to be printed.
+!
+!    Input, character ( len = * ) TITLE, a title to be printed first.
+!    TITLE may be blank.
+!> @see dutch.f90
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) a(n)
+  integer ( kind = 4 ) i
+  character ( len = * ) title
+
+  if ( title /= ' ' ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) trim ( title )
+  end if
+
+  write ( *, '(a)' ) ' '
+  do i = 1, n
+    write ( *, '(i6,i10)' ) i, a(i)
+  end do
+
+  return
+end subroutine i4vec_print_1999
+
+   subroutine     i4vec_print ( n, a, title )
    
    !*****************************************************************************80
    !
@@ -5367,18 +5635,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of components of the vector.
+   !   Input, integer (kind=4) :: N, the number of components of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be printed.
+   !   Input, integer (kind=4) :: A(N), the vector to be printed.
    !
    !   Input, character ( len = * ) TITLE, a title.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
       character ( len = * ) title
    
       write ( *, '(a)' ) ' '
@@ -5389,7 +5657,102 @@ contains
       end do
    
       return
-   end
+   end subroutine i4vec_print
+
+subroutine i4vec_push ( n, x, stack1_max, stack1_num, stack1, stack2_max, &
+  stack2_num, stack2 )
+
+!*****************************************************************************80
+!
+!! I4VEC_PUSH pushes an integer vector onto a stack.
+!
+!  Discussion:
+!
+!    STACK1 contains a list of the dimensions of the objects stored.
+!    Therefore, STACK1_MAX should be at least as big as the maximum number
+!    of objects to be considered.
+!
+!    STACK2 contains the values of the objects.  Therefore, STACK2_MAX
+!    should probably be as big as the maximum total length of the maximum
+!    number of objects stored.
+!
+!    On first call, the user should have set STACK1_NUM and STACK2_NUM to zero.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    09 November 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the dimension of the vector.  N may be zero.
+!
+!    Input, integer ( kind = 4 ) X(N), the value of the vector.
+!
+!    Input, integer ( kind = 4 ) STACK1_MAX, the maximum size of STACK1.
+!
+!    Input/output, integer ( kind = 4 ) STACK1_NUM, the current size of STACK1.
+!
+!    Input/output, integer ( kind = 4 ) STACK1(STACK1_MAX), the vector
+!    dimension stack.
+!
+!    Input, integer ( kind = 4 ) STACK2_MAX, the maximum size of STACK2.
+!
+!    Input/output, integer ( kind = 4 ) STACK2_NUM, the current size of STACK2.
+!
+!    Input/output, integer ( kind = 4 ) STACK2(STACK2_MAX), the vector value stack.
+!
+  implicit none
+
+  integer ( kind = 4 ) n
+  integer ( kind = 4 ) stack1_max
+  integer ( kind = 4 ) stack2_max
+
+  integer ( kind = 4 ) stack1(stack1_max)
+  integer ( kind = 4 ) stack1_num
+  integer ( kind = 4 ) stack2(stack2_max)
+  integer ( kind = 4 ) stack2_num
+  integer ( kind = 4 ) x(n)
+
+  if ( n < 0 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_PUSH - Fatal error!'
+    write ( *, '(a)' ) '  Input dimension N is negative.'
+    stop
+  end if
+
+  if ( stack1_max < stack1_num + 1 ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_PUSH - Fatal error!'
+    write ( *, '(a)' ) '  Exceeding size of stack #1.'
+    stop
+  end if
+
+  if ( stack2_max < stack2_num + n ) then
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) 'I4VEC_PUSH - Fatal error!'
+    write ( *, '(a)' ) '  Exceeding size of stack #2.'
+    stop
+  end if
+
+  stack1_num = stack1_num + 1
+  stack1(stack1_num) = n
+
+  stack2(stack2_num+1:stack2_num+n) = x(1:n)
+  stack2_num = stack2_num + n
+
+  return
+end subroutine i4vec_push
+
+
+
    subroutine i4vec_print_part ( n, a, max_print, title )
    
    !*****************************************************************************80
@@ -5421,22 +5784,22 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries of the vector.
+   !   Input, integer (kind=4) :: N, the number of entries of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be printed.
+   !   Input, integer (kind=4) :: A(N), the vector to be printed.
    !
-   !   Input, integer ( kind = 4 ) MAX_PRINT, the maximum number of lines
+   !   Input, integer (kind=4) :: MAX_PRINT, the maximum number of lines
    !   to print.
    !
    !   Input, character ( len = * ) TITLE, a title.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) max_print
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: max_print
       character ( len = * ) title
    
       if ( max_print <= 0 ) then
@@ -5502,23 +5865,23 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries of the vector.
+   !   Input, integer (kind=4) :: N, the number of entries of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be printed.
+   !   Input, integer (kind=4) :: A(N), the vector to be printed.
    !
-   !   Input, integer ( kind = 4 ) I_LO, I_HI, the first and last indices
+   !   Input, integer (kind=4) :: I_LO, I_HI, the first and last indices
    !   to print.  The routine expects 1 <= I_LO <= I_HI <= N.
    !
    !   Input, character ( len = * ) TITLE, a title.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i_hi
-      integer ( kind = 4 ) i_lo
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i_hi
+      integer (kind=4) :: i_lo
       character ( len = * ) title
    
       write ( *, '(a)' ) ' '
@@ -5565,18 +5928,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_PRODUCT, the product of the entries.
+   !   Output, integer (kind=4) :: I4VEC_PRODUCT, the product of the entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i4vec_product
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i4vec_product
    
       i4vec_product = product ( a(1:n) )
    
@@ -5609,21 +5972,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the vector to be reduced.
+   !   Input/output, integer (kind=4) :: A(N), the vector to be reduced.
    !
-   !   Output, integer ( kind = 4 ) FACTOR, the common factor that was divided
+   !   Output, integer (kind=4) :: FACTOR, the common factor that was divided
    !   out.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) factor
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_gcd
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: factor
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_gcd
    !
    !  Find the smallest nonzero value.
    !
@@ -5704,15 +6067,15 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the array to be reversed.
+   !   Input/output, integer (kind=4) :: A(N), the array to be reversed.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
    
       a(1:n) = a(n:1:-1)
    
@@ -5753,9 +6116,9 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of objects.
+   !   Input, integer (kind=4) :: N, the number of objects.
    !
-   !   Input, integer ( kind = 4 ) M, the number of positions to the right that
+   !   Input, integer (kind=4) :: M, the number of positions to the right that
    !   each element should be moved.  Elements that shift pass position
    !   N "wrap around" to the beginning of the array.
    !
@@ -5763,17 +6126,17 @@ contains
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i4_modp
-      integer ( kind = 4 ) iget
-      integer ( kind = 4 ) iput
-      integer ( kind = 4 ) istart
-      integer ( kind = 4 ) m
-      integer ( kind = 4 ) mcopy
-      integer ( kind = 4 ) nset
-      integer ( kind = 4 ) temp
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i4_modp
+      integer (kind=4) :: iget
+      integer (kind=4) :: iput
+      integer (kind=4) :: istart
+      integer (kind=4) :: m
+      integer (kind=4) :: mcopy
+      integer (kind=4) :: nset
+      integer (kind=4) :: temp
    !
    !  Force M to be positive, between 0 and N-1.
    !
@@ -5855,20 +6218,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be examined.
+   !   Input, integer (kind=4) :: A(N), the vector to be examined.
    !
-   !   Output, integer ( kind = 4 ) RUN_COUNT, the number of runs.
+   !   Output, integer (kind=4) :: RUN_COUNT, the number of runs.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) run_count
-      integer ( kind = 4 ) test
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: run_count
+      integer (kind=4) :: test
    
       run_count = 0
    
@@ -5922,27 +6285,27 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements in the vector.
+   !   Input, integer (kind=4) :: N, the number of elements in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to be searched.  A must
+   !   Input, integer (kind=4) :: A(N), the array to be searched.  A must
    !   be sorted in ascending order.
    !
-   !   Input, integer ( kind = 4 ) B, the value to be searched for.
+   !   Input, integer (kind=4) :: B, the value to be searched for.
    !
-   !   Output, integer ( kind = 4 ) INDX, the result of the search.
+   !   Output, integer (kind=4) :: INDX, the result of the search.
    !   -1, B does not occur in A.
    !   I, A(I) = B.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) b
-      integer ( kind = 4 ) high
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) low
-      integer ( kind = 4 ) mid
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: b
+      integer (kind=4) :: high
+      integer (kind=4) :: indx
+      integer (kind=4) :: low
+      integer (kind=4) :: mid
    
       indx = - 1
    
@@ -5999,27 +6362,27 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements in the vector.
+   !   Input, integer (kind=4) :: N, the number of elements in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to be searched.  A must
+   !   Input, integer (kind=4) :: A(N), the array to be searched.  A must
    !   be sorted in descending order.
    !
-   !   Input, integer ( kind = 4 ) B, the value to be searched for.
+   !   Input, integer (kind=4) :: B, the value to be searched for.
    !
-   !   Output, integer ( kind = 4 ) INDX, the result of the search.
+   !   Output, integer (kind=4) :: INDX, the result of the search.
    !   -1, B does not occur in A.
    !   I, A(I) = B.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) b
-      integer ( kind = 4 ) high
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) low
-      integer ( kind = 4 ) mid
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: b
+      integer (kind=4) :: high
+      integer (kind=4) :: indx
+      integer (kind=4) :: low
+      integer (kind=4) :: mid
    
       indx = - 1
    
@@ -6067,20 +6430,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, the array to be sorted;
    !   On output, the array has been sorted.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: k
    
       do i = 1, n - 1
        do j = i + 1, n
@@ -6118,20 +6481,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, the array to be sorted;
    !   On output, the array has been sorted.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: k
    
       do i = 1, n - 1
        do j = i + 1, n
@@ -6177,19 +6540,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, the array to be sorted;
    !   On output, the array has been sorted.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) n1
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: n1
+      integer (kind=4) :: t
    
       if ( n <= 1 ) then
        return
@@ -6226,8 +6589,10 @@ contains
    
       return
    end
-   subroutine i4vec_sort_heap_d ( n, a )
-   
+
+
+
+   subroutine     i4vec_sort_heap_d ( n, a )
    !*****************************************************************************80
    !
    !! I4VEC_SORT_HEAP_D descending sorts an I4VEC using heap sort.
@@ -6258,19 +6623,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, the array to be sorted;
    !   On output, the array has been sorted.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) n1
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: n1
+      integer (kind=4) :: t
    
       if ( n <= 1 ) then
        return
@@ -6306,7 +6671,10 @@ contains
       end do
    
       return
-   end
+   end subroutine i4vec_sort_heap_d
+
+
+
    subroutine i4vec_sort_heap_index_a ( n, a, indx )
    
    !*****************************************************************************80
@@ -6347,25 +6715,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), an array to be index-sorted.
+   !   Input, integer (kind=4) :: A(N), an array to be index-sorted.
    !
-   !   Output, integer ( kind = 4 ) INDX(N), the sort index.  The
+   !   Output, integer (kind=4) :: INDX(N), the sort index.  The
    !   I-th element of the sorted array is A(INDX(I)).
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) indxt
-      integer ( kind = 4 ) ir
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) l
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: indxt
+      integer (kind=4) :: ir
+      integer (kind=4) :: j
+      integer (kind=4) :: l
+      integer (kind=4) :: value
    
       if ( n < 1 ) then
        return
@@ -6471,25 +6839,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), an array to be index-sorted.
+   !   Input, integer (kind=4) :: A(N), an array to be index-sorted.
    !
-   !   Output, integer ( kind = 4 ) INDX(N), the sort index.  The
+   !   Output, integer (kind=4) :: INDX(N), the sort index.  The
    !   I-th element of the sorted array is A(INDX(I)).
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(n)
-      integer ( kind = 4 ) indxt
-      integer ( kind = 4 ) ir
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) l
-      integer ( kind = 4 ) value
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(n)
+      integer (kind=4) :: indxt
+      integer (kind=4) :: ir
+      integer (kind=4) :: j
+      integer (kind=4) :: l
+      integer (kind=4) :: value
    
       if ( n < 1 ) then
        return
@@ -6586,21 +6954,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of items in the vector.
+   !   Input, integer (kind=4) :: N, the number of items in the vector.
    !   N must be positive.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, A contains data to be sorted.
    !   On output, the entries of A have been sorted in ascending order.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) x
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: x
    
       do i = 2, n
    
@@ -6656,21 +7024,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of items in the vector.
+   !   Input, integer (kind=4) :: N, the number of items in the vector.
    !   N must be positive.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, A contains data to be sorted.
    !   On output, the entries of A have been sorted in descending order.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) x
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: x
    
       do i = 2, n
    
@@ -6731,24 +7099,24 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, the array to be sorted.
    !   On output, the array has been sorted.
    !
       implicit none
    
-      integer ( kind = 4 ), parameter :: level_max = 30
-      integer ( kind = 4 ) n
+      integer (kind=4), parameter :: level_max = 30
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) base
-      integer ( kind = 4 ) l_segment
-      integer ( kind = 4 ) level
-      integer ( kind = 4 ) n_segment
-      integer ( kind = 4 ) rsave(level_max)
-      integer ( kind = 4 ) r_segment
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: base
+      integer (kind=4) :: l_segment
+      integer (kind=4) :: level
+      integer (kind=4) :: n_segment
+      integer (kind=4) :: rsave(level_max)
+      integer (kind=4) :: r_segment
    
       if ( n <= 1 ) then
        return
@@ -6838,25 +7206,25 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).
+   !   Input/output, integer (kind=4) :: A(N).
    !   On input, an array to be sorted.
    !   On output, the sorted array.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) asave
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) ifree
-      integer ( kind = 4 ) inc
-      integer ( kind = 4 ) ipow
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) maxpow
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: asave
+      integer (kind=4) :: i
+      integer (kind=4) :: ifree
+      integer (kind=4) :: inc
+      integer (kind=4) :: ipow
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4) :: maxpow
    
       if ( n <= 1 ) then
        return
@@ -6993,28 +7361,28 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) X_NUM, the number of data values.
+   !   Input, integer (kind=4) :: X_NUM, the number of data values.
    !
-   !   Input, integer ( kind = 4 ) X_VAL(X_NUM), the data values.
+   !   Input, integer (kind=4) :: X_VAL(X_NUM), the data values.
    !
-   !   Input, integer ( kind = 4 ) X_UNIQUE_NUM, the number of unique values i
+   !   Input, integer (kind=4) :: X_UNIQUE_NUM, the number of unique values i
    !   n X_VAL.  This value is only required for languages in which the size of
    !   UNDX must be known in advance.
    !
-   !   Output, integer ( kind = 4 ) UNDX(X_UNIQUE_NUM), the UNDX vector.
+   !   Output, integer (kind=4) :: UNDX(X_UNIQUE_NUM), the UNDX vector.
    !
-   !   Output, integer ( kind = 4 ) XDNU(X_NUM), the XDNU vector.
+   !   Output, integer (kind=4) :: XDNU(X_NUM), the XDNU vector.
    !
       implicit none
    
-      integer ( kind = 4 ) x_num
-      integer ( kind = 4 ) x_unique_num
+      integer (kind=4) :: x_num
+      integer (kind=4) :: x_unique_num
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) undx(x_unique_num)
-      integer ( kind = 4 ) x_val(x_num)
-      integer ( kind = 4 ) xdnu(x_num)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: undx(x_unique_num)
+      integer (kind=4) :: x_val(x_num)
+      integer (kind=4) :: xdnu(x_num)
    !
    !  Walk through the sorted array.
    !
@@ -7062,20 +7430,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements in A.
+   !   Input, integer (kind=4) :: N, the number of elements in A.
    !
-   !   Input/output, integer ( kind = 4 ) A(N).  On input, the sorted
+   !   Input/output, integer (kind=4) :: A(N).  On input, the sorted
    !   integer array.  On output, the unique elements in A.
    !
-   !   Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements.
+   !   Output, integer (kind=4) :: UNIQUE_NUM, the number of unique elements.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) itest
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: itest
+      integer (kind=4) :: unique_num
    
       if ( n <= 0 ) then
        unique_num = 0
@@ -7121,19 +7489,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the sorted array to examine.
+   !   Input, integer (kind=4) :: A(N), the sorted array to examine.
    !
-   !   Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements.
+   !   Output, integer (kind=4) :: UNIQUE_NUM, the number of unique elements.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: unique_num
    
       if ( n < 1 ) then
        unique_num = 0
@@ -7176,32 +7544,32 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to examine.  The elements of A
+   !   Input, integer (kind=4) :: A(N), the array to examine.  The elements of A
    !   should have been sorted.
    !
-   !   Input, integer ( kind = 4 ) MAXUNIQ, the maximum number of unique elements
+   !   Input, integer (kind=4) :: MAXUNIQ, the maximum number of unique elements
    !   that can be handled.  If there are more than MAXUNIQ unique
    !   elements in A, the excess will be ignored.
    !
-   !   Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements.
+   !   Output, integer (kind=4) :: UNIQUE_NUM, the number of unique elements.
    !
-   !   Output, integer ( kind = 4 ) AUNIQ(UNIQUE_NUM), the unique elements of A.
+   !   Output, integer (kind=4) :: AUNIQ(UNIQUE_NUM), the unique elements of A.
    !
-   !   Output, integer ( kind = 4 ) ACOUNT(UNIQUE_NUM), the number of times
+   !   Output, integer (kind=4) :: ACOUNT(UNIQUE_NUM), the number of times
    !   each element of AUNIQ occurs in A.
    !
       implicit none
    
-      integer ( kind = 4 ) maxuniq
-      integer ( kind = 4 ) n
+      integer (kind=4) :: maxuniq
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) acount(maxuniq)
-      integer ( kind = 4 ) auniq(maxuniq)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: acount(maxuniq)
+      integer (kind=4) :: auniq(maxuniq)
+      integer (kind=4) :: i
+      integer (kind=4) :: unique_num
    !
    !  Start taking statistics.
    !
@@ -7262,33 +7630,33 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input/output, integer ( kind = 4 ) A(N), the array to split.  On output,
+   !   Input/output, integer (kind=4) :: A(N), the array to split.  On output,
    !   all the entries of A that are less than or equal to SPLIT
    !   are in A(1:SPLIT_INDEX).
    !
-   !   Input, integer ( kind = 4 ) SPLIT, the value used to split the vector.
+   !   Input, integer (kind=4) :: SPLIT, the value used to split the vector.
    !   It is not necessary that any value of A actually equal SPLIT.
    !
-   !   Output, integer ( kind = 4 ) SPLIT_INDEX, indicates the position of the
+   !   Output, integer (kind=4) :: SPLIT_INDEX, indicates the position of the
    !   last entry of the split vector that is less than or equal to SPLIT.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i1
-      integer ( kind = 4 ) i2
-      integer ( kind = 4 ) i3
-      integer ( kind = 4 ) j1
-      integer ( kind = 4 ) j2
-      integer ( kind = 4 ) j3
-      integer ( kind = 4 ) split
-      integer ( kind = 4 ) split_index
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i1
+      integer (kind=4) :: i2
+      integer (kind=4) :: i3
+      integer (kind=4) :: j1
+      integer (kind=4) :: j2
+      integer (kind=4) :: j3
+      integer (kind=4) :: split
+      integer (kind=4) :: split_index
+      integer (kind=4) :: t
    !
    !  Partition the vector into A1, A2, A3, where
    !   A1 = A(I1:J1) holds values <= SPLIT,
@@ -7331,6 +7699,97 @@ contains
    
       return
    end
+
+subroutine i4vec_split_unsort ( n, a, split, isplit )
+!*****************************************************************************80
+!
+!! I4VEC_SPLIT_UNSORT "splits" an unsorted I4VEC based on a splitting value.
+!
+!  Discussion:
+!
+!    If the vector is already sorted, it is simpler to do a binary search
+!    on the data than to call this routine.
+!
+!    The vector is not assumed to be sorted before input, and is not
+!    sorted during processing.  If sorting is not needed, then it is
+!    more efficient to use this routine.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    18 September 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!
+!    Input/output, integer ( kind = 4 ) A(N), the array to split.  On output,
+!    all the entries of A that are less than or equal to SPLIT
+!    are in A(1:ISPLIT).
+!
+!    Input, integer ( kind = 4 ) SPLIT, the value used to split the vector.
+!    It is not necessary that any value of A actually equal SPLIT.
+!
+!    Output, integer ( kind = 4 ) ISPLIT, indicates the position of the last
+!    entry of the split vector that is less than or equal to SPLIT.
+!> @see: dutch.f90
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) a(n)
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) i1
+  integer ( kind = 4 ) i2
+  integer ( kind = 4 ) i3
+  integer ( kind = 4 ) isplit
+  integer ( kind = 4 ) j1
+  integer ( kind = 4 ) j2
+  integer ( kind = 4 ) j3
+  integer ( kind = 4 ) split
+!
+!  Partition the vector into A1, A2, A3, where
+!    A1 = A(I1:J1) holds values <= SPLIT,
+!    A2 = A(I2:J2) holds untested values,
+!    A3 = A(I3:J3) holds values > SPLIT.
+!
+  i1 = 1
+  j1 = 0
+
+  i2 = 1
+  j2 = n
+
+  i3 = n+1
+  j3 = n
+!
+!  Pick the next item from A2, and move it into A1 or A3.
+!  Adjust indices appropriately.
+!
+  do i = 1, n
+
+    if ( a(i2) <= split ) then
+      i2 = i2 + 1
+      j1 = j1 + 1
+    else
+      call i4_swap ( a(i2), a(i3-1) )
+      i3 = i3 - 1
+      j2 = j2 - 1
+    end if
+
+  end do
+
+  isplit = j1
+
+  return
+end subroutine i4vec_split_unsort
+
    subroutine i4vec_std ( n, a, std )
    
    !*****************************************************************************80
@@ -7361,17 +7820,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector whose variance is desired.
+   !   Input, integer (kind=4) :: A(N), the vector whose variance is desired.
    !
    !   Output, real ( kind = 8 ) STD, the standard deviation of the entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       real ( kind = 8 ) mean
       real ( kind = 8 ) std
    
@@ -7420,18 +7879,18 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the array.
+   !   Input, integer (kind=4) :: N, the number of entries in the array.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_SUM, the sum of the entries.
+   !   Output, integer (kind=4) :: I4VEC_SUM, the sum of the entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i4vec_sum
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i4vec_sum
    
       i4vec_sum = sum ( a(1:n) )
    
@@ -7461,17 +7920,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the arrays.
+   !   Input, integer (kind=4) :: N, the number of entries in the arrays.
    !
-   !   Input/output, integer ( kind = 4 ) A1(N), A2(N), the vectors to swap.
+   !   Input/output, integer (kind=4) :: A1(N), A2(N), the vectors to swap.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) a3(n)
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: a3(n)
    
       a3(1:n) = a1(1:n)
       a1(1:n) = a2(1:n)
@@ -7514,19 +7973,19 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of components of the vector.
+   !   Input, integer (kind=4) :: N, the number of components of the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector to be printed.
+   !   Input, integer (kind=4) :: A(N), the vector to be printed.
    !
    !   Input, character ( len = * ) TITLE, a title.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) ihi
-      integer ( kind = 4 ) ilo
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: ihi
+      integer (kind=4) :: ilo
       character ( len = * ) title
    
       write ( *, '(a)' ) ' '
@@ -7620,29 +8079,29 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) X_NUM, the number of data values.
+   !   Input, integer (kind=4) :: X_NUM, the number of data values.
    !
-   !   Input, integer ( kind = 4 ) X_VAL(X_NUM), the data values.
+   !   Input, integer (kind=4) :: X_VAL(X_NUM), the data values.
    !
-   !   Input, integer ( kind = 4 ) X_UNIQUE_NUM, the number of unique values
+   !   Input, integer (kind=4) :: X_UNIQUE_NUM, the number of unique values
    !   in X_VAL.  This value is only required for languages in which the size of
    !   UNDX must be known in advance.
    !
-   !   Output, integer ( kind = 4 ) UNDX(X_UNIQUE_NUM), the UNDX vector.
+   !   Output, integer (kind=4) :: UNDX(X_UNIQUE_NUM), the UNDX vector.
    !
-   !   Output, integer ( kind = 4 ) XDNU(X_NUM), the XDNU vector.
+   !   Output, integer (kind=4) :: XDNU(X_NUM), the XDNU vector.
    !
       implicit none
    
-      integer ( kind = 4 ) x_num
-      integer ( kind = 4 ) x_unique_num
+      integer (kind=4) :: x_num
+      integer (kind=4) :: x_unique_num
    
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx(x_num)
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) undx(x_unique_num)
-      integer ( kind = 4 ) x_val(x_num)
-      integer ( kind = 4 ) xdnu(x_num)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx(x_num)
+      integer (kind=4) :: j
+      integer (kind=4) :: undx(x_unique_num)
+      integer (kind=4) :: x_val(x_num)
+      integer (kind=4) :: xdnu(x_num)
    !
    !  Implicitly sort the array.
    !
@@ -7697,28 +8156,28 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the dimension of the vector.
+   !   Input, integer (kind=4) :: N, the dimension of the vector.
    !
-   !   Input, integer ( kind = 4 ) A, B, the limits of the interval.
+   !   Input, integer (kind=4) :: A, B, the limits of the interval.
    !
-   !   Input/output, integer ( kind = 4 ) SEED, the "seed" value, which
+   !   Input/output, integer (kind=4) :: SEED, the "seed" value, which
    !   should NOT be 0.  On output, SEED has been updated.
    !
-   !   Output, integer ( kind = 4 ) X(N), a vector of numbers between A and B.
+   !   Output, integer (kind=4) :: X(N), a vector of numbers between A and B.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a
-      integer ( kind = 4 ) b
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ), parameter :: i4_huge = 2147483647
-      integer ( kind = 4 ) k
+      integer (kind=4) :: a
+      integer (kind=4) :: b
+      integer (kind=4) :: i
+      integer (kind=4), parameter :: i4_huge = 2147483647
+      integer (kind=4) :: k
       real ( kind = 4 ) r
-      integer ( kind = 4 ) seed
-      integer ( kind = 4 ) value
-      integer ( kind = 4 ) x(n)
+      integer (kind=4) :: seed
+      integer (kind=4) :: value
+      integer (kind=4) :: x(n)
    
       if ( seed == 0 ) then
        write ( *, '(a)' ) ' '
@@ -7783,21 +8242,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the unsorted array to examine.
+   !   Input, integer (kind=4) :: A(N), the unsorted array to examine.
    !
-   !   Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements
+   !   Output, integer (kind=4) :: UNIQUE_NUM, the number of unique elements
    !   of A.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: unique_num
    
       unique_num = 0
    
@@ -7848,21 +8307,21 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of elements of A.
+   !   Input, integer (kind=4) :: N, the number of elements of A.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array.
+   !   Input, integer (kind=4) :: A(N), the array.
    !
-   !   Output, integer ( kind = 4 ) UNIQUE_INDEX(N), the unique index.
+   !   Output, integer (kind=4) :: UNIQUE_INDEX(N), the unique index.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) unique_index(n)
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: j
+      integer (kind=4) :: unique_index(n)
+      integer (kind=4) :: unique_num
    
       unique_index(1:n) = -1
       unique_num = 0
@@ -7923,30 +8382,30 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of objects.
+   !   Input, integer (kind=4) :: N, the number of objects.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to be indexed.
+   !   Input, integer (kind=4) :: A(N), the array to be indexed.
    !
-   !   Input, integer ( kind = 4 ) VALUE, a value to be searched for.
+   !   Input, integer (kind=4) :: VALUE, a value to be searched for.
    !
-   !   Input, integer ( kind = 4 ) MAX_INDEX, the maximum number of indices
+   !   Input, integer (kind=4) :: MAX_INDEX, the maximum number of indices
    !   to find.
    !
-   !   Output, integer ( kind = 4 ) N_INDEX, the number of entries equal to VALUE.
+   !   Output, integer (kind=4) :: N_INDEX, the number of entries equal to VALUE.
    !
-   !   Output, integer ( kind = 4 ) VALUE_INDEX(MAX_INDEX), the indices of entries
+   !   Output, integer (kind=4) :: VALUE_INDEX(MAX_INDEX), the indices of entries
    !   equal to VALUE.
    !
       implicit none
    
-      integer ( kind = 4 ) max_index
-      integer ( kind = 4 ) n
+      integer (kind=4) :: max_index
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) n_index
-      integer ( kind = 4 ) value
-      integer ( kind = 4 ) value_index(max_index)
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: n_index
+      integer (kind=4) :: value
+      integer (kind=4) :: value_index(max_index)
    
       n_index = 0
    
@@ -7991,23 +8450,23 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of objects.
+   !   Input, integer (kind=4) :: N, the number of objects.
    !
-   !   Input, integer ( kind = 4 ) A(N), the array to be indexed.
+   !   Input, integer (kind=4) :: A(N), the array to be indexed.
    !
-   !   Input, integer ( kind = 4 ) VALUE, a value to be searched for.
+   !   Input, integer (kind=4) :: VALUE, a value to be searched for.
    !
-   !   Input, integer ( kind = 4 ) VALUE_NUM, the number of times the
+   !   Input, integer (kind=4) :: VALUE_NUM, the number of times the
    !   value occurs.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) value
-      integer ( kind = 4 ) value_num
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: value
+      integer (kind=4) :: value_num
    
       value_num = 0
    
@@ -8045,17 +8504,17 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector whose variance is desired.
+   !   Input, integer (kind=4) :: A(N), the vector whose variance is desired.
    !
    !   Output, real ( kind = 8 ) VARIANCE, the variance of the vector entries.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
       real ( kind = 8 ) mean
       real ( kind = 8 ) variance
    
@@ -8108,20 +8567,20 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Input, integer ( kind = 4 ) A(N), the vector.
+   !   Input, integer (kind=4) :: A(N), the vector.
    !
-   !   Output, integer ( kind = 4 ) I4VEC_WIDTH, the width of the vector.
+   !   Output, integer (kind=4) :: I4VEC_WIDTH, the width of the vector.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_width
-      integer ( kind = 4 ) i4vec_width
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_width
+      integer (kind=4) :: i4vec_width
    
       i4vec_width = -1
    
@@ -8155,15 +8614,15 @@ contains
    !
    !  Parameters:
    !
-   !   Input, integer ( kind = 4 ) N, the number of entries in the vector.
+   !   Input, integer (kind=4) :: N, the number of entries in the vector.
    !
-   !   Output, integer ( kind = 4 ) A(N), the vector, which has been set to zero.
+   !   Output, integer (kind=4) :: A(N), the vector, which has been set to zero.
    !
       implicit none
    
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
    
-      integer ( kind = 4 ) a(n)
+      integer (kind=4) :: a(n)
    
       a(1:n) = 0
    
@@ -8200,27 +8659,27 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of data items.
+    !    Input, integer (kind=4) :: N, the number of data items.
     !
-    !    Input, integer ( kind = 4 ) A1(N), A2(N), contain the two components
+    !    Input, integer (kind=4) :: A1(N), A2(N), contain the two components
     !    of each item.
     !
-    !    Input, integer ( kind = 4 ) I, J, the items to be compared.
+    !    Input, integer (kind=4) :: I, J, the items to be compared.
     !
-    !    Output, integer ( kind = 4 ) ISGN, the results of the comparison:
+    !    Output, integer (kind=4) :: ISGN, the results of the comparison:
     !    -1, item I < item J,
     !     0, item I = item J,
     !    +1, item J < item I.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) j
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: isgn
+      integer (kind=4) :: j
     
       isgn = 0
     
@@ -8275,19 +8734,19 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of components of the vector.
+    !    Input, integer (kind=4) :: N, the number of components of the vector.
     !
-    !    Input, integer ( kind = 4 ) A(N), B(N), the vectors to be printed.
+    !    Input, integer (kind=4) :: A(N), B(N), the vectors to be printed.
     !
     !    Input, character ( len = * ) TITLE, a title.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) a(n)
-      integer ( kind = 4 ) b(n)
-      integer ( kind = 4 ) i
+      integer (kind=4) :: a(n)
+      integer (kind=4) :: b(n)
+      integer (kind=4) :: i
       character ( len = * ) title
     
       write ( *, '(a)' ) ' '
@@ -8328,21 +8787,21 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of items of data.
+    !    Input, integer (kind=4) :: N, the number of items of data.
     !
-    !    Input/output, integer ( kind = 4 ) A1(N), A2(N), the data to be sorted.
+    !    Input/output, integer (kind=4) :: A1(N), A2(N), the data to be sorted.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx
+      integer (kind=4) :: isgn
+      integer (kind=4) :: j
+      integer (kind=4) :: t
     
       if ( n <= 1 ) then
         return
@@ -8418,21 +8877,21 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of items of data.
+    !    Input, integer (kind=4) :: N, the number of items of data.
     !
-    !    Input/output, integer ( kind = 4 ) A1(N), A2(N), the data to be sorted.
+    !    Input/output, integer (kind=4) :: A1(N), A2(N), the data to be sorted.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) t
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: i
+      integer (kind=4) :: indx
+      integer (kind=4) :: isgn
+      integer (kind=4) :: j
+      integer (kind=4) :: t
     
       if ( n <= 1 ) then
         return
@@ -8509,13 +8968,13 @@ contains
     !
     !    Input, logical L, a logical value.
     !
-    !    Output, integer ( kind = 4 ) L_TO_I4, the integer value of L.
+    !    Output, integer (kind=4) :: L_TO_I4, the integer value of L.
     !
       implicit none
     
       logical l
-      integer ( kind = 4 ) l_to_i4
-      integer ( kind = 4 ) value
+      integer (kind=4) :: l_to_i4
+      integer (kind=4) :: value
     
       if ( l ) then
         value = 1
@@ -8564,22 +9023,22 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of items.
+    !    Input, integer (kind=4) :: N, the number of items.
     !
-    !    Input/output, integer ( kind = 4 ) A1(N), A2(N).
+    !    Input/output, integer (kind=4) :: A1(N), A2(N).
     !    On input, the array of N items.
     !    On output, an array of unique items.
     !
-    !    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique items.
+    !    Output, integer (kind=4) :: UNIQUE_NUM, the number of unique items.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) a1(n)
-      integer ( kind = 4 ) a2(n)
-      integer ( kind = 4 ) itest
-      integer ( kind = 4 ) unique_num
+      integer (kind=4) :: a1(n)
+      integer (kind=4) :: a2(n)
+      integer (kind=4) :: itest
+      integer (kind=4) :: unique_num
     
       if ( n <= 0 ) then
         unique_num = 0
@@ -8632,26 +9091,26 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of entries.
+    !    Input, integer (kind=4) :: N, the number of entries.
     !
-    !    Input, integer ( kind = 4 ) P(N), the array to check.
+    !    Input, integer (kind=4) :: P(N), the array to check.
     !
-    !    Input, integer ( kind = 4 ) BASE, the index base.
+    !    Input, integer (kind=4) :: BASE, the index base.
     !
-    !    Output, integer ( kind = 4 ) IERROR, error flag.
+    !    Output, integer (kind=4) :: IERROR, error flag.
     !    0, the array represents a permutation.
     !    nonzero, the array does not represent a permutation.  The smallest
     !    missing value is equal to IERROR.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) base
-      integer ( kind = 4 ) find
-      integer ( kind = 4 ) ierror
-      integer ( kind = 4 ) p(n)
-      integer ( kind = 4 ) seek
+      integer (kind=4) :: base
+      integer (kind=4) :: find
+      integer (kind=4) :: ierror
+      integer (kind=4) :: p(n)
+      integer (kind=4) :: seek
     
       ierror = 0
     
@@ -8721,13 +9180,13 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of objects being permuted.
+    !    Input, integer (kind=4) :: N, the number of objects being permuted.
     !
-    !    Input, integer ( kind = 4 ) IOPT, requests tagging.
+    !    Input, integer (kind=4) :: IOPT, requests tagging.
     !    0, the permutation will not be tagged.
     !    1, the permutation will be tagged.
     !
-    !    Input/output, integer ( kind = 4 ) P(N).  On input, P describes a
+    !    Input/output, integer (kind=4) :: P(N).  On input, P describes a
     !    permutation, in the sense that entry I is to be moved to P(I).
     !    If IOPT = 0, then P will not be changed by this routine.
     !    If IOPT = 1, then on output, P will be "tagged".  That is,
@@ -8736,30 +9195,30 @@ contains
     !    which is negative, moving to I2 = ABS(P(I1)), then to
     !    P(I2), and so on, until returning to I1.
     !
-    !    Output, integer ( kind = 4 ) ISGN, the "sign" of the permutation, which is
+    !    Output, integer (kind=4) :: ISGN, the "sign" of the permutation, which is
     !    +1 if the permutation is even, -1 if odd.  Every permutation
     !    may be produced by a certain number of pairwise switches.
     !    If the number of switches is even, the permutation itself is
     !    called even.
     !
-    !    Output, integer ( kind = 4 ) NCYCLE, the number of cycles in the
+    !    Output, integer (kind=4) :: NCYCLE, the number of cycles in the
     !    permutation.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ), parameter :: base = 1
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i1
-      integer ( kind = 4 ) i2
-      integer ( kind = 4 ) i4_sign
-      integer ( kind = 4 ) ierror
-      integer ( kind = 4 ) iopt
-      integer ( kind = 4 ) is
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) ncycle
-      integer ( kind = 4 ) p(n)
+      integer (kind=4), parameter :: base = 1
+      integer (kind=4) :: i
+      integer (kind=4) :: i1
+      integer (kind=4) :: i2
+      integer (kind=4) :: i4_sign
+      integer (kind=4) :: ierror
+      integer (kind=4) :: iopt
+      integer (kind=4) :: is
+      integer (kind=4) :: isgn
+      integer (kind=4) :: ncycle
+      integer (kind=4) :: p(n)
     
       call perm_check ( n, p, base, ierror )
     
@@ -8824,28 +9283,28 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of objects to be permuted.
+    !    Input, integer (kind=4) :: N, the number of objects to be permuted.
     !
-    !    Input, integer ( kind = 4 ) BASE, is 0 for a 0-based permutation and 1 for
+    !    Input, integer (kind=4) :: BASE, is 0 for a 0-based permutation and 1 for
     !    a 1-based permutation.
     !
-    !    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+    !    Input/output, integer (kind=4) :: SEED, a seed for the random
     !    number generator.
     !
-    !    Output, integer ( kind = 4 ) P(N), the permutation.  P(I) is the "new"
+    !    Output, integer (kind=4) :: P(N), the permutation.  P(I) is the "new"
     !    location of the object originally at I.
     !
       implicit none
     
-      integer ( kind = 4 ) n
+      integer (kind=4) :: n
     
-      integer ( kind = 4 ) base
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ) i4_uniform_ab
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ) k
-      integer ( kind = 4 ) p(n)
-      integer ( kind = 4 ) seed
+      integer (kind=4) :: base
+      integer (kind=4) :: i
+      integer (kind=4) :: i4_uniform_ab
+      integer (kind=4) :: j
+      integer (kind=4) :: k
+      integer (kind=4) :: p(n)
+      integer (kind=4) :: seed
     
       do i = 1, n
         p(i) = ( i - 1 ) + base
@@ -8899,9 +9358,9 @@ contains
     !
     !  Parameters:
     !
-    !    Input, integer ( kind = 4 ) N, the number of items to be sorted.
+    !    Input, integer (kind=4) :: N, the number of items to be sorted.
     !
-    !    Input/output, integer ( kind = 4 ) INDX, the main communication signal.
+    !    Input/output, integer (kind=4) :: INDX, the main communication signal.
     !
     !    The user must set INDX to 0 before the first call.
     !    Thereafter, the user should not change the value of INDX until
@@ -8920,28 +9379,28 @@ contains
     !
     !      equal to 0, the sorting is done.
     !
-    !    Output, integer ( kind = 4 ) I, J, the indices of two items.
+    !    Output, integer (kind=4) :: I, J, the indices of two items.
     !    On return with INDX positive, elements I and J should be interchanged.
     !    On return with INDX negative, elements I and J should be compared, and
     !    the result reported in ISGN on the next call.
     !
-    !    Input, integer ( kind = 4 ) ISGN, results of comparison of elements
+    !    Input, integer (kind=4) :: ISGN, results of comparison of elements
     !    I and J. (Used only when the previous call returned INDX less than 0).
     !    ISGN <= 0 means I is less than or equal to J;
     !    0 <= ISGN means I is greater than or equal to J.
     !
       implicit none
     
-      integer ( kind = 4 ) i
-      integer ( kind = 4 ), save :: i_save = 0
-      integer ( kind = 4 ) indx
-      integer ( kind = 4 ) isgn
-      integer ( kind = 4 ) j
-      integer ( kind = 4 ), save :: j_save = 0
-      integer ( kind = 4 ), save :: k = 0
-      integer ( kind = 4 ), save :: k1 = 0
-      integer ( kind = 4 ) n
-      integer ( kind = 4 ), save :: n1 = 0
+      integer (kind=4) :: i
+      integer (kind=4), save :: i_save = 0
+      integer (kind=4) :: indx
+      integer (kind=4) :: isgn
+      integer (kind=4) :: j
+      integer (kind=4), save :: j_save = 0
+      integer (kind=4), save :: k = 0
+      integer (kind=4), save :: k1 = 0
+      integer (kind=4) :: n
+      integer (kind=4), save :: n1 = 0
     !
     !  INDX = 0: This is the first call.
     !
@@ -9054,6 +9513,140 @@ contains
     
       return
     end
+
+
+subroutine perm_print ( n, p, title )
+
+!*****************************************************************************80
+!
+!! PERM_PRINT prints a permutation.
+!
+!  Example:
+!
+!    Input:
+!
+!      P = 7 2 4 1 5 3 6
+!
+!    Printed output:
+!
+!      "This is the permutation:"
+!
+!      1 2 3 4 5 6 7
+!      7 2 4 1 5 3 6
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    25 July 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the number of objects permuted.
+!
+!    Input, integer ( kind = 4 ) P(N), the permutation, in standard index form.
+!
+!    Input, character ( len = * ) TITLE, an optional title.
+!    If no title is supplied, then only the permutation is printed.
+!> @see dutch.f90
+
+  implicit none
+
+  integer ( kind = 4 ), parameter :: inc = 20
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) ihi
+  integer ( kind = 4 ) ilo
+  integer ( kind = 4 ) p(n)
+  character ( len = * ) title
+
+  if ( len_trim ( title ) /= 0 ) then
+
+    write ( *, '(a)' ) ' '
+    write ( *, '(a)' ) trim ( title )
+
+    do ilo = 1, n, inc
+      ihi = min ( n, ilo + inc - 1 )
+      write ( *, '(a)' ) ' '
+      write ( *, '(20i4)' ) ( i, i = ilo, ihi )
+      write ( *, '(20i4)' ) p(ilo:ihi)
+    end do
+
+  else
+
+    do ilo = 1, n, inc
+      ihi = min ( n, ilo + inc - 1 )
+      write ( *, '(20i4)' ) p(ilo:ihi)
+    end do
+
+  end if
+
+  return
+end
+
+
+subroutine perm_random ( n, seed, p )
+
+!*****************************************************************************80
+!
+!! PERM_RANDOM returns a random permutation.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    12 November 2000
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Reference:
+!
+!    Marc de Berg, Marc van Kreveld, Mark Overmars, Otfried Schwarzkopf,
+!    Computational Geometry,
+!    Second Edition,
+!    Springer, 2000, page 78.
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the number of items to permute.
+!
+!    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+!    number generator.
+!
+!    Output, integer ( kind = 4 ) P(N), a permutation of the numbers
+!    from 1 to N.
+!
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) i4_uniform
+  integer ( kind = 4 ) j
+  integer ( kind = 4 ) p(n)
+  integer ( kind = 4 ) seed
+
+  call i4vec_indicator ( n, p )
+
+  do i = n, 2, -1
+    j = i4_uniform ( 1, i, seed )
+    call i4_swap ( p(i), p(j) )
+  end do
+
+  return
+end subroutine perm_random
+
 
 end module jburk_i4vec_
 
