@@ -2,6 +2,12 @@ module     jburk_r4poly_
 use, intrinsic :: iso_fortran_env
 implicit none
 
+   interface           r4poly_deriv
+      module procedure r4poly_deriv
+   end interface       r4poly_deriv
+   public              r4poly_deriv
+
+
 contains
 
 
@@ -63,70 +69,64 @@ subroutine r4poly_degree ( na, a, degree )
 end
 
 
-subroutine r4poly_deriv ( n, c, p, cp )
+   subroutine r4poly_deriv (n, c, p, cp)
+   !*****************************************************************************80
+   !! R4POLY_DERIV returns the derivative of a polynomial.
+   !
+   !  Licensing:
+   !    This code is distributed under the GNU LGPL license.
+   !
+   !  Modified:
+   !    02 May 2011
+   !
+   !  Author:
+   !    John Burkardt
+   !
+   !  Parameters:
+   !    Input, integer (kind=4) :: N, the degree of the polynomial.
+   !
+   !    Input, real (kind=4) :: C(0:N), the polynomial coefficients.
+   !    C(I) is the coefficient of X**I.
+   !
+   !    Input, integer (kind=4) :: P, the order of the derivative.
+   !    0 means no derivative is taken.
+   !    1 means first derivative,
+   !    2 means second derivative and so on.
+   !    Values of P less than 0 are meaningless. Values of P greater
+   !    than N are meaningful, but the code will behave as though the
+   !    value of P was N+1.
+   !
+   !    Output, real (kind=4) :: CP(0:N-P), the polynomial coefficients of
+   !    the derivative.
+   implicit none
+      integer (kind=4), intent(in) :: n
+      real (kind=4), intent(in) :: c(0:n)
+      real (kind=4), intent(out) :: cp(0:*)
+      real (kind=4) :: cp_temp(0:n)
+      integer (kind=4) :: d
+      integer (kind=4) :: i
+      integer (kind=4), intent(in) :: p
 
-!*****************************************************************************80
-!
-!! R4POLY_DERIV returns the derivative of a polynomial.
-!
-!  Licensing:
-!
-!    This code is distributed under the GNU LGPL license.
-!
-!  Modified:
-!
-!    02 May 2011
-!
-!  Author:
-!
-!    John Burkardt
-!
-!  Parameters:
-!
-!    Input, integer (kind=4) :: N, the degree of the polynomial.
-!
-!    Input, real (kind=4) :: C(0:N), the polynomial coefficients.
-!    C(I) is the coefficient of X**I.
-!
-!    Input, integer (kind=4) :: P, the order of the derivative.
-!    0 means no derivative is taken.
-!    1 means first derivative,
-!    2 means second derivative and so on.
-!    Values of P less than 0 are meaningless.  Values of P greater
-!    than N are meaningful, but the code will behave as though the
-!    value of P was N+1.
-!
-!    Output, real (kind=4) :: CP(0:N-P), the polynomial coefficients of
-!    the derivative.
-!
-  implicit none
+      if ( n < p ) then
+        return
+      end if
 
-  integer (kind=4) :: n
+      cp_temp(0:n) = c(0:n)
 
-  real (kind=4) :: c(0:n)
-  real (kind=4) :: cp(0:*)
-  real (kind=4) :: cp_temp(0:n)
-  integer (kind=4) :: d
-  integer (kind=4) :: i
-  integer (kind=4) :: p
+      do d = 1, p
+         do i = 0, n - d
+            cp_temp(i) = real(i+1, kind=4) * cp_temp(i+1)
+         end do
+         cp_temp(n-d+1) = 0.0E+0
+      end do
 
-  if ( n < p ) then
-    return
-  end if
+      cp(0:n-p) = cp_temp(0:n-p)
 
-  cp_temp(0:n) = c(0:n)
+      return
+   end subroutine r4poly_deriv
 
-  do d = 1, p
-    do i = 0, n - d
-      cp_temp(i) = real ( i + 1, kind = 4 ) * cp_temp(i+1)
-    end do
-    cp_temp(n-d+1) = 0.0E+00
-  end do
 
-  cp(0:n-p) = cp_temp(0:n-p)
 
-  return
-end
 subroutine r4poly_lagrange_0 ( npol, xpol, xval, wval )
 
 !*****************************************************************************80
