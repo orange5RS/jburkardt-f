@@ -1,5 +1,5 @@
 # TIMESTAMP: Print a Timestamp
-TIMESTAMP is a FORTRAN90 library which prints the current YMDHMS date (year-month-day-hours-minutes-seconds) as a timestamp.
+**TIMESTAMP** is a FORTRAN90 library which prints the current YMDHMS date (year-month-day-hours-minutes-seconds) as a timestamp.
 
 This is useful when documenting the run of a program. By including a timestamp, the output of the program will always contain a clear indication of when it was created. Other indicators, such as the file modification timestamp, may be misleading or subject to unintentional modification.
 
