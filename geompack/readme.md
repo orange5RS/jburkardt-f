@@ -20,7 +20,8 @@ GEOMPACK is available in a C version and a C++ version and a FORTRAN77 version a
 - TRIANGULATION_TRIANGLE_NEIGHBORS, a FORTRAN90 program which reads data defining a triangulation, determines the neighboring triangles of each triangle, and writes that information to a file.
 
 ## Author:
-Original FORTRAN77 version by Barry Joe; FORTRAN90 version by John Burkardt.
+- Original FORTRAN77 version by Barry Joe; 
+- FORTRAN90 version by John Burkardt.
 
 ## Reference:
 - Franz Aurenhammer, Voronoi diagrams - a study of a fundamental geometric data structure, ACM Computing Surveys, Volume 23, Number 3, pages 345-405, September 1991.
