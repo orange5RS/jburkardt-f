@@ -1,3 +1,98 @@
+module     jburk_geompack
+
+
+interface        alpha_measure
+module procedure alpha_measure
+end interface    alpha_measure
+public           alpha_measure
+
+interface        angle_rad_2d
+module procedure angle_rad_2d
+end interface    angle_rad_2d
+public           angle_rad_2d
+
+interface        diaedg
+module procedure diaedg
+end interface    diaedg
+public           diaedg
+
+interface        get_unit
+module procedure get_unit
+end interface    get_unit
+public           get_unit
+
+interface        i4_modp
+module procedure i4_modp
+end interface    i4_modp
+public           i4_modp
+
+interface        i4_swap
+module procedure i4_swap
+end interface    i4_swap
+public           i4_swap
+
+interface        i4_wrap
+module procedure i4_wrap
+end interface    i4_wrap
+public           i4_wrap
+
+interface        i4vec_heap_d
+module procedure i4vec_heap_d
+end interface    i4vec_heap_d
+public           i4vec_heap_d
+
+interface        i4vec_sort_heap_a
+module procedure i4vec_sort_heap_a
+end interface    i4vec_sort_heap_a
+public           i4vec_sort_heap_a
+
+interface        i4vec_sorted_unique
+module procedure i4vec_sorted_unique
+end interface    i4vec_sorted_unique
+public           i4vec_sorted_unique
+
+interface        lrline
+module procedure lrline
+end interface    lrline
+public           lrline
+
+interface        perm_check
+module procedure perm_check
+end interface    perm_check
+public           perm_check
+
+interface        perm_inverse
+module procedure perm_inverse
+end interface    perm_inverse
+public           perm_inverse
+
+interface        points_delaunay_naive_2d
+module procedure points_delaunay_naive_2d
+end interface    points_delaunay_naive_2d
+public           points_delaunay_naive_2d
+
+interface        points_hull_2d
+module procedure points_hull_2d
+end interface    points_hull_2d
+public           points_hull_2d
+
+interface        quad_convex_random
+module procedure quad_convex_random
+end interface    quad_convex_random
+public           quad_convex_random
+
+interface        r8_acos
+module procedure r8_acos
+end interface    r8_acos
+public           r8_acos
+
+
+
+
+
+contains
+
+
 subroutine alpha_measure ( n, z, triangle_order, triangle_num, triangle_node, &
   alpha_min, alpha_ave, alpha_area )
 
@@ -4035,3 +4130,5 @@ subroutine vbedg ( x, y, node_num, node_xy, triangle_num, triangle_node, &
 
   return
 end
+
+end module jburk_geompack
