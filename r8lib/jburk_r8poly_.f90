@@ -36,25 +36,25 @@ subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    Input, integer(kind=4) :: NPOL, the number of abscissas.
 !
-!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas, which should
+!    Input, real(kind=8) :: XPOL(NPOL), the abscissas, which should
 !    be distinct.
 !
-!    Input, real ( kind = 8 ) XVAL, the point at which the Lagrange
+!    Input, real(kind=8) :: XVAL, the point at which the Lagrange
 !    factor is to be evaluated.
 !
-!    Output, real ( kind = 8 ) DWDX, the derivative of W with respect to X.
+!    Output, real(kind=8) :: DWDX, the derivative of W with respect to X.
 !
   implicit none
 
-  integer ( kind = 4 ) npol
+  integer(kind=4) :: npol
 
-  real ( kind = 8 ) dwdx
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) w
-  real ( kind = 8 ) xpol(npol)
-  real ( kind = 8 ) xval
+  real(kind=8) :: dwdx
+  integer(kind=4) :: i
+  real(kind=8) :: w
+  real(kind=8) :: xpol(npol)
+  real(kind=8) :: xval
 
   dwdx = 0.0D+00
   w = 1.0D+00
@@ -68,8 +68,9 @@ subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
 
   return
 end
-subroutine r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
 
+
+subroutine     r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
 !*****************************************************************************80
 !
 !! R8POLY_LAGRANGE_2 evaluates the second derivative of the Lagrange factor.
@@ -108,57 +109,51 @@ subroutine r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    Input, integer(kind=4) :: NPOL, the number of abscissas.
 !    NPOL must be at least 1.
 !
-!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas, which should
+!    Input, real(kind=8) :: XPOL(NPOL), the abscissas, which should
 !    be distinct.
 !
-!    Input, real ( kind = 8 ) XVAL, the point at which the Lagrange
+!    Input, real(kind=8) :: XVAL, the point at which the Lagrange
 !    factor is to be evaluated.
 !
-!    Output, real ( kind = 8 ) DW2DX2, the second derivative of W
+!    Output, real(kind=8) :: DW2DX2, the second derivative of W
 !    with respect to XVAL.
 !
-  implicit none
+   implicit none
 
-  integer ( kind = 4 ) npol
+   integer(kind=4) :: npol
 
-  real ( kind = 8 ) dw2dx2
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) term
-  real ( kind = 8 ) xpol(npol)
-  real ( kind = 8 ) xval
+   real(kind=8) :: dw2dx2
+   integer(kind=4) :: i
+   integer(kind=4) :: j
+   integer(kind=4) :: k
+   real(kind=8) :: term
+   real(kind=8) :: xpol(npol)
+   real(kind=8) :: xval
 
-  dw2dx2 = 0.0D+00
+   dw2dx2 = 0.0D+00
 
-  do k = 1, npol
+   do k = 1, npol
+      do j = 1, npol
+         if ( j /= k ) then
+            term = 1.0D+00
+            do i = 1, npol
+               if (i /= j .and. i /= k) then
+                  term = term * (xval - xpol(i))
+               end if
+            end do
+            dw2dx2 = dw2dx2 + term
+         end if
+      end do
+   end do
 
-    do j = 1, npol
+   return
+end subroutine r8poly_lagrange_2
 
-      if ( j /= k ) then
-        term = 1.0D+00
 
-        do i = 1, npol
-          if ( i /= j .and. i /= k ) then
-            term = term * ( xval - xpol(i) )
-          end if
-        end do
-
-        dw2dx2 = dw2dx2 + term
-
-      end if
-
-    end do
-
-  end do
-
-  return
-end
-subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
-
+subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
 !*****************************************************************************80
 !
 !! R8POLY_LAGRANGE_COEF returns the coefficients of a Lagrange polynomial.
@@ -192,30 +187,29 @@ subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    Input, integer(kind=4) :: NPOL, the number of abscissas.
 !    NPOL must be at least 1.
 !
-!    Input, integer ( kind = 4 ) IPOL, the index of the polynomial to evaluate.
+!    Input, integer(kind=4) :: IPOL, the index of the polynomial to evaluate.
 !    IPOL must be between 1 and NPOL.
 !
-!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas of the
+!    Input, real(kind=8) :: XPOL(NPOL), the abscissas of the
 !    Lagrange polynomials.  The entries in XPOL must be distinct.
 !
-!    Output, real ( kind = 8 ) PCOF(0:NPOL-1), the standard polynomial
+!    Output, real(kind=8) :: PCOF(0:NPOL-1), the standard polynomial
 !    coefficients of the IPOL-th Lagrange polynomial:
 !      L(IPOL)(X) = SUM ( 0 <= I <= NPOL-1 ) PCOF(I) * X^I
 !
   implicit none
 
-  integer ( kind = 4 ) npol
-
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) ipol
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) pcof(0:npol-1)
+  integer(kind=4) :: npol
+  integer(kind=4) :: i
+  integer(kind=4) :: indx
+  integer(kind=4) :: ipol
+  integer(kind=4) :: j
+  real(kind=8) :: pcof(0:npol-1)
   logical r8vec_distinct
-  real ( kind = 8 ) xpol(npol)
+  real(kind=8) :: xpol(npol)
 !
 !  Make sure IPOL is legal.
 !
@@ -325,30 +319,30 @@ subroutine r8poly_lagrange_factor ( npol, xpol, xval, wval, dwdx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    Input, integer(kind=4) :: NPOL, the number of abscissas.
 !    NPOL must be at least 1.
 !
-!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas, which should
+!    Input, real(kind=8) :: XPOL(NPOL), the abscissas, which should
 !    be distinct.
 !
-!    Input, real ( kind = 8 ) XVAL, the point at which the Lagrange
+!    Input, real(kind=8) :: XVAL, the point at which the Lagrange
 !    factor is to be evaluated.
 !
-!    Output, real ( kind = 8 ) WVAL, the value of the Lagrange factor at XVAL.
+!    Output, real(kind=8) :: WVAL, the value of the Lagrange factor at XVAL.
 !
-!    Output, real ( kind = 8 ) DWDX, the derivative of W with respect to XVAL.
+!    Output, real(kind=8) :: DWDX, the derivative of W with respect to XVAL.
 !
   implicit none
 
-  integer ( kind = 4 ) npol
+  integer(kind=4) :: npol
 
-  real ( kind = 8 ) dwdx
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) term
-  real ( kind = 8 ) wval
-  real ( kind = 8 ) xpol(npol)
-  real ( kind = 8 ) xval
+  real(kind=8) :: dwdx
+  integer(kind=4) :: i
+  integer(kind=4) :: j
+  real(kind=8) :: term
+  real(kind=8) :: wval
+  real(kind=8) :: xpol(npol)
+  real(kind=8) :: xval
 
   wval = product ( xval - xpol(1:npol) )
 
@@ -402,37 +396,37 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    Input, integer(kind=4) :: NPOL, the number of abscissas.
 !    NPOL must be at least 1.
 !
-!    Input, integer ( kind = 4 ) IPOL, the index of the polynomial to evaluate.
+!    Input, integer(kind=4) :: IPOL, the index of the polynomial to evaluate.
 !    IPOL must be between 1 and NPOL.
 !
-!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas of the Lagrange
+!    Input, real(kind=8) :: XPOL(NPOL), the abscissas of the Lagrange
 !    polynomials.  The entries in XPOL must be distinct.
 !
-!    Input, real ( kind = 8 ) XVAL, the point at which the IPOL-th
+!    Input, real(kind=8) :: XVAL, the point at which the IPOL-th
 !    Lagrange polynomial is to be evaluated.
 !
-!    Output, real ( kind = 8 ) PVAL, the value of the IPOL-th Lagrange
+!    Output, real(kind=8) :: PVAL, the value of the IPOL-th Lagrange
 !    polynomial at XVAL.
 !
-!    Output, real ( kind = 8 ) DPDX, the derivative of the IPOL-th
+!    Output, real(kind=8) :: DPDX, the derivative of the IPOL-th
 !    Lagrange polynomial at XVAL.
 !
   implicit none
 
-  integer ( kind = 4 ) npol
+  integer(kind=4) :: npol
 
-  real ( kind = 8 ) dpdx
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ipol
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) p2
-  real ( kind = 8 ) pval
+  real(kind=8) :: dpdx
+  integer(kind=4) :: i
+  integer(kind=4) :: ipol
+  integer(kind=4) :: j
+  real(kind=8) :: p2
+  real(kind=8) :: pval
   logical r8vec_distinct
-  real ( kind = 8 ) xpol(npol)
-  real ( kind = 8 ) xval
+  real(kind=8) :: xpol(npol)
+  real(kind=8) :: xval
 !
 !  Make sure IPOL is legal.
 !
@@ -523,18 +517,18 @@ subroutine r8poly_order ( na, a, order )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NA, the dimension of A.
+!    Input, integer(kind=4) :: NA, the dimension of A.
 !
-!    Input, real ( kind = 8 ) A(0:NA), the coefficients of the polynomials.
+!    Input, real(kind=8) :: A(0:NA), the coefficients of the polynomials.
 !
-!    Output, integer ( kind = 4 ) ORDER, the order of A.
+!    Output, integer(kind=4) :: ORDER, the order of A.
 !
   implicit none
 
-  integer ( kind = 4 ) na
+  integer(kind=4) :: na
 
-  real ( kind = 8 ) a(0:na)
-  integer ( kind = 4 ) order
+  real(kind=8) :: a(0:na)
+  integer(kind=4) :: order
 
   order = na + 1
 
@@ -570,9 +564,9 @@ subroutine r8poly_print ( n, a, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of A.
+!    Input, integer(kind=4) :: N, the dimension of A.
 !
-!    Input, real ( kind = 8 ) A(0:N), the polynomial coefficients.
+!    Input, real(kind=8) :: A(0:N), the polynomial coefficients.
 !    A(0) is the constant term and
 !    A(N) is the coefficient of X^N.
 !
@@ -580,12 +574,12 @@ subroutine r8poly_print ( n, a, title )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) :: n
 
-  real ( kind = 8 ) a(0:n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) mag
-  integer ( kind = 4 ) n2
+  real(kind=8) :: a(0:n)
+  integer(kind=4) :: i
+  real(kind=8) :: mag
+  integer(kind=4) :: n2
   character plus_minus
   character ( len = * ) title
 
@@ -708,24 +702,24 @@ subroutine r8poly_shift ( scale, shift, n, poly_cof )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) SHIFT, SCALE, the shift and scale applied to X,
+!    Input, real(kind=8) :: SHIFT, SCALE, the shift and scale applied to X,
 !    so that Z = SCALE * X + SHIFT.
 !
-!    Input, integer ( kind = 4 ) N, the number of coefficients.
+!    Input, integer(kind=4) :: N, the number of coefficients.
 !
-!    Input/output, real ( kind = 8 ) POLY_COF(0:N).
+!    Input/output, real(kind=8) :: POLY_COF(0:N).
 !    On input, the coefficient array in terms of the X variable.
 !    On output, the coefficient array in terms of the Z variable.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) :: n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) poly_cof(0:n)
-  real ( kind = 8 ) scale
-  real ( kind = 8 ) shift
+  integer(kind=4) :: i
+  integer(kind=4) :: j
+  real(kind=8) :: poly_cof(0:n)
+  real(kind=8) :: scale
+  real(kind=8) :: shift
 
   do i = 1, n
     poly_cof(i:n) = poly_cof(i:n) / scale
@@ -767,27 +761,27 @@ subroutine r8poly_value ( m, c, n, x, p )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the degree.
+!    Input, integer(kind=4) :: M, the degree.
 !
-!    Input, real ( kind = 8 ) C(0:M), the polynomial coefficients.  
+!    Input, real(kind=8) :: C(0:M), the polynomial coefficients.  
 !    C(1) is the constant term.
 !
-!    Input, integer ( kind = 4 ) N, the number of evaluation points.
+!    Input, integer(kind=4) :: N, the number of evaluation points.
 !
-!    Input, real ( kind = 8 ) X(N), the evaluation points.
+!    Input, real(kind=8) :: X(N), the evaluation points.
 !
-!    Output, real ( kind = 8 ) P(N), the value of the polynomial at the 
+!    Output, real(kind=8) :: P(N), the value of the polynomial at the 
 !    evaluation points.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer(kind=4) :: m
+  integer(kind=4) :: n
 
-  real ( kind = 8 ) c(0:m)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) p(n)
-  real ( kind = 8 ) x(n)
+  real(kind=8) :: c(0:m)
+  integer(kind=4) :: i
+  real(kind=8) :: p(n)
+  real(kind=8) :: x(n)
 
   p(1:n) = c(m)
   do i = m - 1, 0, -1
@@ -816,24 +810,24 @@ subroutine r8poly_value_horner ( n, c, x, cx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of C.
+!    Input, integer(kind=4) :: N, the dimension of C.
 !
-!    Input, real ( kind = 8 ) C(0:N), the polynomial coefficients.
+!    Input, real(kind=8) :: C(0:N), the polynomial coefficients.
 !    C(I) is the coefficient of X^I.
 !
-!    Input, real ( kind = 8 ) X, the point at which the polynomial is
+!    Input, real(kind=8) :: X, the point at which the polynomial is
 !    to be evaluated.
 !
-!    Output, real ( kind = 8 ) CX, the value of the polynomial at X.
+!    Output, real(kind=8) :: CX, the value of the polynomial at X.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) :: n
 
-  real ( kind = 8 ) c(0:n)
-  real ( kind = 8 ) cx
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x
+  real(kind=8) :: c(0:n)
+  real(kind=8) :: cx
+  integer(kind=4) :: i
+  real(kind=8) :: x
 
   cx = c(n)
   do i = n - 1, 0, -1
@@ -873,25 +867,25 @@ function r8poly_value_old ( n, a, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the order of the polynomial.
+!    Input, integer(kind=4) :: N, the order of the polynomial.
 !
-!    Input, real ( kind = 8 ) A(N), the coefficients of the polynomial.
+!    Input, real(kind=8) :: A(N), the coefficients of the polynomial.
 !    A(1) is the constant term.
 !
-!    Input, real ( kind = 8 ) X, the point at which the polynomial is
+!    Input, real(kind=8) :: X, the point at which the polynomial is
 !    to be evaluated.
 !
-!    Output, real ( kind = 8 ) R8POLY_VALUE_OLD, the value of the polynomial 
+!    Output, real(kind=8) :: R8POLY_VALUE_OLD, the value of the polynomial 
 !    at X.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) :: n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) r8poly_value_old
-  real ( kind = 8 ) x
+  real(kind=8) :: a(n)
+  integer(kind=4) :: i
+  real(kind=8) :: r8poly_value_old
+  real(kind=8) :: x
 
   r8poly_value_old = a(n)
   do i = n - 1, 1, -1
@@ -930,33 +924,33 @@ subroutine r8poly_value_2d ( m, c, n, x, y, p )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the degree of the polynomial.
+!    Input, integer(kind=4) :: M, the degree of the polynomial.
 !
-!    Input, real ( kind = 8 ) C(T(M+1)), the polynomial coefficients.  
+!    Input, real(kind=8) :: C(T(M+1)), the polynomial coefficients.  
 !    C(1) is the constant term.  T(M+1) is the M+1-th triangular number.
 !    The coefficients are stored consistent with the following ordering
 !    of monomials: 1, X, Y, X^2, XY, Y^2, X^3, X^2Y, XY^2, Y^3, X^4, ...
 !
-!    Input, integer ( kind = 4 ) N, the number of evaluation points.
+!    Input, integer(kind=4) :: N, the number of evaluation points.
 !
-!    Input, real ( kind = 8 ) X(N), Y(N), the evaluation points.
+!    Input, real(kind=8) :: X(N), Y(N), the evaluation points.
 !
-!    Output, real ( kind = 8 ) P(N), the value of the polynomial at the 
+!    Output, real(kind=8) :: P(N), the value of the polynomial at the 
 !    evaluation points.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) :: n
 
-  real ( kind = 8 ) c(*)
-  integer ( kind = 4 ) ex
-  integer ( kind = 4 ) ey
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) m
-  real ( kind = 8 ) p(n)
-  integer ( kind = 4 ) s
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  real(kind=8) :: c(*)
+  integer(kind=4) :: ex
+  integer(kind=4) :: ey
+  integer(kind=4) :: j
+  integer(kind=4) :: m
+  real(kind=8) :: p(n)
+  integer(kind=4) :: s
+  real(kind=8) :: x(n)
+  real(kind=8) :: y(n)
 
   p(1:n) = 0.0D+00
 
@@ -991,13 +985,13 @@ subroutine r8poly2_ex ( x1, y1, x2, y2, x3, y3, x, y, ierror )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) X1, Y1, X2, Y2, X3, Y3, the coordinates of
+!    Input, real(kind=8) :: X1, Y1, X2, Y2, X3, Y3, the coordinates of
 !    three points on the parabola.  X1, X2 and X3 must be distinct.
 !
-!    Output, real ( kind = 8 ) X, Y, the X coordinate of the extremal point
+!    Output, real(kind=8) :: X, Y, the X coordinate of the extremal point
 !    of the parabola, and the value of the parabola at that point.
 !
-!    Output, integer ( kind = 4 ) IERROR, error flag.
+!    Output, integer(kind=4) :: IERROR, error flag.
 !    0, no error.
 !    1, two of the X values are equal.
 !    2, the data lies on a straight line; there is no finite extremal
@@ -1005,16 +999,16 @@ subroutine r8poly2_ex ( x1, y1, x2, y2, x3, y3, x, y, ierror )
 !
   implicit none
 
-  real ( kind = 8 ) bot
-  integer ( kind = 4 ) ierror
-  real ( kind = 8 ) x
-  real ( kind = 8 ) x1
-  real ( kind = 8 ) x2
-  real ( kind = 8 ) x3
-  real ( kind = 8 ) y
-  real ( kind = 8 ) y1
-  real ( kind = 8 ) y2
-  real ( kind = 8 ) y3
+  real(kind=8) :: bot
+  integer(kind=4) :: ierror
+  real(kind=8) :: x
+  real(kind=8) :: x1
+  real(kind=8) :: x2
+  real(kind=8) :: x3
+  real(kind=8) :: y
+  real(kind=8) :: y1
+  real(kind=8) :: y2
+  real(kind=8) :: y3
 
   ierror = 0
 
@@ -1069,16 +1063,16 @@ subroutine r8poly2_ex2 ( x1, y1, x2, y2, x3, y3, x, y, a, b, c, ierror )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) X1, Y1, X2, Y2, X3, Y3, the coordinates of
+!    Input, real(kind=8) :: X1, Y1, X2, Y2, X3, Y3, the coordinates of
 !    three points on the parabola.  X1, X2 and X3 must be distinct.
 !
-!    Output, real ( kind = 8 ) X, Y, the X coordinate of the extremal
+!    Output, real(kind=8) :: X, Y, the X coordinate of the extremal
 !    point of the parabola, and the value of the parabola at that point.
 !
-!    Output, real ( kind = 8 ) A, B, C, the coefficients that define the
+!    Output, real(kind=8) :: A, B, C, the coefficients that define the
 !    parabola: P(X) = A * X * X + B * X + C.
 !
-!    Output, integer ( kind = 4 ) IERROR, error flag.
+!    Output, integer(kind=4) :: IERROR, error flag.
 !    0, no error.
 !    1, two of the X values are equal.
 !    2, the data lies on a straight line; there is no finite extremal
@@ -1086,21 +1080,21 @@ subroutine r8poly2_ex2 ( x1, y1, x2, y2, x3, y3, x, y, a, b, c, ierror )
 !
   implicit none
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  real ( kind = 8 ) det
-  integer ( kind = 4 ) ierror
-  real ( kind = 8 ) v(3,3)
-  real ( kind = 8 ) w(3,3)
-  real ( kind = 8 ) x
-  real ( kind = 8 ) x1
-  real ( kind = 8 ) x2
-  real ( kind = 8 ) x3
-  real ( kind = 8 ) y
-  real ( kind = 8 ) y1
-  real ( kind = 8 ) y2
-  real ( kind = 8 ) y3
+  real(kind=8) :: a
+  real(kind=8) :: b
+  real(kind=8) :: c
+  real(kind=8) :: det
+  integer(kind=4) :: ierror
+  real(kind=8) :: v(3,3)
+  real(kind=8) :: w(3,3)
+  real(kind=8) :: x
+  real(kind=8) :: x1
+  real(kind=8) :: x2
+  real(kind=8) :: x3
+  real(kind=8) :: y
+  real(kind=8) :: y1
+  real(kind=8) :: y2
+  real(kind=8) :: y3
 
   ierror = 0
 
@@ -1177,7 +1171,7 @@ subroutine r8poly2_root ( a, b, c, r1, r2 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) A, B, C, the coefficients of the polynomial.
+!    Input, real(kind=8) :: A, B, C, the coefficients of the polynomial.
 !    A must not be zero.
 !
 !    Output, complex ( kind = 8 ) R1, R2, the roots of the polynomial, which
@@ -1185,9 +1179,9 @@ subroutine r8poly2_root ( a, b, c, r1, r2 )
 !
   implicit none
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
+  real(kind=8) :: a
+  real(kind=8) :: b
+  real(kind=8) :: c
   complex ( kind = 8 ) disc
   complex ( kind = 8 ) q
   complex ( kind = 8 ) r1
@@ -1235,22 +1229,22 @@ subroutine r8poly2_rroot ( a, b, c, r1, r2 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) A, B, C, the coefficients of the quadratic
+!    Input, real(kind=8) :: A, B, C, the coefficients of the quadratic
 !    polynomial A * X * X + B * X + C = 0 whose roots are desired.
 !    A must not be zero.
 !
-!    Output, real ( kind = 8 ) R1, R2, the real parts of the roots
+!    Output, real(kind=8) :: R1, R2, the real parts of the roots
 !    of the polynomial.
 !
   implicit none
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  real ( kind = 8 ) disc
-  real ( kind = 8 ) q
-  real ( kind = 8 ) r1
-  real ( kind = 8 ) r2
+  real(kind=8) :: a
+  real(kind=8) :: b
+  real(kind=8) :: c
+  real(kind=8) :: disc
+  real(kind=8) :: q
+  real(kind=8) :: r1
+  real(kind=8) :: r2
 
   if ( a == 0.0D+00 ) then
     write ( *, '(a)' ) ' '
@@ -1288,7 +1282,7 @@ subroutine r8poly2_val ( x1, y1, x2, y2, x3, y3, x, y, yp, ypp )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) X1, Y1, X2, Y2, X3, Y3, three pairs of data.
+!    Input, real(kind=8) :: X1, Y1, X2, Y2, X3, Y3, three pairs of data.
 !    If the X values are distinct, then all the Y values represent
 !    actual values of the parabola.
 !
@@ -1299,27 +1293,27 @@ subroutine r8poly2_val ( x1, y1, x2, y2, x3, y3, x, y, yp, ypp )
 !      X1 == X2 == X3: Y2 is the derivative at X1, and
 !                      Y3 is the second derivative at X1.
 !
-!    Input, real ( kind = 8 ) X, an abscissa at which the parabola is to be
+!    Input, real(kind=8) :: X, an abscissa at which the parabola is to be
 !    evaluated.
 !
-!    Output, real ( kind = 8 ) Y, YP, YPP, the values of the parabola and
+!    Output, real(kind=8) :: Y, YP, YPP, the values of the parabola and
 !    its first and second derivatives at X.
 !
   implicit none
 
-  integer ( kind = 4 ) distinct
-  real ( kind = 8 ) dif1
-  real ( kind = 8 ) dif2
-  real ( kind = 8 ) x
-  real ( kind = 8 ) x1
-  real ( kind = 8 ) x2
-  real ( kind = 8 ) x3
-  real ( kind = 8 ) y
-  real ( kind = 8 ) y1
-  real ( kind = 8 ) y2
-  real ( kind = 8 ) y3
-  real ( kind = 8 ) yp
-  real ( kind = 8 ) ypp
+  integer(kind=4) :: distinct
+  real(kind=8) :: dif1
+  real(kind=8) :: dif2
+  real(kind=8) :: x
+  real(kind=8) :: x1
+  real(kind=8) :: x2
+  real(kind=8) :: x3
+  real(kind=8) :: y
+  real(kind=8) :: y1
+  real(kind=8) :: y2
+  real(kind=8) :: y3
+  real(kind=8) :: yp
+  real(kind=8) :: ypp
 !
 !  If any X's are equal, put them and the Y data first.
 !
@@ -1400,49 +1394,49 @@ subroutine r8poly2_val2 ( dim_num, ndata, tdata, ydata, left, tval, yval )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) DIM_NUM, the dimension of a single data point.
+!    Input, integer(kind=4) :: DIM_NUM, the dimension of a single data point.
 !    DIM_NUM must be at least 1.
 !
-!    Input, integer ( kind = 4 ) NDATA, the number of data points.
+!    Input, integer(kind=4) :: NDATA, the number of data points.
 !    NDATA must be at least 3.
 !
-!    Input, real ( kind = 8 ) TDATA(NDATA), the abscissas of the data points.
+!    Input, real(kind=8) :: TDATA(NDATA), the abscissas of the data points.
 !    The values in TDATA must be in strictly ascending order.
 !
-!    Input, real ( kind = 8 ) YDATA(DIM_NUM,NDATA), the data points
+!    Input, real(kind=8) :: YDATA(DIM_NUM,NDATA), the data points
 !    corresponding to the abscissas.
 !
-!    Input, integer ( kind = 4 ) LEFT, the location of the first of the three
+!    Input, integer(kind=4) :: LEFT, the location of the first of the three
 !    consecutive data points through which the parabolic interpolant
 !    must pass.  1 <= LEFT <= NDATA - 2.
 !
-!    Input, real ( kind = 8 ) TVAL, the value of T at which the parabolic
+!    Input, real(kind=8) :: TVAL, the value of T at which the parabolic
 !    interpolant is to be evaluated.  Normally, TDATA(1) <= TVAL <= T(NDATA),
 !    and the data will be interpolated.  For TVAL outside this range,
 !    extrapolation will be used.
 !
-!    Output, real ( kind = 8 ) YVAL(DIM_NUM), the value of the parabolic
+!    Output, real(kind=8) :: YVAL(DIM_NUM), the value of the parabolic
 !    interpolant at TVAL.
 !
   implicit none
 
-  integer ( kind = 4 ) ndata
-  integer ( kind = 4 ) dim_num
+  integer(kind=4) :: ndata
+  integer(kind=4) :: dim_num
 
-  real ( kind = 8 ) dif1
-  real ( kind = 8 ) dif2
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) left
-  real ( kind = 8 ) t1
-  real ( kind = 8 ) t2
-  real ( kind = 8 ) t3
-  real ( kind = 8 ) tval
-  real ( kind = 8 ) tdata(ndata)
-  real ( kind = 8 ) ydata(dim_num,ndata)
-  real ( kind = 8 ) y1
-  real ( kind = 8 ) y2
-  real ( kind = 8 ) y3
-  real ( kind = 8 ) yval(dim_num)
+  real(kind=8) :: dif1
+  real(kind=8) :: dif2
+  integer(kind=4) :: i
+  integer(kind=4) :: left
+  real(kind=8) :: t1
+  real(kind=8) :: t2
+  real(kind=8) :: t3
+  real(kind=8) :: tval
+  real(kind=8) :: tdata(ndata)
+  real(kind=8) :: ydata(dim_num,ndata)
+  real(kind=8) :: y1
+  real(kind=8) :: y2
+  real(kind=8) :: y3
+  real(kind=8) :: yval(dim_num)
 !
 !  Check.
 !
@@ -1519,7 +1513,7 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) A, B, C, D, the coefficients of the polynomial.
+!    Input, real(kind=8) :: A, B, C, D, the coefficients of the polynomial.
 !    A must not be zero.
 !
 !    Output, complex ( kind = 8 ) R1, R2, R3, the roots of the polynomial, which
@@ -1527,22 +1521,22 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
 !
   implicit none
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  real ( kind = 8 ) d
+  real(kind=8) :: a
+  real(kind=8) :: b
+  real(kind=8) :: c
+  real(kind=8) :: d
   complex ( kind = 8 ) i
   complex ( kind = 8 ) one
-  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
-  real ( kind = 8 ) q
-  real ( kind = 8 ) r
+  real(kind=8) ::  parameter :: pi = 3.141592653589793D+00
+  real(kind=8) :: q
+  real(kind=8) :: r
   complex ( kind = 8 ) r1
   complex ( kind = 8 ) r2
   complex ( kind = 8 ) r3
-  real ( kind = 8 ) s1
-  real ( kind = 8 ) s2
-  real ( kind = 8 ) temp
-  real ( kind = 8 ) theta
+  real(kind=8) :: s1
+  real(kind=8) :: s2
+  real(kind=8) :: temp
+  real(kind=8) :: theta
 
   if ( a == 0.0D+00 ) then
     write ( *, '(a)' ) ' '
@@ -1608,26 +1602,26 @@ subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) A, B, C, D, the coefficients of the polynomial.
+!    Input, real(kind=8) :: A, B, C, D, the coefficients of the polynomial.
 !    A must not be zero.
 !
 !    Output, complex ( kind = 8 ) R1, R2, R3, R4, the roots of the polynomial.
 !
   implicit none
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) a3
-  real ( kind = 8 ) a4
-  real ( kind = 8 ) b
-  real ( kind = 8 ) b3
-  real ( kind = 8 ) b4
-  real ( kind = 8 ) c
-  real ( kind = 8 ) c3
-  real ( kind = 8 ) c4
-  real ( kind = 8 ) d
-  real ( kind = 8 ) d3
-  real ( kind = 8 ) d4
-  real ( kind = 8 ) e
+  real(kind=8) :: a
+  real(kind=8) :: a3
+  real(kind=8) :: a4
+  real(kind=8) :: b
+  real(kind=8) :: b3
+  real(kind=8) :: b4
+  real(kind=8) :: c
+  real(kind=8) :: c3
+  real(kind=8) :: c4
+  real(kind=8) :: d
+  real(kind=8) :: d3
+  real(kind=8) :: d4
+  real(kind=8) :: e
   complex ( kind = 8 ) p
   complex ( kind = 8 ) q
   complex ( kind = 8 ) r
