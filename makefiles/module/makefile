@@ -1,7 +1,7 @@
 #
 #  On Chili and Kachina, this is where the F90 compiler is:
 #
-F90 = /usr/bin/fort
+F90 = /usr/local/bin/gfortran
 
 sge_mod_prb.out: sge_mod_prb
 	./sge_mod_prb > sge_mod_prb.out
