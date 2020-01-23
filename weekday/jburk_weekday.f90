@@ -757,10 +757,10 @@ subroutine weekday_values ( n_data, y, m, d, w )
 !
   implicit none
 
-  integer(kind=4),::  parameter :: n_max = 34
+  integer(kind=4), parameter :: n_max = 34
 
   integer(kind=4) :: d
-  integer(kind=4),::  save, dimension ( n_max ) :: d_vec = (/ &
+  integer(kind=4), save, dimension ( n_max ) :: d_vec = (/ &
     30, &
      8, &
     26, &
@@ -796,7 +796,7 @@ subroutine weekday_values ( n_data, y, m, d, w )
     10, &
     18 /)
   integer(kind=4) :: m
-  integer(kind=4),::  save, dimension ( n_max ) :: m_vec = (/ &
+  integer(kind=4), save, dimension ( n_max ) :: m_vec = (/ &
      7, &
     12, &
      9, &
@@ -833,7 +833,7 @@ subroutine weekday_values ( n_data, y, m, d, w )
      7 /)
   integer(kind=4) :: n_data
   integer(kind=4) :: w
-  integer(kind=4),::  save, dimension ( n_max ) :: w_vec = (/ &
+  integer(kind=4), save, dimension ( n_max ) :: w_vec = (/ &
     1, &
     4, &
     4, &
@@ -869,7 +869,7 @@ subroutine weekday_values ( n_data, y, m, d, w )
     4, &
     1 /)
   integer(kind=4) :: y
-  integer(kind=4),::  save, dimension ( n_max ) :: y_vec = (/ &
+  integer(kind=4), save, dimension ( n_max ) :: y_vec = (/ &
     - 587, &
     - 169, &
        70, &
@@ -1196,7 +1196,10 @@ end subroutine ymdf_compare
 
 
 
-subroutine ymdf_to_jed_common ( y, m, d, f, jed )
+!> @brief  YMDF_TO_JED_COMMON converts a Common YMDF date to a JED.
+!> @author John Burkardt
+!> @date   2001-03-16
+subroutine     ymdf_to_jed_common (y, m, d, f, jed)
 
 !*****************************************************************************80
 !
@@ -1244,68 +1247,70 @@ subroutine ymdf_to_jed_common ( y, m, d, f, jed )
 !
 !    Output, real(kind=8) :: JED, the Julian Ephemeris Date.
 !
-  implicit none
+   implicit none
 
-  character cmp
-  integer(kind=4) :: d
-  integer(kind=4) :: d1
-  integer(kind=4) :: d2
-  real(kind=8) :: f
-  real(kind=8) :: f1
-  real(kind=8) :: f2
-  integer(kind=4) :: ierror
-  real(kind=8) :: jed
-  integer(kind=4) :: m
-  integer(kind=4) :: m1
-  integer(kind=4) :: m2
-  integer(kind=4) :: y
-  integer(kind=4) :: y1
-  integer(kind=4) :: y2
-!
-!  Copy the month and year.
-!
-  y1 = y
-  m1 = m
-  d1 = d
-  f1 = f
+   character cmp
+   integer(kind=4) :: d
+   integer(kind=4) :: d1
+   integer(kind=4) :: d2
+   real(kind=8) :: f
+   real(kind=8) :: f1
+   real(kind=8) :: f2
+   integer(kind=4) :: ierror
+   real(kind=8) :: jed
+   integer(kind=4) :: m
+   integer(kind=4) :: m1
+   integer(kind=4) :: m2
+   integer(kind=4) :: y
+   integer(kind=4) :: y1
+   integer(kind=4) :: y2
 
-  y2 = 1582
-  m2 = 10
-  d2 = 4+1
-  f2 = 0.0D+00
+   ! Copy the month and year.
+   y1 = y
+   m1 = m
+   d1 = d
+   f1 = f
 
-  call ymdf_compare ( y1, m1, d1, f1, y2, m2, d2, f2, cmp )
+   y2 = 1582
+   m2 = 10
+   d2 = 4+1
+   f2 = 0.0D+00
 
-  if ( cmp == '<' ) then
-    call ymdf_to_jed_julian ( y1, m1, d1, f1, jed )
-    return
-  end if
-!
-!  Use the Gregorian calendar for dates strictly after 1752/9/13.
-!
-  y2 = 1582
-  m2 = 10
-  d2 = 15-1
-  f2 = 0.0D+00
+   call ymdf_compare ( y1, m1, d1, f1, y2, m2, d2, f2, cmp )
 
-  call ymdf_compare ( y1, m1, d1, f1, y2, m2, d2, f2, cmp )
+   if ( cmp == '<' ) then
+      call ymdf_to_jed_julian ( y1, m1, d1, f1, jed )
+      return
+   end if
 
-  if ( cmp == '>' ) then
-    call ymdf_to_jed_gregorian ( y1, m1, d1, f1, jed )
-    return
-  end if
+   ! Use the Gregorian calendar for dates strictly after 1752/9/13.
+   y2 = 1582
+   m2 = 10
+   d2 = 15-1
+   f2 = 0.0D+00
 
-  jed = -1.0D+00
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) 'YMDF_TO_JED_COMMON - Error!'
-  write ( *, '(a)' ) '  Illegal date!'
+   call ymdf_compare ( y1, m1, d1, f1, y2, m2, d2, f2, cmp )
 
-  return
+   if ( cmp == '>' ) then
+      call ymdf_to_jed_gregorian ( y1, m1, d1, f1, jed )
+      return
+   end if
+
+   jed = -1.0D+00
+   write (unit=*, fmt='(a)') ' '
+   write (unit=*, fmt='(a)') 'YMDF_TO_JED_COMMON - Error!'
+   write (unit=*, fmt='(a)') '  Illegal date!'
+
+   return
 end subroutine ymdf_to_jed_common
 
 
 
-subroutine ymdf_to_jed_gregorian ( y, m, d, f, jed )
+!> @author John Burkardt
+!> @brief  YMDF_TO_JED_GREGORIAN converts a Gregorian YMDF date to a JED.
+!> @date   2009-01-18
+!> @see    Edward Richards, Algorithm E, Mapping Time, The Calendar and Its History, Oxford, 1999, pages 323-324.
+subroutine     ymdf_to_jed_gregorian ( y, m, d, f, jed )
 
 !*****************************************************************************80
 !
@@ -1336,49 +1341,50 @@ subroutine ymdf_to_jed_gregorian ( y, m, d, f, jed )
 !
 !    Output, real(kind=8) :: JED, the corresponding JED.
 !
-  implicit none
+   implicit none
 
-  integer(kind=4) :: d
-  integer(kind=4) :: d_prime
-  real(kind=8) :: f
-  integer(kind=4) :: g
-  integer(kind=4) :: ierror
-  real(kind=8) :: jed
-  integer(kind=4) :: j1
-  integer(kind=4) :: j2
-  integer(kind=4) :: m
-  integer(kind=4) :: m_prime
-  integer(kind=4) :: y
-  integer(kind=4) :: y2
-  integer(kind=4) :: y_prime
-!
-!  Account for the missing year 0 by moving negative years up one.
-!
-  call y_common_to_astronomical ( y, y2 )
-!
-!  Convert the calendar date to a computational date.
-!
-  y_prime = y2 + 4716 - ( 14 - m ) / 12
-  m_prime = mod ( m + 9, 12 )
-  d_prime = d - 1
-!
-!  Convert the computational date to a JED.
-!
-  j1 = ( 1461 * y_prime ) / 4
+   integer(kind=4) :: d
+   integer(kind=4) :: d_prime
+   real(kind=8) :: f
+   integer(kind=4) :: g
+   integer(kind=4) :: ierror
+   real(kind=8) :: jed
+   integer(kind=4) :: j1
+   integer(kind=4) :: j2
+   integer(kind=4) :: m
+   integer(kind=4) :: m_prime
+   integer(kind=4) :: y
+   integer(kind=4) :: y2
+   integer(kind=4) :: y_prime
 
-  j2 = ( 153 * m_prime + 2 ) / 5
+   ! Account for the missing year 0 by moving negative years up one.
+   call y_common_to_astronomical ( y, y2 )
 
-  g = ( 3 * ( ( y_prime + 184 ) / 100 ) / 4 ) - 38
+   ! Convert the calendar date to a computational date.
+   y_prime = y2 + 4716 - ( 14 - m ) / 12
+   m_prime = mod ( m + 9, 12 )
+   d_prime = d - 1
 
-  jed = real ( j1 + j2 + d_prime - 1401 - g, kind = 8 ) - 0.5D+00
-  jed = jed + f
+   ! Convert the computational date to a JED.
+   j1 = ( 1461 * y_prime ) / 4
 
-  return
+   j2 = ( 153 * m_prime + 2 ) / 5
+
+   g = ( 3 * ( ( y_prime + 184 ) / 100 ) / 4 ) - 38
+
+   jed = real ( j1 + j2 + d_prime - 1401 - g, kind = 8 ) - 0.5D+00
+   jed = jed + f
+
+   return
 end subroutine ymdf_to_jed_gregorian
 
 
 
-subroutine ymdf_to_jed_julian ( y, m, d, f, jed )
+!> @author John Burkardt
+!> @brief  YMDF_TO_JED_JULIAN converts a Julian YMDF date to a JED.
+!> @date   2001-03-16
+!> @see    Edward Richards, Algorithm E, Mapping Time, The Calendar and Its History, Oxford, 1999, pages 323-324.
+subroutine     ymdf_to_jed_julian ( y, m, d, f, jed )
 
 !*****************************************************************************80
 !
@@ -1409,41 +1415,38 @@ subroutine ymdf_to_jed_julian ( y, m, d, f, jed )
 !
 !    Output, real(kind=8) :: JED, the Julian Ephemeris Date.
 !
-  implicit none
+   implicit none
 
-  integer(kind=4) :: d
-  integer(kind=4) :: d_prime
-  real(kind=8) :: f
-  integer(kind=4) :: ierror
-  real(kind=8) :: jed
-  integer(kind=4) :: j1
-  integer(kind=4) :: j2
-  integer(kind=4) :: m
-  integer(kind=4) :: m_prime
-  integer(kind=4) :: y
-  integer(kind=4) :: y2
-  integer(kind=4) :: y_prime
-!
-!  Account for the missing year 0 by moving negative years up one.
-!
-  call y_common_to_astronomical ( y, y2 )
-!
-!  Convert the calendar date to a computational date.
-!
-  y_prime = y2 + 4716 - ( 14 - m ) / 12
-  m_prime = mod ( m + 9, 12 )
-  d_prime = d - 1
-!
-!  Convert the computational date to a JED.
-!
-  j1 = ( 1461 * y_prime ) / 4
+   integer(kind=4) :: d
+   integer(kind=4) :: d_prime
+   real(kind=8) :: f
+   integer(kind=4) :: ierror
+   real(kind=8) :: jed
+   integer(kind=4) :: j1
+   integer(kind=4) :: j2
+   integer(kind=4) :: m
+   integer(kind=4) :: m_prime
+   integer(kind=4) :: y
+   integer(kind=4) :: y2
+   integer(kind=4) :: y_prime
 
-  j2 = ( 153 * m_prime + 2 ) / 5
+   ! Account for the missing year 0 by moving negative years up one.
+   call y_common_to_astronomical ( y, y2 )
 
-  jed = real ( j1 + j2 + d_prime - 1401, kind = 8 ) - 0.5D+00
-  jed = jed + f
+   ! Convert the calendar date to a computational date.
+   y_prime = y2 + 4716 - ( 14 - m ) / 12
+   m_prime = mod ( m + 9, 12 )
+   d_prime = d - 1
 
-  return
+   ! Convert the computational date to a JED.
+   j1 = ( 1461 * y_prime ) / 4
+
+   j2 = ( 153 * m_prime + 2 ) / 5
+
+   jed = real ( j1 + j2 + d_prime - 1401, kind = 8 ) - 0.5D+00
+   jed = jed + f
+
+   return
 end subroutine ymdf_to_jed_julian
 
 
