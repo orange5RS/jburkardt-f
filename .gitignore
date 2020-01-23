@@ -2,3 +2,4 @@
 *.mod
 *.o
 *.out
+makefiles/module/sge_mod_prb
