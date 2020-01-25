@@ -8,6 +8,11 @@ module procedure delaunay_swap_test
 end interface    delaunay_swap_test
 public           delaunay_swap_test
 
+interface        r8tris2
+module procedure r8tris2
+end interface    r8tris2
+public           r8tris2
+
 interface        swapec
 module procedure swapec
 end interface    swapec
@@ -117,6 +122,346 @@ subroutine delaunay_swap_test ( xy, swap )
 end
 
 
+
+subroutine r8tris2 ( node_num, node_xy, element_num, element_node, &
+  element_neighbor )
+
+!*****************************************************************************80
+!
+!! R8TRIS2 constructs a Delaunay triangulation of 2D vertices.
+!
+!  Discussion:
+!
+!    The routine constructs the Delaunay triangulation of a set of 2D vertices
+!    using an incremental approach and diagonal edge swaps.  Vertices are
+!    first sorted in lexicographically increasing (X,Y) order, and
+!    then are inserted one at a time from outside the convex hull.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    25 August 2001
+!
+!  Author:
+!
+!    Original FORTRAN77 version by Barry Joe.
+!    FORTRAN90 version by John Burkardt.
+!
+!  Reference:
+!
+!    Barry Joe,
+!    GEOMPACK - a software package for the generation of meshes
+!    using geometric algorithms,
+!    Advances in Engineering Software,
+!    Volume 13, pages 325-331, 1991.
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) NODE_NUM, the number of nodes.
+!
+!    Input/output, real ( kind = 8 ) NODE_XY(2,NODE_NUM), the coordinates
+!    of the nodes.  On output, the vertices have been sorted into
+!    dictionary order.
+!
+!    Output, integer ( kind = 4 ) ELEMENT_NUM, the number of triangles in the
+!    triangulation;  ELEMENT_NUM is equal to 2*NODE_NUM - NB - 2, where NB is
+!    the number of boundary vertices.
+!
+!    Output, integer ( kind = 4 ) ELEMENT_NODE(3,ELEMENT_NUM), the nodes that
+!    make up each triangle.  The elements are indices of P.  The vertices of
+!    the triangles are in counter clockwise order.
+!
+!    Output, integer ( kind = 4 ) ELEMENT_NEIGHBOR(3,ELEMENT_NUM), the
+!    triangle neighbor list.  Positive elements are indices of TIL; negative
+!    elements are used for links of a counter clockwise linked list of boundary
+!    edges;  LINK = -(3*I + J-1) where I, J = triangle, edge index;
+!    ELEMENT_NEIGHBOR(J,I) refers to the neighbor along edge from vertex J
+!    to J+1 (mod 3).
+!
+  implicit none
+
+  integer ( kind = 4 ), parameter :: dim_num = 2
+  integer ( kind = 4 ) node_num
+
+  real ( kind = 8 ) cmax
+  integer ( kind = 4 ) e
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) ierr
+  integer ( kind = 4 ) indx(node_num)
+  integer ( kind = 4 ) j
+  integer ( kind = 4 ) k
+  integer ( kind = 4 ) l
+  integer ( kind = 4 ) ledg
+  integer ( kind = 4 ) lr
+  integer ( kind = 4 ) lrline
+  integer ( kind = 4 ) ltri
+  integer ( kind = 4 ) m
+  integer ( kind = 4 ) m1
+  integer ( kind = 4 ) m2
+  integer ( kind = 4 ) n
+  real ( kind = 8 ) node_xy(dim_num,node_num)
+  integer ( kind = 4 ) redg
+  integer ( kind = 4 ) rtri
+  integer ( kind = 4 ) stack(node_num)
+  integer ( kind = 4 ) t
+  real ( kind = 8 ) tol
+  integer ( kind = 4 ) top
+  integer ( kind = 4 ) element_neighbor(3,node_num*2)
+  integer ( kind = 4 ) element_num
+  integer ( kind = 4 ) element_node(3,node_num*2)
+
+  tol = 100.0D+00 * epsilon ( tol )
+
+  ierr = 0
+!
+!  Sort the vertices by increasing (x,y).
+!
+  call r82vec_sort_heap_index_a ( node_num, node_xy, indx )
+
+  call r82vec_permute ( node_num, indx, node_xy )
+!
+!  Make sure that the data nodes are "reasonably" distinct.
+!
+  m1 = 1
+
+  do i = 2, node_num
+
+    m = m1
+    m1 = i
+
+    k = 0
+
+    do j = 1, dim_num
+
+      cmax = max ( abs ( node_xy(j,m) ), abs ( node_xy(j,m1) ) )
+
+      if ( tol * ( cmax + 1.0D+00 ) &
+           < abs ( node_xy(j,m) - node_xy(j,m1) ) ) then
+        k = j
+        exit
+      end if
+
+    end do
+
+    if ( k == 0 ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8TRIS2 - Fatal error!'
+      write ( *, '(a,i8)' ) '  Fails for point number I = ', i
+      write ( *, '(a,i8)' ) '  M = ', m
+      write ( *, '(a,i8)' ) '  M1 = ', m1
+      write ( *, '(a,2g14.6)' ) '  NODE_XY(M)  = ', node_xy(1:dim_num,m)
+      write ( *, '(a,2g14.6)' ) '  NODE_XY(M1) = ', node_xy(1:dim_num,m1)
+      ierr = 224
+      stop
+    end if
+
+  end do
+!
+!  Starting from nodes M1 and M2, search for a third point M that
+!  makes a "healthy" triangle (M1,M2,M)
+!
+  m1 = 1
+  m2 = 2
+  j = 3
+
+  do
+
+    if ( node_num < j ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8TRIS2 - Fatal error!'
+      ierr = 225
+      stop
+    end if
+
+    m = j
+
+    lr = lrline ( node_xy(1,m), node_xy(2,m), node_xy(1,m1), &
+      node_xy(2,m1), node_xy(1,m2), node_xy(2,m2), 0.0D+00 )
+
+    if ( lr /= 0 ) then
+      exit
+    end if
+
+    j = j + 1
+
+  end do
+!
+!  Set up the triangle information for (M1,M2,M), and for any other
+!  triangles you created because points were collinear with M1, M2.
+!
+  element_num = j - 2
+
+  if ( lr == -1 ) then
+
+    element_node(1,1) = m1
+    element_node(2,1) = m2
+    element_node(3,1) = m
+    element_neighbor(3,1) = -3
+
+    do i = 2, element_num
+
+      m1 = m2
+      m2 = i+1
+
+      element_node(1,i) = m1
+      element_node(2,i) = m2
+      element_node(3,i) = m
+
+      element_neighbor(1,i-1) = -3 * i
+      element_neighbor(2,i-1) = i
+      element_neighbor(3,i) = i - 1
+
+    end do
+
+    element_neighbor(1,element_num) = -3 * element_num - 1
+    element_neighbor(2,element_num) = -5
+    ledg = 2
+    ltri = element_num
+
+  else
+
+    element_node(1,1) = m2
+    element_node(2,1) = m1
+    element_node(3,1) = m
+
+    element_neighbor(1,1) = -4
+
+    do i = 2, element_num
+
+      m1 = m2
+      m2 = i+1
+
+      element_node(1,i) = m2
+      element_node(2,i) = m1
+      element_node(3,i) = m
+
+      element_neighbor(3,i-1) = i
+      element_neighbor(1,i) = -3 * i - 3
+      element_neighbor(2,i) = i - 1
+
+    end do
+
+    element_neighbor(3,element_num) = -3 * element_num
+    element_neighbor(2,1) = -3 * element_num - 2
+    ledg = 2
+    ltri = 1
+
+  end if
+!
+!  Insert the vertices one at a time from outside the convex hull,
+!  determine visible boundary edges, and apply diagonal edge swaps until
+!  Delaunay triangulation of vertices (so far) is obtained.
+!
+  top = 0
+
+  do i = j+1, node_num
+
+    m = i
+    m1 = element_node(ledg,ltri)
+
+    if ( ledg <= 2 ) then
+      m2 = element_node(ledg+1,ltri)
+    else
+      m2 = element_node(1,ltri)
+    end if
+
+    lr = lrline ( node_xy(1,m), node_xy(2,m), node_xy(1,m1), &
+      node_xy(2,m1), node_xy(1,m2), node_xy(2,m2), 0.0D+00 )
+
+    if ( 0 < lr ) then
+      rtri = ltri
+      redg = ledg
+      ltri = 0
+    else
+      l = -element_neighbor(ledg,ltri)
+      rtri = l / 3
+      redg = mod ( l, 3 ) + 1
+    end if
+
+    call vbedg ( node_xy(1,m), node_xy(2,m), node_num, node_xy, element_num, &
+      element_node, element_neighbor, ltri, ledg, rtri, redg )
+
+    n = element_num + 1
+    l = -element_neighbor(ledg,ltri)
+
+    do
+
+      t = l / 3
+      e = mod ( l, 3 ) + 1
+      l = -element_neighbor(e,t)
+      m2 = element_node(e,t)
+
+      if ( e <= 2 ) then
+        m1 = element_node(e+1,t)
+      else
+        m1 = element_node(1,t)
+      end if
+
+      element_num = element_num + 1
+      element_neighbor(e,t) = element_num
+
+      element_node(1,element_num) = m1
+      element_node(2,element_num) = m2
+      element_node(3,element_num) = m
+
+      element_neighbor(1,element_num) = t
+      element_neighbor(2,element_num) = element_num - 1
+      element_neighbor(3,element_num) = element_num + 1
+
+      top = top + 1
+
+      if ( node_num < top ) then
+        ierr = 8
+        write ( *, '(a)' ) ' '
+        write ( *, '(a)' ) 'R8TRIS2 - Fatal error!'
+        write ( *, '(a)' ) '  Stack overflow.'
+        stop
+      end if
+
+      stack(top) = element_num
+
+      if ( t == rtri .and. e == redg ) then
+        exit
+      end if
+
+    end do
+
+    element_neighbor(ledg,ltri) = -3 * n - 1
+    element_neighbor(2,n) = -3 * element_num - 2
+    element_neighbor(3,element_num) = -l
+
+    ltri = n
+    ledg = 2
+
+    call swapec ( m, top, ltri, ledg, node_num, node_xy, element_num, &
+      element_node, element_neighbor, stack, ierr )
+
+    if ( ierr /= 0 ) then
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8TRIS2 - Fatal error!'
+      write ( *, '(a)' ) '  Error return from SWAPEC.'
+      stop
+    end if
+
+  end do
+!
+!  Now account for the sorting that we did.
+!
+  do i = 1, 3
+    do j = 1, element_num
+      element_node(i,j) = indx ( element_node(i,j) )
+    end do
+  end do
+
+  call perm_inverse ( node_num, indx )
+
+  call r82vec_permute ( node_num, indx, node_xy )
+
+  return
+end
 
 
 
