@@ -28,6 +28,27 @@ module procedure diaedg
 end interface    diaedg
 public           diaedg
 
+interface        lrline
+module procedure lrline
+end interface    lrline
+public           lrline
+
+interface        triangle_angles_2d
+module procedure triangle_angles_2d
+end interface    triangle_angles_2d
+public           triangle_angles_2d
+
+interface        triangle_area_2d
+module procedure triangle_area_2d
+end interface    triangle_area_2d
+public           triangle_area_2d
+
+interface        triangle_circumcenter_2d
+module procedure triangle_circumcenter_2d
+end interface    triangle_circumcenter_2d
+public           triangle_circumcenter_2d
+
+
 contains
 
 subroutine alpha_measure ( n, z, element_order, element_num, element_node, &
@@ -570,6 +591,288 @@ function diaedg ( x0, y0, x1, y1, x2, y2, x3, y3 )
     end if
 
   end if
+
+  return
+end
+
+
+
+function lrline ( xu, yu, xv1, yv1, xv2, yv2, dv )
+
+!*****************************************************************************80
+!
+!! LRLINE determines if a point is left of, right or, or on a directed line.
+!
+!  Discussion:
+!
+!    The directed line is parallel to, and at a signed distance DV from
+!    a directed base line from (XV1,YV1) to (XV2,YV2).
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    14 July 2001
+!
+!  Author:
+!
+!    Original FORTRAN77 version by Barry Joe.
+!    FORTRAN90 version by John Burkardt.
+!
+!  Reference:
+!
+!    Barry Joe,
+!    GEOMPACK - a software package for the generation of meshes
+!    using geometric algorithms,
+!    Advances in Engineering Software,
+!    Volume 13, pages 325-331, 1991.
+!
+!  Parameters:
+!
+!    Input, real ( kind = 8 ) XU, YU, the coordinates of the point whose
+!    position relative to the directed line is to be determined.
+!
+!    Input, real ( kind = 8 ) XV1, YV1, XV2, YV2, the coordinates of two points
+!    that determine the directed base line.
+!
+!    Input, real ( kind = 8 ) DV, the signed distance of the directed line
+!    from the directed base line through the points (XV1,YV1) and (XV2,YV2).
+!    DV is positive for a line to the left of the base line.
+!
+!    Output, integer ( kind = 4 ) LRLINE, the result:
+!    +1, the point is to the right of the directed line;
+!     0, the point is on the directed line;
+!    -1, the point is to the left of the directed line.
+!
+  implicit none
+
+  real ( kind = 8 ) dv
+  real ( kind = 8 ) dx
+  real ( kind = 8 ) dxu
+  real ( kind = 8 ) dy
+  real ( kind = 8 ) dyu
+  integer ( kind = 4 ) lrline
+  real ( kind = 8 ) t
+  real ( kind = 8 ) tol
+  real ( kind = 8 ) tolabs
+  real ( kind = 8 ) xu
+  real ( kind = 8 ) xv1
+  real ( kind = 8 ) xv2
+  real ( kind = 8 ) yu
+  real ( kind = 8 ) yv1
+  real ( kind = 8 ) yv2
+
+  tol = 100.0D+00 * epsilon ( tol )
+
+  dx = xv2 - xv1
+  dy = yv2 - yv1
+  dxu = xu - xv1
+  dyu = yu - yv1
+
+  tolabs = tol * max ( abs ( dx ), abs ( dy ), abs ( dxu ), &
+    abs ( dyu ), abs ( dv ) )
+
+  t = dy * dxu - dx * dyu + dv * sqrt ( dx * dx + dy * dy )
+
+  if ( tolabs < t ) then
+    lrline = 1
+  else if ( -tolabs <= t ) then
+    lrline = 0
+  else
+    lrline = -1
+  end if
+
+  return
+end
+
+
+
+
+subroutine triangle_angles_2d ( t, angle )
+
+!*****************************************************************************80
+!
+!! TRIANGLE_ANGLES_2D computes the angles of a triangle in 2D.
+!
+!  Discussion:
+!
+!    The law of cosines is used:
+!
+!      C^2 = A^2 + B^2 - 2 * A * B * COS ( GAMMA )
+!
+!    where GAMMA is the angle opposite side C.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    04 May 2005
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, real ( kind = 8 ) T(2,3), the triangle vertices.
+!
+!    Output, real ( kind = 8 ) ANGLE(3), the angles opposite
+!    sides P1-P2, P2-P3 and P3-P1, in radians.
+!
+  implicit none
+
+  integer ( kind = 4 ), parameter :: dim_num = 2
+
+  real ( kind = 8 ) a
+  real ( kind = 8 ) angle(3)
+  real ( kind = 8 ) arc_cosine
+  real ( kind = 8 ) b
+  real ( kind = 8 ) c
+  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
+  real ( kind = 8 ) t(dim_num,3)
+!
+!  Compute the length of each side.
+!
+  a = sqrt ( sum ( ( t(1:dim_num,1) - t(1:dim_num,2) )**2 ) )
+  b = sqrt ( sum ( ( t(1:dim_num,2) - t(1:dim_num,3) )**2 ) )
+  c = sqrt ( sum ( ( t(1:dim_num,3) - t(1:dim_num,1) )**2 ) )
+!
+!  Take care of ridiculous special cases.
+!
+  if ( a == 0.0D+00 .and. b == 0.0D+00 .and. c == 0.0D+00 ) then
+    angle(1:3) = 2.0D+00 * pi / 3.0D+00
+    return
+  end if
+
+  if ( c == 0.0D+00 .or. a == 0.0D+00 ) then
+    angle(1) = pi
+  else
+    angle(1) = arc_cosine ( ( c * c + a * a - b * b ) / ( 2.0D+00 * c * a ) )
+  end if
+
+  if ( a == 0.0D+00 .or. b == 0.0D+00 ) then
+    angle(2) = pi
+  else
+    angle(2) = arc_cosine ( ( a * a + b * b - c * c ) / ( 2.0D+00 * a * b ) )
+  end if
+
+  if ( b == 0.0D+00 .or. c == 0.0D+00 ) then
+    angle(3) = pi
+  else
+    angle(3) = arc_cosine ( ( b * b + c * c - a * a ) / ( 2.0D+00 * b * c ) )
+  end if
+
+  return
+end
+
+
+
+subroutine triangle_area_2d ( t, area )
+
+!*****************************************************************************80
+!
+!! TRIANGLE_AREA_2D computes the area of a triangle in 2D.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    17 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, real ( kind = 8 ) T(2,3), the triangle vertices.
+!
+!    Output, real ( kind = 8 ) AREA, the absolute area of the triangle.
+!
+  implicit none
+
+  integer ( kind = 4 ), parameter :: dim_num = 2
+
+  real ( kind = 8 ) area
+  real ( kind = 8 ) t(dim_num,3)
+
+  area = 0.5D+00 * abs ( &
+      t(1,1) * ( t(2,2) - t(2,3) ) &
+    + t(1,2) * ( t(2,3) - t(2,1) ) &
+    + t(1,3) * ( t(2,1) - t(2,2) ) )
+
+  return
+end
+
+
+subroutine triangle_circumcenter_2d ( t, center )
+
+!*****************************************************************************80
+!
+!! TRIANGLE_CIRCUMCENTER_2D computes the circumcenter of a triangle in 2D.
+!
+!  Discussion:
+!
+!    The circumcenter of a triangle is the center of the circumcircle, the
+!    circle that passes through the three vertices of the triangle.
+!
+!    The circumcircle contains the triangle, but it is not necessarily the
+!    smallest triangle to do so.
+!
+!    If all angles of the triangle are no greater than 90 degrees, then
+!    the center of the circumscribed circle will lie inside the triangle.
+!    Otherwise, the center will lie outside the triangle.
+!
+!    The circumcenter is the intersection of the perpendicular bisectors
+!    of the sides of the triangle.
+!
+!    In geometry, the circumcenter of a triangle is often symbolized by "O".
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    18 February 2005
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, real ( kind = 8 ) T(2,3), the triangle vertices.
+!
+!    Output, real ( kind = 8 ) CENTER(2), the circumcenter of the triangle.
+!
+  implicit none
+
+  integer ( kind = 4 ), parameter :: dim_num = 2
+
+  real ( kind = 8 ) asq
+  real ( kind = 8 ) bot
+  real ( kind = 8 ) center(dim_num)
+  real ( kind = 8 ) csq
+  real ( kind = 8 ) t(dim_num,3)
+  real ( kind = 8 ) top(dim_num)
+
+  asq = ( t(1,2) - t(1,1) )**2 + ( t(2,2) - t(2,1) )**2
+  csq = ( t(1,3) - t(1,1) )**2 + ( t(2,3) - t(2,1) )**2
+
+  top(1) =    ( t(2,2) - t(2,1) ) * csq - ( t(2,3) - t(2,1) ) * asq
+  top(2) =  - ( t(1,2) - t(1,1) ) * csq + ( t(1,3) - t(1,1) ) * asq
+
+  bot  =  ( t(2,2) - t(2,1) ) * ( t(1,3) - t(1,1) ) &
+        - ( t(2,3) - t(2,1) ) * ( t(1,2) - t(1,1) )
+
+  center(1:2) = t(1:2,1) + 0.5D+00 * top(1:2) / bot
 
   return
 end
