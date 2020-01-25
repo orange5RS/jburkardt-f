@@ -26,7 +26,7 @@ GEOMETRY is available in a C version and a C++ version and a FORTRAN77 version a
 ## Related Data and Programs:
 
 - DUTCH, a FORTRAN90 library which carries out tasks in computational geometry.
-- GEOMPACK, a FORTRAN90 library which can compute Delaunay triangulations Voronoi diagrams and other information, written by Barry Joe.
+- [GEOMPACK](https://github.com/orange5RS/jburkardt-f/tree/master/geompack), a FORTRAN90 library which can compute Delaunay triangulations Voronoi diagrams and other information, written by Barry Joe.
 - POLYGON_MOMENTS, a FORTRAN90 library which computes arbitrary moments of a polygon.
 - SIMPLEX_COORDINATES, a FORTRAN90 library which computes the Cartesian coordinates of the vertices of a regular simplex in M dimensions.
 - SPHERE_GRID, a FORTRAN90 library which provides a number of ways of generating grids of points, or of points and lines, or of points and lines and faces, over the unit sphere.
@@ -35,7 +35,7 @@ GEOMETRY is available in a C version and a C++ version and a FORTRAN77 version a
 - TETRAHEDRONS, a dataset directory which contains examples of tetrahedrons;
 - TRIANGLES, a dataset directory which contains examples of triangles;
 - TRIANGULATE, a C program which triangulates a (possibly nonconvex) polygon.
-- TRIANGULATION, a FORTRAN90 library which defines and analyzes triangulations.
+- [TRIANGULATION](https://github.com/orange5RS/jburkardt-f/tree/master/triangulation), a FORTRAN90 library which defines and analyzes triangulations.
 - TRIANGULATION_DISPLAY_OPENGL, a C++ program which reads files defining a triangulation and displays an image using OpenGL.
 - TRIANGULATION_TRIANGLE_NEIGHBORS, a FORTRAN90 program which reads data defining a triangulation, determines the neighboring triangles of each triangle, and writes that information to a file.
 
