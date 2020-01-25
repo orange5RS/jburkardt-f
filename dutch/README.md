@@ -2,40 +2,41 @@
 
 DUTCH is a FORTRAN90 library which implements some of the computational geometry routines from the reference.
 
+
 ## Licensing:
+
 The computer code and data files described and made available on this web page are distributed under the GNU LGPL license.
 
+
 ## Related Data and Programs:
-- GEOMETRY, a FORTRAN90 library which contains many geometrical algorithms.
-- GEOMPACK, a FORTRAN90 library which contain routines for Voronoi diagrams and Delaunay triangulations.
+
+- [GEOMETRY](https://github.com/orange5RS/jburkardt-f/tree/master/geometry), a FORTRAN90 library which contains many geometrical algorithms.
+- [GEOMPACK](https://github.com/orange5RS/jburkardt-f/tree/master/geompack), a FORTRAN90 library which contain routines for Voronoi diagrams and Delaunay triangulations.
+
 
 ## Reference:
-1. Marc de Berg, Marc van Kreveld, Mark Overmars, Otfried Schwarzkopf,
-   Computational Geometry,
-   Springer, 2000.
-2. Thomas Cormen, Charles Leiserson, Ronald Rivest,
-   Introduction to Algorithms,
-   MIT Press.
-3. Albert Nijenhuis, Herbert Wilf,
-   Combinatorial Algorithms,
-   Academic Press, 1978, second edition,
-   ISBN 0-12-519260-6.
-4. Joseph O'Rourke,
-   Computational Geometry,
-   Cambridge University Press,
-   Second Edition, 1998.
-   http://www.cs.uu.nl/geobook/.
+
+1. Marc de Berg, Marc van Kreveld, Mark Overmars, Otfried Schwarzkopf, Computational Geometry, Springer, 2000.
+2. Thomas Cormen, Charles Leiserson, Ronald Rivest, Introduction to Algorithms, MIT Press.
+3. Albert Nijenhuis, Herbert Wilf, Combinatorial Algorithms, Academic Press, 1978, second edition, ISBN 0-12-519260-6.
+4. Joseph O'Rourke, Computational Geometry, Cambridge University Press, Second Edition, 1998. http://www.cs.uu.nl/geobook/.
+
 
 ## Source Code:
+
 - dutch.f90, the source code.
 - dutch.sh, commands to compile the source code.
 
+
 ## Examples and Tests:
+
 - dutch_prb.f90, a sample problem.
 - dutch_prb.sh, commands to compile, link and run the sample problem.
 - dutch_prb_output.txt, the output file.
 
+
 ## List of Routines:
+
 - ANGLE_DEG_2D returns the angle swept out between two rays in 2D.
 - ANGLE_RAD_2D returns the angle in radians swept out between two rays in 2D.
 - CIRCLE_DIA2IMP_2D converts a diameter to an implicit circle in 2D.
