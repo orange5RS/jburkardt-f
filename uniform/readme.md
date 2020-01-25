@@ -1,6 +1,5 @@
 
-# UNIFORM
-Uniform Random Number Generation
+# UNIFORM: Uniform Random Number Generation
 
 UNIFORM is a FORTRAN90 library which returns a sequence of uniformly distributed pseudorandom numbers.
 
