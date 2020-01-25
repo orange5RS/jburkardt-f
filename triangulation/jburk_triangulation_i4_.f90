@@ -23,6 +23,11 @@ implicit none
    end interface    i4_wrap
    public           i4_wrap
 
+   interface        get_seed
+   module procedure get_seed
+   end interface    get_seed
+   public           get_seed
+
 contains
 
 function i4_modp ( i, j )
