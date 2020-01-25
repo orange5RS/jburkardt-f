@@ -146,6 +146,9 @@ subroutine ffwt ( n, x )
 
   return
 end
+
+
+
 subroutine fwt ( n, x, y )
 
 !*****************************************************************************80
@@ -249,6 +252,9 @@ subroutine fwt ( n, x, y )
 
   return
 end
+
+
+
 subroutine haar ( n, x, y )
 
 !*****************************************************************************80
@@ -320,6 +326,9 @@ subroutine haar ( n, x, y )
 
   return
 end
+
+
+
 subroutine haarin ( n, x, y )
 
 !*****************************************************************************80
@@ -391,6 +400,9 @@ subroutine haarin ( n, x, y )
 
   return
 end
+
+
+
 subroutine hnorm ( n, x )
 
 !*****************************************************************************80
@@ -717,6 +729,9 @@ function i4_wrap ( ival, ilo, ihi )
 
   return
 end
+
+
+
 subroutine r8vec_shift_circular ( shift, n, x )
 
 !*****************************************************************************80
@@ -768,6 +783,9 @@ subroutine r8vec_shift_circular ( shift, n, x )
 
   return
 end
+
+
+
 subroutine r8vec_uniform_01 ( n, seed, r )
 
 !*****************************************************************************80
@@ -851,6 +869,9 @@ subroutine r8vec_uniform_01 ( n, seed, r )
 
   return
 end
+
+
+
 subroutine timestamp ( )
 
 !*****************************************************************************80
@@ -929,6 +950,9 @@ subroutine timestamp ( )
 
   return
 end
+
+
+
 subroutine walsh ( n, x, y )
 
 !*****************************************************************************80
