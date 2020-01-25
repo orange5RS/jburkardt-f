@@ -3,5 +3,5 @@
 *.mod
 *.o
 *.out
-makefiles/module/sge_mod_prb
 *.old.f90
+makefiles/module/sge_mod_prb
