@@ -1,0 +1,623 @@
+
+## GEOMETRY
+Geometric Calculations
+
+GEOMETRY is a FORTRAN90 library which carries out geometric calculations in 2, 3 and N dimensional space.
+
+These calculations include angles, areas, containment, distances, intersections, lengths, and volumes.
+
+Some geometric objects can be described in a variety of ways. For instance, a line has implicit, explicit and parametric representations. The names of routines often will specify the representation used, and there are routines to convert from one representation to another.
+
+Another useful task is the delineation of a standard geometric object. For instance, there is a routine that will return the location of the vertices of an octahedron, and others to produce a series of "equally spaced" points on a circle, ellipse, sphere, or within the interior of a triangle.
+
+An open source directory of computational geometry routines is available at http://www.cgal.org, the Computational Geometry Algorithms Library.
+
+
+## Licensing:
+
+The computer code and data files described and made available on this web page are distributed under the GNU LGPL license.
+
+
+## Languages:
+
+GEOMETRY is available in a C version and a C++ version and a FORTRAN77 version and a FORTRAN90 version and a MATLAB version.
+
+
+## Related Data and Programs:
+
+- DUTCH, a FORTRAN90 library which carries out tasks in computational geometry.
+- GEOMPACK, a FORTRAN90 library which can compute Delaunay triangulations Voronoi diagrams and other information, written by Barry Joe.
+- POLYGON_MOMENTS, a FORTRAN90 library which computes arbitrary moments of a polygon.
+- SIMPLEX_COORDINATES, a FORTRAN90 library which computes the Cartesian coordinates of the vertices of a regular simplex in M dimensions.
+- SPHERE_GRID, a FORTRAN90 library which provides a number of ways of generating grids of points, or of points and lines, or of points and lines and faces, over the unit sphere.
+- TABLE_DELAUNAY, a FORTRAN90 program which reads a file of point coordinates in the TABLE format and writes out the Delaunay triangulation.
+- TET_MESH, a FORTRAN90 library which carries out various operations on tetrahedral meshes.
+- TETRAHEDRONS, a dataset directory which contains examples of tetrahedrons;
+- TRIANGLES, a dataset directory which contains examples of triangles;
+- TRIANGULATE, a C program which triangulates a (possibly nonconvex) polygon.
+- TRIANGULATION, a FORTRAN90 library which defines and analyzes triangulations.
+- TRIANGULATION_DISPLAY_OPENGL, a C++ program which reads files defining a triangulation and displays an image using OpenGL.
+- TRIANGULATION_TRIANGLE_NEIGHBORS, a FORTRAN90 program which reads data defining a triangulation, determines the neighboring triangles of each triangle, and writes that information to a file.
+
+
+## Reference:
+
+- Gerard Bashein, Paul Detmer, Centroid of a Polygon, in Graphics Gems IV, edited by Paul Heckbert, AP Professional, 1994, ISBN: 0123361559, LC: T385.G6974.
+- SF Bockman, Generalizing the Formula for Areas of Polygons to Moments, American Mathematical Society Monthly, Volume 96, Number 2, February 1989, pages 131-132.
+- Adrian Bowyer, John Woodwark, A Programmer's Geometry, Butterworths, 1983, ISBN: 0408012420.
+- Paulo Cezar Pinto Carvalho, Paulo Roma Cavalcanti, Point in Polyhedron Testing Using Spherical Polygons, in Graphics Gems V, edited by Alan Paeth, Academic Press, 1995, ISBN: 0125434553, LC: T385.G6975.
+- Daniel Cohen, Voxel Traversal along a 3D Line, in Graphics Gems IV, edited by Paul Heckbert, AP Professional, 1994, ISBN: 0123361559, LC: T385.G6974.
+- Thomas Cormen, Charles Leiserson, Ronald Rivest, Introduction to Algorithms, MIT Press, 2001, ISBN: 0262032937, LC: QA76.C662.
+- Marc deBerg, Marc Krevald, Mark Overmars, Otfried Schwarzkopf, Computational Geometry, Springer, 2000, ISBN: 3-540-65620-0, LC: QA448.D38.C65.
+- Jack Dongarra, Jim Bunch, Cleve Moler, Pete Stewart, LINPACK User's Guide, SIAM, 1979, ISBN13: 978-0-898711-72-1, LC: QA214.L56.
+- James Foley, Andries vanDam, Steven Feiner, John Hughes, Computer Graphics, Principles and Practice, Second Edition, Addison Wesley, 1995, ISBN: 0201848406, LC: T385.C5735.
+- Martin Gardner, The Mathematical Carnival, Knopf, 1975, ISBN: 0394494067, LC: QA95.G286.
+- Priamos Georgiades, Signed Distance From Point To Plane, in Graphics Gems III, edited by David Kirk, Academic Press, 1992, ISBN: 0124096735, LC: T385.G6973.
+- Branko Gruenbaum, Geoffrey Shephard, Pick's Theorem, The American Mathematical Monthly, Volume 100, Number 2, February 1993, pages 150-161.
+- John Harris, Horst Stocker, Handbook of Mathematics and Computational Science, Springer, 1998, ISBN: 0-387-94746-9, LC: QA40.S76.
+- Barry Joe, GEOMPACK - a software package for the generation of meshes using geometric algorithms, Advances in Engineering Software, Volume 13, 1991, pages 325-331.
+- Anwei Liu, Barry Joe, Quality Local Refinement of Tetrahedral Meshes Based on 8-Subtetrahedron Subdivision, Mathematics of Computation, Volume 65, Number 215, July 1996, pages 1183-1200.
+- Jack Kuipers, Quaternions and Rotation Sequences, Princeton, 1998, ISBN: 0691102988, LC: QA196.K85.
+- Robert Miller, Computing the Area of a Spherical Polygon, in Graphics Gems IV, edited by Paul Heckbert, Academic Press, 1994, ISBN: 0123361559, LC: T385.G6974.
+- Albert Nijenhuis, Herbert Wilf, Combinatorial Algorithms for Computers and Calculators, Second Edition, Academic Press, 1978, ISBN: 0-12-519260-6, LC: QA164.N54.
+- Atsuyuki Okabe, Barry Boots, Kokichi Sugihara, Sung Nok Chiu, Spatial Tesselations: Concepts and Applications of Voronoi Diagrams, Second Edition, Wiley, 2000, ISBN: 0-471-98635-6, LC: QA278.2.O36.
+- Joseph ORourke, Computational Geometry, Second Edition, Cambridge, 1998, ISBN: 0521649765, LC: QA448.D38.
+- Edward Saff, Arno Kuijlaars, Distributing Many Points on a Sphere, The Mathematical Intelligencer, Volume 19, Number 1, 1997, pages 5-11.
+- Philip Schneider, David Eberly, Geometric Tools for Computer Graphics, Elsevier, 2002, ISBN: 1558605940, LC: T385.S334.
+- Peter Schorn, Frederick Fisher, Testing the Convexity of a Polygon, in Graphics Gems IV, edited by Paul Heckbert, AP Professional, 1994, ISBN: 0123361559, LC: T385.G6974.
+- Moshe Shimrat, Algorithm 112: Position of Point Relative to Polygon, Communications of the ACM, Volume 5, Number 8, August 1962, page 434.
+- Kenneth Stephenson, Introduction to Circle Packing, The Theory of Discrete Analytic Functions, Cambridge, 2005, ISBN: 0521823560, LC: QA640.7S74.
+- Allen VanGelder, Efficient Computation of Polygon Area and Polyhedron Volume, in Graphics Gems V, edited by Alan Paeth, AP Professional, 1995, ISBN: 0125434553, LC: T385.G6975.
+- Daniel Zwillinger, Steven Kokoska, Standard Probability and Statistical Tables, CRC Press, 2000, ISBN: 1-58488-059-7, LC: QA273.3.Z95.
+
+
+## Source Code:
+
+- geometry.f90, the source code;
+- geometry.sh, commands to compile the source code;
+
+
+## Examples and Tests:
+
+- geometry_prb.f90, the calling program;
+- geometry_prb.sh, commands to compile, link and run the sample test program;
+- geometry_prb_output.txt, the output file.
+
+
+##  List of Routines:
+
+- ANGLE_BOX_2D "boxes" an angle defined by three points in 2D.
+- ANGLE_CONTAINS_POINT_2D determines if an angle contains a point, in 2D.
+- ANGLE_DEG_2D returns the angle swept out between two rays in 2D.
+- ANGLE_HALF_2D finds half an angle in 2D.
+- ANGLE_RAD_2D returns the angle in radians swept out between two rays in 2D.
+- ANGLE_RAD_3D returns the angle in radians between two rays in 3D.
+- ANGLE_RAD_ND returns the angle in radians between two rays in ND.
+- ANGLE_TURN_2D computes a turning angle in 2D.
+- ANNULUS_AREA_2D computes the area of a circular annulus in 2D.
+- ANNULUS_SECTOR_AREA_2D computes the area of an annular sector in 2D.
+- ANNULUS_SECTOR_CENTROID_2D computes the centroid of an annular sector in 2D.
+- ARC_COSINE computes the arc cosine function, with argument truncation.
+- ARC_SINE computes the arc sine function, with argument truncation.
+- ATAN4 computes the inverse tangent of the ratio Y / X.
+- BALL_UNIT_SAMPLE_2D picks a random point in the unit ball in 2D.
+- BALL_UNIT_SAMPLE_3D picks a random point in the unit ball in 3D.
+- BALL_UNIT_SAMPLE_ND picks a random point in the unit ball in ND.
+- BASIS_MAP_3D computes the matrix which maps one basis to another in 3D.
+- BOX_01_CONTAINS_POINT_2D determines if a point is inside the unit box in 2D.
+- BOX_01_CONTAINS_POINT_ND determines if a point is inside the unit box in ND.
+- BOX_CONTAINS_POINT_2D determines if a point is inside a box in 2D.
+- BOX_CONTAINS_POINT_ND determines if a point is inside a box in ND.
+- BOX_CONTAINS_SEGMENT_ND reports if a box contains a line segment in ND.
+- BOX_RAY_INT_2D: intersection ( box, ray ) in 2D.
+- BOX_SEGMENT_CLIP_2D uses a box to clip a line segment in 2D.
+- CIRCLE_ARC_POINT_NEAR_2D : nearest point on a circular arc.
+- CIRCLE_AREA_2D computes the area of a circle in 2D.
+- CIRCLE_DIA2IMP_2D converts a diameter to an implicit circle in 2D.
+- CIRCLE_EXP_CONTAINS_POINT_2D: explicit circle contains a point in 2D.
+- CIRCLE_EXP2IMP_2D converts a circle from explicit to implicit form in 2D.
+- CIRCLE_IMP_CONTAINS_POINT_2D: implicit circle contains a point in 2D?
+- CIRCLE_IMP_LINE_EXP_DIST_2D: distance ( impl circle, explicit line ) in 2D.
+- CIRCLE_IMP_LINE_PAR_INT_2D: ( imp circle, param line ) intersection in 2D.
+- CIRCLE_IMP_POINT_DIST_2D: distance ( implicit circle, point ) in 2D.
+- CIRCLE_IMP_POINT_DIST_SIGNED_2D: signed distance ( imp circle, point ) in 2D.
+- CIRCLE_IMP_POINT_NEAR_2D: nearest ( implicit circle, point ) in 2D.
+- CIRCLE_IMP_POINTS_2D returns points on an implicit circle in 2D.
+- CIRCLE_IMP_POINTS_3D returns points on an implicit circle in 3D.
+- CIRCLE_IMP_POINTS_ARC_2D: N points on an arc of an implicit circle in 2D.
+- CIRCLE_IMP_PRINT_2D prints an implicit circle in 2D.
+- CIRCLE_IMP_PRINT_2D prints an implicit circle in 3D.
+- CIRCLE_IMP2EXP_2D converts a circle from implicit to explicit form in 2D.
+- CIRCLE_LLR2IMP_2D converts a circle from LLR to implicit form in 2D.
+- CIRCLE_LUNE_AREA_2D returns the area of a circular lune in 2D.
+- CIRCLE_LUNE_CENTROID_2D returns the centroid of a circular lune in 2D.
+- CIRCLE_PPPR2IMP_3D converts a circle from PPPR to implicit form in 3D.
+- CIRCLE_PPR2IMP_2D converts a circle from PPR to implicit form in 2D.
+- CIRCLE_SECTOR_AREA_2D computes the area of a circular sector in 2D.
+- CIRCLE_SECTOR_CENTROID_2D returns the centroid of a circular sector in 2D.
+- CIRCLE_SECTOR_CONTAINS_POINT_2D : is a point inside a circular sector?
+- CIRCLE_SECTOR_PRINT_2D prints a circular sector in 2D.
+- CIRCLE_TRIANGLE_AREA_2D returns the area of a circle triangle in 2D.
+- CIRCLE_TRIPLE_ANGLE_2D returns an angle formed by three circles in 2D.
+- CIRCLES_IMP_INT_2D: finds the intersection of two implicit circles in 2D.
+- COMBIN2 computes the binomial coefficient C(N,K).
+- CONE_AREA_3D computes the surface area of a right circular cone in 3D.
+- CONE_CENTROID_3D returns the centroid of a cone in 3D.
+- CONE_VOLUME_3D computes the volume of a right circular cone in 3D.
+- CONV3D converts 3D data to a 2D projection.
+- COS_DEG returns the cosine of an angle given in degrees.
+- COT_DEG returns the cotangent of an angle given in degrees.
+- COT_RAD returns the cotangent of an angle.
+- CSC_DEG returns the cosecant of an angle given in degrees.
+- CUBE_SHAPE_3D describes a cube in 3D.
+- CUBE_SIZE_3D gives "sizes" for a cube in 3D.
+- CYLINDER_POINT_DIST_3D: distance from a cylinder to a point in 3D.
+- CYLINDER_POINT_DIST_SIGNED_3D: signed distance from cylinder to point in 3D.
+- CYLINDER_POINT_INSIDE_3D determines if a cylinder contains a point in 3D.
+- CYLINDER_POINT_NEAR_3D: nearest point on a cylinder to a point in 3D.
+- CYLINDER_SAMPLE_3D samples a cylinder in 3D.
+- CYLINDER_VOLUME_3D determines the volume of a cylinder in 3D.
+- DEGREES_TO_RADIANS converts an angle from degrees to radians.
+- DGE_DET computes the determinant of a matrix factored by DGE_FA.
+- DGE_FA factors a general matrix.
+- DGE_SL solves a system factored by DGE_FA.
+- DIRECTION_PERT_3D randomly perturbs a direction vector in 3D.
+- DIRECTION_UNIFORM_2D picks a random direction vector in 2D.
+- DIRECTION_UNIFORM_3D picks a random direction vector in 3D.
+- DIRECTION_UNIFORM_ND generates a random direction vector in ND.
+- DISK_POINT_DIST_3D determines the distance from a disk to a point in 3D.
+- DMS_TO_RADIANS converts an angle from degrees/minutes/seconds to radians.
+- DODEC_SHAPE_3D describes a dodecahedron in 3D.
+- DODEC_SIZE_3D gives "sizes" for a dodecahedron in 3D.
+- DUAL_SHAPE_3D constructs the dual of a shape in 3D.
+- DUAL_SIZE_3D determines sizes for a dual of a shape in 3D.
+- ELLIPSE_AREA_2D returns the area of an ellipse in 2D.
+- ELLIPSE_POINT_DIST_2D finds the distance from a point to an ellipse in 2D.
+- ELLIPSE_POINT_NEAR_2D finds the nearest point on an ellipse in 2D.
+- ELLIPSE_POINTS_2D returns N points on an tilted ellipse in 2D.
+- ELLIPSE_POINTS_ARC_2D returns N points on a tilted elliptical arc in 2D.
+- GET_SEED returns a seed for the random number generator.
+- GET_UNIT returns a free FORTRAN unit number.
+- GLOB2LOC_3D converts from a global to a local coordinate system in 3D.
+- HALFPLANE_CONTAINS_POINT_2D reports if a half-plane contains a point in 2d.
+- HALFSPACE_IMP_TRIANGLE_INT_3D: intersection ( imp halfspace, triangle ).
+- HALFSPACE_NORMAL_TRIANGLE_INT_3D: intersection ( norm halfspace, triangle ).
+- HALFSPACE_TRIANGLE_INT_3D: intersection ( halfspace, triangle ) in 3D.
+- HAVERSINE computes the haversine of an angle.
+- HELIX_SHAPE_3D computes points on a helix in 3D.
+- HEXAGON_AREA_2D returns the area of a regular hexagon in 2D.
+- HEXAGON_CONTAINS_POINT_2D finds if a point is inside a hexagon in 2D.
+- HEXAGON_SHAPE_2D returns points on the unit regular hexagon in 2D.
+- HEXAGON_UNIT_AREA_2D returns the area of a unit regular hexagon in 2D.
+- HEXAGON_VERTICES_2D returns the vertices of the unit hexagon in 2D.
+- I4_DEDEKIND_FACTOR computes a function needed for a Dedekind sum.
+- I4_DEDEKIND_SUM computes the Dedekind sum of two I4's.
+- I4_FACTORIAL2 computes the double factorial function.
+- I4_GCD finds the greatest common divisor of two I4's.
+- I4_HUGE returns a "huge" I4.
+- I4_LCM computes the least common multiple of two I4's.
+- I4_MODP returns the nonnegative remainder of integer division.
+- I4_SWAP switches two I4's.
+- I4_UNIFORM returns a scaled pseudorandom I4.
+- I4_WRAP forces an I4 to lie between given limits by wrapping.
+- I4COL_COMPARE compares columns I and J of an I4COL.
+- I4COL_FIND_ITEM searches a table by columns for a given scalar value.
+- I4COL_FIND_PAIR_WRAP searches a table by columns for a pair of items.
+- I4COL_SORT_A ascending sorts an integer array of columns.
+- I4COL_SORTED_UNIQUE_COUNT counts unique elements in an I4COL.
+- I4COL_SWAP swaps columns I and J of a integer array of column data.
+- I4MAT_PRINT prints an integer matrix.
+- I4MAT_PRINT_SOME prints some of an I4MAT.
+- I4MAT_TRANSPOSE_PRINT prints an I4MAT, transposed.
+- I4MAT_TRANSPOSE_PRINT_SOME prints some of the transpose of an I4MAT.
+- I4ROW_COMPARE compares two rows of a integer array.
+- I4ROW_SORT_A ascending sorts the rows of an integer array.
+- I4ROW_SORTED_UNIQUE_COUNT counts unique elements in an IROW array.
+- I4ROW_SWAP swaps two rows of an integer array.
+- I4VEC_HEAP_D reorders an array of integers into a descending heap.
+- I4VEC_INDICATOR sets an integer vector to the indicator vector.
+- I4VEC_LCM returns the least common multiple of an I4VEC.
+- I4VEC_PRINT prints an I4VEC.
+- I4VEC_SORT_HEAP_A ascending sorts an integer array using heap sort.
+- I4VEC_SORTED_UNIQUE gets the unique elements in a sorted integer array.
+- I4VEC_UNIFORM returns a scaled pseudorandom I4VEC.
+- I4VEC2_COMPARE compares pairs of integers stored in two vectors.
+- I4VEC2_SORT_A ascending sorts a vector of pairs of integers.
+- I4VEC2_SORTED_UNIQUE gets the unique elements in a sorted I4VEC2.
+- ICOS_SHAPE describes an icosahedron.
+- ICOS_SIZE gives "sizes" for an icosahedron.
+- LINE_EXP_IS_DEGENERATE_ND finds if an explicit line is degenerate in ND.
+- LINE_EXP_NORMAL_2D computes a unit normal vector to a line in 2D.
+- LINE_EXP_PERP_2D computes a line perpendicular to a line and through a point.
+- LINE_EXP_POINT_DIST_2D: distance ( explicit line, point ) in 2D.
+- LINE_EXP_POINT_DIST_3D: distance ( explicit line, point ) in 3D.
+- LINE_EXP_POINT_DIST_SIGNED_2D: signed distance ( exp line, point ) in 2D.
+- LINE_EXP_POINT_NEAR_2D: point on an explicit line nearest a point in 2D.
+- LINE_EXP_POINT_NEAR_3D: nearest point on explicit line to point in 3D.
+- LINE_EXP2IMP_2D converts an explicit line to implicit form in 2D.
+- LINE_EXP2PAR_2D converts a line from explicit to parametric form in 2D.
+- LINE_EXP2PAR_3D converts a line from explicit to parametric form in 3D.
+- LINE_IMP_IS_DEGENERATE_2D finds if an implicit point is degenerate in 2D.
+- LINE_IMP_POINT_DIST_2D: distance ( implicit line, point ) in 2D.
+- LINE_IMP_POINT_DIST_SIGNED_2D: signed distance ( imp line, point ) in 2D.
+- LINE_IMP2EXP_2D converts an implicit line to explicit form in 2D.
+- LINE_IMP2PAR_2D converts an implicit line to parametric form in 2D.
+- LINE_PAR_POINT_DIST_2D: distance ( parametric line, point ) in 2D.
+- LINE_PAR_POINT_DIST_3D: distance ( parametric line, point ) in 3D.
+- LINE_PAR2EXP_2D converts a parametric line to explicit form in 2D.
+- LINE_PAR2IMP_2D converts a parametric line to implicit form in 2D.
+- LINES_EXP_ANGLE_3D finds the angle between two explicit lines in 3D.
+- LINES_EXP_ANGLE_ND returns the angle between two explicit lines in ND.
+- LINES_EXP_DIST_3D computes the distance between two explicit lines in 3D.
+- LINES_EXP_DIST_3D_2 computes the distance between two explicit lines in 3D.
+- LINES_EXP_EQUAL_2D determines if two explicit lines are equal in 2D.
+- LINES_EXP_INT_2D determines where two explicit lines intersect in 2D.
+- LINES_EXP_NEAR_3D computes the nearest points on two explicit lines in 3D.
+- LINES_EXP_PARALLEL_2D determines if two lines are parallel in 2D.
+- LINES_EXP_PARALLEL_3D determines if two lines are parallel in 3D.
+- LINES_IMP_ANGLE_2D finds the angle between two implicit lines in 2D.
+- LINES_IMP_DIST_2D determines the distance between two implicit lines in 2D.
+- LINES_IMP_INT_2D determines where two implicit lines intersect in 2D.
+- LINES_PAR_ANGLE_2D finds the angle between two parametric lines in 2D.
+- LINES_PAR_ANGLE_3D finds the angle between two parametric lines in 3D.
+- LINES_PAR_DIST_3D finds the distance between two parametric lines in 3D.
+- LINES_PAR_INT_2D determines where two parametric lines intersect in 2D.
+- LOC2GLOB_3D converts from a local to global coordinate system in 3D.
+- LVEC_PRINT prints a logical vector.
+- MINABS finds a local minimum of F(X) = A * abs ( X ) + B.
+- MINQUAD finds a local minimum of F(X) = A * X * X + B * X + C.
+- OCTAHEDRON_SHAPE_3D describes an octahedron in 3D.
+- OCTAHEDRON_SIZE_3D returns size information for an octahedron in 3D.
+- PARALLELOGRAM_AREA_2D computes the area of a parallelogram in 2D.
+- PARALLELOGRAM_AREA_3D computes the area of a parallelogram in 3D.
+- PARALLELOGRAM_CONTAINS_POINT_2D: is point inside a parallelogram in 2D.
+- PARALLELOGRAM_CONTAINS_POINT_3D: point "inside" parallelogram in 3D.
+- PARALLELOGRAM_POINT_DIST_3D: distance ( parallelogram, point ) in 3D.
+- PARABOLA_EX: extremal point of a parabola determined by three points.
+- PARABOLA_EX2: extremal point of a parabola determined by three points.
+- PARALLELEPIPED_CONTAINS_POINT_3D: point inside parallelepiped in 3D.
+- PARALLELEPIPED_POINT_DIST_3D: distance ( parallelepiped, point ) in 3D.
+- PERM_INVERSE inverts a permutation "in place".
+- PLANE_EXP_GRID_3D computes points and lines making up a planar grid in 3D.
+- PLANE_EXP_NORMAL_3D finds the normal to an explicit plane in 3D.
+- PLANE_EXP_POINT_DIST_3D: distance ( explicit plane, point ) in 3D.
+- PLANE_EXP_PRO2 produces 2D coordinates of points that lie in a plane, in 3D.
+- PLANE_EXP_PRO3 projects points orthographically onto a plane, in 3D.
+- PLANE_EXP_PROJECT_3D projects points through a point onto a plane in 3D.
+- PLANE_EXP2IMP_3D converts an explicit plane to implicit form in 3D.
+- PLANE_EXP2NORMAL_3D converts an explicit plane to normal form in 3D.
+- PLANE_IMP_IS_DEGENERATE_3D is TRUE if an implicit plane is degenerate.
+- PLANE_IMP_LINE_PAR_INT_3D: intersection ( impl plane, param line ) in 3D.
+- PLANE_IMP_POINT_DIST_3D: distance ( implicit plane, point ) in 3D.
+- PLANE_IMP_POINT_DIST_SIGNED_3D: signed distance ( imp plane, point) in 3D.
+- PLANE_IMP_POINT_NEAR_3D: nearest point on a implicit plane to a point in 3D.
+- PLANE_IMP_SEGMENT_NEAR_3D: nearest ( implicit plane, line segment ) in 3D.
+- PLANE_IMP_TRIANGLE_INT_3D: intersection ( implicit plane, triangle ) in 3D.
+- PLANE_IMP_TRIANGLE_INT_ADD_3D is a utility for plane/triangle intersections.
+- PLANE_IMP_TRIANGLE_NEAR_3D: nearest ( implicit plane, triangle ) in 3D.
+- PLANE_IMP2EXP_3D converts an implicit plane to explicit form in 3D.
+- PLANE_IMP2NORMAL_3D converts an implicit plane to normal form in 3D.
+- PLANE_NORMAL_BASIS_3D finds two perpendicular vectors in a plane in 3D.
+- PLANE_NORMAL_LINE_EXP_INT_3D: intersection of plane and line in 3D.
+- PLANE_NORMAL_TETRAHEDRON_INTERSECT intersects a plane and a tetrahedron.
+- PLANE_NORMAL_TRIANGLE_INT_3D: intersection ( normal plane, triangle ) in 3D.
+- PLANE_NORMAL_UNIFORM_3D generates a random normal plane in 3D.
+- PLANE_NORMAL_UNIFORM_ND generates a random normal plane in ND.
+- PLANE_NORMAL2EXP_3D converts a normal plane to explicit form in 3D.
+- PLANE_NORMAL2IMP_3D converts a normal form plane to implicit form in 3D.
+- PLANES_IMP_ANGLE_3D: dihedral angle between implicit planes in 3D.
+- POINTS_AVOID_POINT_NAIVE_2D: is a point "far" from a set of points in 2D?
+- POINTS_BISECT_LINE_IMP_2D: implicit bisector line between two points in 2D.
+- POINTS_BISECT_LINE_PAR_2D: parametric bisector line between points in 2D.
+- POINTS_CENTROID_2D computes the discrete centroid of a point set in 2D.
+- POINTS_COLIN_2D estimates the colinearity of 3 points in 2D.
+- POINTS_COLIN_3D estimates the colinearity of 3 points in 3D.
+- POINTS_DIST_ND finds the distance between two points in ND.
+- POINTS_HULL_2D computes the convex hull of 2D points.
+- POINTS_PLOT plots a pointset.
+- POINTS_POINT_NEAR_NAIVE_ND finds the nearest point to a given point in ND.
+- POLAR_TO_XY converts polar coordinates to XY coordinates.
+- POLYGON_1_2D integrates the function 1 over a polygon in 2D.
+- POLYGON_ANGLES_2D computes the interior angles of a polygon in 2D.
+- POLYGON_AREA_2D computes the area of a polygon in 2D.
+- POLYGON_AREA_2D_2 computes the area of a polygon in 2D.
+- POLYGON_AREA_3D computes the area of a polygon in 3D.
+- POLYGON_AREA_3D_2 computes the area of a polygon in 3D.
+- POLYGON_CENTROID_2D computes the centroid of a polygon in 2D.
+- POLYGON_CENTROID_2D_2 computes the centroid of a polygon in 2D.
+- POLYGON_CENTROID_3D computes the centroid of a polygon in 3D.
+- POLYGON_CONTAINS_POINT_2D finds if a point is inside a simple polygon in 2D.
+- POLYGON_CONTAINS_POINT_2D_2: is a point inside a convex polygon in 2D.
+- POLYGON_DIAMETER_2D computes the diameter of a polygon in 2D.
+- POLYGON_EXPAND_2D expands a polygon in 2D.
+- POLYGON_INRAD_DATA_2D determines polygonal data from its inner radius in 2D.
+- POLYGON_IS_CONVEX_2D determines whether a polygon is convex in 2D.
+- POLYGON_LATTICE_AREA_2D computes the area of a lattice polygon in 2D.
+- POLYGON_NORMAL_3D computes the normal vector to a polygon in 3D.
+- POLYGON_OUTRAD_DATA_2D determines polygonal data from its outer radius in 2D.
+- POLYGON_POINT_DIST_2D: distance ( polygon, point ) in 2D.
+- POLYGON_POINT_NEAR_2D computes the nearest point on a polygon in 2D.
+- POLYGON_SIDE_DATA_2D determines polygonal data from its side length in 2D.
+- POLYGON_SOLID_ANGLE_3D: projected solid angle of a 3D plane polygon.
+- POLYGON_X_2D integrates the function X over a polygon in 2D.
+- POLYGON_XX_2D integrates the function X*X over a polygon in 2D.
+- POLYGON_XY_2D integrates the function X*Y over a polygon in 2D.
+- POLYGON_Y_2D integrates the function Y over a polygon in 2D.
+- POLYGON_YY_2D integrates the function Y*Y over a polygon in 2D.
+- POLYHEDRON_AREA_3D computes the surface area of a polyhedron in 3D.
+- POLYHEDRON_CENTROID_3D computes the centroid of a polyhedron in 3D.
+- POLYHEDRON_CONTAINS_POINT_3D determines if a point is inside a polyhedron.
+- POLYHEDRON_VOLUME_3D computes the volume of a polyhedron in 3D.
+- POLYHEDRON_VOLUME_3D_2 computes the volume of a polyhedron in 3D.
+- POLYLINE_ARCLENGTH_ND computes the arclength of points on a polyline in ND.
+- POLYLINE_INDEX_POINT_ND evaluates a polyline at a given arclength in ND.
+- POLYLINE_LENGTH_ND computes the length of a polyline in ND.
+- POLYLINE_POINTS_ND computes equally spaced points on a polyline in ND.
+- POLYLOOP_ARCLENGTH_ND computes the arclength of points on a polyloop in ND.
+- POLYLOOP_LENGTH_ND computes the length of a polyloop in ND.
+- POLYLOOP_POINTS_ND computes equally spaced points on a polyloop in ND.
+- PROVEC projects a vector from M space into N space.
+- PYRAMID_VOLUME_3D computes the volume of a pyramid with square base in 3D.
+- QUAD_AREA_2D computes the area of a quadrilateral in 2D.
+- QUAD_AREA2_2D computes the area of a quadrilateral in 2D.
+- QUAD_AREA_3D computes the area of a quadrilateral in 3D.
+- QUAD_CONTAINS_POINT_2D: is point inside a convex quadrilateral in 2D.
+- QUAD_CONVEX_RANDOM returns a random convex quadrilateral.
+- QUAD_POINT_DIST_2D: distance ( quadrilateral, point ) in 2D.
+- QUAD_POINT_DIST_SIGNED_2D: signed distance ( quadrilateral, point ) in 2D.
+- QUAD_POINT_NEAR_2D computes the nearest point on a quadrilateral in 2D.
+- QUAT_CONJ conjugates a quaternion.
+- QUAT_INV inverts a quaternion.
+- QUAT_MUL multiplies two quaternions.
+- QUAT_NORM computes the norm of a quaternion.
+- R4_UNIFORM_01 returns a unit pseudorandom R4.
+- R8_HUGE returns a very large R8.
+- R8_IS_INT determines if a real number represents an integer value.
+- R8_MODP returns the nonnegative remainder of real division.
+- R8_NORMAL_01 returns a unit pseudonormal R8.
+- R8_PI returns the value of pi.
+- R8_SIGN_OPPOSITE_STRICT is TRUE if two R8's are strictly of opposite sign.
+- R8_SWAP switches two R8's.
+- R8_UNIFORM returns a scaled pseudorandom R8.
+- R8_UNIFORM_01 returns a unit pseudorandom R8.
+- R82VEC_PERMUTE permutes a R82 vector in place.
+- R82VEC_SORT_HEAP_INDEX_A does an indexed heap ascending sort of an R82VEC.
+- R8MAT_DET_2D computes the determinant of a 2 by 2 matrix.
+- R8MAT_DET_3D computes the determinant of a 3 by 3 matrix.
+- R8MAT_DET_4D computes the determinant of a 4 by 4 matrix.
+- R8MAT_DET_5D computes the determinant of a 5 by 5 matrix.
+- R8MAT_INVERSE_2D inverts a 2 by 2 real matrix using Cramer's rule.
+- R8MAT_INVERSE_3D inverts a 3 by 3 real matrix using Cramer's rule.
+- R8MAT_PRINT prints a real matrix.
+- R8MAT_PRINT_SOME prints some of an R8MAT.
+- R8MAT_SOLVE uses Gauss-Jordan elimination to solve an N by N linear system.
+- R8MAT_SOLVE_2D solves a 2 by 2 linear system using Cramer's rule.
+- R8MAT_TRANSPOSE_PRINT prints a R8MAT, transposed.
+- R8MAT_TRANSPOSE_PRINT_SOME prints some of an R8MAT, transposed.
+- R8MAT_UNIFORM fills scaled pseudorandom R8MAT.
+- R8MAT_UNIFORM_01 returns a unit pseudorandom R8MAT.
+- R8VEC_ANGLE_3D computes the angle between two vectors in 3D.
+- R8VEC_ANY_NORMAL returns some normal vector to V1.
+- R8VEC_BRACKET searches a sorted array for successive brackets of a value.
+- R8VEC_CROSS_PRODUCT_2D finds the cross product of a pair of vectors in 2D.
+- R8VEC_CROSS_PRODUCT_AFFINE_2D finds the affine cross product in 2D.
+- R8VEC_CROSS_PRODUCT_3D computes the cross product of two vectors in 3D.
+- R8VEC_CROSS_PRODUCT_AFFINE_3D computes the affine cross product in 3D.
+- R8VEC_DISTANCE returns the Euclidean distance between two vectors.
+- R8VEC_DOT_PRODUCT finds the dot product of a pair of vectors in ND.
+- R8VEC_DOT_PRODUCT_AFFINE computes the affine dot product V1-V0 * V2-V0.
+- R8VEC_EQ is true if every pair of entries in two vectors is equal.
+- R8VEC_GT == ( A1 > A2 ) for real vectors.
+- R8VEC_LT == ( A1 < A2 ) for real vectors.
+- R8VEC_NORM returns the L2 norm of an R8VEC.
+- R8VEC_NORM_AFFINE returns the affine norm of an R8VEC.
+- R8VEC_NORMAL_01 samples the unit normal probability distribution.
+- R8VEC_POLARIZE decomposes an R8VEC into normal and parallel components.
+- R8VEC_PRINT prints an R8VEC.
+- R8VEC_TRIPLE_PRODUCT finds the triple product in 3D.
+- R8VEC_SWAP swaps the entries of two real vectors.
+- R8VEC_UNIFORM returns a scaled pseudorandom R8VEC.
+- R8VEC_UNIFORM_01 returns a unit pseudorandom R8VEC.
+- RADEC_DISTANCE_3D - angular distance, astronomical units, sphere in 3D.
+- RADEC_TO_XYZ converts right ascension/declination to (X,Y,Z) coordinates.
+- RADIANS_TO_DEGREES converts an angle from radians to degrees.
+- RADIANS_TO_DMS converts an angle from radians to degrees/minutes/seconds.
+- RANDOM_INITIALIZE initializes the FORTRAN90 random number seed.
+- ROTATION_AXIS_VECTOR_3D rotates a vector around an axis vector in 3D.
+- ROTATION_AXIS2MAT_3D converts a rotation from axis to matrix format in 3D.
+- ROTATION_AXIS2QUAT_3D converts rotation from axis to quaternion form in 3D.
+- ROTATION_MAT_VECTOR_3D applies a marix rotation to a vector in 3d.
+- ROTATION_MAT2AXIS_3D converts a rotation from matrix to axis format in 3D.
+- ROTATION_MAT2QUAT_3D converts rotation from matrix to quaternion format.
+- ROTATION_QUAT_VECTOR_3D applies a quaternion rotation to a vector in 3D.
+- ROTATION_QUAT2AXIS_3D converts rotation from quaternion to axis form in 3D.
+- ROTATION_QUAT2MAT_3D converts rotation from quaternion to matrix form in 3D.
+- RTP_TO_XYZ converts (R,Theta,Phi) to (X,Y,Z) coordinates.
+- SEC_DEG returns the secant of an angle given in degrees.
+- SEGMENT_CONTAINS_POINT_1D reports if a line segment contains a point in 1D.
+- SEGMENT_CONTAINS_POINT_2D reports if a line segment contains a point in 2D.
+- SEGMENT_POINT_COORDS_2D: coordinates of a point on a line segment in 2D.
+- SEGMENT_POINT_COORDS_3D: coordinates of a point on a line segment in 3D.
+- SEGMENT_POINT_DIST_2D: distance ( line segment, point ) in 2D.
+- SEGMENT_POINT_DIST_3D: distance ( line segment, point ) in 3D.
+- SEGMENT_POINT_NEAR_2D: nearest point on line segment to point in 2D.
+- SEGMENT_POINT_NEAR_3D: nearest point on line segment to point in 3D.
+- SEGMENTS_CURVATURE_2D computes the curvature of two line segments in 2D.
+- SEGMENTS_DIST_2D computes the distance between two line segments in 2D.
+- SEGMENTS_DIST_3D computes the distance between two line segments in 3D.
+- SEGMENTS_DIST_3D_OLD computes the distance between two line segments in 3D.
+- SEGMENTS_INT_1D computes the intersection of two line segments in 1D.
+- SEGMENTS_INT_2D computes the intersection of two line segments in 2D.
+- SHAPE_POINT_DIST_2D: distance ( regular shape, point ) in 2D.
+- SHAPE_POINT_NEAR_2D: nearest point ( regular shape, point ) in 2D.
+- SHAPE_PRINT_3D prints information about a polyhedron in 3D.
+- SHAPE_RAY_INT_2D: intersection ( regular shape, ray ) in 2D.
+- SIMPLEX_LATTICE_LAYER_POINT_NEXT: next simplex lattice layer point.
+- SIMPLEX_LATTICE_POINT_NEXT returns the next simplex lattice point.
+- SIMPLEX_UNIT_LATTICE_POINT_NUM_ND: count lattice points.
+- SIMPLEX_UNIT_VOLUME_ND computes the volume of the unit simplex in ND.
+- SIMPLEX_VOLUME_ND computes the volume of a simplex in ND.
+- SIN_DEG returns the sine of an angle given in degrees.
+- SIN_POWER_INT evaluates the sine power integral.
+- SOCCER_SHAPE_3D describes a truncated icosahedron in 3D.
+- SOCCER_SIZE_3D gives "sizes" for a truncated icosahedron in 3D.
+- SORT_HEAP_EXTERNAL externally sorts a list of items into ascending order.
+- SPHERE_CAP_AREA_2D computes the surface area of a spherical cap in 2D.
+- SPHERE_CAP_AREA_3D computes the surface area of a spherical cap in 3D.
+- SPHERE_CAP_AREA_ND computes the area of a spherical cap in ND.
+- SPHERE_CAP_VOLUME_2D computes the volume of a spherical cap in 2D.
+- SPHERE_CAP_VOLUME_3D computes the volume of a spherical cap in 3D.
+- SPHERE_CAP_VOLUME_ND computes the volume of a spherical cap in ND.
+- SPHERE_DIA2IMP_3D converts a diameter to an implicit sphere in 3D.
+- SPHERE_DISTANCE_XYZ computes great circle distances on a sphere.
+- SPHERE_DISTANCE1 computes great circle distances on a sphere.
+- SPHERE_DISTANCE2 computes great circle distances on a sphere.
+- SPHERE_DISTANCE3 computes great circle distances on a sphere.
+- SPHERE_EXP_CONTAINS_POINT_3D: does an explicit sphere contain a point in 3D.
+- SPHERE_EXP_POINT_NEAR_3D: nearest point on explicit sphere to a point in 3D.
+- SPHERE_EXP2IMP_3D converts a sphere from explicit to implicit form in 3D.
+- SPHERE_IMP_AREA_3D computes the surface area of an implicit sphere in 3D.
+- SPHERE_IMP_AREA_ND computes the surface area of an implicit sphere in ND.
+- SPHERE_IMP_CONTAINS_POINT_3D: point in implicit sphere in 3D?
+- SPHERE_IMP_LINE_PROJECT_3D projects a line onto an implicit sphere in 3D.
+- SPHERE_IMP_LOCAL2XYZ_3D: local to XYZ coordinates on implicit sphere in 3D.
+- SPHERE_IMP_POINT_NEAR_3D: nearest point on implicit sphere to a point in 3D.
+- SPHERE_IMP_POINT_PROJECT_3D projects a point onto an implicit sphere in 3D.
+- SPHERE_IMP_VOLUME_3D computes the volume of an implicit sphere in 3D.
+- SPHERE_IMP_VOLUME_ND computes the volume of an implicit sphere in ND.
+- SPHERE_IMP_ZONE_AREA_3D computes the surface area of a spherical zone in 3D.
+- SPHERE_IMP_ZONE_VOLUME_3D computes the volume of a spherical zone in 3D.
+- SPHERE_IMP2EXP_3D converts a sphere from implicit to explicit form in 3D.
+- SPHERE_K computes a factor useful for spherical computations.
+- SPHERE_TRIANGLE_ANGLES_TO_AREA computes the area of a spherical triangle.
+- SPHERE_TRIANGLE_CONTAINS_POINT: does a spherical triangle contain a point.
+- SPHERE_TRIANGLE_SIDES_TO_ANGLES computes spherical triangle angles.
+- SPHERE_TRIANGLE_VERTICES_TO_ANGLES: spherical triangle angles from vertices.
+- SPHERE_TRIANGLE_VERTICES_TO_AREA computes the area of a spherical triangle.
+- SPHERE_TRIANGLE_VERTICES_TO_CENTROID gets a spherical triangle centroid.
+- SPHERE_TRIANGLE_VERTICES_TO_ORIENTATION: orientation of a spherical triangle.
+- SPHERE_TRIANGLE_VERTICES_TO_SIDES computes spherical triangle sides.
+- SPHERE_UNIT_AREA_ND computes the surface area of a unit sphere in ND.
+- SPHERE_UNIT_AREA_VALUES returns some areas of the unit sphere in ND.
+- SPHERE_UNIT_SAMPLE_2D picks a random point on the unit sphere (circle) in 2D.
+- SPHERE_UNIT_SAMPLE_3D picks a random point on the unit sphere in 3D.
+- SPHERE_UNIT_SAMPLE_3D_2 is a BAD method for sampling the unit sphere in 3D.
+- SPHERE_UNIT_SAMPLE_ND picks a random point on the unit sphere in ND.
+- SPHERE_UNIT_SAMPLE_ND_2 picks a random point on the unit sphere in ND.
+- SPHERE_UNIT_SAMPLE_ND_3 picks a random point on the unit sphere in ND.
+- SPHERE_UNIT_VOLUME_ND computes the volume of a unit sphere in ND.
+- SPHERE_UNIT_VOLUME_VALUES returns some volumes of the unit sphere in ND.
+- SPHERE01_DISTANCE_XYZ computes great circle distances on a unit sphere.
+- SPHERE01_POLYGON_AREA returns the area of a spherical polygon.
+- SPHERE01_TRIANGLE_ANGLES_TO_AREA computes the area of a spherical triangle.
+- SPHERE01_TRIANGLE_SIDES_TO_ANGLES computes spherical triangle angles.
+- SPHERE01_TRIANGLE_VERTICES_TO_ANGLES: spherical triangle angles by vertices.
+- SPHERE01_TRIANGLE_VERTICES_TO_AREA computes the area of a spherical triangle.
+- SPHERE01_TRIANGLE_VERTICES_TO_CENTROID gets a spherical triangle "centroid".
+- SPHERE01_TRIANGLE_VERTICES_TO_MIDPOINTS: midsides of a spherical triangle.
+- SPHERE01_TRIANGLE_VERTICES_TO_SIDES computes spherical triangle sides.
+- STRING_2D groups line segments into connected lines in 2D.
+- SUPER_ELLIPSE_POINTS_2D returns N points on a tilted superellipse in 2D.
+- TAN_DEG returns the tangent of an angle given in degrees.
+- TETRAHEDRON_BARYCENTRIC_3D: barycentric coordinates of a point in 3D.
+- TETRAHEDRON_CENTROID_3D computes the centroid of a tetrahedron in 3D.
+- TETRAHEDRON_CIRCUMSPHERE_3D computes the circumsphere of a tetrahedron in 3D.
+- TETRAHEDRON_CONTAINS_POINT_3D finds if a point is inside a tetrahedron in 3D.
+- TETRAHEDRON_DIHEDRAL_ANGLES_3D computes dihedral angles of a tetrahedron.
+- TETRAHEDRON_EDGE_LENGTH_3D returns edge lengths of a tetrahedron in 3D.
+- TETRAHEDRON_FACE_ANGLES_3D returns the 12 face angles of a tetrahedron 3D.
+- TETRAHEDRON_FACE_AREAS_3D returns the 4 face areas of a tetrahedron 3D.
+- TETRAHEDRON_INSPHERE_3D finds the insphere of a tetrahedron in 3D.
+- TETRAHEDRON_LATTICE_LAYER_POINT_NEXT: next tetrahedron lattice layer point.
+- TETRAHEDRON_LATTICE_POINT_NEXT returns the next tetrahedron lattice point.
+- TETRAHEDRON_QUALITY1_3D: "quality" of a tetrahedron in 3D.
+- TETRAHEDRON_QUALITY2_3D: "quality" of a tetrahedron in 3D.
+- TETRAHEDRON_QUALITY3_3D computes the mean ratio of a tetrahedron.
+- TETRAHEDRON_QUALITY4_3D computes the minimum solid angle of a tetrahedron.
+- TETRAHEDRON_RHOMBIC_SHAPE_3D describes a rhombic tetrahedron in 3D.
+- TETRAHEDRON_RHOMBIC_SIZE_3D gives "sizes" for a rhombic tetrahedron in 3D.
+- TETRAHEDRON_SAMPLE_3D returns random points in a tetrahedron.
+- TETRAHEDRON_SHAPE_3D describes a tetrahedron in 3D.
+- TETRAHEDRON_SIZE_3D gives "sizes" for a tetrahedron in 3D.
+- TETRAHEDRON_SOLID_ANGLES_3D computes solid angles of a tetrahedron.
+- TETRAHEDRON_UNIT_LATTICE_POINT_NUM_3D: count lattice points.
+- TETRAHEDRON_VOLUME_3D computes the volume of a tetrahedron in 3D.
+- TIMESTAMP prints the current YMDHMS date as a time stamp.
+- TIMESTRING writes the current YMDHMS date into a string.
+- TMAT_INIT initializes the geometric transformation matrix.
+- TMAT_MXM multiplies two geometric transformation matrices.
+- TMAT_MXP multiplies a geometric transformation matrix times a point.
+- TMAT_MXP2 multiplies a geometric transformation matrix times N points.
+- TMAT_MXV multiplies a geometric transformation matrix times a vector.
+- TMAT_ROT_AXIS: coordinate axis rotation to geometric transformation matrix.
+- TMAT_ROT_VECTOR: arbitrary axis rotation to geometric transformation matrix.
+- TMAT_SCALE applies a scaling to the geometric transformation matrix.
+- TMAT_SHEAR applies a shear to the geometric transformation matrix.
+- TMAT_TRANS applies a translation to the geometric transformation matrix.
+- TORUS_AREA_3D returns the area of a torus in 3D.
+- TORUS_VOLUME_3D computes the volume of a torus in 3D.
+- TP_TO_XYZ converts unit spherical TP coordinates to XYZ coordinates.
+- TRIANGLE_ANGLES_2D computes the angles of a triangle in 2D.
+- TRIANGLE_ANGLES_3D computes the angles of a triangle in 3D.
+- TRIANGLE_AREA_2D computes the area of a triangle in 2D.
+- TRIANGLE_AREA_3D computes the area of a triangle in 3D.
+- TRIANGLE_AREA_3D_2 computes the area of a triangle in 3D.
+- TRIANGLE_AREA_3D_3 computes the area of a triangle in 3D.
+- TRIANGLE_AREA_HERON computes the area of a triangle using Heron's formula.
+- TRIANGLE_AREA_VECTOR_3D computes the area vector of a triangle in 3D.
+- TRIANGLE_BARYCENTRIC_2D finds the barycentric coordinates of a point in 2D.
+- TRIANGLE_CENTROID_2D computes the centroid of a triangle in 2D.
+- TRIANGLE_CENTROID_3D computes the centroid of a triangle in 3D.
+- TRIANGLE_CIRCUMCENTER_2D computes the circumcenter of a triangle in 2D.
+- TRIANGLE_CIRCUMCENTER_2D_2 computes the circumcenter of a triangle in 2D.
+- TRIANGLE_CIRCUMCIRCLE_2D computes the circumcircle of a triangle in 2D.
+- TRIANGLE_CIRCUMCIRCLE_2D_2 computes the circumcircle of a triangle in 2D.
+- TRIANGLE_CIRCUMRADIUS_2D computes the circumradius of a triangle in 2D.
+- TRIANGLE_CONTAINS_LINE_EXP_3D finds if a line is inside a triangle in 3D.
+- TRIANGLE_CONTAINS_LINE_PAR_3D: finds if a line is inside a triangle in 3D.
+- TRIANGLE_CONTAINS_POINT_2D_1 finds if a point is inside a triangle in 2D.
+- TRIANGLE_CONTAINS_POINT_2D_2 finds if a point is inside a triangle in 2D.
+- TRIANGLE_CONTAINS_POINT_2D_3 finds if a point is inside a triangle in 2D.
+- TRIANGLE_DIAMETER_2D computes the diameter of a triangle in 2D.
+- TRIANGLE_EDGE_LENGTH_2D returns edge lengths of a triangle in 2D.
+- TRIANGLE_GRIDPOINTS_2D computes gridpoints within a triangle in 2D.
+- TRIANGLE_INCENTER_2D computes the incenter of a triangle in 2D.
+- TRIANGLE_INCIRCLE_2D computes the inscribed circle of a triangle in 2D.
+- TRIANGLE_INRADIUS_2D: radius of the inscribed circle of a triangle in 2D.
+- TRIANGLE_IS_DEGENERATE_ND finds if a triangle is degenerate in ND.
+- TRIANGLE_LATTICE_LAYER_POINT_NEXT: next triangle lattice layer point.
+- TRIANGLE_LATTICE_POINT_NEXT returns the next triangle lattice point.
+- TRIANGLE_LINE_IMP_INT_2D: implicit line intersects a triangle in 2D.
+- TRIANGLE_ORIENTATION_2D determines the orientation of a triangle in 2D.
+- TRIANGLE_ORTHOCENTER_2D computes the orthocenter of a triangle in 2D.
+- TRIANGLE_POINT_DIST_2D: distance ( triangle, point ) in 2D.
+- TRIANGLE_POINT_DIST_3D: distance ( triangle, point ) in 3D.
+- TRIANGLE_POINT_DIST_SIGNED_2D: signed distance ( triangle, point ) in 2D.
+- TRIANGLE_POINT_NEAR_2D computes the nearest point on a triangle in 2D.
+- TRIANGLE_QUALITY_2D: "quality" of a triangle in 2D.
+- TRIANGLE_RIGHT_LATTICE_POINT_NUM_2D: count lattice points.
+- TRIANGLE_SAMPLE returns random points in a triangle.
+- TRIANGLE_UNIT_LATTICE_POINT_NUM_2D: count lattice points.
+- TRIANGLE_XSI_TO_XY_2D converts from barycentric to XY coordinates in 2D.
+- TRIANGLE_XY_TO_XSI_2D converts from XY to barycentric in 2D.
+- TRUNCATED_OCTAHEDRON_SHAPE_3D describes a truncated octahedron in 3D.
+- TRUNCATED_OCTAHEDRON_SIZE_3D gives "sizes" for a truncated octahedron in 3D.
+- TUBE_2D constructs a "tube" of given width around a path in 2D.
+- VECTOR_DIRECTIONS_ND returns the direction angles of a vector in ND.
+- VECTOR_ROTATE_2D rotates a vector around the origin in 2D.
+- VECTOR_ROTATE_3D rotates a vector around an axis vector in 3D.
+- VECTOR_ROTATE_BASE_2D rotates a vector around a base point in 2D.
+- VECTOR_SEPARATION_ND finds the angular separation between vectors in ND.
+- VECTOR_UNIT_ND normalizes a vector in ND.
+- VOXELS_DIST_L1_ND computes the L1 distance between voxels in ND.
+- VOXELS_LINE_3D computes voxels along a line in 3D.
+- VOXELS_REGION_3D arranges contiguous voxels into regions in 3D.
+- VOXELS_STEP_3D computes voxels along a line from a given point in 3D.
+- XY_TO_POLAR converts XY coordinates to polar coordinates.
+- XYZ_TO_RADEC converts (X,Y,Z) to right ascension/declination coordinates.
+- XYZ_TO_RTP converts (X,Y,Z) to (R,Theta,Phi) coordinates.
+- XYZ_TO_TP converts (X,Y,Z) to (Theta,Phi) coordinates.
+
+You can go up one level to the FORTRAN90 source codes.
+
+Last revised on 27 October 2010. 
