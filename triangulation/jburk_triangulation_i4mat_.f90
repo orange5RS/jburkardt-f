@@ -3,39 +3,35 @@
 module  jburk_triangulation_i4mat_
 implicit none
 
+   interface        i4mat_transpose_print
+   module procedure i4mat_transpose_print
+   end interface    i4mat_transpose_print
+   public           i4mat_transpose_print
 
-interface        i4mat_transpose_print
-module procedure i4mat_transpose_print
-end interface    i4mat_transpose_print
-public           i4mat_transpose_print
+   interface        i4mat_transpose_print_some
+   module procedure i4mat_transpose_print_some
+   end interface    i4mat_transpose_print_some
+   public           i4mat_transpose_print_some
 
-interface        i4mat_transpose_print_some
-module procedure i4mat_transpose_print_some
-end interface    i4mat_transpose_print_some
-public           i4mat_transpose_print_some
+   interface        i4mat_col_compare
+   module procedure i4col_compare
+   end interface    i4mat_col_compare
+   public           i4mat_col_compare
 
-interface        i4mat_col_compare
-module procedure i4col_compare
-end interface    i4mat_col_compare
-public           i4mat_col_compare
+   interface        i4mat_col_sort_a
+   module procedure i4col_sort_a
+   end interface    i4mat_col_sort_a
+   public           i4mat_col_sort_a
 
-interface        i4mat_col_sort_a
-module procedure i4col_sort_a
-end interface    i4mat_col_sort_a
-public           i4mat_col_sort_a
+   interface        i4mat_col_sorted_unique_count
+   module procedure i4col_sorted_unique_count
+   end interface    i4mat_col_sorted_unique_count
+   public           i4mat_col_sorted_unique_count
 
-interface        i4mat_col_sorted_unique_count
-module procedure i4col_sorted_unique_count
-end interface    i4mat_col_sorted_unique_count
-public           i4mat_col_sorted_unique_count
-
-interface        i4mat_col_swap
-module procedure i4col_swap
-end interface    i4mat_col_swap
-public           i4mat_col_swap
-
-
-
+   interface        i4mat_col_swap
+   module procedure i4col_swap
+   end interface    i4mat_col_swap
+   public           i4mat_col_swap
 
 contains
 
