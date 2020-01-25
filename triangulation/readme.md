@@ -19,10 +19,14 @@ The mesh is the collection of triangles. Each triangle is termed an "element". T
 - search a mesh to determine which element contains a point.
 
 Since triangulations are often used to define a finite element mesh, which in turn defines a sparse matrix, there are routines available which can define the sparse compressed column arrays needed for a sparse matrix associated with a mesh of order 3 or 6. The special case of the Taylor-Hood mixed element is also handled, which is essentially an order 6 grid counted twice and an order 3 grid that only uses the vertices of the order 6 grid.
-Licensing:
+
+
+## Licensing:
 
 The computer code and data files described and made available on this web page are distributed under the GNU LGPL license.
-Languages:
+
+
+## Languages:
 
 TRIANGULATION is available in a C version and a C++ version and a FORTRAN77 version and a FORTRAN90 version and a MATLAB version.
 
