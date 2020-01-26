@@ -1,6 +1,5 @@
 
-## GEOMETRY
-Geometric Calculations
+## GEOMETRY Geometric Calculations
 
 GEOMETRY is a FORTRAN90 library which carries out geometric calculations in 2, 3 and N dimensional space.
 
