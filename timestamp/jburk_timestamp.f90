@@ -1,6 +1,36 @@
 module     jburk_timestamp
 implicit none
 
+interface        hms_current_hms
+module procedure hms_current_hms
+end interface    hms_current_hms
+public           hms_current_hms
+
+interface        hms_current_print
+module procedure hms_current_print
+end interface    hms_current_print
+public           hms_current_print
+
+interface        hms_current_string
+module procedure hms_current_string
+end interface    hms_current_string
+public           hms_current_string
+
+interface        hms_delta_print
+module procedure hms_delta_print
+end interface    hms_delta_print
+public           hms_delta_print
+
+interface        timestamp
+module procedure timestamp
+end interface    timestamp
+public           timestamp
+
+interface        timestring
+module procedure timestring
+end interface    timestring
+public           timestring
+
 contains
 
 
@@ -53,7 +83,7 @@ subroutine hms_current_hms ( h, m, s, mm )
   mm = values(8)
 
   return
-end
+end subroutine hms_current_hms
 
 
 
@@ -94,7 +124,7 @@ subroutine hms_current_print ( string )
   write ( *, '(a,2x,a,2x,a)' ) 'Wallclock:', string2, trim ( string )
 
   return
-end
+end subroutine hms_current_print
 
 
 
@@ -167,7 +197,10 @@ subroutine hms_current_string ( string )
     h, ':', n, ':', s, '.', mm, trim ( ampm )
 
   return
-end
+end subroutine hms_current_string
+
+
+
 subroutine hms_delta_print ( string )
 
 !*****************************************************************************80
@@ -261,7 +294,7 @@ subroutine hms_delta_print ( string )
     trim ( string )
 
   return
-end
+end subroutine hms_delta_print
 
 
 
@@ -432,6 +465,8 @@ subroutine     timestring ( string )
 
    return
 end subroutine timestring
+
+
 
 end module jburk_timestamp
 
