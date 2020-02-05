@@ -34,11 +34,27 @@ public           r8poly_order
 contains
 
 
+
 !> @author John Burkardt
 !> @brief  R8POLY_DEGREE returns the degree of a polynomial.
 !> @date   2001-03-21
 !> @see    
-subroutine r8poly_degree (na, a, degree)
+subroutine     r8poly_degree (na, a, degree)
+implicit none
+   integer(kind=4), intent(in)  :: na
+   real(kind=8),    intent(in)  :: a(0:na)
+   integer(kind=4), intent(out) :: degree
+
+   degree = na
+   do while (0 < degree)
+      if (a(degree) .ne. 0.0D+0) then
+         return
+      end if
+      degree = degree - 1
+   end do
+
+   return
+end subroutine r8poly_degree
 
 !*****************************************************************************80
 !
@@ -73,22 +89,6 @@ subroutine r8poly_degree (na, a, degree)
 !
 !    Output, integer ( kind = 4 ) DEGREE, the degree of A.
 !
-subroutine     r8poly_degree (na, a, degree)
-implicit none
-   integer(kind=4), intent(in)  :: na
-   real(kind=8),    intent(in)  :: a(0:na)
-   integer(kind=4), intent(out) :: degree
-
-   degree = na
-   do while (0 < degree)
-      if (a(degree) .ne. 0.0D+0) then
-         return
-      end if
-      degree = degree - 1
-   end do
-
-   return
-end subroutine r8poly_degree
 
 
 
@@ -156,7 +156,10 @@ subroutine r8poly_deriv ( n, c, p, cp )
 
   return
 end
-subroutine r8poly_lagrange_0 ( npol, xpol, xval, wval )
+
+
+
+subroutine     r8poly_lagrange_0 ( npol, xpol, xval, wval )
 
 !*****************************************************************************80
 !
@@ -213,11 +216,11 @@ subroutine r8poly_lagrange_0 ( npol, xpol, xval, wval )
   wval = product ( xval - xpol(1:npol) )
 
   return
-end
+end subroutine r8poly_lagrange_0
 
 
 
-subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
+subroutine     r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
 
 !*****************************************************************************80
 !
@@ -281,7 +284,8 @@ subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
   end do
 
   return
-end
+end subroutine r8poly_lagrange_1
+
 
 
 subroutine     r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
@@ -365,6 +369,7 @@ subroutine     r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
 
    return
 end subroutine r8poly_lagrange_2
+
 
 
 subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
@@ -472,6 +477,9 @@ subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
 
   return
 end
+
+
+
 subroutine r8poly_lagrange_factor ( npol, xpol, xval, wval, dwdx )
 
 !*****************************************************************************80
@@ -578,6 +586,9 @@ subroutine r8poly_lagrange_factor ( npol, xpol, xval, wval, dwdx )
 
   return
 end
+
+
+
 subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 
 !*****************************************************************************80
@@ -703,6 +714,7 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 
   return
 end
+
 
 
 !> @author John Burkardt
