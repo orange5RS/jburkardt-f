@@ -9,7 +9,10 @@ LDFLAGS =
 JOB = r8lib_prb.new
 TARGET = $(JOB).app
 
-OBJS = jburk_r8lib_i4vec_.o \
+OBJS = jburk_r8lib_sort_.o \
+       jburk_r8lib_i4vec_.o \
+       jburk_r8lib_r8vec_.o \
+       jburk_r8lib_r8mat_.o \
        r8lib.new.o \
        $(JOB).o
 
