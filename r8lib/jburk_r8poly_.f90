@@ -1,6 +1,218 @@
 module     jburk_r8poly_
 implicit none
+
+interface        r8poly_degree
+module procedure r8poly_degree
+end interface    r8poly_degree
+public           r8poly_degree
+
+interface        r8poly_deriv
+module procedure r8poly_deriv
+end interface    r8poly_deriv
+public           r8poly_deriv
+
+interface        r8poly_lagrange_0
+module procedure r8poly_lagrange_0
+end interface    r8poly_lagrange_0
+public           r8poly_lagrange_0
+
+interface        r8poly_lagrange_1
+module procedure r8poly_lagrange_1
+end interface    r8poly_lagrange_1
+public           r8poly_lagrange_1
+
+interface        r8poly_lagrange_2
+module procedure r8poly_lagrange_2
+end interface    r8poly_lagrange_2
+public           r8poly_lagrange_2
+
+interface        r8poly_order
+module procedure r8poly_order
+end interface    r8poly_order
+public           r8poly_order
+
 contains
+
+
+subroutine r8poly_degree ( na, a, degree )
+
+!*****************************************************************************80
+!
+!! R8POLY_DEGREE returns the degree of a polynomial.
+!
+!  Discussion:
+!
+!    The degree of a polynomial is the index of the highest power
+!    of X with a nonzero coefficient.
+!
+!    The degree of a constant polynomial is 0.  The degree of the
+!    zero polynomial is debatable, but this routine returns the
+!    degree as 0.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    21 March 2001
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) NA, the dimension of A.
+!
+!    Input, real ( kind = 8 ) A(0:NA), the coefficients of the polynomials.
+!
+!    Output, integer ( kind = 4 ) DEGREE, the degree of A.
+!
+  implicit none
+
+  integer ( kind = 4 ) na
+
+  real ( kind = 8 ) a(0:na)
+  integer ( kind = 4 ) degree
+
+  degree = na
+
+  do while ( 0 < degree )
+
+    if ( a(degree) /= 0.0D+0 ) then
+      return
+    end if
+
+    degree = degree - 1
+
+  end do
+
+  return
+end
+subroutine r8poly_deriv ( n, c, p, cp )
+
+!*****************************************************************************80
+!
+!! R8POLY_DERIV returns the derivative of a polynomial.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    21 February 2002
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the degree of the polynomial.
+!
+!    Input, real ( kind = 8 ) C(0:N), the polynomial coefficients.
+!    C(I) is the coefficient of X^I.
+!
+!    Input, integer ( kind = 4 ) P, the order of the derivative.
+!    0 means no derivative is taken.
+!    1 means first derivative,
+!    2 means second derivative and so on.
+!    Values of P less than 0 are meaningless.  Values of P greater
+!    than N are meaningful, but the code will behave as though the
+!    value of P was N+1.
+!
+!    Output, real ( kind = 8 ) CP(0:N-P), the polynomial coefficients of
+!    the derivative.
+!
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  real ( kind = 8 ) c(0:n)
+  real ( kind = 8 ) cp(0:*)
+  real ( kind = 8 ) cp_temp(0:n)
+  integer ( kind = 4 ) d
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) p
+
+  if ( n < p ) then
+    return
+  end if
+
+  cp_temp(0:n) = c(0:n)
+
+  do d = 1, p
+    do i = 0, n - d
+      cp_temp(i) = real ( i + 1, kind = 8 ) * cp_temp(i+1)
+    end do
+    cp_temp(n-d+1) = 0.0D+0
+  end do
+
+  cp(0:n-p) = cp_temp(0:n-p)
+
+  return
+end
+subroutine r8poly_lagrange_0 ( npol, xpol, xval, wval )
+
+!*****************************************************************************80
+!
+!! R8POLY_LAGRANGE_0 evaluates the Lagrange factor at a point.
+!
+!  Formula:
+!
+!    W(X) = Product ( 1 <= I <= NPOL ) ( X - XPOL(I) )
+!
+!  Discussion:
+!
+!    For a set of points XPOL(I), 1 <= I <= NPOL, the IPOL-th Lagrange basis
+!    polynomial L(IPOL)(X), has the property:
+!
+!      L(IPOL)( XPOL(J) ) = delta ( IPOL, J )
+!
+!    and may be expressed as:
+!
+!      L(IPOL)(X) = W(X) / ( ( X - XPOL(IPOL) ) * W'(XPOL(IPOL)) )
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    21 February 2002
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) NPOL, the number of abscissas.
+!    NPOL must be at least 1.
+!
+!    Input, real ( kind = 8 ) XPOL(NPOL), the abscissas, which
+!    should be distinct.
+!
+!    Input, real ( kind = 8 ) XVAL, the point at which the Lagrange
+!    factor is to be evaluated.
+!
+!    Output, real ( kind = 8 ) WVAL, the value of the Lagrange factor at XVAL.
+!
+  implicit none
+
+  integer ( kind = 4 ) npol
+
+  real ( kind = 8 ) wval
+  real ( kind = 8 ) xpol(npol)
+  real ( kind = 8 ) xval
+
+  wval = product ( xval - xpol(1:npol) )
+
+  return
+end
+
 
 
 subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
@@ -56,8 +268,8 @@ subroutine r8poly_lagrange_1 ( npol, xpol, xval, dwdx )
   real(kind=8) :: xpol(npol)
   real(kind=8) :: xval
 
-  dwdx = 0.0D+00
-  w = 1.0D+00
+  dwdx = 0.0D+0
+  w = 1.0D+0
 
   do i = 1, npol
 
@@ -133,12 +345,12 @@ subroutine     r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
    real(kind=8) :: xpol(npol)
    real(kind=8) :: xval
 
-   dw2dx2 = 0.0D+00
+   dw2dx2 = 0.0D+0
 
    do k = 1, npol
       do j = 1, npol
          if ( j /= k ) then
-            term = 1.0D+00
+            term = 1.0D+0
             do i = 1, npol
                if (i /= j .and. i /= k) then
                   term = term * (xval - xpol(i))
@@ -231,8 +443,8 @@ subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
     stop
   end if
 
-  pcof(0) = 1.0D+00
-  pcof(1:npol-1) = 0.0D+00
+  pcof(0) = 1.0D+0
+  pcof(1:npol-1) = 0.0D+0
 
   indx = 0
 
@@ -346,11 +558,11 @@ subroutine r8poly_lagrange_factor ( npol, xpol, xval, wval, dwdx )
 
   wval = product ( xval - xpol(1:npol) )
 
-  dwdx = 0.0D+00
+  dwdx = 0.0D+0
 
   do i = 1, npol
 
-    term = 1.0D+00
+    term = 1.0D+0
 
     do j = 1, npol
       if ( i /= j ) then
@@ -449,7 +661,7 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 !
 !  Evaluate the polynomial.
 !
-  pval = 1.0D+00
+  pval = 1.0D+0
 
   do i = 1, npol
 
@@ -464,13 +676,13 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 !  Evaluate the derivative, which can be found by summing up the result
 !  of differentiating one factor at a time, successively.
 !
-  dpdx = 0.0D+00
+  dpdx = 0.0D+0
 
   do i = 1, npol
 
     if ( i /= ipol ) then
 
-      p2 = 1.0D+00
+      p2 = 1.0D+0
       do j = 1, npol
 
         if ( j == i ) then
@@ -489,7 +701,28 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 
   return
 end
-subroutine r8poly_order ( na, a, order )
+
+
+!> @author John Burkardt
+!> @brief  R8POLY_ORDER returns the order of a polynomial
+!> @date   2005-04-19
+!> @see    
+subroutine r8poly_order (na, a, order)
+implicit none
+   integer(kind=4), intent(in)  :: na
+   real(kind=8),    intent(in)  :: a(0:na)
+   integer(kind=4), intent(out) :: order
+
+   order = na + 1
+   do while (1 < order)
+      if (a(order-1) .ne. 0.0D+0) then
+         return
+      end if
+      order = order - 1
+   end do
+
+   return
+end subroutine r8poly_order
 
 !*****************************************************************************80
 !
@@ -522,28 +755,9 @@ subroutine r8poly_order ( na, a, order )
 !    Input, real(kind=8) :: A(0:NA), the coefficients of the polynomials.
 !
 !    Output, integer(kind=4) :: ORDER, the order of A.
-!
-  implicit none
 
-  integer(kind=4) :: na
 
-  real(kind=8) :: a(0:na)
-  integer(kind=4) :: order
 
-  order = na + 1
-
-  do while ( 1 < order )
-
-    if ( a(order-1) /= 0.0D+00 ) then
-      return
-    end if
-
-    order = order - 1
-
-  end do
-
-  return
-end
 subroutine r8poly_print ( n, a, title )
 
 !*****************************************************************************80
@@ -594,7 +808,7 @@ subroutine r8poly_print ( n, a, title )
     return
   end if
 
-  if ( a(n2) < 0.0D+00 ) then
+  if ( a(n2) < 0.0D+0 ) then
     plus_minus = '-'
   else
     plus_minus = ' '
@@ -614,7 +828,7 @@ subroutine r8poly_print ( n, a, title )
 
   do i = n2-1, 0, -1
 
-    if ( a(i) < 0.0D+00 ) then
+    if ( a(i) < 0.0D+0 ) then
       plus_minus = '-'
     else
       plus_minus = '+'
@@ -622,7 +836,7 @@ subroutine r8poly_print ( n, a, title )
 
     mag = abs ( a(i) )
 
-    if ( mag /= 0.0D+00 ) then
+    if ( mag /= 0.0D+0 ) then
 
       if ( 2 <= i ) then
         write ( *, ' ( ''         '', a1, g14.6, '' * x ^ '', i3 )' ) &
@@ -952,7 +1166,7 @@ subroutine r8poly_value_2d ( m, c, n, x, y, p )
   real(kind=8) :: x(n)
   real(kind=8) :: y(n)
 
-  p(1:n) = 0.0D+00
+  p(1:n) = 0.0D+0
 
   j = 0
   do s = 0, m
@@ -1025,12 +1239,12 @@ subroutine r8poly2_ex ( x1, y1, x2, y2, x3, y3, x, y, ierror )
 
   bot = ( x2 - x3 ) * y1 - ( x1 - x3 ) * y2 + ( x1 - x2 ) * y3
 
-  if ( bot == 0.0D+00 ) then
+  if ( bot == 0.0D+0 ) then
     ierror = 2
     return
   end if
 
-  x = 0.5D+00 * ( &
+  x = 0.5D+0 * ( &
           x1**2 * ( y3 - y2 ) &
         + x2**2 * ( y1 - y3 ) &
         + x3**2 * ( y2 - y1 ) ) / bot
@@ -1111,15 +1325,15 @@ subroutine r8poly2_ex2 ( x1, y1, x2, y2, x3, y3, x, y, a, b, c, ierror )
 !
 !  Set up the Vandermonde matrix.
 !
-  v(1,1) = 1.0D+00
+  v(1,1) = 1.0D+0
   v(1,2) = x1
   v(1,3) = x1 * x1
 
-  v(2,1) = 1.0D+00
+  v(2,1) = 1.0D+0
   v(2,2) = x2
   v(2,3) = x2 * x2
 
-  v(3,1) = 1.0D+00
+  v(3,1) = 1.0D+0
   v(3,2) = x3
   v(3,3) = x3 * x3
 !
@@ -1135,12 +1349,12 @@ subroutine r8poly2_ex2 ( x1, y1, x2, y2, x3, y3, x, y, a, b, c, ierror )
 !
 !  Determine the extremal point.
 !
-  if ( a == 0.0D+00 ) then
+  if ( a == 0.0D+0 ) then
     ierror = 2
     return
   end if
 
-  x = -b / ( 2.0D+00 * a )
+  x = -b / ( 2.0D+0 * a )
   y = a * x * x + b * x + c
 
   return
@@ -1187,15 +1401,15 @@ subroutine r8poly2_root ( a, b, c, r1, r2 )
   complex ( kind = 8 ) r1
   complex ( kind = 8 ) r2
 
-  if ( a == 0.0D+00 ) then
+  if ( a == 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8POLY2_ROOT - Fatal error!'
     write ( *, '(a)' ) '  The coefficient A is zero.'
     stop
   end if
 
-  disc = b * b - 4.0D+00 * a * c
-  q = -0.5D+00 * ( b + sign ( 1.0D+00, b ) * sqrt ( disc ) )
+  disc = b * b - 4.0D+0 * a * c
+  q = -0.5D+0 * ( b + sign ( 1.0D+0, b ) * sqrt ( disc ) )
   r1 = q / a
   r2 = c / q
 
@@ -1246,19 +1460,19 @@ subroutine r8poly2_rroot ( a, b, c, r1, r2 )
   real(kind=8) :: r1
   real(kind=8) :: r2
 
-  if ( a == 0.0D+00 ) then
+  if ( a == 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8POLY2_RROOT - Fatal error!'
     write ( *, '(a)' ) '  The coefficient A is zero.'
     stop
   end if
 
-  disc = b * b - 4.0D+00 * a * c
-  disc = max ( disc, 0.0D+00 )
+  disc = b * b - 4.0D+0 * a * c
+  disc = max ( disc, 0.0D+0 )
 
-  q = ( b + sign ( 1.0D+00, b ) * sqrt ( disc ) )
-  r1 = -0.5D+00 * q / a
-  r2 = -2.0D+00 * c / q
+  q = ( b + sign ( 1.0D+0, b ) * sqrt ( disc ) )
+  r1 = -0.5D+0 * q / a
+  r2 = -2.0D+0 * c / q
 
   return
 end
@@ -1344,7 +1558,7 @@ subroutine r8poly2_val ( x1, y1, x2, y2, x3, y3, x, y, yp, ypp )
   if ( distinct == 1 ) then
 
     dif1 = y2
-    dif2 = 0.5D+00 * y3
+    dif2 = 0.5D+0 * y3
 
   else if ( distinct == 2 ) then
 
@@ -1362,8 +1576,8 @@ subroutine r8poly2_val ( x1, y1, x2, y2, x3, y3, x, y, yp, ypp )
 !  Evaluate.
 !
   y = y1 + ( x - x1 ) * dif1 + ( x - x1 ) * ( x - x2 ) * dif2
-  yp = dif1 + ( 2.0D+00 * x - x1 - x2 ) * dif2
-  ypp = 2.0D+00 * dif2
+  yp = dif1 + ( 2.0D+0 * x - x1 - x2 ) * dif2
+  ypp = 2.0D+0 * dif2
 
   return
 end
@@ -1527,7 +1741,7 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
   real(kind=8) :: d
   complex ( kind = 8 ) i
   complex ( kind = 8 ) one
-  real(kind=8) ::  parameter :: pi = 3.141592653589793D+00
+  real(kind=8) ::  parameter :: pi = 3.141592653589793D+0
   real(kind=8) :: q
   real(kind=8) :: r
   complex ( kind = 8 ) r1
@@ -1538,45 +1752,45 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
   real(kind=8) :: temp
   real(kind=8) :: theta
 
-  if ( a == 0.0D+00 ) then
+  if ( a == 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8POLY3_ROOT - Fatal error!'
     write ( *, '(a)' ) '  A must not be zero!'
     stop
   end if
 
-  one = cmplx ( 1.0d+00, 0.0D+00, kind = 8 )
+  one = cmplx ( 1.0d+0, 0.0D+0, kind = 8 )
   i = sqrt ( -one )
 
-  q = ( ( b / a )**2 - 3.0D+00 * ( c / a ) ) / 9.0D+00
+  q = ( ( b / a )**2 - 3.0D+0 * ( c / a ) ) / 9.0D+0
 
-  r = ( 2.0D+00 * ( b / a )**3 - 9.0D+00 * ( b / a ) * ( c / a ) &
-      + 27.0D+00 * ( d / a ) ) / 54.0D+00
+  r = ( 2.0D+0 * ( b / a )**3 - 9.0D+0 * ( b / a ) * ( c / a ) &
+      + 27.0D+0 * ( d / a ) ) / 54.0D+0
 
   if ( r * r < q * q * q ) then
 
     theta = acos ( r / sqrt ( q**3 ) )
-    r1 = -2.0D+00 * sqrt ( q ) * cos (   theta                  / 3.0D+00 )
-    r2 = -2.0D+00 * sqrt ( q ) * cos ( ( theta + 2.0D+00 * pi ) / 3.0D+00 )
-    r3 = -2.0D+00 * sqrt ( q ) * cos ( ( theta + 4.0D+00 * pi ) / 3.0D+00 )
+    r1 = -2.0D+0 * sqrt ( q ) * cos (   theta                  / 3.0D+0 )
+    r2 = -2.0D+0 * sqrt ( q ) * cos ( ( theta + 2.0D+0 * pi ) / 3.0D+0 )
+    r3 = -2.0D+0 * sqrt ( q ) * cos ( ( theta + 4.0D+0 * pi ) / 3.0D+0 )
 
   else if ( q * q * q <= r * r ) then
 
     temp = -r + sqrt ( r**2 - q**3 )
-    s1 = sign ( 1.0D+00, temp ) * ( abs ( temp ) )**(1.0D+00/3.0D+00)
+    s1 = sign ( 1.0D+0, temp ) * ( abs ( temp ) )**(1.0D+0/3.0D+0)
 
     temp = -r - sqrt ( r**2 - q**3 )
-    s2 = sign ( 1.0D+00, temp ) * ( abs ( temp ) )**(1.0D+00/3.0D+00)
+    s2 = sign ( 1.0D+0, temp ) * ( abs ( temp ) )**(1.0D+0/3.0D+0)
 
     r1 = s1 + s2
-    r2 = -0.5D+00 * ( s1 + s2 ) + i * 0.5D+00 * sqrt ( 3.0D+00 ) * ( s1 - s2 )
-    r3 = -0.5D+00 * ( s1 + s2 ) - i * 0.5D+00 * sqrt ( 3.0D+00 ) * ( s1 - s2 )
+    r2 = -0.5D+0 * ( s1 + s2 ) + i * 0.5D+0 * sqrt ( 3.0D+0 ) * ( s1 - s2 )
+    r3 = -0.5D+0 * ( s1 + s2 ) - i * 0.5D+0 * sqrt ( 3.0D+0 ) * ( s1 - s2 )
 
   end if
 
-  r1 = r1 - b / ( 3.0D+00 * a )
-  r2 = r2 - b / ( 3.0D+00 * a )
-  r3 = r3 - b / ( 3.0D+00 * a )
+  r1 = r1 - b / ( 3.0D+0 * a )
+  r2 = r2 - b / ( 3.0D+0 * a )
+  r3 = r3 - b / ( 3.0D+0 * a )
 
   return
 end
@@ -1631,9 +1845,9 @@ subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
   complex ( kind = 8 ) r4
   complex ( kind = 8 ) zero
 
-  zero = cmplx ( 0.0D+00, 0.0D+00, kind = 8 )
+  zero = cmplx ( 0.0D+0, 0.0D+0, kind = 8 )
 
-  if ( a == 0.0D+00 ) then
+  if ( a == 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8POLY4_ROOT - Fatal error!'
     write ( *, '(a)') '  A must not be zero!'
@@ -1647,10 +1861,10 @@ subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
 !
 !  Set the coefficients of the resolvent cubic equation.
 !
-  a3 = 1.0D+00
+  a3 = 1.0D+0
   b3 = -b4
-  c3 = a4 * c4 - 4.0D+00 * d4
-  d3 = -a4 * a4 * d4 + 4.0D+00 * b4 * d4 - c4 * c4
+  c3 = a4 * c4 - 4.0D+0 * d4
+  d3 = -a4 * a4 * d4 + 4.0D+0 * b4 * d4 - c4 * c4
 !
 !  Find the roots of the resolvent cubic.
 !
@@ -1658,34 +1872,34 @@ subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
 !
 !  Choose one root of the cubic, here R1.
 !
-!  Set R = sqrt ( 0.25D+00 * A4**2 - B4 + R1 )
+!  Set R = sqrt ( 0.25D+0 * A4**2 - B4 + R1 )
 !
-  r = sqrt ( 0.25D+00 * a4**2 - b4 + r1 )
+  r = sqrt ( 0.25D+0 * a4**2 - b4 + r1 )
 
   if ( r /= zero ) then
 
-    p = sqrt ( 0.75D+00 * a4**2 - r**2 - 2.0D+00 * b4 &
-        + 0.25D+00 * ( 4.0D+00 * a4 * b4 - 8.0D+00 * c4 - a4**3 ) / r )
+    p = sqrt ( 0.75D+0 * a4**2 - r**2 - 2.0D+0 * b4 &
+        + 0.25D+0 * ( 4.0D+0 * a4 * b4 - 8.0D+0 * c4 - a4**3 ) / r )
 
-    q = sqrt ( 0.75D+00 * a4**2 - r**2 - 2.0D+00 * b4 &
-        - 0.25D+00 * ( 4.0D+00 * a4 * b4 - 8.0D+00 * c4 - a4**3 ) / r )
+    q = sqrt ( 0.75D+0 * a4**2 - r**2 - 2.0D+0 * b4 &
+        - 0.25D+0 * ( 4.0D+0 * a4 * b4 - 8.0D+0 * c4 - a4**3 ) / r )
 
   else
 
-    p = sqrt ( 0.75D+00 * a4**2 - 2.0D+00 * b4 &
-      + 2.0D+00 * sqrt ( r1**2 - 4.0D+00 * d4 ) )
+    p = sqrt ( 0.75D+0 * a4**2 - 2.0D+0 * b4 &
+      + 2.0D+0 * sqrt ( r1**2 - 4.0D+0 * d4 ) )
 
-    q = sqrt ( 0.75D+00 * a4**2 - 2.0D+00 * b4 &
-      - 2.0D+00 * sqrt ( r1**2 - 4.0D+00 * d4 ) )
+    q = sqrt ( 0.75D+0 * a4**2 - 2.0D+0 * b4 &
+      - 2.0D+0 * sqrt ( r1**2 - 4.0D+0 * d4 ) )
 
   end if
 !
 !  Set the roots.
 !
-  r1 = -0.25D+00 * a4 + 0.5D+00 * r + 0.5D+00 * p
-  r2 = -0.25D+00 * a4 + 0.5D+00 * r - 0.5D+00 * p
-  r3 = -0.25D+00 * a4 - 0.5D+00 * r + 0.5D+00 * q
-  r4 = -0.25D+00 * a4 - 0.5D+00 * r - 0.5D+00 * q
+  r1 = -0.25D+0 * a4 + 0.5D+0 * r + 0.5D+0 * p
+  r2 = -0.25D+0 * a4 + 0.5D+0 * r - 0.5D+0 * p
+  r3 = -0.25D+0 * a4 - 0.5D+0 * r + 0.5D+0 * q
+  r4 = -0.25D+0 * a4 - 0.5D+0 * r - 0.5D+0 * q
 
   return
 end
