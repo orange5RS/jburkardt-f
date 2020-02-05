@@ -2848,7 +2848,7 @@ subroutine test041 ( )
   return
 end
 subroutine test0415 ( )
-
+use jburk_r8lib_i4vec_, only: i4vec_print
 !*****************************************************************************80
 !
 !! TEST0415 tests R8COL_PERMUTE.
@@ -5236,6 +5236,7 @@ subroutine test073 ( )
 
   return
 end
+
 subroutine test0737 ( )
 
 !*****************************************************************************80
@@ -7972,8 +7973,13 @@ subroutine test110 ( )
 
   return
 end
-subroutine test111 ( )
 
+
+subroutine test111 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_amin
+use jburk_r8lib_r8vec_, only: r8vec_amax
 !*****************************************************************************80
 !
 !! TEST111 tests R8VEC_AMAX and R8VEC_AMIN;
@@ -8095,6 +8101,10 @@ subroutine test112 ( )
   return
 end
 subroutine test113 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_bracket2
+
 
 !*****************************************************************************80
 !
@@ -8171,6 +8181,9 @@ subroutine test113 ( )
   return
 end
 subroutine test114 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_bracket3
 
 !*****************************************************************************80
 !
@@ -8232,6 +8245,9 @@ subroutine test114 ( )
   return
 end
 subroutine test1143 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_bracket5
 
 !*****************************************************************************80
 !
@@ -8255,7 +8271,6 @@ subroutine test1143 ( )
   integer ( kind = 4 ), parameter :: test_num = 6
 
   integer ( kind = 4 ) left
-  integer ( kind = 4 ) r8vec_bracket5
   integer ( kind = 4 ) right
   integer ( kind = 4 ) test
   real ( kind = 8 ) x(n)
@@ -10696,7 +10711,9 @@ subroutine test140 ( )
   return
 end
 subroutine test141 ( )
+use jburk_r8lib_i4vec_, only: i4vec_indicator
 use jburk_r8lib_i4vec_, only: i4vec_print
+use jburk_r8lib_i4vec_, only: i4vec_permute
 
 !*****************************************************************************80
 !
