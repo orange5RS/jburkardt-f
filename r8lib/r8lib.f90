@@ -15538,7 +15538,7 @@ subroutine r8mat_mmt ( n1, n2, n3, a, b, c )
   real ( kind = 8 ) b(n3,n2)
   real ( kind = 8 ) c(n1,n3)
 
-  c(1:n1,1:n3) = matmul ( a(1:n1,1:n2), transpose ( b(1:n3,1:n2) )
+  c(1:n1,1:n3) = matmul ( a(1:n1,1:n2), transpose ( b(1:n3,1:n2) ))
 
   return
 end
