@@ -5994,7 +5994,7 @@ subroutine r82vec_order_type ( n, a, order )
 
   return
 end
-subroutine r82vec_part_quick_a ( n, a, l, r )
+
 
 !*****************************************************************************80
 !
@@ -6049,6 +6049,11 @@ subroutine r82vec_part_quick_a ( n, a, l, r )
 !         L < I < R         A(1:2,I) = KEY;
 !                 R <= I    KEY < A(1:2,I).
 !
+subroutine r82vec_part_quick_a ( n, a, l, r )
+use jburk_r8lib_r8vec_, only: r8vec_swap
+use jburk_r8lib_r8vec_, only: r8vec_eq
+use jburk_r8lib_r8vec_, only: r8vec_gt
+use jburk_r8lib_r8vec_, only: r8vec_lt
   implicit none
 
   integer ( kind = 4 ) n
@@ -6060,9 +6065,9 @@ subroutine r82vec_part_quick_a ( n, a, l, r )
   integer ( kind = 4 ) l
   integer ( kind = 4 ) m
   integer ( kind = 4 ) r
-  logical r8vec_eq
-  logical r8vec_gt
-  logical r8vec_lt
+  ! logical r8vec_eq
+  ! logical r8vec_gt
+  ! logical r8vec_lt
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -8168,7 +8173,8 @@ subroutine r8col_normalize_li ( m, n, a )
 
   return
 end
-subroutine r8col_part_quick_a ( m, n, a, l, r )
+
+
 
 !*****************************************************************************80
 !
@@ -8228,6 +8234,11 @@ subroutine r8col_part_quick_a ( m, n, a, l, r )
 !         L < I < R         A(1:M,I) = KEY;
 !                 R <= I    KEY < A(1:M,I).
 !
+subroutine r8col_part_quick_a ( m, n, a, l, r )
+use jburk_r8lib_r8vec_, only: r8vec_swap
+use jburk_r8lib_r8vec_, only: r8vec_eq
+use jburk_r8lib_r8vec_, only: r8vec_gt
+use jburk_r8lib_r8vec_, only: r8vec_lt
   implicit none
 
   integer ( kind = 4 ) m
@@ -8239,9 +8250,9 @@ subroutine r8col_part_quick_a ( m, n, a, l, r )
   real ( kind = 8 ) key(m)
   integer ( kind = 4 ) l
   integer ( kind = 4 ) r
-  logical r8vec_eq
-  logical r8vec_gt
-  logical r8vec_lt
+  ! logical r8vec_eq
+  ! logical r8vec_gt
+  ! logical r8vec_lt
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -8297,8 +8308,8 @@ subroutine r8col_part_quick_a ( m, n, a, l, r )
 
   return
 end
-subroutine r8col_permute ( m, n, p, a )
-use jburk_r8lib_i4vec_, only: perm_check
+
+
 
 !*****************************************************************************80
 !
@@ -8354,6 +8365,8 @@ use jburk_r8lib_i4vec_, only: perm_check
 !
 !    Input/output, real ( kind = 8 ) A(M,N), the array to be permuted.
 !
+subroutine r8col_permute ( m, n, p, a )
+use jburk_r8lib_i4vec_, only: perm_check
   implicit none
 
   integer ( kind = 4 ) m
@@ -21293,7 +21306,7 @@ subroutine r8row_min ( m, n, a, amin )
 
   return
 end
-subroutine r8row_part_quick_a ( m, n, a, l, r )
+
 
 !*****************************************************************************80
 !
@@ -21365,6 +21378,11 @@ subroutine r8row_part_quick_a ( m, n, a, l, r )
 !         L < I < R         A(I,1:N) = KEY;
 !                 R <= I    KEY < A(I,1:N).
 !
+subroutine r8row_part_quick_a ( m, n, a, l, r )
+use jburk_r8lib_r8vec_, only: r8vec_swap
+use jburk_r8lib_r8vec_, only: r8vec_eq
+use jburk_r8lib_r8vec_, only: r8vec_gt
+use jburk_r8lib_r8vec_, only: r8vec_lt
   implicit none
 
   integer ( kind = 4 ) m
@@ -21376,9 +21394,9 @@ subroutine r8row_part_quick_a ( m, n, a, l, r )
   real ( kind = 8 ) key(n)
   integer ( kind = 4 ) l
   integer ( kind = 4 ) r
-  logical r8vec_eq
-  logical r8vec_gt
-  logical r8vec_lt
+  ! logical r8vec_eq
+  ! logical r8vec_gt
+  ! logical r8vec_lt
 
   if ( m < 1 ) then
     write ( *, '(a)' ) ' '
