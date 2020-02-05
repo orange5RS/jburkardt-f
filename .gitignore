@@ -5,3 +5,4 @@
 *.out
 *.old.f90
 makefiles/module/sge_mod_prb
+*.app
