@@ -866,6 +866,9 @@ subroutine r8poly_print ( n, a, title )
 
   return
 end
+
+
+
 subroutine r8poly_shift ( scale, shift, n, poly_cof )
 
 !*****************************************************************************80
@@ -961,7 +964,10 @@ subroutine r8poly_shift ( scale, shift, n, poly_cof )
 
   return
 end
-subroutine r8poly_value ( m, c, n, x, p )
+
+
+
+subroutine     r8poly_value (m, c, n, x, p)
 
 !*****************************************************************************80
 !
@@ -1001,23 +1007,26 @@ subroutine r8poly_value ( m, c, n, x, p )
 !    Output, real(kind=8) :: P(N), the value of the polynomial at the 
 !    evaluation points.
 !
-  implicit none
+   implicit none
 
-  integer(kind=4) :: m
-  integer(kind=4) :: n
+   integer(kind=4) :: m
+   integer(kind=4) :: n
 
-  real(kind=8) :: c(0:m)
-  integer(kind=4) :: i
-  real(kind=8) :: p(n)
-  real(kind=8) :: x(n)
+   real(kind=8) :: c(0:m)
+   integer(kind=4) :: i
+   real(kind=8) :: p(n)
+   real(kind=8) :: x(n)
 
-  p(1:n) = c(m)
-  do i = m - 1, 0, -1
-    p(1:n) = p(1:n) * x(1:n) + c(i)
-  end do
+   p(1:n) = c(m)
+   do i = m - 1, 0, -1
+      p(1:n) = p(1:n) * x(1:n) + c(i)
+   end do
 
   return
-end
+end subroutine r8poly_value
+
+
+
 subroutine r8poly_value_horner ( n, c, x, cx )
 
 !*****************************************************************************80
