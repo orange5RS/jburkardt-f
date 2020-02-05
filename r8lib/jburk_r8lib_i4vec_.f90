@@ -14,6 +14,11 @@ implicit none
    end interface    i4vec_permute
    public           i4vec_permute
 
+   interface        i4vec_print
+   module procedure i4vec_print
+   end interface    i4vec_print
+   public           i4vec_print
+
    interface        perm_check
    module procedure perm_check
    end interface    perm_check
