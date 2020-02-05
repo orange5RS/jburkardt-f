@@ -9750,7 +9750,14 @@ subroutine test1258 ( )
 
   return
 end
+
+
+
 subroutine test126 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_max
+use jburk_r8lib_r8vec_, only: r8vec_min
 
 !*****************************************************************************80
 !
@@ -9803,7 +9810,14 @@ subroutine test126 ( )
 
   return
 end
+
+
+
 subroutine test127 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_max_index
+use jburk_r8lib_r8vec_, only: r8vec_min_index
 
 !*****************************************************************************80
 !
@@ -9857,7 +9871,14 @@ subroutine test127 ( )
 
   return
 end
+
+
+
 subroutine test128 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_mean
+use jburk_r8lib_r8vec_, only: r8vec_median
 
 !*****************************************************************************80
 !
@@ -9910,7 +9931,15 @@ subroutine test128 ( )
 
   return
 end
+
+
+
 subroutine test129 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_norm_l1
+use jburk_r8lib_r8vec_, only: r8vec_norm_l2
+use jburk_r8lib_r8vec_, only: r8vec_norm_li
 
 !*****************************************************************************80
 !
@@ -9935,9 +9964,9 @@ subroutine test129 ( )
   real ( kind = 8 ) a(n)
   real ( kind = 8 ) b
   real ( kind = 8 ) c
-  real ( kind = 8 ) r8vec_norm_l1
-  real ( kind = 8 ) r8vec_norm_l2
-  real ( kind = 8 ) r8vec_norm_li
+  ! real ( kind = 8 ) r8vec_norm_l1
+  ! real ( kind = 8 ) r8vec_norm_l2
+  ! real ( kind = 8 ) r8vec_norm_li
   integer ( kind = 4 ) seed
 
   write ( *, '(a)' ) ' '
@@ -10614,7 +10643,16 @@ subroutine test139 ( )
 
   return
 end
+
+
+
 subroutine test140 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_print_some
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_index_a
+use jburk_r8lib_r8vec_, only: r8vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_index_d
 
 !*****************************************************************************80
 !
@@ -10710,10 +10748,16 @@ subroutine test140 ( )
 
   return
 end
+
+
+
 subroutine test141 ( )
 use jburk_r8lib_i4vec_, only: i4vec_indicator
 use jburk_r8lib_i4vec_, only: i4vec_print
 use jburk_r8lib_i4vec_, only: i4vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_mask_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_mask_a
 
 !*****************************************************************************80
 !
@@ -10790,7 +10834,13 @@ use jburk_r8lib_i4vec_, only: i4vec_permute
 
   return
 end
+
+
+
 subroutine test142 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print_some
+use jburk_r8lib_r8vec_, only: r8vec_sort_insert_a
 
 !*****************************************************************************80
 !
@@ -10835,7 +10885,14 @@ subroutine test142 ( )
 
   return
 end
+
+
+
 subroutine test143 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print_some
+use jburk_r8lib_r8vec_, only: r8vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_sort_insert_a
 
 !*****************************************************************************80
 !
@@ -10908,7 +10965,14 @@ subroutine test143 ( )
 
   return
 end
+
+
+
 subroutine test144 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_sort_quick_a
 
 !*****************************************************************************80
 !
@@ -10954,7 +11018,14 @@ subroutine test144 ( )
 
   return
 end
+
+
+
 subroutine test145 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_01
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_merge_a
 
 !*****************************************************************************80
 !
@@ -11007,7 +11078,13 @@ subroutine test145 ( )
 
   return
 end
+
+
+
 subroutine test146 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
 
 !*****************************************************************************80
 !
@@ -11069,7 +11146,14 @@ subroutine test146 ( )
 
   return
 end
+
+
+
 subroutine test1465 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_range
 
 !*****************************************************************************80
 !
@@ -11147,7 +11231,16 @@ subroutine test1465 ( )
 
   return
 end
+
+
+
 subroutine test147 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_split
+use jburk_r8lib_r8vec_, only: r8vec_permute_uniform
+use jburk_r8lib_r8vec_, only: r8vec_split
 
 !*****************************************************************************80
 !
@@ -11225,7 +11318,12 @@ subroutine test147 ( )
 
   return
 end
+
+
 subroutine test1475 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sorted_unique_count
+use jburk_r8lib_r8vec_, only: r8vec_sorted_undex
 
 !*****************************************************************************80
 !
@@ -11317,7 +11415,15 @@ subroutine test1475 ( )
 
   return
 end
+
+
+
 subroutine test148 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print_some
+use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_unique
+use jburk_r8lib_r8vec_, only: r8vec_print
 
 !*****************************************************************************80
 !
@@ -11370,7 +11476,8 @@ subroutine test148 ( )
 
   return
 end
-subroutine test149 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -11388,6 +11495,10 @@ subroutine test149 ( )
 !
 !    John Burkardt
 !
+subroutine test149 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_sorted_unique_count
+
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 30
@@ -11422,7 +11533,9 @@ subroutine test149 ( )
 
   return
 end
-subroutine test150 ( )
+
+
+
 
 !*****************************************************************************80
 !
@@ -11440,6 +11553,12 @@ subroutine test150 ( )
 !
 !    John Burkardt
 !
+subroutine test150 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_sort_bubble_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_unique_hist
+
   implicit none
 
   integer ( kind = 4 ), parameter :: unique_max = 30
