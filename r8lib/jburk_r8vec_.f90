@@ -14678,4 +14678,525 @@ subroutine r8vecs_print ( m, nvec, na, a, title )
   return
 end
 
+
+
+subroutine r8r8r8vec_index_insert_unique ( n_max, n, x, y, z, indx, &
+  xval, yval, zval, ival, ierror )
+
+!*****************************************************************************80
+!
+!! R8R8R8VEC_INDEX_INSERT_UNIQUE inserts unique R8R8R in an indexed sorted list.
+!
+!  Discussion:
+!
+!    An R8R8R8VEC is set of N R8R8R8 items.
+!
+!    An R8R8R8 is simply 3 R8 values, stored as scalars.
+!
+!    If the input value does not occur in the current list, it is added,
+!    and N, X, Y, Z and INDX are updated.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    06 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N_MAX, the maximum size of the list.
+!
+!    Input/output, integer ( kind = 4 ) N, the size of the list.
+!
+!    Input/output, real ( kind = 8 ) X(N), Y(N), Z(N), the R8R8R8 vector.
+!
+!    Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!
+!    Input, real ( kind = 8 ) XVAL, YVAL, ZVAL, the value to be inserted
+!    if it is not already in the list.
+!
+!    Output, integer ( kind = 4 ) IVAL, the index in X, Y, Z corresponding
+!    to the value XVAL, YVAL, ZVAL.
+!
+!    Output, integer ( kind = 4 ) IERROR, 0 for no error, 1 if an error
+!    occurred.
+!
+  implicit none
+
+  integer ( kind = 4 ) n_max
+
+  integer ( kind = 4 ) equal
+  integer ( kind = 4 ) ierror
+  integer ( kind = 4 ) indx(n_max)
+  integer ( kind = 4 ) ival
+  integer ( kind = 4 ) less
+  integer ( kind = 4 ) more
+  integer ( kind = 4 ) n
+  real ( kind = 8 ) x(n_max)
+  real ( kind = 8 ) xval
+  real ( kind = 8 ) y(n_max)
+  real ( kind = 8 ) yval
+  real ( kind = 8 ) z(n_max)
+  real ( kind = 8 ) zval
+
+  ierror = 0
+
+  if ( n <= 0 ) then
+
+    if ( n_max <= 0 ) then
+      ierror = 1
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8R8R8VEC_INDEX_INSERT_UNIQUE - Fatal error!'
+      write ( *, '(a)' ) '  Not enough space to store new data.'
+      return
+    end if
+
+    n = 1
+    x(1) = xval
+    y(1) = yval
+    z(1) = zval
+    indx(1) = 1
+    ival = 1
+    return
+
+  end if
+!
+!  Does ( XVAL, YVAL, ZVAL ) already occur in ( X, Y, Z)?
+!
+  call r8r8r8vec_index_search ( n, x, y, z, indx, xval, yval, zval, &
+    less, equal, more )
+
+  if ( equal == 0 ) then
+
+    if ( n_max <= n ) then
+      ierror = 1
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8R8R8VEC_INDEX_INSERT_UNIQUE - Fatal error!'
+      write ( *, '(a)' ) '  Not enough space to store new data.'
+      return
+    end if
+
+    x(n+1) = xval
+    y(n+1) = yval
+    z(n+1) = zval
+    ival = n + 1
+    indx(n+1:more+1:-1) = indx(n:more:-1)
+    indx(more) = n + 1
+    n = n + 1
+
+  else
+
+    ival = indx(equal)
+
+  end if
+
+  return
+end
+subroutine r8r8r8vec_index_search ( n, x, y, z, indx, xval, yval, &
+  zval, less, equal, more )
+
+!*****************************************************************************80
+!
+!! R8R8R8VEC_INDEX_SEARCH searches for R8R8R8 value in an indexed sorted list.
+!
+!  Discussion:
+!
+!    An R8R8R8VEC is set of N R8R8R8 items.
+!
+!    An R8R8R8 is simply 3 R8 values, stored as scalars.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    14 May 2005
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the size of the list.
+!
+!    Input, real ( kind = 8 ) X(N), Y(N), Z(N), the list.
+!
+!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!
+!    Input, real ( kind = 8 ) XVAL, YVAL, ZVAL, the value to be sought.
+!
+!    Output, integer ( kind = 4 ) LESS, EQUAL, MORE, the indexes in INDX of the
+!    entries of X that are just less than, equal to, and just greater
+!    than XVAL.  If XVAL does not occur in X, then EQUAL is zero.
+!    If XVAL is the minimum entry of X, then LESS is 0.  If XVAL
+!    is the greatest entry of X, then MORE is N+1.
+!
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) compare
+  integer ( kind = 4 ) r8r8r8_compare
+  integer ( kind = 4 ) equal
+  integer ( kind = 4 ) hi
+  integer ( kind = 4 ) indx(n)
+  integer ( kind = 4 ) less
+  integer ( kind = 4 ) lo
+  integer ( kind = 4 ) mid
+  integer ( kind = 4 ) more
+  real ( kind = 8 ) x(n)
+  real ( kind = 8 ) xhi
+  real ( kind = 8 ) xlo
+  real ( kind = 8 ) xmid
+  real ( kind = 8 ) xval
+  real ( kind = 8 ) y(n)
+  real ( kind = 8 ) yhi
+  real ( kind = 8 ) ylo
+  real ( kind = 8 ) ymid
+  real ( kind = 8 ) yval
+  real ( kind = 8 ) z(n)
+  real ( kind = 8 ) zhi
+  real ( kind = 8 ) zlo
+  real ( kind = 8 ) zmid
+  real ( kind = 8 ) zval
+
+  if ( n <= 0 ) then
+    less = 0
+    equal = 0
+    more = 0
+    return
+  end if
+
+  lo = 1
+  hi = n
+
+  xlo = x(indx(lo))
+  ylo = y(indx(lo))
+  zlo = z(indx(lo))
+
+  xhi = x(indx(hi))
+  yhi = y(indx(hi))
+  zhi = z(indx(hi))
+
+  compare = r8r8r8_compare ( xval, yval, zval, xlo, ylo, zlo )
+
+  if ( compare == -1 ) then
+    less = 0
+    equal = 0
+    more = 1
+    return
+  else if ( compare == 0 ) then
+    less = 0
+    equal = 1
+    more = 2
+    return
+  end if
+
+  compare = r8r8r8_compare ( xval, yval, zval, xhi, yhi, zhi )
+
+  if ( compare == 1 ) then
+    less = n
+    equal = 0
+    more = n + 1
+    return
+  else if ( compare == 0 ) then
+    less = n - 1
+    equal = n
+    more = n + 1
+    return
+  end if
+
+  do
+
+    if ( lo + 1 == hi ) then
+      less = lo
+      equal = 0
+      more = hi
+      return
+    end if
+
+    mid = ( lo + hi ) / 2
+    xmid = x(indx(mid))
+    ymid = y(indx(mid))
+    zmid = z(indx(mid))
+
+    compare = r8r8r8_compare ( xval, yval, zval, xmid, ymid, zmid )
+
+    if ( compare == 0 ) then
+      equal = mid
+      less = mid - 1
+      more = mid + 1
+      return
+    else if ( compare == -1 ) then
+      hi = mid
+    else if ( compare == +1 ) then
+      lo = mid
+    end if
+
+  end do
+
+  return
+end
+subroutine r8r8vec_index_insert_unique ( n_max, n, x, y, indx, xval, yval, &
+  ival, ierror )
+
+!*****************************************************************************80
+!
+!! R8R8VEC_INDEX_INSERT_UNIQUE inserts a unique R8R8 in an indexed sorted list.
+!
+!  Discussion:
+!
+!    An R8R8VEC is set of N R8R8 items.
+!
+!    An R8R8 is simply 2 R8 values, stored as scalars.
+!
+!    If the input value does not occur in the current list, it is added,
+!    and N, X, Y and INDX are updated.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    06 December 2004
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N_MAX, the maximum size of the list.
+!
+!    Input/output, integer ( kind = 4 ) N, the size of the list.
+!
+!    Input/output, real ( kind = 8 ) X(N), Y(N), the list of R8R8 vectors.
+!
+!    Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!
+!    Input, real ( kind = 8 ) XVAL, YVAL, the value to be inserted if it is
+!    not already in the list.
+!
+!    Output, integer ( kind = 4 ) IVAL, the index in X, Y corresponding to the
+!    value XVAL, YVAL.
+!
+!    Output, integer ( kind = 4 ) IERROR, 0 for no error, 1 if an
+!    error occurred.
+!
+  implicit none
+
+  integer ( kind = 4 ) n_max
+
+  integer ( kind = 4 ) equal
+  integer ( kind = 4 ) ierror
+  integer ( kind = 4 ) indx(n_max)
+  integer ( kind = 4 ) ival
+  integer ( kind = 4 ) less
+  integer ( kind = 4 ) more
+  integer ( kind = 4 ) n
+  real ( kind = 8 ) x(n_max)
+  real ( kind = 8 ) xval
+  real ( kind = 8 ) y(n_max)
+  real ( kind = 8 ) yval
+
+  ierror = 0
+
+  if ( n <= 0 ) then
+
+    if ( n_max <= 0 ) then
+      ierror = 1
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8R8VEC_INDEX_INSERT_UNIQUE - Fatal error!'
+      write ( *, '(a)' ) '  Not enough space to store new data.'
+      return
+    end if
+
+    n = 1
+    x(1) = xval
+    y(1) = yval
+    indx(1) = 1
+    ival = 1
+    return
+
+  end if
+!
+!  Does ( XVAL, YVAL ) already occur in ( X, Y )?
+!
+  call r8r8vec_index_search ( n, x, y, indx, xval, yval, less, equal, more )
+
+  if ( equal == 0 ) then
+
+    if ( n_max <= n ) then
+      ierror = 1
+      write ( *, '(a)' ) ' '
+      write ( *, '(a)' ) 'R8R8VEC_INDEX_INSERT_UNIQUE - Fatal error!'
+      write ( *, '(a)' ) '  Not enough space to store new data.'
+      return
+    end if
+
+    x(n+1) = xval
+    y(n+1) = yval
+    ival = n + 1
+    indx(n+1:more+1:-1) = indx(n:more:-1)
+    indx(more) = n + 1
+    n = n + 1
+
+  else
+
+    ival = indx(equal)
+
+  end if
+
+  return
+end
+subroutine r8r8vec_index_search ( n, x, y, indx, xval, yval, less, equal, &
+  more )
+
+!*****************************************************************************80
+!
+!! R8R8VEC_INDEX_SEARCH searches for an R8R8 in an indexed sorted list.
+!
+!  Discussion:
+!
+!    An R8R8VEC is set of N R8R8 items.
+!
+!    An R8R8 is simply 2 R8 values, stored as scalars.
+!
+!  Licensing:
+!
+!    This code is distributed under the GNU LGPL license.
+!
+!  Modified:
+!
+!    14 May 2005
+!
+!  Author:
+!
+!    John Burkardt
+!
+!  Parameters:
+!
+!    Input, integer ( kind = 4 ) N, the size of the current list.
+!
+!    Input, real ( kind = 8 ) X(N), Y(N), the list.
+!
+!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!
+!    Input, real ( kind = 8 ) XVAL, YVAL, the value to be sought.
+!
+!    Output, integer ( kind = 4 ) LESS, EQUAL, MORE, the indexes in INDX of the
+!    entries of X that are just less than, equal to, and just greater
+!    than XVAL.  If XVAL does not occur in X, then EQUAL is zero.
+!    If XVAL is the minimum entry of X, then LESS is 0.  If XVAL
+!    is the greatest entry of X, then MORE is N+1.
+!
+  implicit none
+
+  integer ( kind = 4 ) n
+
+  integer ( kind = 4 ) compare
+  integer ( kind = 4 ) r8r8_compare
+  integer ( kind = 4 ) equal
+  integer ( kind = 4 ) hi
+  integer ( kind = 4 ) indx(n)
+  integer ( kind = 4 ) less
+  integer ( kind = 4 ) lo
+  integer ( kind = 4 ) mid
+  integer ( kind = 4 ) more
+  real ( kind = 8 ) x(n)
+  real ( kind = 8 ) xhi
+  real ( kind = 8 ) xlo
+  real ( kind = 8 ) xmid
+  real ( kind = 8 ) xval
+  real ( kind = 8 ) y(n)
+  real ( kind = 8 ) yhi
+  real ( kind = 8 ) ylo
+  real ( kind = 8 ) ymid
+  real ( kind = 8 ) yval
+
+  if ( n <= 0 ) then
+    less = 0
+    equal = 0
+    more = 0
+    return
+  end if
+
+  lo = 1
+  hi = n
+
+  xlo = x(indx(lo))
+  ylo = y(indx(lo))
+
+  xhi = x(indx(hi))
+  yhi = y(indx(hi))
+
+  compare = r8r8_compare ( xval, yval, xlo, ylo )
+
+  if ( compare == -1 ) then
+    less = 0
+    equal = 0
+    more = 1
+    return
+  else if ( compare == 0 ) then
+    less = 0
+    equal = 1
+    more = 2
+    return
+  end if
+
+  compare = r8r8_compare ( xval, yval, xhi, yhi )
+
+  if ( compare == 1 ) then
+    less = n
+    equal = 0
+    more = n + 1
+    return
+  else if ( compare == 0 ) then
+    less = n - 1
+    equal = n
+    more = n + 1
+    return
+  end if
+
+  do
+
+    if ( lo + 1 == hi ) then
+      less = lo
+      equal = 0
+      more = hi
+      return
+    end if
+
+    mid = ( lo + hi ) / 2
+    xmid = x(indx(mid))
+    ymid = y(indx(mid))
+
+    compare = r8r8_compare ( xval, yval, xmid, ymid )
+
+    if ( compare == 0 ) then
+      equal = mid
+      less = mid - 1
+      more = mid + 1
+      return
+    else if ( compare == -1 ) then
+      hi = mid
+    else if ( compare == +1 ) then
+      lo = mid
+    end if
+
+  end do
+
+  return
+end
+
+
 end module jburk_r8vec_
