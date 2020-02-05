@@ -4,10 +4,44 @@ module     jburk_r8lib_i4vec_
 use, intrinsic :: iso_fortran_env
 implicit none
 
+   interface        i4vec_indicator
+   module procedure i4vec_indicator
+   end interface    i4vec_indicator
+   public           i4vec_indicator
+
+   interface        i4vec_permute
+   module procedure i4vec_permute
+   end interface    i4vec_permute
+   public           i4vec_permute
+
+   interface        perm_check
+   module procedure perm_check
+   end interface    perm_check
+   public           perm_check
+
+   interface        perm_uniform
+   module procedure perm_uniform
+   end interface    perm_uniform
+   public           perm_uniform
+
 contains
 
 
-subroutine i4vec_indicator ( n, a )
+
+!> @author John Burkardt
+!> @brief  An I4VEC is a vector of I4's.
+!> @date   2007-05-01
+!> @see    
+subroutine     i4vec_indicator (n, a)
+implicit none
+   integer(kind=4), intent(in) :: n
+   integer(kind=4), intent(out) :: a(n)
+   integer(kind=4) :: i
+
+   do i = 1, n
+      a(i) = i
+   end do
+end subroutine i4vec_indicator
 
 !*****************************************************************************80
 !
@@ -35,25 +69,67 @@ subroutine i4vec_indicator ( n, a )
 !
 !    Output, integer ( kind = 4 ) A(N), the array to be initialized.
 !
-  implicit none
-
-  integer ( kind = 4 ) n
-
-  integer ( kind = 4 ) a(n)
-  integer ( kind = 4 ) i
-
-  do i = 1, n
-    a(i) = i
-  end do
-
-  return
-end
 
 
 
+!> @author John Burkardt
+!> @brief  I4VEC_PERMUTE permutes an I4VEC in place.
+!> @date   2000-07-20
+!> @see    
+subroutine     i4vec_permute (n, p, a)
+implicit none
+   integer(kind=4), intent(in)    :: n
+   integer(kind=4), intent(inout) :: a(n)
+   integer(kind=4), intent(inout) :: p(n)
 
-subroutine i4vec_permute ( n, p, a )
+   integer(kind=4), parameter :: base = 1
+   integer(kind=4) :: a_temp
+   integer(kind=4) :: ierror, iget, iput, istart
 
+   call perm_check (n, p, base, ierror)
+
+   ! Search for the next element of the permutation that has not been used.
+   do istart = 1, n
+      if (p(istart) < 0) then
+         cycle
+
+      else if (p(istart) .eq. istart) then
+         p(istart) = - p(istart)
+         cycle
+
+      else
+         a_temp = a(istart)
+         iget = istart
+
+         ! Copy the new value into the vacated entry.
+         do
+            iput = iget
+            iget = p(iget)
+
+            p(iput) = - p(iput)
+
+            if (iget < 1 .or. n < iget) then
+               write (unit=*, fmt='(a)')         ' '
+               write (unit=*, fmt='(a)')         'I4VEC_PERMUTE - Fatal error!'
+               write (unit=*, fmt='(a)')         '  A permutation index is out of range.'
+               write (unit=*, fmt='(a,i8,a,i8)') '  P(', iput, ') = ', iget
+               stop
+            end if
+
+            if (iget .eq. istart) then
+               a(iput) = a_temp
+               exit
+            end if
+
+            a(iput) = a(iget)
+         end do
+      end if
+   end do
+
+   ! Restore the signs of the entries.
+   p(1:n) = - p(1:n)
+
+end subroutine i4vec_permute
 !*****************************************************************************80
 !
 !! I4VEC_PERMUTE permutes an I4VEC in place.
@@ -103,82 +179,6 @@ subroutine i4vec_permute ( n, p, a )
 !
 !    Input/output, integer ( kind = 4 ) A(N), the array to be permuted.
 !
-  implicit none
-
-  integer ( kind = 4 ) n
-
-  integer ( kind = 4 ) a(n)
-  integer ( kind = 4 ) a_temp
-  integer ( kind = 4 ), parameter :: base = 1
-  integer ( kind = 4 ) ierror
-  integer ( kind = 4 ) iget
-  integer ( kind = 4 ) iput
-  integer ( kind = 4 ) istart
-  integer ( kind = 4 ) p(n)
-
-  call perm_check ( n, p, base, ierror )
-
-  if ( ierror /= 0 ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'I4VEC_PERMUTE - Fatal error!'
-    write ( *, '(a)' ) '  PERM_CHECK rejects this permutation.'
-    stop
-  end if
-!
-!  Search for the next element of the permutation that has not been used.
-!
-  do istart = 1, n
-
-    if ( p(istart) < 0 ) then
-
-      cycle
-
-    else if ( p(istart) == istart ) then
-
-      p(istart) = - p(istart)
-      cycle
-
-    else
-
-      a_temp = a(istart)
-      iget = istart
-!
-!  Copy the new value into the vacated entry.
-!
-      do
-
-        iput = iget
-        iget = p(iget)
-
-        p(iput) = - p(iput)
-
-        if ( iget < 1 .or. n < iget ) then
-          write ( *, '(a)' ) ' '
-          write ( *, '(a)' ) 'I4VEC_PERMUTE - Fatal error!'
-          write ( *, '(a)' ) '  A permutation index is out of range.'
-          write ( *, '(a,i8,a,i8)' ) '  P(', iput, ') = ', iget
-          stop
-        end if
-
-        if ( iget == istart ) then
-          a(iput) = a_temp
-          exit
-        end if
-
-        a(iput) = a(iget)
-
-      end do
-
-    end if
-
-  end do
-!
-!  Restore the signs of the entries.
-!
-  p(1:n) = - p(1:n)
-
-  return
-end
 
 
 
