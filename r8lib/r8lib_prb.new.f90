@@ -2232,7 +2232,8 @@ subroutine test037 ( )
 
   return
 end
-subroutine test038 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2250,6 +2251,8 @@ subroutine test038 ( )
 !
 !    John Burkardt
 !
+subroutine test038 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3002,7 +3005,8 @@ subroutine test043 ( )
 
   return
 end
-subroutine test044 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3020,6 +3024,8 @@ subroutine test044 ( )
 !
 !    John Burkardt
 !
+subroutine test044 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3596,7 +3602,8 @@ subroutine test048 ( )
 
   return
 end
-subroutine test049 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3614,6 +3621,10 @@ subroutine test049 ( )
 !
 !    John Burkardt
 !
+subroutine test049 ( )
+! use jburk_r8lib_r8mat_, only: r8mat_print
+! use jburk_r8lib_r8mat_, only: r8mat_cholesky_factor
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -4395,7 +4406,8 @@ subroutine test059 ( )
 
   return
 end
-subroutine test060 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4413,6 +4425,8 @@ subroutine test060 ( )
 !
 !    John Burkardt
 !
+subroutine test060 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -5420,7 +5434,8 @@ subroutine test075 ( )
 
   return
 end
-subroutine test076 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5438,6 +5453,9 @@ subroutine test076 ( )
 !
 !    John Burkardt
 !
+subroutine test076 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+! use jburk_r8lib_r8mat_, only: r8mat_power_method
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -5750,7 +5768,8 @@ use jburk_r8lib_r8vec_, only: r8vec_uniform_01
 
   return
 end
-subroutine test078 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5768,6 +5787,9 @@ subroutine test078 ( )
 !
 !    John Burkardt
 !
+subroutine test078 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+! use jburk_r8lib_r8mat_, only: r8mat_solve2
   implicit none
 
   integer ( kind = 4 ), parameter :: test_num = 4
@@ -5854,7 +5876,8 @@ subroutine test078 ( )
 
   return
 end
-subroutine test079 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5872,6 +5895,8 @@ subroutine test079 ( )
 !
 !    John Burkardt
 !
+subroutine test079 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6361,7 +6386,8 @@ subroutine test087 ( )
 
   return
 end
-subroutine test088 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6379,6 +6405,8 @@ subroutine test088 ( )
 !
 !    John Burkardt
 !
+subroutine test088 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6428,7 +6456,8 @@ subroutine test088 ( )
 
   return
 end
-subroutine test089 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6446,6 +6475,8 @@ subroutine test089 ( )
 !
 !    John Burkardt
 !
+subroutine test089 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6503,7 +6534,8 @@ subroutine test089 ( )
 
   return
 end
-subroutine test090 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6521,6 +6553,8 @@ subroutine test090 ( )
 !
 !    John Burkardt
 !
+subroutine test090 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -6551,7 +6585,8 @@ subroutine test090 ( )
 
   return
 end
-subroutine test091 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6569,6 +6604,9 @@ subroutine test091 ( )
 !
 !    John Burkardt
 !
+subroutine test091 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6597,7 +6635,8 @@ subroutine test091 ( )
 
   return
 end
-subroutine test092 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6615,6 +6654,10 @@ subroutine test092 ( )
 !
 !    John Burkardt
 !
+subroutine test092 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6652,7 +6695,8 @@ subroutine test092 ( )
 
   return
 end
-subroutine test093 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6670,6 +6714,13 @@ subroutine test093 ( )
 !
 !    John Burkardt
 !
+subroutine test093 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_even
+use jburk_r8lib_r8vec_, only: r8vec_even_select
+! use jburk_r8lib_r8poly_, only: r8poly_lagrange_0
+! use jburk_r8lib_r8poly_, only: r8poly_lagrange_1
+! use jburk_r8lib_r8poly_, only: r8poly_lagrange_2
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6726,7 +6777,7 @@ subroutine test093 ( )
 
   return
 end
-subroutine test094 ( )
+
 
 !*****************************************************************************80
 !
@@ -6744,6 +6795,10 @@ subroutine test094 ( )
 !
 !    John Burkardt
 !
+subroutine test094 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_even_select
+! use jburk_r8lib_r8poly_, only: r8poly_lagrange_factor
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6794,7 +6849,8 @@ subroutine test094 ( )
 
   return
 end
-subroutine test095 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6812,6 +6868,11 @@ subroutine test095 ( )
 !
 !    John Burkardt
 !
+subroutine test095 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_even
+use jburk_r8lib_r8vec_, only: r8vec_even_select
+! use jburk_r8lib_r8poly_, only: r8poly_lagrange_factor
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -7810,7 +7871,8 @@ subroutine test107 ( )
 
   return
 end
-subroutine test108 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7828,6 +7890,8 @@ subroutine test108 ( )
 !
 !    John Burkardt
 !
+subroutine test108 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -8046,7 +8110,8 @@ use jburk_r8lib_r8vec_, only: r8vec_amax
 
   return
 end
-subroutine test112 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8064,6 +8129,11 @@ subroutine test112 ( )
 !
 !    John Burkardt
 !
+subroutine test112 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_bracket
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_even_select
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 10
@@ -8114,10 +8184,7 @@ subroutine test112 ( )
 
   return
 end
-subroutine test113 ( )
-use jburk_r8lib_r8vec_, only: r8vec_indicator
-use jburk_r8lib_r8vec_, only: r8vec_print
-use jburk_r8lib_r8vec_, only: r8vec_bracket2
+
 
 
 !*****************************************************************************80
@@ -8136,6 +8203,10 @@ use jburk_r8lib_r8vec_, only: r8vec_bracket2
 !
 !    John Burkardt
 !
+subroutine test113 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_bracket2
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 10
@@ -8326,7 +8397,8 @@ use jburk_r8lib_r8vec_, only: r8vec_bracket5
 
   return
 end
-subroutine test1145 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8344,6 +8416,9 @@ subroutine test1145 ( )
 !
 !    John Burkardt
 !
+subroutine test1145 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_chebyspace
   implicit none
 
   integer ( kind = 4 ) n
@@ -8386,7 +8461,8 @@ subroutine test1145 ( )
 
   return
 end
-subroutine test1147 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8404,6 +8480,9 @@ subroutine test1147 ( )
 !
 !    John Burkardt
 !
+subroutine test1147 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_convolution
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -8433,7 +8512,8 @@ subroutine test1147 ( )
 
   return
 end
-subroutine test115 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8451,6 +8531,9 @@ subroutine test115 ( )
 !
 !    John Burkardt
 !
+subroutine test115 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_convolution_circ
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -8479,7 +8562,8 @@ subroutine test115 ( )
 
   return
 end
-subroutine test116 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8497,6 +8581,9 @@ subroutine test116 ( )
 !
 !    John Burkardt
 !
+subroutine test116 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_dif
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -8630,7 +8717,8 @@ subroutine test1165 ( )
 
   return
 end
-subroutine test1166 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8648,6 +8736,8 @@ subroutine test1166 ( )
 !
 !    John Burkardt
 !
+subroutine test1166 ( )
+use jburk_r8lib_r8vec_, only: r8vec_direct_product2
   implicit none
 
   integer ( kind = 4 ), parameter :: factor_num = 3
@@ -8699,7 +8789,8 @@ subroutine test1166 ( )
 
   return
 end
-subroutine test117 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8717,6 +8808,8 @@ subroutine test117 ( )
 !
 !    John Burkardt
 !
+subroutine test117 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 10
@@ -8818,7 +8911,8 @@ subroutine test118 ( )
 
   return
 end
-subroutine test119 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8836,6 +8930,8 @@ subroutine test119 ( )
 !
 !    John Burkardt
 !
+subroutine test119 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: nold = 4
@@ -8858,7 +8954,8 @@ subroutine test119 ( )
 
   return
 end
-subroutine test120 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8876,6 +8973,8 @@ subroutine test120 ( )
 !
 !    John Burkardt
 !
+subroutine test120 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 6
@@ -8958,7 +9057,8 @@ use jburk_r8lib_r8vec_, only: r8vec_frac
 
   return
 end
-subroutine test1215 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -8976,6 +9076,8 @@ subroutine test1215 ( )
 !
 !    John Burkardt
 !
+subroutine test1215 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n_max = 10
@@ -9248,7 +9350,8 @@ subroutine test123 ( )
 
   return
 end
-subroutine test124 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -9266,6 +9369,10 @@ subroutine test124 ( )
 !
 !    John Burkardt
 !
+subroutine test124 ( )
+use jburk_r8lib_r8vec_, only: r8vec_index_insert_unique
+use jburk_r8lib_r8vec_, only: r8vec_index_order
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n_max = 20
@@ -9315,7 +9422,8 @@ subroutine test124 ( )
 
   return
 end
-subroutine test125 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -9333,6 +9441,9 @@ subroutine test125 ( )
 !
 !    John Burkardt
 !
+subroutine test125 ( )
+use jburk_r8lib_r8vec_, only: r8vec_index_insert_unique
+use jburk_r8lib_r8vec_, only: r8vec_index_search
   implicit none
 
   integer ( kind = 4 ), parameter :: n_max = 20
@@ -9488,8 +9599,9 @@ use jburk_r8lib_r8vec_, only: r8vec_index_sorted_range
 
   return
 end
-subroutine test1252 ( )
-use jburk_r8lib_i4vec_, only: i4vec_print
+
+
+
 !*****************************************************************************80
 !
 !! TEST1252 tests R8VEC_INDEXED_HEAP_D;
@@ -9506,6 +9618,10 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 !
 !    John Burkardt
 !
+subroutine test1252 ( )
+use jburk_r8lib_i4vec_, only: i4vec_print
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_indexed_heap_d
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 20
@@ -9553,8 +9669,9 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 
   return
 end
-subroutine test1255 ( )
-use jburk_r8lib_i4vec_, only: i4vec_print
+
+
+
 !*****************************************************************************80
 !
 !! TEST1255 tests R8VEC_INDEXED_HEAP_D_EXTRACT and related routines.
@@ -9571,6 +9688,14 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 !
 !    John Burkardt
 !
+subroutine test1255 ( )
+use jburk_r8lib_i4vec_, only: i4vec_print
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_indexed_heap_d
+use jburk_r8lib_r8vec_, only: r8vec_indexed_heap_d_max
+use jburk_r8lib_r8vec_, only: r8vec_indexed_heap_d_insert
+
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 20
@@ -9672,7 +9797,8 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 
   return
 end
-subroutine test1256 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -9690,6 +9816,9 @@ subroutine test1256 ( )
 !
 !    John Burkardt
 !
+subroutine test1256 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_legendre
   implicit none
 
   integer ( kind = 4 ) n
@@ -9732,7 +9861,8 @@ subroutine test1256 ( )
 
   return
 end
-subroutine test1258 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -9750,6 +9880,11 @@ subroutine test1258 ( )
 !
 !    John Burkardt
 !
+subroutine test1258 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_linspace
+use jburk_r8lib_r8vec_, only: r8vec_linspace2
+use jburk_r8lib_r8vec_, only: r8vec_midspace
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -10023,7 +10158,8 @@ use jburk_r8lib_r8vec_, only: r8vec_norm_li
 
   return
 end
-subroutine test130 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -10041,6 +10177,8 @@ subroutine test130 ( )
 !
 !    John Burkardt
 !
+subroutine test130 ( )
+use jburk_r8lib_r8vec_, only: r8vec_normal_01
   implicit none
 
   integer ( kind = 4 ), parameter :: n_max = 1000
@@ -10173,7 +10311,6 @@ subroutine test130 ( )
 end
 
 
-subroutine test131 ( )
 
 !*****************************************************************************80
 !
@@ -10191,6 +10328,8 @@ subroutine test131 ( )
 !
 !    John Burkardt
 !
+subroutine test131 ( )
+use jburk_r8lib_r8vec_, only: r8vec_order_type
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -10236,7 +10375,8 @@ subroutine test131 ( )
 
   return
 end
-subroutine test132 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -10254,6 +10394,9 @@ subroutine test132 ( )
 !
 !    John Burkardt
 !
+subroutine test132 ( )
+use jburk_r8lib_r8vec_, only: r8vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -10279,7 +10422,8 @@ subroutine test132 ( )
 
   return
 end
-subroutine test133 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -10297,6 +10441,9 @@ subroutine test133 ( )
 !
 !    John Burkardt
 !
+subroutine test133 ( )
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_polarize
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -10347,7 +10494,8 @@ subroutine test133 ( )
 
   return
 end
-subroutine test134 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -10365,6 +10513,9 @@ subroutine test134 ( )
 !
 !    John Burkardt
 !
+subroutine test134 ( )
+use jburk_r8lib_r8vec_, only: r8vec_rotate
+use jburk_r8lib_r8vec_, only: r8vec_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -10389,7 +10540,8 @@ subroutine test134 ( )
 
   return
 end
-subroutine test135 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -10407,6 +10559,10 @@ subroutine test135 ( )
 !
 !    John Burkardt
 !
+subroutine test135 ( )
+use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8vec_, only: r8vec_reverse
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -10761,6 +10917,7 @@ subroutine test141 ( )
 use jburk_r8lib_i4vec_, only: i4vec_indicator
 use jburk_r8lib_i4vec_, only: i4vec_print
 use jburk_r8lib_i4vec_, only: i4vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
 use jburk_r8lib_r8vec_, only: r8vec_mask_print
 use jburk_r8lib_r8vec_, only: r8vec_sort_heap_mask_a
@@ -10894,12 +11051,6 @@ end
 
 
 
-subroutine test143 ( )
-use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
-use jburk_r8lib_r8vec_, only: r8vec_print_some
-use jburk_r8lib_r8vec_, only: r8vec_permute
-use jburk_r8lib_r8vec_, only: r8vec_sort_insert_a
-
 !*****************************************************************************80
 !
 !! TEST143 tests R8VEC_SORT_INSERT_INDEX_A.
@@ -10916,6 +11067,11 @@ use jburk_r8lib_r8vec_, only: r8vec_sort_insert_a
 !
 !    John Burkardt
 !
+subroutine test143 ( )
+use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
+use jburk_r8lib_r8vec_, only: r8vec_print_some
+use jburk_r8lib_r8vec_, only: r8vec_permute
+use jburk_r8lib_r8vec_, only: r8vec_sort_insert_index_a
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 20
@@ -11091,6 +11247,7 @@ subroutine test146 ( )
 use jburk_r8lib_r8vec_, only: r8vec_uniform_ab
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
+use jburk_r8lib_r8vec_, only: r8vec_sorted_nearest
 
 !*****************************************************************************80
 !
@@ -11117,7 +11274,7 @@ use jburk_r8lib_r8vec_, only: r8vec_sort_heap_a
   integer ( kind = 4 ) i
   integer ( kind = 4 ) j
   real ( kind = 8 ) r8_uniform_ab
-  integer ( kind = 4 ) r8vec_sorted_nearest
+!  integer ( kind = 4 ) r8vec_sorted_nearest
   integer ( kind = 4 ) :: seed = 123456789
   real ( kind = 8 ) x(n)
   real ( kind = 8 ) xval
