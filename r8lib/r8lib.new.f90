@@ -8444,6 +8444,9 @@ use jburk_r8lib_i4vec_, only: perm_check
 
   return
 end
+
+
+
 subroutine r8col_sort_heap_a ( m, n, a )
 
 !*****************************************************************************80
@@ -8539,6 +8542,9 @@ subroutine r8col_sort_heap_a ( m, n, a )
 
   return
 end
+
+
+
 subroutine r8col_sort_heap_index_a ( m, n, a, indx )
 
 !*****************************************************************************80
@@ -8586,6 +8592,7 @@ subroutine r8col_sort_heap_index_a ( m, n, a, indx )
 !    Output, integer ( kind = 4 ) INDX(N), the sort index.  The I-th element
 !    of the sorted array is column INDX(I).
 !
+use jburk_r8lib_r8vec_, only: r8vec_compare
   implicit none
 
   integer ( kind = 4 ) m
@@ -9649,6 +9656,9 @@ subroutine r8col_to_r8vec ( m, n, a, x )
 
   return
 end
+
+
+
 subroutine r8col_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
 
 !*****************************************************************************80
@@ -15749,7 +15759,9 @@ function r8mat_norm_li ( m, n, a )
 
   return
 end
-subroutine r8mat_normal_01 ( m, n, seed, r )
+
+
+
 
 !*****************************************************************************80
 !
@@ -15806,6 +15818,8 @@ subroutine r8mat_normal_01 ( m, n, seed, r )
 !
 !    Output, real ( kind = 8 ) R(M,N), the array of pseudonormal values.
 !
+subroutine r8mat_normal_01 ( m, n, seed, r )
+use jburk_r8lib_r8vec_, only: r8vec_normal_01
   implicit none
 
   integer ( kind = 4 ) m
@@ -21452,7 +21466,8 @@ use jburk_r8lib_r8vec_, only: r8vec_lt
 
   return
 end
-subroutine r8row_sort_heap_a ( m, n, a )
+
+
 
 !*****************************************************************************80
 !
@@ -21493,6 +21508,7 @@ subroutine r8row_sort_heap_a ( m, n, a )
 !    On input, the array of M rows of N-vectors.
 !    On output, the rows of A have been sorted in lexicographic order.
 !
+subroutine r8row_sort_heap_a ( m, n, a )
   implicit none
 
   integer ( kind = 4 ) m
@@ -21547,7 +21563,8 @@ subroutine r8row_sort_heap_a ( m, n, a )
 
   return
 end
-subroutine r8row_sort_heap_index_a ( m, n, a, indx )
+
+
 
 !*****************************************************************************80
 !
@@ -21594,6 +21611,8 @@ subroutine r8row_sort_heap_index_a ( m, n, a, indx )
 !    Output, integer ( kind = 4 ) INDX(M), the sort index.  The I-th element
 !    of the sorted array is row INDX(I).
 !
+subroutine r8row_sort_heap_index_a ( m, n, a, indx )
+use jburk_r8lib_r8vec_, only: r8vec_compare
   implicit none
 
   integer ( kind = 4 ) m
