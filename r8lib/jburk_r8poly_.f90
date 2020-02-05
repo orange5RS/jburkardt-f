@@ -34,7 +34,11 @@ public           r8poly_order
 contains
 
 
-subroutine r8poly_degree ( na, a, degree )
+!> @author John Burkardt
+!> @brief  R8POLY_DEGREE returns the degree of a polynomial.
+!> @date   2001-03-21
+!> @see    
+subroutine r8poly_degree (na, a, degree)
 
 !*****************************************************************************80
 !
@@ -69,27 +73,25 @@ subroutine r8poly_degree ( na, a, degree )
 !
 !    Output, integer ( kind = 4 ) DEGREE, the degree of A.
 !
-  implicit none
+subroutine     r8poly_degree (na, a, degree)
+implicit none
+   integer(kind=4), intent(in)  :: na
+   real(kind=8),    intent(in)  :: a(0:na)
+   integer(kind=4), intent(out) :: degree
 
-  integer ( kind = 4 ) na
+   degree = na
+   do while (0 < degree)
+      if (a(degree) .ne. 0.0D+0) then
+         return
+      end if
+      degree = degree - 1
+   end do
 
-  real ( kind = 8 ) a(0:na)
-  integer ( kind = 4 ) degree
+   return
+end subroutine r8poly_degree
 
-  degree = na
 
-  do while ( 0 < degree )
 
-    if ( a(degree) /= 0.0D+0 ) then
-      return
-    end if
-
-    degree = degree - 1
-
-  end do
-
-  return
-end
 subroutine r8poly_deriv ( n, c, p, cp )
 
 !*****************************************************************************80
@@ -704,7 +706,7 @@ end
 
 
 !> @author John Burkardt
-!> @brief  R8POLY_ORDER returns the order of a polynomial
+!> @brief  R8POLY_ORDER returns the order of a polynomial.
 !> @date   2005-04-19
 !> @see    
 subroutine r8poly_order (na, a, order)
