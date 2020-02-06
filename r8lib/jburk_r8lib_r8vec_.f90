@@ -1,8 +1,13 @@
+
+!> @see https://github.com/Mohid-Water-Modelling-System/Mohid/wiki/Documenting-Fortran-with-Doxygen
 module     jburk_r8lib_r8vec_
 use, intrinsic :: iso_fortran_env
 implicit none
 
-
+interface        r8vec_correlation
+module procedure r8vec_correlation
+end interface    r8vec_correlation
+public           r8vec_correlation
 contains
 
 
@@ -26,21 +31,21 @@ subroutine r8vec_uniform_unit ( m, seed, w )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the spatial dimension.
+!    Input, integer(kind=4) M, the spatial dimension.
 !
-!    Input/output, integer ( kind = 4 ) SEED, a seed for the random number 
+!    Input/output, integer(kind=4) SEED, a seed for the random number 
 !    generator.
 !
-!    Output, real ( kind = 8 ) W(M), a random direction vector,
+!    Output, real(kind=8) W(M), a random direction vector,
 !    with unit norm.
 !
   implicit none
 
-  integer ( kind = 4 ) m
+  integer(kind=4) m
 
-  real ( kind = 8 ) norm
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) w(m)
+  real(kind=8) norm
+  integer(kind=4) seed
+  real(kind=8) w(m)
 !
 !  Get M values from a standard normal distribution.
 !
@@ -90,26 +95,26 @@ subroutine r8vec_01_to_ab ( n, a, amax, amin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer(kind=4) N, the number of data values.
 !
-!    Input/output, real ( kind = 8 ) A(N), the vector to be rescaled.
+!    Input/output, real(kind=8) A(N), the vector to be rescaled.
 !
-!    Input, real ( kind = 8 ) AMAX, AMIN, the maximum and minimum values
+!    Input, real(kind=8) AMAX, AMIN, the maximum and minimum values
 !    allowed for A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  real ( kind = 8 ) amax2
-  real ( kind = 8 ) amax3
-  real ( kind = 8 ) amin
-  real ( kind = 8 ) amin2
-  real ( kind = 8 ) amin3
+  real(kind=8) a(n)
+  real(kind=8) amax
+  real(kind=8) amax2
+  real(kind=8) amax3
+  real(kind=8) amin
+  real(kind=8) amin2
+  real(kind=8) amin3
 
-  if ( amax == amin ) then
+  if ( amax .eq. amin ) then
     a(1:n) = amin
     return
   end if
@@ -165,22 +170,22 @@ subroutine r8vec_ab_to_01 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer(kind=4) N, the number of data values.
 !
-!    Input/output, real ( kind = 8 ) A(N), the data to be rescaled.
+!    Input/output, real(kind=8) A(N), the data to be rescaled.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  real ( kind = 8 ) amin
+  real(kind=8) a(n)
+  real(kind=8) amax
+  real(kind=8) amin
 
   amax = maxval ( a(1:n) )
   amin = minval ( a(1:n) )
 
-  if ( amin == amax ) then
+  if ( amin .eq. amax ) then
     a(1:n) = 0.5D+00
   else
     a(1:n) = ( a(1:n) - amin ) / ( amax - amin )
@@ -215,27 +220,27 @@ subroutine r8vec_ab_to_cd ( n, a, bmin, bmax, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer(kind=4) N, the number of data values.
 !
-!    Input, real ( kind = 8 ) A(N), the data to be remapped.
+!    Input, real(kind=8) A(N), the data to be remapped.
 !
-!    Input, real ( kind = 8 ) BMIN, BMAX, the values to which min(A) and max(A)
+!    Input, real(kind=8) BMIN, BMAX, the values to which min(A) and max(A)
 !    are to be assigned.
 !
-!    Output, real ( kind = 8 ) B(N), the remapped data.
+!    Output, real(kind=8) B(N), the remapped data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  real ( kind = 8 ) amin
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) bmax
-  real ( kind = 8 ) bmin
+  real(kind=8) a(n)
+  real(kind=8) amax
+  real(kind=8) amin
+  real(kind=8) b(n)
+  real(kind=8) bmax
+  real(kind=8) bmin
 
-  if ( bmax == bmin ) then
+  if ( bmax .eq. bmin ) then
     b(1:n) = bmin
     return
   end if
@@ -243,7 +248,7 @@ subroutine r8vec_ab_to_cd ( n, a, bmin, bmax, b )
   amin = minval ( a(1:n) )
   amax = maxval ( a(1:n) )
 
-  if ( amax == amin ) then
+  if ( amax .eq. amin ) then
     b(1:n) = 0.5D+00 * ( bmax + bmin )
     return
   end if
@@ -278,7 +283,7 @@ function r8vec_all_nonpositive ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
 !    Input, double ( kind = 8 ) A(N), the vector.
 !
@@ -287,12 +292,12 @@ function r8vec_all_nonpositive ( n, a )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_all_nonpositive
 
-  r8vec_all_nonpositive = all ( a(1:n) <= 0.0D+00 )
+  r8vec_all_nonpositive = all ( a(1:n) <= 0.0D+0 )
 
   return
 end
@@ -320,19 +325,19 @@ subroutine r8vec_amax ( n, a, amax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) AMAX, the value of the entry
+!    Output, real(kind=8) AMAX, the value of the entry
 !    of largest magnitude.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
+  real(kind=8) a(n)
+  real(kind=8) amax
 
   amax = maxval ( abs ( a(1:n) ) )
 
@@ -362,21 +367,21 @@ subroutine r8vec_amax_index ( n, a, amax_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, integer ( kind = 4 ) AMAX_INDEX, the index of the entry of
+!    Output, integer(kind=4) AMAX_INDEX, the index of the entry of
 !    largest magnitude.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  integer ( kind = 4 ) amax_index
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) amax
+  integer(kind=4) amax_index
+  integer(kind=4) i
 
   if ( n <= 0 ) then
 
@@ -422,19 +427,19 @@ subroutine r8vec_amin ( n, a, amin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 )A(N), the array.
+!    Input, real(kind=8)A(N), the array.
 !
-!    Output, real ( kind = 8 ) AMIN, the value of the entry
+!    Output, real(kind=8) AMIN, the value of the entry
 !    of smallest magnitude.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amin
+  real(kind=8) a(n)
+  real(kind=8) amin
 
   amin = minval ( abs ( a(1:n) ) )
 
@@ -464,21 +469,21 @@ subroutine r8vec_amin_index ( n, a, amin_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, integer ( kind = 4 ) AMIN_INDEX, the index of the entry of
+!    Output, integer(kind=4) AMIN_INDEX, the index of the entry of
 !    smallest magnitude.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amin
-  integer ( kind = 4 ) amin_index
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) amin
+  integer(kind=4) amin_index
+  integer(kind=4) i
 
   if ( n <= 0 ) then
 
@@ -524,20 +529,20 @@ function r8vec_any_negative ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_ANY_NEGATIVE is TRUE if any entry is negative.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_any_negative
 
-  r8vec_any_negative = any ( a(1:n) < 0.0D+00 )
+  r8vec_any_negative = any ( a(1:n) < 0.0D+0 )
 
   return
 end
@@ -565,20 +570,20 @@ function r8vec_any_nonzero ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_ANY_NONZERO is TRUE if any entry is nonzero.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_any_nonzero
 
-  r8vec_any_nonzero = any ( a(1:n) /= 0.0D+00 )
+  r8vec_any_nonzero = any ( a(1:n) /= 0.0D+0 )
 
   return
 end
@@ -612,26 +617,26 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) DIM_NUM, the spatial dimension.
+!    Input, integer(kind=4) DIM_NUM, the spatial dimension.
 !
-!    Input, real ( kind = 8 ) V1(DIM_NUM), the vector.
+!    Input, real(kind=8) V1(DIM_NUM), the vector.
 !
-!    Output, real ( kind = 8 ) V2(DIM_NUM), a vector that is
+!    Output, real(kind=8) V2(DIM_NUM), a vector that is
 !    normal to V2, and has unit Euclidean length.
 !
 subroutine r8vec_any_normal ( dim_num, v1, v2 )
   implicit none
 
-  integer ( kind = 4 ) dim_num
+  integer(kind=4) dim_num
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-!  real ( kind = 8 ) r8vec_norm
-  real ( kind = 8 ) v1(dim_num)
-  real ( kind = 8 ) v2(dim_num)
-  real ( kind = 8 ) vj
-  real ( kind = 8 ) vk
+  integer(kind=4) i
+  integer(kind=4) j
+  integer(kind=4) k
+!  real(kind=8) r8vec_norm
+  real(kind=8) v1(dim_num)
+  real(kind=8) v2(dim_num)
+  real(kind=8) vj
+  real(kind=8) vk
 
   if ( dim_num < 2 ) then
     write ( *, '(a)' ) ' '
@@ -640,9 +645,9 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
     stop
   end if
 
-  if ( r8vec_norm ( dim_num, v1 ) == 0.0D+00 ) then
-    v2(1) = 1.0D+00
-    v2(2:dim_num) = 0.0D+00
+  if ( r8vec_norm ( dim_num, v1 ) .eq. 0.0D+0 ) then
+    v2(1) = 1.0D+0
+    v2(2:dim_num) = 0.0D+0
     return
   end if
 !
@@ -653,10 +658,10 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
 !  VJ, at least, is not zero.
 !
   j = - 1
-  vj = 0.0D+00
+  vj = 0.0D+0
 
   k = - 1
-  vk = 0.0D+00
+  vk = 0.0D+0
 
   do i = 1, dim_num
 
@@ -679,7 +684,7 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
 !  Setting V2 to zero, except that V2(J) = -VK, and V2(K) = VJ,
 !  will just about do the trick.
 !
-  v2(1:dim_num) = 0.0D+00
+  v2(1:dim_num) = 0.0D+0
 
   v2(j) = - vk / sqrt ( vk * vk + vj * vj )
   v2(k) =   vj / sqrt ( vk * vk + vj * vj )
@@ -720,20 +725,20 @@ function r8vec_ascends ( n, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the array.
+!    Input, integer(kind=4) N, the size of the array.
 !
-!    Input, real ( kind = 8 ) X(N), the array to be examined.
+!    Input, real(kind=8) X(N), the array to be examined.
 !
 !    Output, logical R8VEC_ASCENDS, is TRUE if the
 !    entries of X ascend.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
+  integer(kind=4) i
   logical r8vec_ascends
-  real ( kind = 8 ) x(n)
+  real(kind=8) x(n)
 
   do i = 1, n - 1
     if ( x(i+1) < x(i) ) then
@@ -780,20 +785,20 @@ function r8vec_ascends_strictly ( n, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the array.
+!    Input, integer(kind=4) N, the size of the array.
 !
-!    Input, real ( kind = 8 ) X(N), the array to be examined.
+!    Input, real(kind=8) X(N), the array to be examined.
 !
 !    Output, logical R8VEC_ASCENDS_STRICTLY, is TRUE if the
 !    entries of X strictly ascend.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
+  integer(kind=4) i
   logical r8vec_ascends_strictly
-  real ( kind = 8 ) x(n)
+  real(kind=8) x(n)
 
   do i = 1, n - 1
     if ( x(i+1) <= x(i) ) then
@@ -840,44 +845,44 @@ subroutine r8vec_bin ( n, x, bin_num, bin_min, bin_max, bin, bin_limit )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of X.
+!    Input, integer(kind=4) N, the number of entries of X.
 !
-!    Input, real ( kind = 8 ) X(N), an (unsorted) array to be binned.
+!    Input, real(kind=8) X(N), an (unsorted) array to be binned.
 !
-!    Input, integer ( kind = 4 ) BIN_NUM, the number of bins.  Two extra bins,
+!    Input, integer(kind=4) BIN_NUM, the number of bins.  Two extra bins,
 !    #0 and #BIN_NUM+1, count extreme values.
 !
-!    Input, real ( kind = 8 ) BIN_MIN, BIN_MAX, define the range and size
+!    Input, real(kind=8) BIN_MIN, BIN_MAX, define the range and size
 !    of the bins.  BIN_MIN and BIN_MAX must be distinct.
 !    Normally, BIN_MIN < BIN_MAX, and the documentation will assume
 !    this, but proper results will be computed if BIN_MIN > BIN_MAX.
 !
-!    Output, integer ( kind = 4 ) BIN(0:BIN_NUM+1).
+!    Output, integer(kind=4) BIN(0:BIN_NUM+1).
 !    BIN(0) counts entries of X less than BIN_MIN.
 !    BIN(BIN_NUM+1) counts entries greater than or equal to BIN_MAX.
 !    For 1 <= I <= BIN_NUM, BIN(I) counts the entries X(J) such that
 !      BIN_LIMIT(I-1) <= X(J) < BIN_LIMIT(I).
 !    where H is the bin spacing.
 !
-!    Output, real ( kind = 8 ) BIN_LIMIT(0:BIN_NUM), the "limits" of the bins.
+!    Output, real(kind=8) BIN_LIMIT(0:BIN_NUM), the "limits" of the bins.
 !    BIN(I) counts the number of entries X(J) such that
 !      BIN_LIMIT(I-1) <= X(J) < BIN_LIMIT(I).
 !
   implicit none
 
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) bin_num
+  integer(kind=4) n
+  integer(kind=4) bin_num
 
-  integer ( kind = 4 ) bin(0:bin_num+1)
-  real ( kind = 8 ) bin_limit(0:bin_num)
-  real ( kind = 8 ) bin_max
-  real ( kind = 8 ) bin_min
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) t
-  real ( kind = 8 ) x(n)
+  integer(kind=4) bin(0:bin_num+1)
+  real(kind=8) bin_limit(0:bin_num)
+  real(kind=8) bin_max
+  real(kind=8) bin_min
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) t
+  real(kind=8) x(n)
 
-  if ( bin_max == bin_min ) then
+  if ( bin_max .eq. bin_min ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_BIN - Fatal error!'
     write ( *, '(a)' ) '  BIN_MIN = BIN_MAX.'
@@ -890,9 +895,9 @@ subroutine r8vec_bin ( n, x, bin_num, bin_min, bin_max, bin, bin_limit )
 
     t = ( x(i) - bin_min ) / ( bin_max - bin_min )
 
-    if ( t < 0.0D+00 ) then
+    if ( t < 0.0D+0 ) then
       j = 0
-    else if ( 1.0D+00 <= t ) then
+    else if ( 1.0D+0 <= t ) then
       j = bin_num + 1
     else
       j = 1 + int ( real ( bin_num, kind = 8 ) * t )
@@ -940,27 +945,27 @@ subroutine r8vec_blend ( n, t1, x1, t2, x2, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in each  vector.
+!    Input, integer(kind=4) N, the number of entries in each  vector.
 !
-!    Input, real ( kind = 8 ) T1, the weight factor for vector 1.
+!    Input, real(kind=8) T1, the weight factor for vector 1.
 !
-!    Input, real ( kind = 8 ) X1(N), the first vector.
+!    Input, real(kind=8) X1(N), the first vector.
 !
-!    Input, real ( kind = 8 ) T2, the weight factor for vector 2.
+!    Input, real(kind=8) T2, the weight factor for vector 2.
 !
-!    Input, real ( kind = 8 ) X2(N), the second vector.
+!    Input, real(kind=8) X2(N), the second vector.
 !
-!    Output, real ( kind = 8 ) X(N), the interpolated or extrapolated value.
+!    Output, real(kind=8) X(N), the interpolated or extrapolated value.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) t1
-  real ( kind = 8 ) t2
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) x1(n)
-  real ( kind = 8 ) x2(n)
+  real(kind=8) t1
+  real(kind=8) t2
+  real(kind=8) x(n)
+  real(kind=8) x1(n)
+  real(kind=8) x2(n)
 
   x(1:n) = t1 * x1(1:n) + t2 * x2(1:n)
 
@@ -1005,24 +1010,24 @@ subroutine r8vec_bracket ( n, x, xval, left, right )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, length of input array.
+!    Input, integer(kind=4) N, length of input array.
 !
-!    Input, real ( kind = 8 ) X(N), an array that has been sorted into
+!    Input, real(kind=8) X(N), an array that has been sorted into
 !    ascending order.
 !
-!    Input, real ( kind = 8 ) XVAL, a value to be bracketed.
+!    Input, real(kind=8) XVAL, a value to be bracketed.
 !
-!    Output, integer ( kind = 4 ) LEFT, RIGHT, the results of the search.
+!    Output, integer(kind=4) LEFT, RIGHT, the results of the search.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) left
-  integer ( kind = 4 ) right
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xval
+  integer(kind=4) i
+  integer(kind=4) left
+  integer(kind=4) right
+  real(kind=8) x(n)
+  real(kind=8) xval
 
   do i = 2, n - 1
 
@@ -1085,14 +1090,14 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, length of the input array.
+!    Input, integer(kind=4) N, length of the input array.
 !
-!    Input, real ( kind = 8 ) X(N), an array that has been sorted into
+!    Input, real(kind=8) X(N), an array that has been sorted into
 !    ascending order.
 !
-!    Input, real ( kind = 8 ) XVAL, a value to be bracketed by entries of X.
+!    Input, real(kind=8) XVAL, a value to be bracketed by entries of X.
 !
-!    Input, integer ( kind = 4 ) START, between 1 and N, specifies that XVAL
+!    Input, integer(kind=4) START, between 1 and N, specifies that XVAL
 !    is likely to be in the interval:
 !      [ X(START), X(START+1) ]
 !    or, if not in that interval, then either
@@ -1100,19 +1105,19 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !    or
 !      [ X(START-1), X(START) ].
 !
-!    Output, integer ( kind = 4 ) LEFT, RIGHT, the results of the search.
+!    Output, integer(kind=4) LEFT, RIGHT, the results of the search.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) high
-  integer ( kind = 4 ) left
-  integer ( kind = 4 ) low
-  integer ( kind = 4 ) right
-  integer ( kind = 4 ) start
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xval
+  integer(kind=4) high
+  integer(kind=4) left
+  integer(kind=4) low
+  integer(kind=4) right
+  integer(kind=4) start
+  real(kind=8) x(n)
+  real(kind=8) xval
 !
 !  Check.
 !
@@ -1129,7 +1134,7 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  XVAL = X(START)?
 !
-  if ( x(start) == xval ) then
+  if ( x(start) .eq. xval ) then
 
     left = start
     right = start
@@ -1149,7 +1154,7 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  XVAL = X(START+1)?
 !
-    else if ( xval == x(start+1) ) then
+    else if ( xval .eq. x(start+1) ) then
 
       left = start + 1
       right = start + 1
@@ -1173,7 +1178,7 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  XVAL = X(START+2)?
 !
-    else if ( xval == x(start+2) ) then
+    else if ( xval .eq. x(start+2) ) then
 
       left = start + 2
       right = start + 2
@@ -1202,7 +1207,7 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  -oo < XVAL < X(START) = X(1).
 !
-  else if ( start == 1 ) then
+  else if ( start .eq. 1 ) then
 
     left = -1
     right = start
@@ -1210,7 +1215,7 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 !
 !  XVAL = X(START-1)?
 !
-  else if ( xval == x(start-1) ) then
+  else if ( xval .eq. x(start-1) ) then
 
     left = start - 1
     right = start - 1
@@ -1273,14 +1278,14 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, length of the input array.
+!    Input, integer(kind=4) N, length of the input array.
 !
-!    Input, real ( kind = 8 ) T(N), an array that has been sorted
+!    Input, real(kind=8) T(N), an array that has been sorted
 !    into ascending order.
 !
-!    Input, real ( kind = 8 ) TVAL, a value to be bracketed by entries of T.
+!    Input, real(kind=8) TVAL, a value to be bracketed by entries of T.
 !
-!    Input/output, integer ( kind = 4 ) LEFT.
+!    Input/output, integer(kind=4) LEFT.
 !    On input, if 1 <= LEFT <= N-1, LEFT is taken as a suggestion for the
 !    interval [ T(LEFT), T(LEFT+1) ] in which TVAL lies.  This interval
 !    is searched first, followed by the appropriate interval to the left
@@ -1291,14 +1296,14 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) high
-  integer ( kind = 4 ) left
-  integer ( kind = 4 ) low
-  integer ( kind = 4 ) mid
-  real ( kind = 8 ) t(n)
-  real ( kind = 8 ) tval
+  integer(kind=4) high
+  integer(kind=4) left
+  integer(kind=4) low
+  integer(kind=4) mid
+  real(kind=8) t(n)
+  real(kind=8) tval
 !
 !  Check the input data.
 !
@@ -1320,9 +1325,9 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 !
   if ( tval < t(left) ) then
 
-    if ( left == 1 ) then
+    if ( left .eq. 1 ) then
       return
-    else if ( left == 2 ) then
+    else if ( left .eq. 2 ) then
       left = 1
       return
     else if ( t(left-1) <= tval ) then
@@ -1340,7 +1345,7 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 
     do
 
-      if ( low == high ) then
+      if ( low .eq. high ) then
         left = low
         return
       end if
@@ -1360,9 +1365,9 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 !
   else if ( t(left+1) < tval ) then
 
-    if ( left == n - 1 ) then
+    if ( left .eq. n - 1 ) then
       return
-    else if ( left == n - 2 ) then
+    else if ( left .eq. n - 2 ) then
       left = left + 1
       return
     else if ( tval <= t(left+2) ) then
@@ -1380,7 +1385,7 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 
     do
 
-      if ( low == high ) then
+      if ( low .eq. high ) then
         left = low
         return
       end if
@@ -1440,32 +1445,32 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NT, length of the input array.
+!    Input, integer(kind=4) NT, length of the input array.
 !
-!    Input, real ( kind = 8 ) T(NT), an array that has been sorted
+!    Input, real(kind=8) T(NT), an array that has been sorted
 !    into ascending order.
 !
-!    Input, integer ( kind = 4 ) NS, the number of points to be bracketed.
+!    Input, integer(kind=4) NS, the number of points to be bracketed.
 !
-!    Input, real ( kind = 8 ) S(NS), values to be bracketed by entries of T.
+!    Input, real(kind=8) S(NS), values to be bracketed by entries of T.
 !
-!    Output, integer ( kind = 4 ) LEFT(NS).
+!    Output, integer(kind=4) LEFT(NS).
 !    LEFT(I) is set so that the interval [ T(LEFT(I)), T(LEFT(I)+1) ]
 !    is the closest to S(I); it either contains S(I), or else S(I)
 !    lies outside the interval [ T(1), T(NT) ].
 !
   implicit none
 
-  integer ( kind = 4 ) ns
-  integer ( kind = 4 ) nt
+  integer(kind=4) ns
+  integer(kind=4) nt
 
-  integer ( kind = 4 ) high
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) left(ns)
-  integer ( kind = 4 ) low
-  integer ( kind = 4 ) mid
-  real ( kind = 8 ) s(ns)
-  real ( kind = 8 ) t(nt)
+  integer(kind=4) high
+  integer(kind=4) i
+  integer(kind=4) left(ns)
+  integer(kind=4) low
+  integer(kind=4) mid
+  real(kind=8) s(ns)
+  real(kind=8) t(nt)
 !
 !  Check the input data.
 !
@@ -1485,9 +1490,9 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 !
     if ( s(i) < t(left(i)) ) then
 
-      if ( left(i) == 1 ) then
+      if ( left(i) .eq. 1 ) then
         cycle
-      else if ( left(i) == 2 ) then
+      else if ( left(i) .eq. 2 ) then
         left(i) = 1
         cycle
       else if ( t(left(i)-1) <= s(i) ) then
@@ -1505,7 +1510,7 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 
       do
 
-        if ( low == high ) then
+        if ( low .eq. high ) then
           left(i) = low
           exit
         end if
@@ -1525,9 +1530,9 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 !
     else if ( t(left(i)+1) < s(i) ) then
 
-      if ( left(i) == nt - 1 ) then
+      if ( left(i) .eq. nt - 1 ) then
         cycle
-      else if ( left(i) == nt - 2 ) then
+      else if ( left(i) .eq. nt - 2 ) then
         left(i) = left(i) + 1
         cycle
       else if ( s(i) <= t(left(i)+2) ) then
@@ -1545,7 +1550,7 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 
       do
 
-        if ( low == high ) then
+        if ( low .eq. high ) then
           left(i) = low
           exit
         end if
@@ -1603,25 +1608,25 @@ function r8vec_bracket5 ( nd, xd, xi )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) ND, the number of data values.
+!    Input, integer(kind=4) ND, the number of data values.
 !
-!    Input, real ( kind = 8 ) XD(N), the sorted data.
+!    Input, real(kind=8) XD(N), the sorted data.
 !
-!    Input, real ( kind = 8 ) XD, the query value.
+!    Input, real(kind=8) XD, the query value.
 !
-!    Output, integer ( kind = 4 ) R8VEC_BRACKET5, the bracket information.
+!    Output, integer(kind=4) R8VEC_BRACKET5, the bracket information.
 !
   implicit none
 
-  integer ( kind = 4 ) nd
+  integer(kind=4) nd
 
-  integer ( kind = 4 ) b
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) r
-  integer ( kind = 4 ) r8vec_bracket5
-  real ( kind = 8 ) xd(nd)
-  real ( kind = 8 ) xi
+  integer(kind=4) b
+  integer(kind=4) l
+  integer(kind=4) m
+  integer(kind=4) r
+  integer(kind=4) r8vec_bracket5
+  real(kind=8) xd(nd)
+  real(kind=8) xi
 
   if ( xi < xd(1) .or. xd(nd) < xi ) then
 
@@ -1681,28 +1686,28 @@ subroutine r8vec_bracket6 ( nd, xd, ni, xi, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) ND, the number of data values.
+!    Input, integer(kind=4) ND, the number of data values.
 !
-!    Input, real ( kind = 8 ) XD(N), the sorted data.
+!    Input, real(kind=8) XD(N), the sorted data.
 !
-!    Input, integer ( kind = 4 ) NI, the number of inquiry values.
+!    Input, integer(kind=4) NI, the number of inquiry values.
 !
-!    Input, real ( kind = 8 ) XD(NI), the query values.
+!    Input, real(kind=8) XD(NI), the query values.
 !
-!    Output, integer ( kind = 4 ) B(NI), the bracket information.
+!    Output, integer(kind=4) B(NI), the bracket information.
 !
   implicit none
 
-  integer ( kind = 4 ) nd
-  integer ( kind = 4 ) ni
+  integer(kind=4) nd
+  integer(kind=4) ni
 
-  integer ( kind = 4 ) b(ni)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) r
-  real ( kind = 8 ) xd(nd)
-  real ( kind = 8 ) xi(ni)
+  integer(kind=4) b(ni)
+  integer(kind=4) i
+  integer(kind=4) l
+  integer(kind=4) m
+  integer(kind=4) r
+  real(kind=8) xd(nd)
+  real(kind=8) xi(ni)
 
   do i = 1, ni
 
@@ -1765,27 +1770,27 @@ subroutine r8vec_ceiling ( n, r8vec, ceilingvec )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
-!    Input, real ( kind = 8 ) R8VEC(N), the vector.
+!    Input, real(kind=8) R8VEC(N), the vector.
 !
-!    Output, real ( kind = 8 ) CEILINGVEC(N), the rounded values.
+!    Output, real(kind=8) CEILINGVEC(N), the rounded values.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) ceilingvec(n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) r8vec(n)
-  real ( kind = 8 ) value
+  real(kind=8) ceilingvec(n)
+  integer(kind=4) i
+  real(kind=8) r8vec(n)
+  real(kind=8) value
 
   do i = 1, n
 
     value = real ( int ( r8vec(i) ), kind = 8 )
 
     if ( value < r8vec(i) ) then
-      value = value + 1.0D+00
+      value = value + 1.0D+0
     end if
 
     ceilingvec(i) = value
@@ -1818,27 +1823,27 @@ subroutine r8vec_chebyspace ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the interval.
+!    Input, real(kind=8) A, B, the interval.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of Chebyshev spaced data.
+!    Output, real(kind=8) X(N), a vector of Chebyshev spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  integer ( kind = 4 ) i
-  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
-  real ( kind = 8 ) theta
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  real(kind=8) c
+  integer(kind=4) i
+  real(kind=8), parameter :: pi = 3.141592653589793D+00
+  real(kind=8) theta
+  real(kind=8) x(n)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
-    x(1) = ( a + b ) / 2.0D+00
+    x(1) = ( a + b ) / 2.0D+0
 
   else
 
@@ -1849,15 +1854,15 @@ subroutine r8vec_chebyspace ( n, a, b, x )
 
       c = cos ( theta )
 
-      if ( mod ( n, 2 ) == 1 ) then
-        if ( 2 * i - 1 == n ) then
-          c = 0.0D+00
+      if ( mod ( n, 2 ) .eq. 1 ) then
+        if ( 2 * i - 1 .eq. n ) then
+          c = 0.0D+0
         end if
       end if
 
-      x(i) = ( ( 1.0D+00 - c ) * a  &
-             + ( 1.0D+00 + c ) * b ) &
-             /   2.0D+00
+      x(i) = ( ( 1.0D+0 - c ) * a  &
+             + ( 1.0D+0 + c ) * b ) &
+             /   2.0D+0
 
     end do
 
@@ -1889,27 +1894,27 @@ subroutine r8vec_cheby1space ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the first and last entries.
+!    Input, real(kind=8) A, B, the first and last entries.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of Chebyshev spaced data.
+!    Output, real(kind=8) X(N), a vector of Chebyshev spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  integer ( kind = 4 ) i
-  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
-  real ( kind = 8 ) theta
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  real(kind=8) c
+  integer(kind=4) i
+  real(kind=8), parameter :: pi = 3.141592653589793D+00
+  real(kind=8) theta
+  real(kind=8) x(n)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
-    x(1) = ( a + b ) / 2.0D+00
+    x(1) = ( a + b ) / 2.0D+0
 
   else
 
@@ -1920,15 +1925,15 @@ subroutine r8vec_cheby1space ( n, a, b, x )
 
       c = cos ( theta )
 
-      if ( mod ( n, 2 ) == 1 ) then
-        if ( 2 * i - 1 == n ) then
-          c = 0.0D+00
+      if ( mod ( n, 2 ) .eq. 1 ) then
+        if ( 2 * i - 1 .eq. n ) then
+          c = 0.0D+0
         end if
       end if
 
-      x(i) = ( ( 1.0D+00 - c ) * a   &
-             + ( 1.0D+00 + c ) * b ) &
-             /   2.0D+00
+      x(i) = ( ( 1.0D+0 - c ) * a   &
+             + ( 1.0D+0 + c ) * b ) &
+             /   2.0D+0
 
     end do
 
@@ -1960,27 +1965,27 @@ subroutine r8vec_cheby2space ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the first and last entries.
+!    Input, real(kind=8) A, B, the first and last entries.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of Chebyshev spaced data.
+!    Output, real(kind=8) X(N), a vector of Chebyshev spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  real ( kind = 8 ) c
-  integer ( kind = 4 ) i
-  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
-  real ( kind = 8 ) theta
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  real(kind=8) c
+  integer(kind=4) i
+  real(kind=8), parameter :: pi = 3.141592653589793D+00
+  real(kind=8) theta
+  real(kind=8) x(n)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
-    x(1) = ( a + b ) / 2.0D+00
+    x(1) = ( a + b ) / 2.0D+0
 
   else
 
@@ -1990,15 +1995,15 @@ subroutine r8vec_cheby2space ( n, a, b, x )
 
       c = cos ( theta )
 
-      if ( mod ( n, 2 ) == 1 ) then
-        if ( 2 * i - 1 == n ) then
-          c = 0.0D+00
+      if ( mod ( n, 2 ) .eq. 1 ) then
+        if ( 2 * i - 1 .eq. n ) then
+          c = 0.0D+0
         end if
       end if
 
-      x(i) = ( ( 1.0D+00 - c ) * a   &
-             + ( 1.0D+00 + c ) * b ) &
-             /   2.0D+00
+      x(i) = ( ( 1.0D+0 - c ) * a   &
+             + ( 1.0D+0 + c ) * b ) &
+             /   2.0D+0
 
     end do
 
@@ -2030,20 +2035,20 @@ subroutine r8vec_circular_variance ( n, x, circular_variance )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) X(N), the vector whose variance is desired.
+!    Input, real(kind=8) X(N), the vector whose variance is desired.
 !
-!    Output, real ( kind = 8 ) CIRCULAR VARIANCE, the circular variance
+!    Output, real(kind=8) CIRCULAR VARIANCE, the circular variance
 !    of the vector entries.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) circular_variance
-  real ( kind = 8 ) mean
-  real ( kind = 8 ) x(n)
+  real(kind=8) circular_variance
+  real(kind=8) mean
+  real(kind=8) x(n)
 
   call r8vec_mean ( n, x, mean )
 
@@ -2053,7 +2058,7 @@ subroutine r8vec_circular_variance ( n, x, circular_variance )
 
   circular_variance = sqrt ( circular_variance ) / real ( n, kind = 8 )
 
-  circular_variance = 1.0D+00 - circular_variance
+  circular_variance = 1.0D+0 - circular_variance
 
   return
 end
@@ -2094,23 +2099,23 @@ subroutine r8vec_compare ( n, a1, a2, isgn )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vectors.
+!    Input, integer(kind=4) N, the number of entries in the vectors.
 !
-!    Input, real ( kind = 8 ) A1(N), A2(N), the vectors to be compared.
+!    Input, real(kind=8) A1(N), A2(N), the vectors to be compared.
 !
-!    Output, integer ( kind = 4 ) ISGN, the results of the comparison:
+!    Output, integer(kind=4) ISGN, the results of the comparison:
 !    -1, A1 < A2,
 !     0, A1 = A2,
 !    +1, A1 > A2.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) k
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
+  integer(kind=4) isgn
+  integer(kind=4) k
 
   isgn = 0
 
@@ -2186,27 +2191,27 @@ subroutine r8vec_convolution ( m, x, n, y, z )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of X.
+!    Input, integer(kind=4) M, the dimension of X.
 !
-!    Input, real ( kind = 8 ) X(M), the first vector to be convolved.
+!    Input, real(kind=8) X(M), the first vector to be convolved.
 !
-!    Input, integer ( kind = 4 ) N, the dimension of Y.
+!    Input, integer(kind=4) N, the dimension of Y.
 !
-!    Input, real ( kind = 8 ) Y(N), the second vector to be convolved.
+!    Input, real(kind=8) Y(N), the second vector to be convolved.
 !
-!    Output, real ( kind = 8 ) Z(M+N-1), the convolution of X and Y.
+!    Output, real(kind=8) Z(M+N-1), the convolution of X and Y.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer(kind=4) m
+  integer(kind=4) n
 
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x(m)
-  real ( kind = 8 ) y(n)
-  real ( kind = 8 ) z(m+n-1)
+  integer(kind=4) j
+  real(kind=8) x(m)
+  real(kind=8) y(n)
+  real(kind=8) z(m+n-1)
 
-  z(1:m+n-1) = 0.0D+00
+  z(1:m+n-1) = 0.0D+0
 
   do j = 1, n
     z(j:j+m-1) = z(j:j+m-1) + x(1:m) * y(j)
@@ -2275,20 +2280,20 @@ subroutine r8vec_convolution_circ ( n, x, y, z )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) X(N), Y(N), the vectors to be convolved.
+!    Input, real(kind=8) X(N), Y(N), the vectors to be convolved.
 !
-!    Output, real ( kind = 8 ) Z(N), the circular convolution of X and Y.
+!    Output, real(kind=8) Z(N), the circular convolution of X and Y.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) m
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
-  real ( kind = 8 ) z(n)
+  integer(kind=4) m
+  real(kind=8) x(n)
+  real(kind=8) y(n)
+  real(kind=8) z(n)
 
   do m = 1, n
     z(m) = dot_product ( x(1:m), y(m:1:-1) ) &
@@ -2321,18 +2326,18 @@ subroutine r8vec_copy ( n, a1, a2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the length of the vectors.
+!    Input, integer(kind=4) N, the length of the vectors.
 !
-!    Input, real ( kind = 8 ) A1(N), the vector to be copied.
+!    Input, real(kind=8) A1(N), the vector to be copied.
 !
-!    Output, real ( kind = 8 ) A2(N), a copy of A1.
+!    Output, real(kind=8) A2(N), a copy of A1.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
 
   a2(1:n) = a1(1:n)
 
@@ -2341,6 +2346,33 @@ end
 
 
 
+!> @author John Burkardt
+!> @brief  R8VEC_CORRELATION returns the correlation of two R8VEC's.
+!> @date   2010-08-21
+!> @date   2020-02-20
+!> @see    
+subroutine r8vec_correlation (n, x, y, correlation)
+implicit none
+   integer, intent(in) :: n                 !< N, the dimension of the vectors.
+   real(kind=8), intent(in) :: x(n)         !< X(N), 
+   real(kind=8), intent(in) :: y(n)         !< Y(N), the vectors to be convolved.
+   real(kind=8), intent(out) :: correlation !< CORRELATION, the correlation of X and Y.
+   real(kind=8) :: x_norm, y_norm, xy_dot
+
+   x_norm = r8vec_norm (n, x)
+   y_norm = r8vec_norm (n, y)
+   xy_dot = dot_product (x(1:n), y(1:n))
+
+   correlation = 0.0D+0
+   if (x_norm .ne. 0.0D+0 .and. y_norm .ne. 0.0D+0) then
+      correlation = xy_dot / x_norm / y_norm
+   end if
+   ! if (x_norm .eq. 0.0D+0 .or. y_norm .eq. 0.0D+0) then
+   !    correlation = 0.0D+0
+   ! else
+   !    correlation = xy_dot / x_norm / y_norm
+   ! end if
+end subroutine r8vec_correlation
 !*****************************************************************************80
 !
 !! R8VEC_CORRELATION returns the correlation of two R8VEC's.
@@ -2369,37 +2401,15 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) X(N), Y(N), the vectors to be convolved.
+!    Input, real(kind=8) X(N), Y(N), the vectors to be convolved.
 !
-!    Output, real ( kind = 8 ) CORRELATION, the correlation of X and Y.
+!    Output, real(kind=8) CORRELATION, the correlation of X and Y.
 !
-subroutine r8vec_correlation ( n, x, y, correlation )
-  implicit none
 
-  integer ( kind = 4 ) n
 
-  real ( kind = 8 ) correlation
-!  real ( kind = 8 ) r8vec_norm
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) x_norm
-  real ( kind = 8 ) xy_dot
-  real ( kind = 8 ) y(n)
-  real ( kind = 8 ) y_norm
 
-  x_norm = r8vec_norm ( n, x )
-  y_norm = r8vec_norm ( n, y )
-  xy_dot = dot_product ( x(1:n), y(1:n) )
-
-  if ( x_norm == 0.0D+00 .or. y_norm == 0.0D+00 ) then
-    correlation = 0.0D+00
-  else
-    correlation = xy_dot / x_norm / y_norm
-  end if
-
-  return
-end
 function r8vec_cross_product_2d ( v1, v2 )
 
 !*****************************************************************************80
@@ -2427,15 +2437,15 @@ function r8vec_cross_product_2d ( v1, v2 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V1(2), V2(2), the vectors.
+!    Input, real(kind=8) V1(2), V2(2), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_CROSS_PRODUCT_2D, the cross product.
+!    Output, real(kind=8) R8VEC_CROSS_PRODUCT_2D, the cross product.
 !
   implicit none
 
-  real ( kind = 8 ) r8vec_cross_product_2d
-  real ( kind = 8 ) v1(2)
-  real ( kind = 8 ) v2(2)
+  real(kind=8) r8vec_cross_product_2d
+  real(kind=8) v1(2)
+  real(kind=8) v2(2)
 
   r8vec_cross_product_2d = v1(1) * v2(2) - v1(2) * v2(1)
 
@@ -2468,19 +2478,19 @@ function r8vec_cross_product_affine_2d ( v0, v1, v2 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V0(2), the base vector.
+!    Input, real(kind=8) V0(2), the base vector.
 !
-!    Input, real ( kind = 8 ) V1(2), V2(2), the vectors.
+!    Input, real(kind=8) V1(2), V2(2), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_CROSS_PRODUCT_AFFINE_2D,
+!    Output, real(kind=8) R8VEC_CROSS_PRODUCT_AFFINE_2D,
 !    the cross product (V1-V0) x (V2-V0).
 !
   implicit none
 
-  real ( kind = 8 ) r8vec_cross_product_affine_2d
-  real ( kind = 8 ) v0(2)
-  real ( kind = 8 ) v1(2)
-  real ( kind = 8 ) v2(2)
+  real(kind=8) r8vec_cross_product_affine_2d
+  real(kind=8) v0(2)
+  real(kind=8) v1(2)
+  real(kind=8) v2(2)
 
   r8vec_cross_product_affine_2d = &
       ( v1(1) - v0(1) ) * ( v2(2) - v0(2) ) &
@@ -2523,15 +2533,15 @@ subroutine r8vec_cross_product_3d ( v1, v2, v3 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V1(3), V2(3), the two vectors.
+!    Input, real(kind=8) V1(3), V2(3), the two vectors.
 !
-!    Output, real ( kind = 8 ) V3(3), the cross product vector.
+!    Output, real(kind=8) V3(3), the cross product vector.
 !
   implicit none
 
-  real ( kind = 8 ) v1(3)
-  real ( kind = 8 ) v2(3)
-  real ( kind = 8 ) v3(3)
+  real(kind=8) v1(3)
+  real(kind=8) v2(3)
+  real(kind=8) v3(3)
 
   v3(1) = v1(2) * v2(3) - v1(3) * v2(2)
   v3(2) = v1(3) * v2(1) - v1(1) * v2(3)
@@ -2575,19 +2585,19 @@ subroutine r8vec_cross_product_affine_3d ( v0, v1, v2, v3 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V0(3), the base vector.
+!    Input, real(kind=8) V0(3), the base vector.
 !
-!    Input, real ( kind = 8 ) V1(3), V2(3), the two vectors.
+!    Input, real(kind=8) V1(3), V2(3), the two vectors.
 !
-!    Output, real ( kind = 8 ) V3(3), the cross product vector
+!    Output, real(kind=8) V3(3), the cross product vector
 !    ( V1-V0) x (V2-V0).
 !
   implicit none
 
-  real ( kind = 8 ) v0(3)
-  real ( kind = 8 ) v1(3)
-  real ( kind = 8 ) v2(3)
-  real ( kind = 8 ) v3(3)
+  real(kind=8) v0(3)
+  real(kind=8) v1(3)
+  real(kind=8) v2(3)
+  real(kind=8) v3(3)
 
   v3(1) = ( v1(2) - v0(2) ) * ( v2(3) - v0(3) ) &
         - ( v2(2) - v0(2) ) * ( v1(3) - v0(3) )
@@ -2632,19 +2642,19 @@ subroutine r8vec_cum ( n, a, a_cum )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be summed.
+!    Input, real(kind=8) A(N), the vector to be summed.
 !
-!    Output, real ( kind = 8 ) A_CUM(1:N), the cumulative sums.
+!    Output, real(kind=8) A_CUM(1:N), the cumulative sums.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_cum(n)
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) a_cum(n)
+  integer(kind=4) i
 
   a_cum(1) = a(1)
 
@@ -2686,21 +2696,21 @@ subroutine r8vec_cum0 ( n, a, a_cum )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be summed.
+!    Input, real(kind=8) A(N), the vector to be summed.
 !
-!    Output, real ( kind = 8 ) A_CUM(0:N), the cumulative sums.
+!    Output, real(kind=8) A_CUM(0:N), the cumulative sums.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_cum(0:n)
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) a_cum(0:n)
+  integer(kind=4) i
 
-  a_cum(0) = 0.0D+00
+  a_cum(0) = 0.0D+0
 
   do i = 1, n
     a_cum(i) = a_cum(i-1) + a(i)
@@ -2783,23 +2793,23 @@ subroutine r8vec_dif ( n, h, cof )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the order of the derivative to be
+!    Input, integer(kind=4) N, the order of the derivative to be
 !    approximated.  N must be 0 or greater.
 !
-!    Input, real ( kind = 8 ) H, the half spacing between points.
+!    Input, real(kind=8) H, the half spacing between points.
 !    H must be positive.
 !
-!    Output, real ( kind = 8 ) COF(0:N), the coefficients needed to approximate
+!    Output, real(kind=8) COF(0:N), the coefficients needed to approximate
 !    the N-th derivative of a function F.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) cof(0:n)
-  real ( kind = 8 ) h
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) cof(0:n)
+  real(kind=8) h
+  integer(kind=4) i
+  integer(kind=4) j
 
   if ( n < 0 ) then
     write ( *, '(a)' ) ' '
@@ -2809,7 +2819,7 @@ subroutine r8vec_dif ( n, h, cof )
     stop
   end if
 
-  if ( h <= 0.0D+00 ) then
+  if ( h <= 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_DIF - Fatal error!'
     write ( *, '(a,g14.6)' ) '  The half sampling spacing is H = ', h
@@ -2819,7 +2829,7 @@ subroutine r8vec_dif ( n, h, cof )
 
   do i = 0, n
 
-    cof(i) = 1.0D+00
+    cof(i) = 1.0D+0
 
     do j = i - 1, 1, -1
       cof(j) = -cof(j) + cof(j-1)
@@ -2831,7 +2841,7 @@ subroutine r8vec_dif ( n, h, cof )
 
   end do
 
-  cof(0:n) = cof(0:n) / ( 2.0D+00 * h )**n
+  cof(0:n) = cof(0:n) / ( 2.0D+0 * h )**n
 
   return
 end
@@ -2859,28 +2869,28 @@ function r8vec_diff_dot_product ( n, u1, v1, u2, v2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) U1(N), V1(N), defines the vector U1-V1.
+!    Input, real(kind=8) U1(N), V1(N), defines the vector U1-V1.
 !
-!    Input, real ( kind = 8 ) U2(N), V2(N), defines the vector U2-V2.
+!    Input, real(kind=8) U2(N), V2(N), defines the vector U2-V2.
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_DOT_PRODUCT, the dot product 
+!    Output, real(kind=8) R8VEC_DIFF_DOT_PRODUCT, the dot product 
 !    of (U1-V1)*(U2-V2).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) r8vec_diff_dot_product
-  real ( kind = 8 ) u1(n)
-  real ( kind = 8 ) u2(n)
-  real ( kind = 8 ) v1(n)
-  real ( kind = 8 ) v2(n)
-  real ( kind = 8 ) value
+  integer(kind=4) i
+  real(kind=8) r8vec_diff_dot_product
+  real(kind=8) u1(n)
+  real(kind=8) u2(n)
+  real(kind=8) v1(n)
+  real(kind=8) v2(n)
+  real(kind=8) value
 
-  value = 0.0D+00
+  value = 0.0D+0
   do i = 1, n
     value = value + ( u1(i) - v1(i) ) * ( u2(i) - v2(i) )
   end do
@@ -2917,19 +2927,19 @@ function r8vec_diff_norm ( n, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the vectors
+!    Input, real(kind=8) A(N), B(N), the vectors
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_NORM, the L2 norm of A - B.
+!    Output, real(kind=8) R8VEC_DIFF_NORM, the L2 norm of A - B.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) r8vec_diff_norm
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  real(kind=8) r8vec_diff_norm
 
   r8vec_diff_norm = sqrt ( sum ( ( a(1:n) - b(1:n) )**2 ) )
 
@@ -2963,19 +2973,19 @@ function r8vec_diff_norm_l1 ( n, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the vectors.
+!    Input, real(kind=8) A(N), B(N), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_NORM_L1, the L1 norm of A - B.
+!    Output, real(kind=8) R8VEC_DIFF_NORM_L1, the L1 norm of A - B.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) r8vec_diff_norm_l1
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  real(kind=8) r8vec_diff_norm_l1
 
   r8vec_diff_norm_l1 = sum ( abs ( a(1:n) - b(1:n) ) )
 
@@ -3009,19 +3019,19 @@ function r8vec_diff_norm_l2 ( n, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the vectors
+!    Input, real(kind=8) A(N), B(N), the vectors
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_NORM_L2, the L2 norm of A - B.
+!    Output, real(kind=8) R8VEC_DIFF_NORM_L2, the L2 norm of A - B.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) r8vec_diff_norm_l2
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  real(kind=8) r8vec_diff_norm_l2
 
   r8vec_diff_norm_l2 = sqrt ( sum ( ( a(1:n) - b(1:n) )**2 ) )
 
@@ -3055,19 +3065,19 @@ function r8vec_diff_norm_li ( n, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the vectors
+!    Input, real(kind=8) A(N), B(N), the vectors
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_NORM_LI, the L-oo norm of A - B.
+!    Output, real(kind=8) R8VEC_DIFF_NORM_LI, the L-oo norm of A - B.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) r8vec_diff_norm_li
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  real(kind=8) r8vec_diff_norm_li
 
   r8vec_diff_norm_li = maxval ( abs ( a(1:n) - b(1:n) ) )
 
@@ -3099,20 +3109,20 @@ function r8vec_diff_norm_squared ( n, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the vectors
+!    Input, real(kind=8) A(N), B(N), the vectors
 !
-!    Output, real ( kind = 8 ) R8VEC_DIFF_NORM_SQUARED, the square of 
+!    Output, real(kind=8) R8VEC_DIFF_NORM_SQUARED, the square of 
 !    the L2 norm of A - B.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  real ( kind = 8 ) r8vec_diff_norm_squared
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  real(kind=8) r8vec_diff_norm_squared
 
   r8vec_diff_norm_squared = sum ( ( a(1:n) - b(1:n) )**2 )
 
@@ -3213,20 +3223,20 @@ subroutine r8vec_direct_product ( factor_index, factor_order, factor_value, &
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) FACTOR_INDEX, the index of the factor being
+!    Input, integer(kind=4) FACTOR_INDEX, the index of the factor being
 !    processed.  The first factor processed must be factor 1!
 !
-!    Input, integer ( kind = 4 ) FACTOR_ORDER, the order of the factor.
+!    Input, integer(kind=4) FACTOR_ORDER, the order of the factor.
 !
-!    Input, real ( kind = 8 ) FACTOR_VALUE(FACTOR_ORDER), the factor values
+!    Input, real(kind=8) FACTOR_VALUE(FACTOR_ORDER), the factor values
 !    for factor FACTOR_INDEX.
 !
-!    Input, integer ( kind = 4 ) FACTOR_NUM, the number of factors.
+!    Input, integer(kind=4) FACTOR_NUM, the number of factors.
 !
-!    Input, integer ( kind = 4 ) POINT_NUM, the number of elements in the
+!    Input, integer(kind=4) POINT_NUM, the number of elements in the
 !    direct product.
 !
-!    Input/output, real ( kind = 8 ) X(FACTOR_NUM,POINT_NUM), the elements of
+!    Input/output, real(kind=8) X(FACTOR_NUM,POINT_NUM), the elements of
 !    the direct product, which are built up gradually.
 !
 !  Local Parameters:
@@ -3242,25 +3252,25 @@ subroutine r8vec_direct_product ( factor_index, factor_order, factor_value, &
 !
   implicit none
 
-  integer ( kind = 4 ) factor_num
-  integer ( kind = 4 ) factor_order
-  integer ( kind = 4 ) point_num
+  integer(kind=4) factor_num
+  integer(kind=4) factor_order
+  integer(kind=4) point_num
 
-  integer ( kind = 4 ), save :: contig
-  integer ( kind = 4 ) factor_index
-  real ( kind = 8 ) factor_value(factor_order)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ), save :: rep
-  integer ( kind = 4 ), save :: skip
-  integer ( kind = 4 ) start
-  real ( kind = 8 ) x(factor_num,point_num)
+  integer(kind=4), save :: contig
+  integer(kind=4) factor_index
+  real(kind=8) factor_value(factor_order)
+  integer(kind=4) j
+  integer(kind=4) k
+  integer(kind=4), save :: rep
+  integer(kind=4), save :: skip
+  integer(kind=4) start
+  real(kind=8) x(factor_num,point_num)
 
-  if ( factor_index == 1 ) then
+  if ( factor_index .eq. 1 ) then
     contig = 1
     skip = 1
     rep = point_num
-    x(1:factor_num,1:point_num) = 0.0D+00
+    x(1:factor_num,1:point_num) = 0.0D+0
   end if
 
   rep = rep / factor_order
@@ -3376,28 +3386,28 @@ subroutine r8vec_direct_product2 ( factor_index, factor_order, factor_value, &
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) FACTOR_INDEX, the index of the factor being
+!    Input, integer(kind=4) FACTOR_INDEX, the index of the factor being
 !    processed.  The first factor processed must be factor 1!
 !
-!    Input, integer ( kind = 4 ) FACTOR_ORDER, the order of the factor.
+!    Input, integer(kind=4) FACTOR_ORDER, the order of the factor.
 !
-!    Input, real ( kind = 8 ) FACTOR_VALUE(FACTOR_ORDER), the factor values
+!    Input, real(kind=8) FACTOR_VALUE(FACTOR_ORDER), the factor values
 !    for factor FACTOR_INDEX.
 !
-!    Input, integer ( kind = 4 ) FACTOR_NUM, the number of factors.
+!    Input, integer(kind=4) FACTOR_NUM, the number of factors.
 !
-!    Input, integer ( kind = 4 ) POINT_NUM, the number of elements in the
+!    Input, integer(kind=4) POINT_NUM, the number of elements in the
 !    direct product.
 !
-!    Input/output, real ( kind = 8 ) W(POINT_NUM), the elements of the
+!    Input/output, real(kind=8) W(POINT_NUM), the elements of the
 !    direct product, which are built up gradually.
 !
 !  Local Parameters:
 !
-!    Local, integer ( kind = 4 ) START, the first location of a block of values
+!    Local, integer(kind=4) START, the first location of a block of values
 !    to set.
 !
-!    Local, integer ( kind = 4 ) CONTIG, the number of consecutive values
+!    Local, integer(kind=4) CONTIG, the number of consecutive values
 !    to set.
 !
 !    Local, integer SKIP, the distance from the current value of START
@@ -3407,25 +3417,25 @@ subroutine r8vec_direct_product2 ( factor_index, factor_order, factor_value, &
 !
   implicit none
 
-  integer ( kind = 4 ) factor_num
-  integer ( kind = 4 ) factor_order
-  integer ( kind = 4 ) point_num
+  integer(kind=4) factor_num
+  integer(kind=4) factor_order
+  integer(kind=4) point_num
 
-  integer ( kind = 4 ), save :: contig
-  integer ( kind = 4 ) factor_index
-  real ( kind = 8 ) factor_value(factor_order)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ), save :: rep
-  integer ( kind = 4 ), save :: skip
-  integer ( kind = 4 ) start
-  real ( kind = 8 ) w(point_num)
+  integer(kind=4), save :: contig
+  integer(kind=4) factor_index
+  real(kind=8) factor_value(factor_order)
+  integer(kind=4) j
+  integer(kind=4) k
+  integer(kind=4), save :: rep
+  integer(kind=4), save :: skip
+  integer(kind=4) start
+  real(kind=8) w(point_num)
 
-  if ( factor_index == 1 ) then
+  if ( factor_index .eq. 1 ) then
     contig = 1
     skip = 1
     rep = point_num
-    w(1:point_num) = 1.0D+00
+    w(1:point_num) = 1.0D+0
   end if
 
   rep = rep / factor_order
@@ -3470,20 +3480,20 @@ function r8vec_distance ( dim_num, v1, v2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) DIM_NUM, the spatial dimension.
+!    Input, integer(kind=4) DIM_NUM, the spatial dimension.
 !
-!    Input, real ( kind = 8 ) V1(DIM_NUM), V2(DIM_NUM), the vectors.
+!    Input, real(kind=8) V1(DIM_NUM), V2(DIM_NUM), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_DISTANCE, the Euclidean distance
+!    Output, real(kind=8) R8VEC_DISTANCE, the Euclidean distance
 !    between the vectors.
 !
   implicit none
 
-  integer ( kind = 4 ) dim_num
+  integer(kind=4) dim_num
 
-  real ( kind = 8 ) r8vec_distance
-  real ( kind = 8 ) v1(dim_num)
-  real ( kind = 8 ) v2(dim_num)
+  real(kind=8) r8vec_distance
+  real(kind=8) v1(dim_num)
+  real(kind=8) v2(dim_num)
 
   r8vec_distance = sqrt ( sum ( ( v1(1:dim_num) - v2(1:dim_num) )**2 ) )
 
@@ -3513,26 +3523,26 @@ function r8vec_distinct ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be checked.
+!    Input, real(kind=8) A(N), the vector to be checked.
 !
 !    Output, logical R8VEC_DISTINCT is TRUE if the elements of A are distinct.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
   logical r8vec_distinct
 
   r8vec_distinct = .false.
 
   do i = 2, n
     do j = 1, i - 1
-      if ( a(i) == a(j) ) then
+      if ( a(i) .eq. a(j) ) then
         return
       end if
     end do
@@ -3569,19 +3579,19 @@ function r8vec_dot_product ( n, v1, v2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) V1(N), V2(N), the vectors.
+!    Input, real(kind=8) V1(N), V2(N), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_DOT_PRODUCT, the dot product.
+!    Output, real(kind=8) R8VEC_DOT_PRODUCT, the dot product.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) r8vec_dot_product
-  real ( kind = 8 ) v1(n)
-  real ( kind = 8 ) v2(n)
+  real(kind=8) r8vec_dot_product
+  real(kind=8) v1(n)
+  real(kind=8) v2(n)
 
   r8vec_dot_product = dot_product ( v1(1:n), v2(1:n) )
 
@@ -3607,22 +3617,22 @@ function r8vec_dot_product_affine ( n, v0, v1, v2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the spatial dimension.
+!    Input, integer(kind=4) N, the spatial dimension.
 !
-!    Input, real ( kind = 8 ) V0(N), the base vector.
+!    Input, real(kind=8) V0(N), the base vector.
 !
-!    Input, real ( kind = 8 ) V1(N), V2(N), the vectors.
+!    Input, real(kind=8) V1(N), V2(N), the vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_DOT_PRODUCT_AFFINE, the dot product.
+!    Output, real(kind=8) R8VEC_DOT_PRODUCT_AFFINE, the dot product.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) r8vec_dot_product_affine
-  real ( kind = 8 ) v0(n)
-  real ( kind = 8 ) v1(n)
-  real ( kind = 8 ) v2(n)
+  real(kind=8) r8vec_dot_product_affine
+  real(kind=8) v0(n)
+  real(kind=8) v1(n)
+  real(kind=8) v2(n)
 
   r8vec_dot_product_affine = dot_product ( &
     v1(1:n) - v0(1:n),  &
@@ -3654,22 +3664,22 @@ function r8vec_eq ( n, a1, a2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vectors.
+!    Input, integer(kind=4) N, the number of entries in the vectors.
 !
-!    Input, real ( kind = 8 ) A1(N), A2(N), two vectors to compare.
+!    Input, real(kind=8) A1(N), A2(N), two vectors to compare.
 !
 !    Output, logical R8VEC_EQ, is TRUE if every pair of elements A1(I)
 !    and A2(I) are equal, and FALSE otherwise.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
   logical r8vec_eq
 
-  r8vec_eq = ( all ( a1(1:n) == a2(1:n) ) )
+  r8vec_eq = ( all ( a1(1:n) .eq. a2(1:n) ) )
 
   return
 end
@@ -3702,24 +3712,24 @@ subroutine r8vec_even ( n, alo, ahi, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of values.
+!    Input, integer(kind=4) N, the number of values.
 !
-!    Input, real ( kind = 8 ) ALO, AHI, the low and high values.
+!    Input, real(kind=8) ALO, AHI, the low and high values.
 !
-!    Output, real ( kind = 8 ) A(N), N evenly spaced values.
+!    Output, real(kind=8) A(N), N evenly spaced values.
 !    Normally, A(1) = ALO and A(N) = AHI.
 !    However, if N = 1, then A(1) = 0.5*(ALO+AHI).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) ahi
-  real ( kind = 8 ) alo
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) ahi
+  real(kind=8) alo
+  integer(kind=4) i
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
     a(1) = 0.5D+00 * ( alo + ahi )
 
@@ -3765,26 +3775,26 @@ subroutine r8vec_even_select ( n, xlo, xhi, ival, xval )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of values.
+!    Input, integer(kind=4) N, the number of values.
 !
-!    Input, real ( kind = 8 ) XLO, XHI, the low and high values.
+!    Input, real(kind=8) XLO, XHI, the low and high values.
 !
-!    Input, integer ( kind = 4 ) IVAL, the index of the desired point.
+!    Input, integer(kind=4) IVAL, the index of the desired point.
 !    IVAL is normally between 1 and N, but may be any integer value.
 !
-!    Output, real ( kind = 8 ) XVAL, the IVAL-th of N evenly spaced values
+!    Output, real(kind=8) XVAL, the IVAL-th of N evenly spaced values
 !    between XLO and XHI.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) ival
-  real ( kind = 8 ) xhi
-  real ( kind = 8 ) xlo
-  real ( kind = 8 ) xval
+  integer(kind=4) ival
+  real(kind=8) xhi
+  real(kind=8) xlo
+  real(kind=8) xval
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
     xval = 0.5D+00 * ( xlo + xhi )
 
@@ -3829,44 +3839,44 @@ subroutine r8vec_even2 ( maxval, nfill, nold, xold, nval, xval )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) MAXVAL, the size of the XVAL array, as declared
+!    Input, integer(kind=4) MAXVAL, the size of the XVAL array, as declared
 !    by the user.  MAXVAL must be large enough to hold the NVAL values computed
 !    by this routine.  In other words, MAXVAL must be at least equal to
 !    NOLD + SUM (1 <= I <= NOLD-1) NFILL(I).
 !
-!    Input, integer ( kind = 4 ) NFILL(NOLD-1), the number of values
+!    Input, integer(kind=4) NFILL(NOLD-1), the number of values
 !    to be interpolated between XOLD(I) and XOLD(I+1).
 !    NFILL(I) does not count the endpoints.  Thus, if
 !    NFILL(I) is 1, there will be one new point generated
 !    between XOLD(I) and XOLD(I+1).
 !    NFILL(I) must be nonnegative.
 !
-!    Input, integer ( kind = 4 ) NOLD, the number of values XOLD,
+!    Input, integer(kind=4) NOLD, the number of values XOLD,
 !    between which extra values are to be interpolated.
 !
-!    Input, real ( kind = 8 ) XOLD(NOLD), the original vector of numbers
+!    Input, real(kind=8) XOLD(NOLD), the original vector of numbers
 !    between which new values are to be interpolated.
 !
-!    Output, integer ( kind = 4 ) NVAL, the number of values computed
+!    Output, integer(kind=4) NVAL, the number of values computed
 !    in the XVAL array.
 !    NVAL = NOLD + SUM ( 1 <= I <= NOLD-1 ) NFILL(I)
 !
-!    Output, real ( kind = 8 ) XVAL(MAXVAL).  On output, XVAL contains the
+!    Output, real(kind=8) XVAL(MAXVAL).  On output, XVAL contains the
 !    NOLD values of XOLD, as well as the interpolated
 !    values, making a total of NVAL values.
 !
   implicit none
 
-  integer ( kind = 4 ) maxval
-  integer ( kind = 4 ) nold
+  integer(kind=4) maxval
+  integer(kind=4) nold
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) nadd
-  integer ( kind = 4 ) nfill(nold-1)
-  integer ( kind = 4 ) nval
-  real ( kind = 8 ) xold(nold)
-  real ( kind = 8 ) xval(maxval)
+  integer(kind=4) i
+  integer(kind=4) j
+  integer(kind=4) nadd
+  integer(kind=4) nfill(nold-1)
+  integer(kind=4) nval
+  real(kind=8) xold(nold)
+  real(kind=8) xval(maxval)
 
   nval = 1
 
@@ -3935,24 +3945,24 @@ subroutine r8vec_even2_select ( n, xlo, xhi, ival, xval )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of values.
+!    Input, integer(kind=4) N, the number of values.
 !
-!    Input, real ( kind = 8 ) XLO, XHI, the low and high values.
+!    Input, real(kind=8) XLO, XHI, the low and high values.
 !
-!    Input, integer ( kind = 4 ) IVAL, the index of the desired point.
+!    Input, integer(kind=4) IVAL, the index of the desired point.
 !    IVAL is normally between 1 and N, but may be any integer value.
 !
-!    Output, real ( kind = 8 ) XVAL, the IVAL-th of N evenly spaced midpoints
+!    Output, real(kind=8) XVAL, the IVAL-th of N evenly spaced midpoints
 !    between XLO and XHI.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) ival
-  real ( kind = 8 ) xhi
-  real ( kind = 8 ) xlo
-  real ( kind = 8 ) xval
+  integer(kind=4) ival
+  real(kind=8) xhi
+  real(kind=8) xlo
+  real(kind=8) xval
 
   xval = ( real ( 2 * n - 2 * ival + 1, kind = 8 ) * xlo   &
          + real (         2 * ival - 1, kind = 8 ) * xhi ) &
@@ -3995,39 +4005,39 @@ subroutine r8vec_even3 ( nold, nval, xold, xval )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NOLD, the number of values XOLD, between
+!    Input, integer(kind=4) NOLD, the number of values XOLD, between
 !    which extra values are to be interpolated.
 !
-!    Input, integer ( kind = 4 ) NVAL, the number of values to be computed
+!    Input, integer(kind=4) NVAL, the number of values to be computed
 !    in the XVAL array.  NVAL should be at least NOLD.
 !
-!    Input, real ( kind = 8 ) XOLD(NOLD), the original vector of numbers
+!    Input, real(kind=8) XOLD(NOLD), the original vector of numbers
 !    between which new values are to be interpolated.
 !
-!    Output, real ( kind = 8 ) XVAL(NVAL).  On output, XVAL contains the
+!    Output, real(kind=8) XVAL(NVAL).  On output, XVAL contains the
 !    NOLD values of XOLD, as well as interpolated
 !    values, making a total of NVAL values.
 !
   implicit none
 
-  integer ( kind = 4 ) nval
-  integer ( kind = 4 ) nold
+  integer(kind=4) nval
+  integer(kind=4) nold
 
-  real ( kind = 8 ) density
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ival
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) nmaybe
-  integer ( kind = 4 ) npts
-  integer ( kind = 4 ) ntemp
-  integer ( kind = 4 ) ntot
-  real ( kind = 8 ) xlen
-  real ( kind = 8 ) xleni
-  real ( kind = 8 ) xlentot
-  real ( kind = 8 ) xold(nold)
-  real ( kind = 8 ) xval(nval)
+  real(kind=8) density
+  integer(kind=4) i
+  integer(kind=4) ival
+  integer(kind=4) j
+  integer(kind=4) nmaybe
+  integer(kind=4) npts
+  integer(kind=4) ntemp
+  integer(kind=4) ntot
+  real(kind=8) xlen
+  real(kind=8) xleni
+  real(kind=8) xlentot
+  real(kind=8) xold(nold)
+  real(kind=8) xval(nval)
 
-  xlen = 0.0D+00
+  xlen = 0.0D+0
   do i = 1, nold - 1
     xlen = xlen + abs ( xold(i+1) - xold(i) )
   end do
@@ -4038,7 +4048,7 @@ subroutine r8vec_even3 ( nold, nval, xold, xval )
 
   ival = 1
   ntot = 0
-  xlentot = 0.0D+00
+  xlentot = 0.0D+0
 
   do i = 1, nold - 1
 
@@ -4107,25 +4117,25 @@ subroutine r8vec_expand_linear ( n, x, fat, xfat )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of input data values.
+!    Input, integer(kind=4) N, the number of input data values.
 !
-!    Input, real ( kind = 8 ) X(N), the original data.
+!    Input, real(kind=8) X(N), the original data.
 !
-!    Input, integer ( kind = 4 ) FAT, the number of data values to interpolate
+!    Input, integer(kind=4) FAT, the number of data values to interpolate
 !    between each pair of original data values.
 !
-!    Output, real ( kind = 8 ) XFAT((N-1)*(FAT+1)+1), the "fattened" data.
+!    Output, real(kind=8) XFAT((N-1)*(FAT+1)+1), the "fattened" data.
 !
   implicit none
 
-  integer ( kind = 4 ) fat
-  integer ( kind = 4 ) n
+  integer(kind=4) fat
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xfat((n-1)*(fat+1)+1)
+  integer(kind=4) i
+  integer(kind=4) j
+  integer(kind=4) k
+  real(kind=8) x(n)
+  real(kind=8) xfat((n-1)*(fat+1)+1)
 
   k = 0
 
@@ -4196,33 +4206,33 @@ subroutine r8vec_expand_linear2 ( n, x, before, fat, after, xfat )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of input data values.
+!    Input, integer(kind=4) N, the number of input data values.
 !    N must be at least 2.
 !
-!    Input, real ( kind = 8 ) X(N), the original data.
+!    Input, real(kind=8) X(N), the original data.
 !
-!    Input, integer ( kind = 4 ) BEFORE, the number of "before" values.
+!    Input, integer(kind=4) BEFORE, the number of "before" values.
 !
-!    Input, integer ( kind = 4 ) FAT, the number of data values to interpolate
+!    Input, integer(kind=4) FAT, the number of data values to interpolate
 !    between each pair of original data values.
 !
-!    Input, integer ( kind = 4 ) AFTER, the number of "after" values.
+!    Input, integer(kind=4) AFTER, the number of "after" values.
 !
-!    Output, real ( kind = 8 ) XFAT(BEFORE+(N-1)*(FAT+1)+1+AFTER), the
+!    Output, real(kind=8) XFAT(BEFORE+(N-1)*(FAT+1)+1+AFTER), the
 !    "fattened" data.
 !
   implicit none
 
-  integer ( kind = 4 ) after
-  integer ( kind = 4 ) before
-  integer ( kind = 4 ) fat
-  integer ( kind = 4 ) n
+  integer(kind=4) after
+  integer(kind=4) before
+  integer(kind=4) fat
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xfat(before+(n-1)*(fat+1)+1+after)
+  integer(kind=4) i
+  integer(kind=4) j
+  integer(kind=4) k
+  real(kind=8) x(n)
+  real(kind=8) xfat(before+(n-1)*(fat+1)+1+after)
 
   k = 0
 !
@@ -4293,29 +4303,29 @@ subroutine r8vec_first_index ( n, a, tol, first_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) FIRST_INDEX(N), the first occurrence index.
+!    Output, integer(kind=4) FIRST_INDEX(N), the first occurrence index.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) first_index(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) tol
+  real(kind=8) a(n)
+  integer(kind=4) first_index(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) tol
 
   first_index(1:n) = -1
 
   do i = 1, n
 
-    if ( first_index(i) == -1 ) then
+    if ( first_index(i) .eq. -1 ) then
 
       first_index(i) = i
 
@@ -4368,20 +4378,20 @@ subroutine r8vec_floor ( n, r8vec, floorvec )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
-!    Input, real ( kind = 8 ) R8VEC(N), the values to be rounded down.
+!    Input, real(kind=8) R8VEC(N), the values to be rounded down.
 !
-!    Output, integer ( kind = 4 ) FLOORVEC(N), the rounded value.
+!    Output, integer(kind=4) FLOORVEC(N), the rounded value.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) floorvec(n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) r8vec(n)
-  integer ( kind = 4 ) value
+  integer(kind=4) floorvec(n)
+  integer(kind=4) i
+  real(kind=8) r8vec(n)
+  integer(kind=4) value
 
   do i = 1, n
 
@@ -4423,32 +4433,32 @@ subroutine r8vec_frac ( n, a, k, frac )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, A is the array to search.
 !    On output, the elements of A have been somewhat rearranged.
 !
-!    Input, integer ( kind = 4 ) K, the fractile to be sought.  If K = 1, the
+!    Input, integer(kind=4) K, the fractile to be sought.  If K = 1, the
 !    minimum entry is sought.  If K = N, the maximum is sought.  Other values
 !    of K search for the entry which is K-th in size.  K must be at
 !    least 1, and no greater than N.
 !
-!    Output, real ( kind = 8 ) FRAC, the value of the K-th fractile of A.
+!    Output, real(kind=8) FRAC, the value of the K-th fractile of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) frac
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) iryt
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) left
-  real ( kind = 8 ) temp
-  real ( kind = 8 ) x
+  real(kind=8) a(n)
+  real(kind=8) frac
+  integer(kind=4) i
+  integer(kind=4) iryt
+  integer(kind=4) j
+  integer(kind=4) k
+  integer(kind=4) left
+  real(kind=8) temp
+  real(kind=8) x
 
   if ( n <= 0 ) then
     write ( *, '(a)' ) ' '
@@ -4571,18 +4581,18 @@ subroutine r8vec_fraction ( n, x, fraction )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of arguments.
+!    Input, integer(kind=4) N, the number of arguments.
 !
-!    Input, real ( kind = 8 ) X(N), the arguments.
+!    Input, real(kind=8) X(N), the arguments.
 !
-!    Output, real ( kind = 8 ) FRACTION(N), the fraction parts.
+!    Output, real(kind=8) FRACTION(N), the fraction parts.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) fraction(n)
-  real ( kind = 8 ) x(n)
+  real(kind=8) fraction(n)
+  real(kind=8) x(n)
 
   fraction(1:n) = abs ( x(1:n) ) - real ( int ( abs ( x(1:n) ) ), kind = 8 )
 
@@ -4592,7 +4602,7 @@ function r8vec_gt ( n, a1, a2 )
 
 !*****************************************************************************80
 !
-!! R8VEC_GT == ( A1 > A2 ) for R8VEC's.
+!! R8VEC_GT .eq. ( A1 > A2 ) for R8VEC's.
 !
 !  Discussion:
 !
@@ -4601,9 +4611,9 @@ function r8vec_gt ( n, a1, a2 )
 !    The comparison is lexicographic.
 !
 !    A1 > A2  <=>                              A1(1) > A2(1) or
-!                 ( A1(1)     == A2(1)     and A1(2) > A2(2) ) or
+!                 ( A1(1)     .eq. A2(1)     and A1(2) > A2(2) ) or
 !                 ...
-!                 ( A1(1:N-1) == A2(1:N-1) and A1(N) > A2(N)
+!                 ( A1(1:N-1) .eq. A2(1:N-1) and A1(N) > A2(N)
 !
 !  Licensing:
 !
@@ -4619,19 +4629,19 @@ function r8vec_gt ( n, a1, a2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) A1(N), A2(N), the vectors to be compared.
+!    Input, real(kind=8) A1(N), A2(N), the vectors to be compared.
 !
 !    Output, logical R8VEC_GT, is TRUE if and only if A1 > A2.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
-  integer ( kind = 4 ) i
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
+  integer(kind=4) i
   logical r8vec_gt
 
   r8vec_gt = .false.
@@ -4694,21 +4704,21 @@ subroutine r8vec_heap_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the input array.
+!    Input, integer(kind=4) N, the size of the input array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, an unsorted array.
 !    On output, the array has been reordered into a heap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ifree
-  real ( kind = 8 ) key
-  integer ( kind = 4 ) m
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) ifree
+  real(kind=8) key
+  integer(kind=4) m
 !
 !  Only nodes N/2 down to 1 can be "parent" nodes.
 !
@@ -4811,21 +4821,21 @@ subroutine r8vec_heap_d ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the input array.
+!    Input, integer(kind=4) N, the size of the input array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, an unsorted array.
 !    On output, the array has been reordered into a heap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ifree
-  real ( kind = 8 ) key
-  integer ( kind = 4 ) m
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) ifree
+  real(kind=8) key
+  integer(kind=4) m
 !
 !  Only nodes N/2 down to 1 can be "parent" nodes.
 !
@@ -4922,18 +4932,18 @@ subroutine r8vec_heap_d_extract ( n, a, value )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the number of items in the heap.
+!    Input/output, integer(kind=4) N, the number of items in the heap.
 !
-!    Input/output, real ( kind = 8 ) A(N), the heap.
+!    Input/output, real(kind=8) A(N), the heap.
 !
-!    Output, real ( kind = 8 ) VALUE, the item of maximum value, which has
+!    Output, real(kind=8) VALUE, the item of maximum value, which has
 !    been removed from the heap.
 !
   implicit none
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) n
-  real ( kind = 8 ) value
+  real(kind=8) a(*)
+  integer(kind=4) n
+  real(kind=8) value
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -4946,7 +4956,7 @@ subroutine r8vec_heap_d_extract ( n, a, value )
 !
   value = a(1)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     n = 0
     return
   end if
@@ -4996,19 +5006,19 @@ subroutine r8vec_heap_d_insert ( n, a, value )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the number of items in the heap.
+!    Input/output, integer(kind=4) N, the number of items in the heap.
 !
-!    Input/output, real ( kind = 8 ) A(N), the heap.
+!    Input/output, real(kind=8) A(N), the heap.
 !
-!    Input, real ( kind = 8 ) VALUE, the value to be inserted.
+!    Input, real(kind=8) VALUE, the value to be inserted.
 !
   implicit none
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) parent
-  real ( kind = 8 ) value
+  real(kind=8) a(*)
+  integer(kind=4) i
+  integer(kind=4) n
+  integer(kind=4) parent
+  real(kind=8) value
 
   n = n + 1
   i = n
@@ -5064,18 +5074,18 @@ subroutine r8vec_heap_d_max ( n, a, value )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the heap.
+!    Input, integer(kind=4) N, the number of items in the heap.
 !
-!    Input, real ( kind = 8 ) A(N), the heap.
+!    Input, real(kind=8) A(N), the heap.
 !
-!    Output, real ( kind = 8 ) VALUE, the maximum value in the heap.
+!    Output, real(kind=8) VALUE, the maximum value in the heap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) value
+  real(kind=8) a(n)
+  real(kind=8) value
 
   value = a(1)
 
@@ -5109,30 +5119,30 @@ subroutine r8vec_histogram ( n, a, a_lo, a_hi, histo_num, histo_gram )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the array to examine.
+!    Input, real(kind=8) A(N), the array to examine.
 !
-!    Input, real ( kind = 8 ) A_LO, A_HI, the lowest and highest
+!    Input, real(kind=8) A_LO, A_HI, the lowest and highest
 !    values to be histogrammed.  These values will also define the bins.
 !
-!    Input, integer ( kind = 4 ) HISTO_NUM, the number of bins to use.
+!    Input, integer(kind=4) HISTO_NUM, the number of bins to use.
 !
-!    Output, integer ( kind = 4 ) HISTO_GRAM(0:HISTO_NUM+1), contains the
+!    Output, integer(kind=4) HISTO_GRAM(0:HISTO_NUM+1), contains the
 !    number of entries of A in each bin.
 !
   implicit none
 
-  integer ( kind = 4 ) histo_num
-  integer ( kind = 4 ) n
+  integer(kind=4) histo_num
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_hi
-  real ( kind = 8 ) a_lo
-  real ( kind = 8 ) delta
-  integer ( kind = 4 ) histo_gram(0:histo_num+1)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) a(n)
+  real(kind=8) a_hi
+  real(kind=8) a_lo
+  real(kind=8) delta
+  integer(kind=4) histo_gram(0:histo_num+1)
+  integer(kind=4) i
+  integer(kind=4) j
 
   histo_gram(0:histo_num+1) = 0
 
@@ -5151,7 +5161,7 @@ subroutine r8vec_histogram ( n, a, a_lo, a_hi, histo_num, histo_gram )
         * real ( 1,         kind = 8 )   &
         + (      -           delta + a(i) - a_lo ) &
         * real ( histo_num, kind = 8 ) ) &
-        / ( a_hi - 2.0D+00 * delta        - a_lo ) )
+        / ( a_hi - 2.0D+0 * delta        - a_lo ) )
 
       histo_gram(j) = histo_gram(j) + 1
 
@@ -5195,26 +5205,26 @@ subroutine r8vec_house_column ( n, a, k, v )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the order of the matrix A.
+!    Input, integer(kind=4) N, the order of the matrix A.
 !
-!    Input, real ( kind = 8 ) A(N), column K of the matrix A.
+!    Input, real(kind=8) A(N), column K of the matrix A.
 !
-!    Input, integer ( kind = 4 ) K, the column of the matrix to be modified.
+!    Input, integer(kind=4) K, the column of the matrix to be modified.
 !
-!    Output, real ( kind = 8 ) V(N), a vector of unit L2 norm which defines an
+!    Output, real(kind=8) V(N), a vector of unit L2 norm which defines an
 !    orthogonal Householder premultiplier matrix H with the property
 !    that the K-th column of H*A is zero below the diagonal.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) s
-  real ( kind = 8 ) v(n)
+  real(kind=8) a(n)
+  integer(kind=4) k
+  real(kind=8) s
+  real(kind=8) v(n)
 
-  v(1:n) = 0.0D+00
+  v(1:n) = 0.0D+0
 
   if ( k < 1 .or. n <= k ) then
     return
@@ -5222,7 +5232,7 @@ subroutine r8vec_house_column ( n, a, k, v )
 
   s = sqrt ( dot_product ( a(k:n), a(k:n) ) )
 
-  if ( s == 0.0D+00 ) then
+  if ( s .eq. 0.0D+0 ) then
     return
   end if
 
@@ -5259,21 +5269,21 @@ function r8vec_i4vec_dot_product ( n, r8vec, i4vec )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) R8VEC(N), the first vector.
+!    Input, real(kind=8) R8VEC(N), the first vector.
 !
-!    Input, integer ( kind = 4 ) I4VEC(N), the second vector.
+!    Input, integer(kind=4) I4VEC(N), the second vector.
 !
-!    Output, real ( kind = 8 ) R8VEC_I4VEC_DOT_PRODUCT, the dot product.
+!    Output, real(kind=8) R8VEC_I4VEC_DOT_PRODUCT, the dot product.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i4vec(n)
-  real ( kind = 8 ) r8vec(n)
-  real ( kind = 8 ) r8vec_i4vec_dot_product
+  integer(kind=4) i4vec(n)
+  real(kind=8) r8vec(n)
+  real(kind=8) r8vec_i4vec_dot_product
 
   r8vec_i4vec_dot_product = dot_product ( r8vec(1:n), &
                                    real ( i4vec(1:n), kind = 8 ) )
@@ -5304,21 +5314,21 @@ function r8vec_in_01 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_IN_01, is TRUE if every entry of A is
 !    between 0 and 1.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_in_01
 
-  if ( any ( a(1:n) < 0.0D+00 .or. 1.0D+00 < a(1:n) ) ) then
+  if ( any ( a(1:n) < 0.0D+0 .or. 1.0D+0 < a(1:n) ) ) then
     r8vec_in_01 = .false.
   else
     r8vec_in_01 = .true.
@@ -5350,9 +5360,9 @@ function r8vec_in_ab ( n, x, a, b )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in X.
+!    Input, integer(kind=4) N, the number of entries in X.
 !
-!    Input, real ( kind = 8 ) X(N), the vector.
+!    Input, real(kind=8) X(N), the vector.
 !
 !    Input, real A, B, the limits of the range.
 !
@@ -5361,12 +5371,12 @@ function r8vec_in_ab ( n, x, a, b )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
+  real(kind=8) a
+  real(kind=8) b
   logical r8vec_in_ab
-  real ( kind = 8 ) x(n)
+  real(kind=8) x(n)
 
   if ( any ( x(1:n) < a .or. b < x(1:n) ) ) then
     r8vec_in_ab = .false.
@@ -5402,29 +5412,29 @@ subroutine r8vec_index_delete_all ( n, x, indx, xval )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the size of the current list.
+!    Input/output, integer(kind=4) N, the size of the current list.
 !
-!    Input/output, real ( kind = 8 ) X(N), the list.
+!    Input/output, real(kind=8) X(N), the list.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input/output, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Input, real ( kind = 8 ) XVAL, the value to be sought.
+!    Input, real(kind=8) XVAL, the value to be sought.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) equal
-  integer ( kind = 4 ) equal1
-  integer ( kind = 4 ) equal2
-  integer ( kind = 4 ) get
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(*)
-  integer ( kind = 4 ) less
-  integer ( kind = 4 ) more
-  integer ( kind = 4 ) put
-  real ( kind = 8 ) x(*)
-  real ( kind = 8 ) xval
+  integer(kind=4) equal
+  integer(kind=4) equal1
+  integer(kind=4) equal2
+  integer(kind=4) get
+  integer(kind=4) i
+  integer(kind=4) indx(*)
+  integer(kind=4) less
+  integer(kind=4) more
+  integer(kind=4) put
+  real(kind=8) x(*)
+  real(kind=8) xval
 
   if ( n < 1 ) then
     n = 0
@@ -5433,7 +5443,7 @@ subroutine r8vec_index_delete_all ( n, x, indx, xval )
 
   call r8vec_index_search ( n, x, indx, xval, less, equal, more )
 
-  if ( equal == 0 ) then
+  if ( equal .eq. 0 ) then
     return
   end if
 
@@ -5482,7 +5492,7 @@ subroutine r8vec_index_delete_all ( n, x, indx, xval )
 
   end do
 
-  x(put+1:n) = 0.0D+00
+  x(put+1:n) = 0.0D+0
 !
 !  Adjust the INDX values.
 !
@@ -5539,31 +5549,31 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the input list.
+!    Input, integer(kind=4) N, the size of the input list.
 !
-!    Input, real ( kind = 8 ) X(N), the list.
+!    Input, real(kind=8) X(N), the list.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Output, integer ( kind = 4 ) N2, the number of unique entries in X.
+!    Output, integer(kind=4) N2, the number of unique entries in X.
 !
-!    Output, real ( kind = 8 ) X2(N2), a copy of the list which has
+!    Output, real(kind=8) X2(N2), a copy of the list which has
 !    been sorted, and made unique.
 !
-!    Output, integer ( kind = 4 ) INDX2(N2), the sort index of the new list.
+!    Output, integer(kind=4) INDX2(N2), the sort index of the new list.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indx2(n)
-  integer ( kind = 4 ) n2
-  integer ( kind = 4 ) n3
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) x2(n)
-  real ( kind = 8 ) x3(n)
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) indx2(n)
+  integer(kind=4) n2
+  integer(kind=4) n3
+  real(kind=8) x(n)
+  real(kind=8) x2(n)
+  real(kind=8) x3(n)
 
   i = 0
   n3 = 0
@@ -5577,7 +5587,7 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
     end if
 
     if ( 1 < i ) then
-      if ( x(indx(i)) == x3(n3) ) then
+      if ( x(indx(i)) .eq. x3(n3) ) then
         cycle
       end if
     end if
@@ -5623,35 +5633,35 @@ subroutine r8vec_index_delete_one ( n, x, indx, xval, n2, x2, indx2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the current list.
+!    Input, integer(kind=4) N, the size of the current list.
 !
-!    Input, real ( kind = 8 ) X(N), the list.
+!    Input, real(kind=8) X(N), the list.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Input, real ( kind = 8 ) XVAL, the value to be sought.
+!    Input, real(kind=8) XVAL, the value to be sought.
 !
-!    Output, integer ( kind = 4 ) N2, the size of the current list.
+!    Output, integer(kind=4) N2, the size of the current list.
 !
-!    Output, real ( kind = 8 ) X2(N2), the list.
+!    Output, real(kind=8) X2(N2), the list.
 !
-!    Output, integer ( kind = 4 ) INDX2(N2), the sort index of the list.
+!    Output, integer(kind=4) INDX2(N2), the sort index of the list.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) equal
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indx2(n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) less
-  integer ( kind = 4 ) more
-  integer ( kind = 4 ) n2
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) x2(n)
-  real ( kind = 8 ) xval
+  integer(kind=4) equal
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) indx2(n)
+  integer(kind=4) j
+  integer(kind=4) less
+  integer(kind=4) more
+  integer(kind=4) n2
+  real(kind=8) x(n)
+  real(kind=8) x2(n)
+  real(kind=8) xval
 
   if ( n < 1 ) then
     n2 = 0
@@ -5702,24 +5712,24 @@ subroutine r8vec_index_insert ( n, x, indx, xval )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the size of the current list.
+!    Input/output, integer(kind=4) N, the size of the current list.
 !
-!    Input/output, real ( kind = 8 ) X(N), the list.
+!    Input/output, real(kind=8) X(N), the list.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input/output, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Input, real ( kind = 8 ) XVAL, the value to be sought.
+!    Input, real(kind=8) XVAL, the value to be sought.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) equal
-  integer ( kind = 4 ) indx(*)
-  integer ( kind = 4 ) less
-  integer ( kind = 4 ) more
-  real ( kind = 8 ) x(*)
-  real ( kind = 8 ) xval
+  integer(kind=4) equal
+  integer(kind=4) indx(*)
+  integer(kind=4) less
+  integer(kind=4) more
+  real(kind=8) x(*)
+  real(kind=8) xval
 
   if ( n <= 0 ) then
     n = 1
@@ -5764,24 +5774,24 @@ subroutine r8vec_index_insert_unique ( n, x, indx, xval )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the size of the current list.
+!    Input/output, integer(kind=4) N, the size of the current list.
 !
-!    Input/output, real ( kind = 8 ) X(N), the list.
+!    Input/output, real(kind=8) X(N), the list.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input/output, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Input, real ( kind = 8 ) XVAL, the value to be sought.
+!    Input, real(kind=8) XVAL, the value to be sought.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) equal
-  integer ( kind = 4 ) indx(*)
-  integer ( kind = 4 ) less
-  integer ( kind = 4 ) more
-  real ( kind = 8 ) x(*)
-  real ( kind = 8 ) xval
+  integer(kind=4) equal
+  integer(kind=4) indx(*)
+  integer(kind=4) less
+  integer(kind=4) more
+  real(kind=8) x(*)
+  real(kind=8) xval
 
   if ( n <= 0 ) then
     n = 1
@@ -5794,7 +5804,7 @@ subroutine r8vec_index_insert_unique ( n, x, indx, xval )
 !
   call r8vec_index_search ( n, x, indx, xval, less, equal, more )
 
-  if ( equal == 0 ) then
+  if ( equal .eq. 0 ) then
     x(n+1) = xval
     indx(n+1:more+1:-1) = indx(n:more:-1)
     indx(more) = n + 1
@@ -5831,20 +5841,20 @@ subroutine r8vec_index_order ( n, x, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the current list.
+!    Input, integer(kind=4) N, the size of the current list.
 !
-!    Input/output, real ( kind = 8 ) X(N), the list.  On output, the list
+!    Input/output, real(kind=8) X(N), the list.  On output, the list
 !    has been sorted.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input, integer(kind=4) INDX(N), the sort index of the list.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) indx(n)
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  integer(kind=4) indx(n)
+  real(kind=8) x(n)
+  real(kind=8) y(n)
 
   y(1:n) = x(indx(1:n))
   x(1:n) = y(1:n)
@@ -5875,15 +5885,15 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the current list.
+!    Input, integer(kind=4) N, the size of the current list.
 !
-!    Input, real ( kind = 8 ) X(N), the list.
+!    Input, real(kind=8) X(N), the list.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Input, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Input, real ( kind = 8 ) XVAL, the value to be sought.
+!    Input, real(kind=8) XVAL, the value to be sought.
 !
-!    Output, integer ( kind = 4 ) LESS, EQUAL, MORE, the indexes in INDX of the
+!    Output, integer(kind=4) LESS, EQUAL, MORE, the indexes in INDX of the
 !    entries of X that are just less than, equal to, and just greater
 !    than XVAL.  If XVAL does not occur in X, then EQUAL is zero.
 !    If XVAL is the minimum entry of X, then LESS is 0.  If XVAL
@@ -5891,20 +5901,20 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) equal
-  integer ( kind = 4 ) hi
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) less
-  integer ( kind = 4 ) lo
-  integer ( kind = 4 ) mid
-  integer ( kind = 4 ) more
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xhi
-  real ( kind = 8 ) xlo
-  real ( kind = 8 ) xmid
-  real ( kind = 8 ) xval
+  integer(kind=4) equal
+  integer(kind=4) hi
+  integer(kind=4) indx(n)
+  integer(kind=4) less
+  integer(kind=4) lo
+  integer(kind=4) mid
+  integer(kind=4) more
+  real(kind=8) x(n)
+  real(kind=8) xhi
+  real(kind=8) xlo
+  real(kind=8) xmid
+  real(kind=8) xval
 
   if ( n <= 0 ) then
     less = 0
@@ -5923,7 +5933,7 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
     equal = 0
     more = 1
     return
-  else if ( xval == xlo ) then
+  else if ( xval .eq. xlo ) then
     less = 0
     equal = 1
     more = 2
@@ -5935,7 +5945,7 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
     equal = 0
     more = n + 1
     return
-  else if ( xval == xhi ) then
+  else if ( xval .eq. xhi ) then
     less = n - 1
     equal = n
     more = n + 1
@@ -5944,7 +5954,7 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
 
   do
 
-    if ( lo + 1 == hi ) then
+    if ( lo + 1 .eq. hi ) then
       less = lo
       equal = 0
       more = hi
@@ -5954,7 +5964,7 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
     mid = ( lo + hi ) / 2
     xmid = x(indx(mid))
 
-    if ( xval == xmid ) then
+    if ( xval .eq. xmid ) then
       equal = mid
       less = equal - 1
       more = equal + 1
@@ -5993,24 +6003,24 @@ subroutine r8vec_index_sort_unique ( n, x, indx, n2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the current list.
+!    Input, integer(kind=4) N, the size of the current list.
 !
-!    Input/output, real ( kind = 8 ) X(N), the list.  On output, X contains only
+!    Input/output, real(kind=8) X(N), the list.  On output, X contains only
 !    unique elements.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sort index of the list.
+!    Output, integer(kind=4) INDX(N), the sort index of the list.
 !
-!    Output, integer ( kind = 4 ) N2, the number of unique elements in X.
+!    Output, integer(kind=4) N2, the number of unique elements in X.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) n2
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) n2
+  real(kind=8) x(n)
+  real(kind=8) y(n)
 
   n2 = 0
 
@@ -6020,7 +6030,7 @@ subroutine r8vec_index_sort_unique ( n, x, indx, n2 )
 
   x(1:n2) = y(1:n2)
 
-  x(n2+1:n) = 0.0D+00
+  x(n2+1:n) = 0.0D+0
   indx(n2+1:n) = 0
 
   return
@@ -6045,33 +6055,33 @@ subroutine r8vec_index_sorted_range ( n, r, indx, r_lo, r_hi, i_lo, i_hi )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the vector.
+!    Input, integer(kind=4) N, the number of items in the vector.
 !
-!    Input, real ( kind = 8 ) R(N), the index sorted vector.
+!    Input, real(kind=8) R(N), the index sorted vector.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the vector used to sort R.
+!    Input, integer(kind=4) INDX(N), the vector used to sort R.
 !    The vector R(INDX(*)) is sorted.
 !
-!    Input, real ( kind = 8 ) R_LO, R_HI, the limits of the range.
+!    Input, real(kind=8) R_LO, R_HI, the limits of the range.
 !
-!    Output, integer ( kind = 4 ) I_LO, I_HI, the range of indices
+!    Output, integer(kind=4) I_LO, I_HI, the range of indices
 !    so that I_LO <= I <= I_HI => R_LO <= R(INDX(I)) <= R_HI.  If no
 !    values in R lie in the range, then I_HI < I_LO will be returned.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i_hi
-  integer ( kind = 4 ) i_lo
-  integer ( kind = 4 ) i1
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  real ( kind = 8 ) r(n)
-  real ( kind = 8 ) r_hi
-  real ( kind = 8 ) r_lo
+  integer(kind=4) i_hi
+  integer(kind=4) i_lo
+  integer(kind=4) i1
+  integer(kind=4) i2
+  integer(kind=4) indx(n)
+  integer(kind=4) j1
+  integer(kind=4) j2
+  real(kind=8) r(n)
+  real(kind=8) r_hi
+  real(kind=8) r_lo
 !
 !  Cases we can handle immediately.
 !
@@ -6089,7 +6099,7 @@ subroutine r8vec_index_sorted_range ( n, r, indx, r_lo, r_hi, i_lo, i_hi )
 !
 !  Are there are least two intervals?
 !
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     if ( r_lo <= r(indx(1)) .and. r(indx(1)) <= r_hi ) then
       i_lo = 1
       i_hi = 1
@@ -6231,24 +6241,24 @@ subroutine r8vec_indexed_heap_d ( n, a, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the index array.
+!    Input, integer(kind=4) N, the size of the index array.
 !
-!    Input, real ( kind = 8 ) A(*), the data vector.
+!    Input, real(kind=8) A(*), the data vector.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the index array.
+!    Input/output, integer(kind=4) INDX(N), the index array.
 !    Each entry of INDX must be a valid index for the array A.
 !    On output, the indices have been reordered into a descending heap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ifree
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) key
-  integer ( kind = 4 ) m
+  real(kind=8) a(*)
+  integer(kind=4) i
+  integer(kind=4) ifree
+  integer(kind=4) indx(n)
+  integer(kind=4) key
+  integer(kind=4) m
 !
 !  Only nodes N/2 down to 1 can be "parent" nodes.
 !
@@ -6352,22 +6362,22 @@ subroutine r8vec_indexed_heap_d_extract ( n, a, indx, indx_extract )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the number of items in the
+!    Input/output, integer(kind=4) N, the number of items in the
 !    index vector.
 !
-!    Input, real ( kind = 8 ) A(*), the data vector.
+!    Input, real(kind=8) A(*), the data vector.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the index vector.
+!    Input/output, integer(kind=4) INDX(N), the index vector.
 !
-!    Output, integer ( kind = 4 ) INDX_EXTRACT, the index in A of the item of
+!    Output, integer(kind=4) INDX_EXTRACT, the index in A of the item of
 !    maximum value, which has now been removed from the heap.
 !
   implicit none
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) indx(*)
-  integer ( kind = 4 ) indx_extract
-  integer ( kind = 4 ) n
+  real(kind=8) a(*)
+  integer(kind=4) indx(*)
+  integer(kind=4) indx_extract
+  integer(kind=4) n
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -6380,7 +6390,7 @@ subroutine r8vec_indexed_heap_d_extract ( n, a, indx, indx_extract )
 !
   indx_extract = indx(1)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     n = 0
     return
   end if
@@ -6437,24 +6447,24 @@ subroutine r8vec_indexed_heap_d_insert ( n, a, indx, indx_insert )
 !
 !  Parameters:
 !
-!    Input/output, integer ( kind = 4 ) N, the number of items in the
+!    Input/output, integer(kind=4) N, the number of items in the
 !    index vector.
 !
-!    Input, real ( kind = 8 ) A(*), the data vector.
+!    Input, real(kind=8) A(*), the data vector.
 !
-!    Input/output, integer ( kind = 4 ) INDX(N), the index vector.
+!    Input/output, integer(kind=4) INDX(N), the index vector.
 !
-!    Input, integer ( kind = 4 ) INDX_INSERT, the index in A of the value
+!    Input, integer(kind=4) INDX_INSERT, the index in A of the value
 !    to be inserted into the heap.
 !
   implicit none
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(*)
-  integer ( kind = 4 ) indx_insert
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) parent
+  real(kind=8) a(*)
+  integer(kind=4) i
+  integer(kind=4) indx(*)
+  integer(kind=4) indx_insert
+  integer(kind=4) n
+  integer(kind=4) parent
 
   n = n + 1
   i = n
@@ -6513,22 +6523,22 @@ subroutine r8vec_indexed_heap_d_max ( n, a, indx, indx_max )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the index vector.
+!    Input, integer(kind=4) N, the number of items in the index vector.
 !
-!    Input, real ( kind = 8 ) A(*), the data vector.
+!    Input, real(kind=8) A(*), the data vector.
 !
-!    Input, integer ( kind = 4 ) INDX(N), the index vector.
+!    Input, integer(kind=4) INDX(N), the index vector.
 !
-!    Output, integer ( kind = 4 ) INDX_MAX, the index in A of the maximum value
+!    Output, integer(kind=4) INDX_MAX, the index in A of the maximum value
 !    in the heap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(*)
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indx_max
+  real(kind=8) a(*)
+  integer(kind=4) indx(n)
+  integer(kind=4) indx_max
 
   indx_max = indx(1)
 
@@ -6558,16 +6568,16 @@ subroutine r8vec_indicator ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Output, real ( kind = 8 ) A(N), the array to be initialized.
+!    Output, real(kind=8) A(N), the array to be initialized.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  integer(kind=4) i
 
   do i = 1, n
     a(i) = real ( i, kind = 8 )
@@ -6599,25 +6609,25 @@ subroutine r8vec_insert ( n, a, pos, value )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the array on input.
+!    Input, integer(kind=4) N, the dimension of the array on input.
 !
-!    Input/output, real ( kind = 8 ) A(N+1), the array.  On input, A is
+!    Input/output, real(kind=8) A(N+1), the array.  On input, A is
 !    assumed to contain only N entries, while on output, A actually
 !    contains N+1 entries.
 !
-!    Input, integer ( kind = 4 ) POS, the position to be assigned the new entry.
+!    Input, integer(kind=4) POS, the position to be assigned the new entry.
 !    1 <= POS <= N+1.
 !
-!    Input, real ( kind = 8 ) VALUE, the value to be inserted.
+!    Input, real(kind=8) VALUE, the value to be inserted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n+1)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) pos
-  real ( kind = 8 ) value
+  real(kind=8) a(n+1)
+  integer(kind=4) i
+  integer(kind=4) pos
+  real(kind=8) value
 
   if ( pos < 1 .or. n + 1 < pos ) then
 
@@ -6658,25 +6668,25 @@ function r8vec_insignificant ( n, r, s )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) R(N), the vector to be compared against.
+!    Input, real(kind=8) R(N), the vector to be compared against.
 !
-!    Input, real ( kind = 8 ) S(N), the vector to be compared.
+!    Input, real(kind=8) S(N), the vector to be compared.
 !
 !    Output, logical R8VEC_INSIGNIFICANT, is TRUE if S is insignificant
 !    compared to R.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) r(n)
+  integer(kind=4) i
+  real(kind=8) r(n)
   logical r8vec_insignificant
-  real ( kind = 8 ) s(n)
-  real ( kind = 8 ) t
-  real ( kind = 8 ) tol
+  real(kind=8) s(n)
+  real(kind=8) t
+  real(kind=8) tol
   logical value
 
   value = .true.
@@ -6721,21 +6731,21 @@ function r8vec_is_int ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_IS_INT, is TRUE if every entry of A is
 !    integral.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_is_int
 
-  r8vec_is_int = all ( a(1:n) == aint ( a(1:n) ) )
+  r8vec_is_int = all ( a(1:n) .eq. aint ( a(1:n) ) )
 
   return
 end
@@ -6763,20 +6773,20 @@ function r8vec_is_nonnegative ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_IS_NONNEGATIVE, the value of the condition.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_is_nonnegative
 
-  r8vec_is_nonnegative = all ( 0.0D+00 <= a(1:n) )
+  r8vec_is_nonnegative = all ( 0.0D+0 <= a(1:n) )
 
   return
 end
@@ -6804,20 +6814,20 @@ function r8vec_is_zero ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
 !    Output, logical R8VEC_IS_ZERO, the value of the condition.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_is_zero
 
-  r8vec_is_zero = all ( a(1:n) == 0.0D+00 )
+  r8vec_is_zero = all ( a(1:n) .eq. 0.0D+0 )
 
   return
 end
@@ -6845,26 +6855,26 @@ subroutine r8vec_legendre ( n, x_first, x_last, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) X_FIRST, X_LAST, the first and last entries.
+!    Input, real(kind=8) X_FIRST, X_LAST, the first and last entries.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of Legendre-spaced data.
+!    Output, real(kind=8) X(N), a vector of Legendre-spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) x_first
-  real ( kind = 8 ) x_last
+  integer(kind=4) i
+  real(kind=8) x(n)
+  real(kind=8) x_first
+  real(kind=8) x_last
 
   call legendre_zeros ( n, x )
 
-  x(1:n) = ( ( 1.0D+00 - x(1:n) ) * x_first  &
-           + ( 1.0D+00 + x(1:n) ) * x_last ) &
-           /   2.0D+00
+  x(1:n) = ( ( 1.0D+0 - x(1:n) ) * x_first  &
+           + ( 1.0D+0 + x(1:n) ) * x_last ) &
+           /   2.0D+0
 
   return
 end
@@ -6897,24 +6907,24 @@ subroutine r8vec_linspace ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A_FIRST, A_LAST, the first and last entries.
+!    Input, real(kind=8) A_FIRST, A_LAST, the first and last entries.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of linearly spaced data.
+!    Output, real(kind=8) X(N), a vector of linearly spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  integer(kind=4) i
+  real(kind=8) x(n)
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
 
-    x(1) = ( a + b ) / 2.0D+00
+    x(1) = ( a + b ) / 2.0D+0
 
   else
 
@@ -6957,20 +6967,20 @@ subroutine r8vec_linspace2 ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the first and last entries.
+!    Input, real(kind=8) A, B, the first and last entries.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of linearly spaced data.
+!    Output, real(kind=8) X(N), a vector of linearly spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  integer(kind=4) i
+  real(kind=8) x(n)
 
   do i = 1, n
     x(i) = ( real ( n  - i + 1, kind = 8 ) * a &
@@ -6984,7 +6994,7 @@ function r8vec_lt ( n, a1, a2 )
 
 !*****************************************************************************80
 !
-!! R8VEC_LT == ( A1 < A2 ) for R8VEC's.
+!! R8VEC_LT .eq. ( A1 < A2 ) for R8VEC's.
 !
 !  Discussion:
 !
@@ -6993,9 +7003,9 @@ function r8vec_lt ( n, a1, a2 )
 !    The comparison is lexicographic.
 !
 !    A1 < A2  <=>                              A1(1) < A2(1) or
-!                 ( A1(1)     == A2(1)     and A1(2) < A2(2) ) or
+!                 ( A1(1)     .eq. A2(1)     and A1(2) < A2(2) ) or
 !                 ...
-!                 ( A1(1:N-1) == A2(1:N-1) and A1(N) < A2(N)
+!                 ( A1(1:N-1) .eq. A2(1:N-1) and A1(N) < A2(N)
 !
 !  Licensing:
 !
@@ -7011,20 +7021,20 @@ function r8vec_lt ( n, a1, a2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vectors.
+!    Input, integer(kind=4) N, the dimension of the vectors.
 !
-!    Input, real ( kind = 8 ) A1(N), A2(N), the vectors to be compared.
+!    Input, real(kind=8) A1(N), A2(N), the vectors to be compared.
 !
 !    Output, logical R8VEC_LT, is TRUE if and only if A1 < A2.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
   logical r8vec_lt
-  integer ( kind = 4 ) i
+  integer(kind=4) i
 
   r8vec_lt = .false.
 
@@ -7066,25 +7076,25 @@ subroutine r8vec_mask_print ( n, a, mask_num, mask, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of components of the vector.
+!    Input, integer(kind=4) N, the number of components of the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
-!    Input, integer ( kind = 4 ) MASK_NUM, the number of masked elements.
+!    Input, integer(kind=4) MASK_NUM, the number of masked elements.
 !
-!    Input, integer ( kind = 4 ) MASK(MASK_NUM), the indices of the vector
+!    Input, integer(kind=4) MASK(MASK_NUM), the indices of the vector
 !    to be printed.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
   implicit none
 
-  integer ( kind = 4 ) mask_num
-  integer ( kind = 4 ) n
+  integer(kind=4) mask_num
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) mask(mask_num)
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) mask(mask_num)
   character ( len = * ) title
 
   write ( *, '(a)' ) ' '
@@ -7123,18 +7133,18 @@ subroutine r8vec_max ( n, a, amax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) AMAX, the value of the largest entry.
+!    Output, real(kind=8) AMAX, the value of the largest entry.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
+  real(kind=8) a(n)
+  real(kind=8) amax
 
   amax = maxval ( a(1:n) )
 
@@ -7164,19 +7174,19 @@ subroutine r8vec_max_abs_index ( n, a, max_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, integer ( kind = 4 ) MAX_INDEX, the index of the largest entry.
+!    Output, integer(kind=4) MAX_INDEX, the index of the largest entry.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) max_index
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) max_index
 
   if ( n <= 0 ) then
 
@@ -7220,19 +7230,19 @@ subroutine r8vec_max_index ( n, a, max_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, integer ( kind = 4 ) MAX_INDEX, the index of the largest entry.
+!    Output, integer(kind=4) MAX_INDEX, the index of the largest entry.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) max_index
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) max_index
 
   if ( n <= 0 ) then
 
@@ -7276,18 +7286,18 @@ subroutine r8vec_mean ( n, a, mean )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose mean is desired.
+!    Input, real(kind=8) A(N), the vector whose mean is desired.
 !
-!    Output, real ( kind = 8 ) MEAN, the mean of the vector entries.
+!    Output, real(kind=8) MEAN, the mean of the vector entries.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) mean
+  real(kind=8) a(n)
+  real(kind=8) mean
 
   mean = sum ( a(1:n) ) / real ( n, kind = 8 )
 
@@ -7316,20 +7326,20 @@ subroutine r8vec_median ( n, a, median )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to search.  On output,
+!    Input/output, real(kind=8) A(N), the array to search.  On output,
 !    the order of the elements of A has been somewhat changed.
 !
-!    Output, real ( kind = 8 ) MEDIAN, the value of the median of A.
+!    Output, real(kind=8) MEDIAN, the value of the median of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) median
+  real(kind=8) a(n)
+  integer(kind=4) k
+  real(kind=8) median
 
   k = ( n + 1 ) / 2
 
@@ -7369,20 +7379,20 @@ subroutine r8vec_midspace ( n, a, b, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the endpoints of the interval.
+!    Input, real(kind=8) A, B, the endpoints of the interval.
 !
-!    Output, real ( kind = 8 ) X(N), a vector of linearly spaced data.
+!    Output, real(kind=8) X(N), a vector of linearly spaced data.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x(n)
+  real(kind=8) a
+  real(kind=8) b
+  integer(kind=4) i
+  real(kind=8) x(n)
 
   do i = 1, n
     x(i) = ( real ( 2 * n - 2 * i + 1, kind = 8 ) * a &
@@ -7416,18 +7426,18 @@ subroutine r8vec_min ( n, a, amin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) AMIN, the value of the smallest entry.
+!    Output, real(kind=8) AMIN, the value of the smallest entry.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amin
+  real(kind=8) a(n)
+  real(kind=8) amin
 
   amin = minval ( a(1:n) )
 
@@ -7457,19 +7467,19 @@ subroutine r8vec_min_index ( n, a, min_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, integer ( kind = 4 ) MIN_INDEX, the index of the smallest entry.
+!    Output, integer(kind=4) MIN_INDEX, the index of the smallest entry.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) min_index
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) min_index
 
   if ( n <= 0 ) then
 
@@ -7513,27 +7523,27 @@ function r8vec_min_pos ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer(kind=4) N, the number of entries.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) R8VEC_MIN_POS, the smallest positive entry,
+!    Output, real(kind=8) R8VEC_MIN_POS, the smallest positive entry,
 !    or R8_HUGE if no entry is positive.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ), parameter :: r8_huge = 1.0D+30
-  real ( kind = 8 ) r8vec_min_pos
-  real ( kind = 8 ) value
+  real(kind=8) a(n)
+  integer(kind=4) i
+  real(kind=8), parameter :: r8_huge = 1.0D+30
+  real(kind=8) r8vec_min_pos
+  real(kind=8) value
 
   value = r8_huge
 
   do i = 1, n
-    if ( 0.0D+00 < a(i) ) then
+    if ( 0.0D+0 < a(i) ) then
       value = min ( value, a(i) )
     end if
   end do
@@ -7618,9 +7628,9 @@ subroutine r8vec_mirror_next ( n, a, done )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input/output, real ( kind = 8 ) A(N), a vector of real numbers.
+!    Input/output, real(kind=8) A(N), a vector of real numbers.
 !    On output, the signs of some entries have been changed.
 !
 !    Output, logical DONE, is TRUE if the input vector A was the last element
@@ -7629,18 +7639,18 @@ subroutine r8vec_mirror_next ( n, a, done )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical done
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) positive
+  integer(kind=4) i
+  integer(kind=4) positive
 !
 !  Seek the first strictly positive entry of A.
 !
   positive = 0
   do i = 1, n
-    if ( 0.0D+00 < a(i) ) then
+    if ( 0.0D+0 < a(i) ) then
       positive = i
       exit
     end if
@@ -7648,7 +7658,7 @@ subroutine r8vec_mirror_next ( n, a, done )
 !
 !  If there is no strictly positive entry of A, there is no successor.
 !
-  if ( positive == 0 ) then
+  if ( positive .eq. 0 ) then
     a(1:n) = - a(1:n)
     done = .true.
     return
@@ -7685,21 +7695,21 @@ function r8vec_negative_strict ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N).
+!    Input, real(kind=8) A(N).
 !
 !    Output, logical R8VEC_NEGATIVE_STRICT, is TRUE every entry of the
 !    vector is strictly negative.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_negative_strict
 
-  r8vec_negative_strict = ( all ( a(1:n) < 0.0D+00 ) )
+  r8vec_negative_strict = ( all ( a(1:n) < 0.0D+0 ) )
 
   return
 end
@@ -7727,15 +7737,15 @@ subroutine r8vec_nint ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input/output, real ( kind = 8 ) A(N), the vector to be NINT'ed.
+!    Input/output, real(kind=8) A(N), the vector to be NINT'ed.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
 
   a(1:n) = nint ( real ( a(1:n), kind = 8 ) )
 
@@ -7744,6 +7754,21 @@ end
 
 
 
+!> @author John Burkardt
+!> @author [P. Jang](orange224factory@gmail.com)
+!> @brief  R8VEC_NORM returns the L2 norm of an R8VEC.
+!> @brief  R8VEC_NORM returns the L2 norm of a20R02EC0
+!> @date   2010-08-21
+!> @date   2020-02-06
+!> @see    
+function r8vec_norm (n, a) result (norm)
+implicit none
+   integer, intent(in) :: n         !< N, the number of entries in A.
+   real(kind=8), intent(in) :: a(n) !< A(N), the vector whose L2 norm is desired.
+   real(kind=8) :: norm             !< NORM, the L2 norm of A.
+
+   norm = sqrt (sum (a(1:n)**2))
+end function r8vec_norm
 !*****************************************************************************80
 !
 !! R8VEC_NORM returns the L2 norm of an R8VEC.
@@ -7770,24 +7795,12 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose L2 norm is desired.
+!    Input, real(kind=8) A(N), the vector whose L2 norm is desired.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM, the L2 norm of A.
+!    Output, real(kind=8) R8VEC_NORM, the L2 norm of A.
 !
-function r8vec_norm ( n, a )
-  implicit none
-
-  integer ( kind = 4 ) n
-
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_norm
-
-  r8vec_norm = sqrt ( sum ( a(1:n)**2 ) )
-
-  return
-end function r8vec_norm
 
 
 function r8vec_norm_affine ( n, v0, v1 )
@@ -7819,21 +7832,21 @@ function r8vec_norm_affine ( n, v0, v1 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the order of the vectors.
+!    Input, integer(kind=4) N, the order of the vectors.
 !
-!    Input, real ( kind = 8 ) V0(N), the base vector.
+!    Input, real(kind=8) V0(N), the base vector.
 !
-!    Input, real ( kind = 8 ) V1(N), the vector whose affine norm is desired.
+!    Input, real(kind=8) V1(N), the vector whose affine norm is desired.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_AFFINE, the L2 norm of V1-V0.
+!    Output, real(kind=8) R8VEC_NORM_AFFINE, the L2 norm of V1-V0.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) r8vec_norm_affine
-  real ( kind = 8 ) v0(n)
-  real ( kind = 8 ) v1(n)
+  real(kind=8) r8vec_norm_affine
+  real(kind=8) v0(n)
+  real(kind=8) v1(n)
 
   r8vec_norm_affine = sqrt ( sum ( ( v0(1:n) - v1(1:n) )**2 ) )
 
@@ -7867,24 +7880,24 @@ function r8vec_norm_l0 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Output, integer ( kind = 4 ) R8VEC_NORM_L0, the value of the norm.
+!    Output, integer(kind=4) R8VEC_NORM_L0, the value of the norm.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) r8vec_norm_l0
-  integer ( kind = 4 ) value
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) r8vec_norm_l0
+  integer(kind=4) value
 
   value = 0
   do i = 1, n
-    if ( a(i) /= 0.0D+00 ) then
+    if ( a(i) /= 0.0D+0 ) then
       value = value + 1
     end if
   end do
@@ -7921,18 +7934,18 @@ function r8vec_norm_l1 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose L1 norm is desired.
+!    Input, real(kind=8) A(N), the vector whose L1 norm is desired.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_L1, the L1 norm of A.
+!    Output, real(kind=8) R8VEC_NORM_L1, the L1 norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_norm_l1
+  real(kind=8) a(n)
+  real(kind=8) r8vec_norm_l1
 
   r8vec_norm_l1 = sum ( abs ( a(1:n) ) )
 
@@ -7966,18 +7979,18 @@ function r8vec_norm_l2 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose L2 norm is desired.
+!    Input, real(kind=8) A(N), the vector whose L2 norm is desired.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_L2, the L2 norm of A.
+!    Output, real(kind=8) R8VEC_NORM_L2, the L2 norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_norm_l2
+  real(kind=8) a(n)
+  real(kind=8) r8vec_norm_l2
 
   r8vec_norm_l2 = sqrt ( sum ( a(1:n)**2 ) )
 
@@ -8011,18 +8024,18 @@ function r8vec_norm_li ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose L-oo norm is desired.
+!    Input, real(kind=8) A(N), the vector whose L-oo norm is desired.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_LI, the L-oo norm of A.
+!    Output, real(kind=8) R8VEC_NORM_LI, the L-oo norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_norm_li
+  real(kind=8) a(n)
+  real(kind=8) r8vec_norm_li
 
   r8vec_norm_li = maxval ( abs ( a(1:n) ) )
 
@@ -8063,32 +8076,32 @@ function r8vec_norm_lp ( n, a, p )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector whose LP norm is desired.
+!    Input, real(kind=8) A(N), the vector whose LP norm is desired.
 !
-!    Input, real ( kind = 8 ) P, the index of the norm.
+!    Input, real(kind=8) P, the index of the norm.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_LP, the LP norm of A.
+!    Output, real(kind=8) R8VEC_NORM_LP, the LP norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) p
-  real ( kind = 8 ) r8vec_norm_lp
+  real(kind=8) a(n)
+  real(kind=8) p
+  real(kind=8) r8vec_norm_lp
 
-  if ( p <= 0.0D+00 ) then
-    r8vec_norm_lp = -1.0D+00
-  else if ( p == huge ( p ) ) then
+  if ( p <= 0.0D+0 ) then
+    r8vec_norm_lp = -1.0D+0
+  else if ( p .eq. huge ( p ) ) then
     r8vec_norm_lp = maxval ( abs ( a(1:n) ) )
-  else if ( p == 1.0D+00 ) then
+  else if ( p .eq. 1.0D+0 ) then
     r8vec_norm_lp = sum ( abs ( a(1:n) ) )
-  else if ( p == 2.0D+00 ) then
+  else if ( p .eq. 2.0D+0 ) then
     r8vec_norm_lp = sqrt ( sum ( a(1:n)**2 ) )
   else
-    r8vec_norm_lp = ( sum ( ( abs ( a(1:n) ) )**p ) )**( 1.0D+00 / p )
+    r8vec_norm_lp = ( sum ( ( abs ( a(1:n) ) )**p ) )**( 1.0D+0 / p )
   end if
 
   return
@@ -8119,18 +8132,18 @@ function r8vec_norm_squared ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORM_SQUARED, the squared L2 norm of A.
+!    Output, real(kind=8) R8VEC_NORM_SQUARED, the squared L2 norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_norm_squared
+  real(kind=8) a(n)
+  real(kind=8) r8vec_norm_squared
 
   r8vec_norm_squared = sum ( a(1:n)**2 )
 
@@ -8176,25 +8189,25 @@ subroutine r8vec_normal_01 ( n, seed, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of values desired.  If N is
+!    Input, integer(kind=4) N, the number of values desired.  If N is
 !    negative,then the code will flush its internal memory; in particular,
 !    if there is a saved value to be used on the next call, it is
 !    instead discarded.  This is useful if the user has reset the
 !    random number seed, for instance.
 !
-!    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+!    Input/output, integer(kind=4) SEED, a seed for the random
 !    number generator.
 !
-!    Output, real ( kind = 8 ) X(N), a sample of the standard normal PDF.
+!    Output, real(kind=8) X(N), a sample of the standard normal PDF.
 !
 !  Local parameters:
 !
-!    Local, integer ( kind = 4 ) MADE, records the number of values that have
+!    Local, integer(kind=4) MADE, records the number of values that have
 !    been computed.  On input with negative N, this value overwrites
 !    the return value of N, so the user can get an accounting of
 !    how much work has been done.
 !
-!    Local, real ( kind = 8 ) R(N+1), is used to store some uniform
+!    Local, real(kind=8) R(N+1), is used to store some uniform
 !    random values.  Its dimension is N+1, but really it is only needed
 !    to be the smallest even number greater than or equal to N.
 !
@@ -8206,24 +8219,24 @@ subroutine r8vec_normal_01 ( n, seed, x )
 !    if we have a saved value that can be immediately stored in X(1),
 !    and so on.
 !
-!    Local, real ( kind = 8 ) Y, the value saved from the previous call, if
+!    Local, real(kind=8) Y, the value saved from the previous call, if
 !    SAVED is 1.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ), save :: made = 0
-  real ( kind = 8 ), parameter :: pi = 3.141592653589793D+00
-  real ( kind = 8 ) r(n+1)
-  real ( kind = 8 ) r8_uniform_01
-  integer ( kind = 4 ), save :: saved = 0
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) x(n)
-  integer ( kind = 4 ) x_hi_index
-  integer ( kind = 4 ) x_lo_index
-  real ( kind = 8 ), save :: y = 0.0D+00
+  integer(kind=4) m
+  integer(kind=4), save :: made = 0
+  real(kind=8), parameter :: pi = 3.141592653589793D+00
+  real(kind=8) r(n+1)
+  real(kind=8) r8_uniform_01
+  integer(kind=4), save :: saved = 0
+  integer(kind=4) seed
+  real(kind=8) x(n)
+  integer(kind=4) x_hi_index
+  integer(kind=4) x_lo_index
+  real(kind=8), save :: y = 0.0D+0
 !
 !  I'd like to allow the user to reset the internal data.
 !  But this won't work properly if we have a saved value Y.
@@ -8235,9 +8248,9 @@ subroutine r8vec_normal_01 ( n, seed, x )
     n = made
     made = 0
     saved = 0
-    y = 0.0D+00
+    y = 0.0D+0
     return
-  else if ( n == 0 ) then
+  else if ( n .eq. 0 ) then
     return
   end if
 !
@@ -8248,7 +8261,7 @@ subroutine r8vec_normal_01 ( n, seed, x )
 !
 !  Use up the old value, if we have it.
 !
-  if ( saved == 1 ) then
+  if ( saved .eq. 1 ) then
     x(1) = y
     saved = 0
     x_lo_index = 2
@@ -8256,15 +8269,15 @@ subroutine r8vec_normal_01 ( n, seed, x )
 !
 !  Maybe we don't need any more values.
 !
-  if ( x_hi_index - x_lo_index + 1 == 0 ) then
+  if ( x_hi_index - x_lo_index + 1 .eq. 0 ) then
 !
 !  If we need just one new value, do that here to avoid null arrays.
 !
-  else if ( x_hi_index - x_lo_index + 1 == 1 ) then
+  else if ( x_hi_index - x_lo_index + 1 .eq. 1 ) then
 
     r(1) = r8_uniform_01 ( seed )
 
-    if ( r(1) == 0.0D+00 ) then
+    if ( r(1) .eq. 0.0D+0 ) then
       write ( *, '(a)' ) ' '
       write ( *, '(a)' ) 'R8VEC_NORMAL_01 - Fatal error!'
       write ( *, '(a)' ) '  R8_UNIFORM_01 returned a value of 0.'
@@ -8274,8 +8287,8 @@ subroutine r8vec_normal_01 ( n, seed, x )
     r(2) = r8_uniform_01 ( seed )
 
     x(x_hi_index) = &
-             sqrt ( -2.0D+00 * log ( r(1) ) ) * cos ( 2.0D+00 * pi * r(2) )
-    y =      sqrt ( -2.0D+00 * log ( r(1) ) ) * sin ( 2.0D+00 * pi * r(2) )
+             sqrt ( -2.0D+0 * log ( r(1) ) ) * cos ( 2.0D+0 * pi * r(2) )
+    y =      sqrt ( -2.0D+0 * log ( r(1) ) ) * sin ( 2.0D+0 * pi * r(2) )
 
     saved = 1
 
@@ -8283,19 +8296,19 @@ subroutine r8vec_normal_01 ( n, seed, x )
 !
 !  If we require an even number of values, that's easy.
 !
-  else if ( mod ( x_hi_index - x_lo_index + 1, 2 ) == 0 ) then
+  else if ( mod ( x_hi_index - x_lo_index + 1, 2 ) .eq. 0 ) then
 
     m = ( x_hi_index - x_lo_index + 1 ) / 2
 
     call r8vec_uniform_01 ( 2*m, seed, r )
 
     x(x_lo_index:x_hi_index-1:2) = &
-      sqrt ( -2.0D+00 * log ( r(1:2*m-1:2) ) ) &
-      * cos ( 2.0D+00 * pi * r(2:2*m:2) )
+      sqrt ( -2.0D+0 * log ( r(1:2*m-1:2) ) ) &
+      * cos ( 2.0D+0 * pi * r(2:2*m:2) )
 
     x(x_lo_index+1:x_hi_index:2) = &
-      sqrt ( -2.0D+00 * log ( r(1:2*m-1:2) ) ) &
-      * sin ( 2.0D+00 * pi * r(2:2*m:2) )
+      sqrt ( -2.0D+0 * log ( r(1:2*m-1:2) ) ) &
+      * sin ( 2.0D+0 * pi * r(2:2*m:2) )
 
     made = made + x_hi_index - x_lo_index + 1
 !
@@ -8312,18 +8325,18 @@ subroutine r8vec_normal_01 ( n, seed, x )
     call r8vec_uniform_01 ( 2*m, seed, r )
 
     x(x_lo_index:x_hi_index-1:2) = &
-      sqrt ( -2.0D+00 * log ( r(1:2*m-3:2) ) ) &
-      * cos ( 2.0D+00 * pi * r(2:2*m-2:2) )
+      sqrt ( -2.0D+0 * log ( r(1:2*m-3:2) ) ) &
+      * cos ( 2.0D+0 * pi * r(2:2*m-2:2) )
 
     x(x_lo_index+1:x_hi_index:2) = &
-      sqrt ( -2.0D+00 * log ( r(1:2*m-3:2) ) ) &
-      * sin ( 2.0D+00 * pi * r(2:2*m-2:2) )
+      sqrt ( -2.0D+0 * log ( r(1:2*m-3:2) ) ) &
+      * sin ( 2.0D+0 * pi * r(2:2*m-2:2) )
 
-    x(n) = sqrt ( -2.0D+00 * log ( r(2*m-1) ) ) &
-      * cos ( 2.0D+00 * pi * r(2*m) )
+    x(n) = sqrt ( -2.0D+0 * log ( r(2*m-1) ) ) &
+      * cos ( 2.0D+0 * pi * r(2*m) )
 
-    y = sqrt ( -2.0D+00 * log ( r(2*m-1) ) ) &
-      * sin ( 2.0D+00 * pi * r(2*m) )
+    y = sqrt ( -2.0D+0 * log ( r(2*m-1) ) ) &
+      * sin ( 2.0D+0 * pi * r(2*m) )
 
     saved = 1
 
@@ -8360,20 +8373,20 @@ subroutine r8vec_normalize ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the dimension of the vector.
+!    Input, integer(kind=4) N, the dimension of the vector.
 !
-!    Input/output, real ( kind = 8 ) A(N), the vector to be normalized.
+!    Input/output, real(kind=8) A(N), the vector to be normalized.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) norm
+  real(kind=8) a(n)
+  real(kind=8) norm
 
   norm = sqrt ( sum ( a(1:n)**2 ) )
 
-  if ( norm /= 0.0D+00 ) then
+  if ( norm /= 0.0D+0 ) then
     a(1:n) = a(1:n) / norm
   end if
 
@@ -8403,22 +8416,22 @@ subroutine r8vec_normalize_l1 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input/output, real ( kind = 8 ) A(N), the vector to be normalized.
+!    Input/output, real(kind=8) A(N), the vector to be normalized.
 !    On output, the entries of A should have unit sum.  However, if
 !    the input vector has zero sum, the routine halts.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_sum
+  real(kind=8) a(n)
+  real(kind=8) a_sum
 
   a_sum = sum ( a(1:n) )
 
-  if ( a_sum == 0.0D+00 ) then
+  if ( a_sum .eq. 0.0D+0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_NORMALIZE_L1 - Fatal error!'
     write ( *, '(a)' ) '  The vector entries sum to 0.'
@@ -8457,18 +8470,18 @@ function r8vec_normsq ( n, v )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the vector dimension.
+!    Input, integer(kind=4) N, the vector dimension.
 !
-!    Input, real ( kind = 8 ) V(N), the vector.
+!    Input, real(kind=8) V(N), the vector.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORMSQ, the squared L2 norm.
+!    Output, real(kind=8) R8VEC_NORMSQ, the squared L2 norm.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) r8vec_normsq
-  real ( kind = 8 ) v(n)
+  real(kind=8) r8vec_normsq
+  real(kind=8) v(n)
 
   r8vec_normsq = sum ( v(1:n)**2 )
 
@@ -8503,21 +8516,21 @@ function r8vec_normsq_affine ( n, v0, v1 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the vector dimension.
+!    Input, integer(kind=4) N, the vector dimension.
 !
-!    Input, real ( kind = 8 ) V0(N), the base vector.
+!    Input, real(kind=8) V0(N), the base vector.
 !
-!    Input, real ( kind = 8 ) V1(N), the vector.
+!    Input, real(kind=8) V1(N), the vector.
 !
-!    Output, real ( kind = 8 ) R8VEC_NORMSQ_AFFINE, the squared affine L2 norm.
+!    Output, real(kind=8) R8VEC_NORMSQ_AFFINE, the squared affine L2 norm.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) r8vec_normsq_affine
-  real ( kind = 8 ) v0(n)
-  real ( kind = 8 ) v1(n)
+  real(kind=8) r8vec_normsq_affine
+  real(kind=8) v0(n)
+  real(kind=8) v1(n)
 
   r8vec_normsq_affine = sum ( ( v0(1:n) - v1(1:n) )**2 )
 
@@ -8547,11 +8560,11 @@ subroutine r8vec_order_type ( n, a, order )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of the array.
+!    Input, integer(kind=4) N, the number of entries of the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array to be checked.
+!    Input, real(kind=8) A(N), the array to be checked.
 !
-!    Output, integer ( kind = 4 ) ORDER, order indicator:
+!    Output, integer(kind=4) ORDER, order indicator:
 !    -1, no discernable order;
 !    0, all entries are equal;
 !    1, ascending order;
@@ -8561,11 +8574,11 @@ subroutine r8vec_order_type ( n, a, order )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) order
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) order
 !
 !  Search for the first value not equal to A(1).
 !
@@ -8582,7 +8595,7 @@ subroutine r8vec_order_type ( n, a, order )
 
     if ( a(1) < a(i) ) then
 
-      if ( i == 2 ) then
+      if ( i .eq. 2 ) then
         order = 2
       else
         order = 1
@@ -8592,7 +8605,7 @@ subroutine r8vec_order_type ( n, a, order )
 
     else if ( a(i) < a(1) ) then
 
-      if ( i == 2 ) then
+      if ( i .eq. 2 ) then
         order = 4
       else
         order = 3
@@ -8610,35 +8623,35 @@ subroutine r8vec_order_type ( n, a, order )
 
     i = i + 1
 
-    if ( order == 1 ) then
+    if ( order .eq. 1 ) then
 
       if ( a(i) < a(i-1) ) then
         order = -1
         exit
       end if
 
-    else if ( order == 2 ) then
+    else if ( order .eq. 2 ) then
 
       if ( a(i) < a(i-1) ) then
         order = -1
         exit
-      else if ( a(i) == a(i-1) ) then
+      else if ( a(i) .eq. a(i-1) ) then
         order = 1
       end if
 
-    else if ( order == 3 ) then
+    else if ( order .eq. 3 ) then
 
       if ( a(i-1) < a(i) ) then
         order = -1
         exit
       end if
 
-    else if ( order == 4 ) then
+    else if ( order .eq. 4 ) then
 
       if ( a(i-1) < a(i) ) then
         order = -1
         exit
-      else if ( a(i) == a(i-1) ) then
+      else if ( a(i) .eq. a(i-1) ) then
         order = 3
       end if
 
@@ -8691,12 +8704,12 @@ subroutine r8vec_part_quick_a ( n, a, l, r )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of A.
+!    Input, integer(kind=4) N, the number of entries of A.
 !
-!    Input/output, real ( kind = 8 ) A(N).  On input, the array to be checked.
+!    Input/output, real(kind=8) A(N).  On input, the array to be checked.
 !    On output, A has been reordered as described above.
 !
-!    Output, integer ( kind = 4 ) L, R, the indices of A that define
+!    Output, integer(kind=4) L, R, the indices of A that define
 !    the three segments.  Let KEY = the input value of A(1).  Then
 !    I <= L                 A(I) < KEY;
 !         L < I < R         A(I) = KEY;
@@ -8704,22 +8717,22 @@ subroutine r8vec_part_quick_a ( n, a, l, r )
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) key
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) r
-  real ( kind = 8 ) temp
+  real(kind=8) a(n)
+  integer(kind=4) i
+  real(kind=8) key
+  integer(kind=4) l
+  integer(kind=4) m
+  integer(kind=4) r
+  real(kind=8) temp
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_PART_QUICK_A - Fatal error!'
     write ( *, '(a)' ) '  N < 1.'
     stop
-  else if ( n == 1 ) then
+  else if ( n .eq. 1 ) then
     l = 0
     r = 2
     return
@@ -8740,7 +8753,7 @@ subroutine r8vec_part_quick_a ( n, a, l, r )
       temp = a(r)
       a(r) = a(l+1)
       a(l+1) = temp
-    else if ( a(l+1) == key ) then
+    else if ( a(l+1) .eq. key ) then
       m = m + 1
       temp = a(m)
       a(m) = a(l+1)
@@ -8815,24 +8828,24 @@ use jburk_r8lib_i4vec_, only: perm_check
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer(kind=4) N, the number of objects.
 !
-!    Input, integer ( kind = 4 ) P(N), the permutation.
+!    Input, integer(kind=4) P(N), the permutation.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to be permuted.
+!    Input/output, real(kind=8) A(N), the array to be permuted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_temp
-  integer ( kind = 4 ), parameter :: base = 1
-  integer ( kind = 4 ) ierror
-  integer ( kind = 4 ) iget
-  integer ( kind = 4 ) iput
-  integer ( kind = 4 ) istart
-  integer ( kind = 4 ) p(n)
+  real(kind=8) a(n)
+  real(kind=8) a_temp
+  integer(kind=4), parameter :: base = 1
+  integer(kind=4) ierror
+  integer(kind=4) iget
+  integer(kind=4) iput
+  integer(kind=4) istart
+  integer(kind=4) p(n)
 
   call perm_check ( n, p, base, ierror )
 
@@ -8851,7 +8864,7 @@ use jburk_r8lib_i4vec_, only: perm_check
 
       cycle
 
-    else if ( p(istart) == istart ) then
+    else if ( p(istart) .eq. istart ) then
 
       p(istart) = - p(istart)
       cycle
@@ -8878,7 +8891,7 @@ use jburk_r8lib_i4vec_, only: perm_check
           stop
         end if
 
-        if ( iget == istart ) then
+        if ( iget .eq. istart ) then
           a(iput) = a_temp
           exit
         end if
@@ -8926,22 +8939,22 @@ subroutine r8vec_permute_cyclic ( n, k, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer(kind=4) N, the number of objects.
 !
-!    Input, integer ( kind = 4 ) K, the increment used.
+!    Input, integer(kind=4) K, the increment used.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to be permuted.
+!    Input/output, real(kind=8) A(N), the array to be permuted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i4_wrap
-  integer ( kind = 4 ) ipk
-  integer ( kind = 4 ) k
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  integer(kind=4) i
+  integer(kind=4) i4_wrap
+  integer(kind=4) ipk
+  integer(kind=4) k
 
   do i = 1, n
     ipk = i4_wrap ( i + k, 1, n )
@@ -8978,21 +8991,21 @@ use jburk_r8lib_i4vec_, only: perm_uniform
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer(kind=4) N, the number of objects.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to be permuted.
+!    Input/output, real(kind=8) A(N), the array to be permuted.
 !
-!    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+!    Input/output, integer(kind=4) SEED, a seed for the random
 !    number generator.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ), parameter :: base = 1
-  integer ( kind = 4 ) p(n)
-  integer ( kind = 4 ) seed
+  real(kind=8) a(n)
+  integer(kind=4), parameter :: base = 1
+  integer(kind=4) p(n)
+  integer(kind=4) seed
 
   call perm_uniform ( n, base, seed, p )
 
@@ -9033,31 +9046,31 @@ subroutine r8vec_polarize ( n, a, p, a_normal, a_parallel )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be polarized.
+!    Input, real(kind=8) A(N), the vector to be polarized.
 !
-!    Input, real ( kind = 8 ) P(N), the polarizing direction.
+!    Input, real(kind=8) P(N), the polarizing direction.
 !
-!    Output, real ( kind = 8 ) A_NORMAL(N), A_PARALLEL(N), the normal
+!    Output, real(kind=8) A_NORMAL(N), A_PARALLEL(N), the normal
 !    and parallel components of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) a_dot_p
-  real ( kind = 8 ) a_normal(n)
-  real ( kind = 8 ) a_parallel(n)
-  real ( kind = 8 ) p(n)
-  real ( kind = 8 ) p_norm
+  real(kind=8) a(n)
+  real(kind=8) a_dot_p
+  real(kind=8) a_normal(n)
+  real(kind=8) a_parallel(n)
+  real(kind=8) p(n)
+  real(kind=8) p_norm
 
   p_norm = sqrt ( sum ( p(1:n)**2 ) )
 
-  if ( p_norm == 0.0D+00 ) then
+  if ( p_norm .eq. 0.0D+0 ) then
     a_normal(1:n) = a(1:n)
-    a_parallel(1:n) = 0.0D+00
+    a_parallel(1:n) = 0.0D+0
     return
   end if
 
@@ -9093,21 +9106,21 @@ function r8vec_positive_strict ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N).
+!    Input, real(kind=8) A(N).
 !
 !    Output, logical R8VEC_POSITIVE_STRICT, is TRUE every entry of the
 !    vector is strictly positive.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
   logical r8vec_positive_strict
 
-  r8vec_positive_strict = ( all ( 0.0D+00 < a(1:n) ) )
+  r8vec_positive_strict = ( all ( 0.0D+0 < a(1:n) ) )
 
   return
 end
@@ -9135,18 +9148,18 @@ subroutine r8vec_print ( n, a, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of components of the vector.
+!    Input, integer(kind=4) N, the number of components of the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  integer(kind=4) i
   character ( len = * ) title
 
   write ( *, '(a)' ) ' '
@@ -9190,22 +9203,22 @@ subroutine r8vec_print_part ( n, a, max_print, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of the vector.
+!    Input, integer(kind=4) N, the number of entries of the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
-!    Input, integer ( kind = 4 ) MAX_PRINT, the maximum number of lines
+!    Input, integer(kind=4) MAX_PRINT, the maximum number of lines
 !    to print.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) max_print
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) max_print
   character ( len = * ) title
 
   if ( max_print <= 0 ) then
@@ -9271,23 +9284,23 @@ subroutine r8vec_print_some ( n, a, i_lo, i_hi, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of the vector.
+!    Input, integer(kind=4) N, the number of entries of the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
-!    Input, integer ( kind = 4 ) I_LO, I_HI, the first and last indices
+!    Input, integer(kind=4) I_LO, I_HI, the first and last indices
 !    to print.  The routine expects 1 <= I_LO <= I_HI <= N.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i_hi
-  integer ( kind = 4 ) i_lo
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) i_hi
+  integer(kind=4) i_lo
   character ( len = * ) title
 
   write ( *, '(a)' ) ' '
@@ -9324,22 +9337,22 @@ subroutine r8vec_print2 ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries of A.
+!    Input, integer(kind=4) N, the number of entries of A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  real ( kind = 8 ) amin
-  integer ( kind = 4 ) i
+  real(kind=8) a(n)
+  real(kind=8) amax
+  real(kind=8) amin
+  integer(kind=4) i
   character ( len = 11 ) iform
   logical integ
-  integer ( kind = 4 ) lmax
-  real ( kind = 8 ) r8_log_10
+  integer(kind=4) lmax
+  real(kind=8) r8_log_10
 !
 !  Check if all entries are integral.
 !
@@ -9418,18 +9431,18 @@ function r8vec_product ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) R8VEC_PRODUCT, the product of the entries.
+!    Output, real(kind=8) R8VEC_PRODUCT, the product of the entries.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_product
+  real(kind=8) a(n)
+  real(kind=8) r8vec_product
 
   r8vec_product = product ( a(1:n) )
 
@@ -9464,28 +9477,28 @@ subroutine r8vec_range ( n, x, xmin, xmax, y, ymin, ymax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) X(N), the X array.
+!    Input, real(kind=8) X(N), the X array.
 !
-!    Input, real ( kind = 8 ) XMIN, XMAX, the range of X values to check.
+!    Input, real(kind=8) XMIN, XMAX, the range of X values to check.
 !
-!    Input, real ( kind = 8 ) Y(N), the Y array.
+!    Input, real(kind=8) Y(N), the Y array.
 !
-!    Output, real ( kind = 8 ) YMIN, YMAX, the range of Y values whose
+!    Output, real(kind=8) YMIN, YMAX, the range of Y values whose
 !    X value is within the X range.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) xmax
-  real ( kind = 8 ) xmin
-  real ( kind = 8 ) y(n)
-  real ( kind = 8 ) ymax
-  real ( kind = 8 ) ymin
+  integer(kind=4) i
+  real(kind=8) x(n)
+  real(kind=8) xmax
+  real(kind=8) xmin
+  real(kind=8) y(n)
+  real(kind=8) ymax
+  real(kind=8) ymin
 
   ymin =   huge ( ymin )
   ymax = - huge ( ymax )
@@ -9536,22 +9549,22 @@ subroutine r8vec_range_2 ( n, a, amin, amax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Input/output, real ( kind = 8 ) AMIN, AMAX.  On input, the
+!    Input/output, real(kind=8) AMIN, AMAX.  On input, the
 !    current legal range of values for A.  On output, AMIN and AMAX
 !    are either unchanged, or else "widened" so that all entries
 !    of A are within the range.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) amax
-  real ( kind = 8 ) amin
+  real(kind=8) a(n)
+  real(kind=8) amax
+  real(kind=8) amin
 
   amax = max ( amax, maxval ( a(1:n) ) )
   amin = min ( amin, minval ( a(1:n) ) )
@@ -9597,15 +9610,15 @@ subroutine r8vec_reverse ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to be reversed.
+!    Input/output, real(kind=8) A(N), the array to be reversed.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
 
   a(1:n) = a(n:1:-1)
 
@@ -9639,18 +9652,18 @@ function r8vec_rms ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Output, real ( kind = 8 ) R8VEC_RMS, the RMS norm of A.
+!    Output, real(kind=8) R8VEC_RMS, the RMS norm of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_rms
+  real(kind=8) a(n)
+  real(kind=8) r8vec_rms
 
   r8vec_rms = sqrt ( sum ( a(1:n)**2 ) / n )
 
@@ -9698,33 +9711,33 @@ subroutine r8vec_rotate ( n, a, m )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer(kind=4) N, the number of objects.
 !
-!    Input, integer ( kind = 4 ) M, the number of positions to the right that
+!    Input, integer(kind=4) M, the number of positions to the right that
 !    each element should be moved.  Elements that shift pass position
 !    N "wrap around" to the beginning of the array.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to be rotated.
+!    Input/output, real(kind=8) A(N), the array to be rotated.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i4_modp
-  integer ( kind = 4 ) iget
-  integer ( kind = 4 ) iput
-  integer ( kind = 4 ) istart
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) mcopy
-  integer ( kind = 4 ) nset
-  real ( kind = 8 ) temp
+  real(kind=8) a(n)
+  integer(kind=4) i4_modp
+  integer(kind=4) iget
+  integer(kind=4) iput
+  integer(kind=4) istart
+  integer(kind=4) m
+  integer(kind=4) mcopy
+  integer(kind=4) nset
+  real(kind=8) temp
 !
 !  Force M to be positive, between 0 and N-1.
 !
   mcopy = i4_modp ( m, n )
 
-  if ( mcopy == 0 ) then
+  if ( mcopy .eq. 0 ) then
     return
   end if
 
@@ -9753,7 +9766,7 @@ subroutine r8vec_rotate ( n, a, m )
         iget = iget + n
       end if
 
-      if ( iget == istart ) then
+      if ( iget .eq. istart ) then
         exit
       end if
 
@@ -9800,17 +9813,17 @@ function r8vec_scalar_triple_product ( v1, v2, v3 )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V1(3), V2(3), V3(3), the three vectors.
+!    Input, real(kind=8) V1(3), V2(3), V3(3), the three vectors.
 !
-!    Output, real ( kind = 8 ) R8VEC_SCALAR_TRIPLE_PRODUCT, the scalar
+!    Output, real(kind=8) R8VEC_SCALAR_TRIPLE_PRODUCT, the scalar
 !    triple product.
 !
   implicit none
 
-  real ( kind = 8 ) r8vec_scalar_triple_product
-  real ( kind = 8 ) v1(3)
-  real ( kind = 8 ) v2(3)
-  real ( kind = 8 ) v3(3)
+  real(kind=8) r8vec_scalar_triple_product
+  real(kind=8) v1(3)
+  real(kind=8) v2(3)
+  real(kind=8) v3(3)
 
   r8vec_scalar_triple_product = &
       v1(1) * ( v2(2) * v3(3) - v2(3) * v3(2) ) &
@@ -9852,27 +9865,27 @@ subroutine r8vec_search_binary_a ( n, a, aval, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements in the array.
+!    Input, integer(kind=4) N, the number of elements in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array to be searched.  The array must
+!    Input, real(kind=8) A(N), the array to be searched.  The array must
 !    be sorted in ascending order.
 !
-!    Input, real ( kind = 8 ) AVAL, the value to be searched for.
+!    Input, real(kind=8) AVAL, the value to be searched for.
 !
-!    Output, integer ( kind = 4 ) INDX, the result of the search.
+!    Output, integer(kind=4) INDX, the result of the search.
 !    -1, AVAL does not occur in the array.
 !    I, A(I) = AVAL.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) aval
-  integer ( kind = 4 ) high
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) low
-  integer ( kind = 4 ) mid
+  real(kind=8) a(n)
+  real(kind=8) aval
+  integer(kind=4) high
+  integer(kind=4) indx
+  integer(kind=4) low
+  integer(kind=4) mid
 
   indx = -1
 
@@ -9883,7 +9896,7 @@ subroutine r8vec_search_binary_a ( n, a, aval, indx )
 
     mid = ( low + high ) / 2
 
-    if ( a(mid) == aval ) then
+    if ( a(mid) .eq. aval ) then
       indx = mid
       exit
     else if ( a(mid) < aval ) then
@@ -9920,26 +9933,26 @@ subroutine r8vec_shift ( shift, n, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) SHIFT, the amount by which each entry is to
+!    Input, integer(kind=4) SHIFT, the amount by which each entry is to
 !    be shifted.
 !
-!    Input, integer ( kind = 4 ) N, the length of the vector.
+!    Input, integer(kind=4) N, the length of the vector.
 !
-!    Input/output, real ( kind = 8 ) X(N), the vector to be shifted.
+!    Input/output, real(kind=8) X(N), the vector to be shifted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) ihi
-  integer ( kind = 4 ) ilo
-  integer ( kind = 4 ) shift
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  integer(kind=4) ihi
+  integer(kind=4) ilo
+  integer(kind=4) shift
+  real(kind=8) x(n)
+  real(kind=8) y(n)
 
   y(1:n) = x(1:n)
 
-  x(1:n) = 0.0D+00
+  x(1:n) = 0.0D+0
 
   ilo = max ( 1, 1 + shift )
   ihi = min ( n, n + shift )
@@ -9972,23 +9985,23 @@ subroutine r8vec_shift_circular ( shift, n, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) SHIFT, the amount by which each entry is to
+!    Input, integer(kind=4) SHIFT, the amount by which each entry is to
 !    be shifted.
 !
-!    Input, integer ( kind = 4 ) N, the length of the vector.
+!    Input, integer(kind=4) N, the length of the vector.
 !
-!    Input/output, real ( kind = 8 ) X(N), the vector to be shifted.
+!    Input/output, real(kind=8) X(N), the vector to be shifted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i4_wrap
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) shift
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  integer(kind=4) i
+  integer(kind=4) i4_wrap
+  integer(kind=4) j
+  integer(kind=4) shift
+  real(kind=8) x(n)
+  real(kind=8) y(n)
 
   y(1:n) = x(1:n)
 
@@ -10026,20 +10039,20 @@ subroutine r8vec_sort_bubble_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, an unsorted array.
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) t
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) t
 
   do i = 1, n - 1
     do j = i + 1, n
@@ -10080,20 +10093,20 @@ subroutine r8vec_sort_bubble_d ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, an unsorted array.
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) t
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) t
 
   do i = 1, n - 1
     do j = i + 1, n
@@ -10139,19 +10152,19 @@ subroutine r8vec_sort_heap_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, the array to be sorted;
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) n1
-  real ( kind = 8 ) temp
+  real(kind=8) a(n)
+  integer(kind=4) n1
+  real(kind=8) temp
 
   if ( n <= 1 ) then
     return
@@ -10220,18 +10233,18 @@ subroutine r8vec_sort_heap_d ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, the array to be sorted;
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) n1
+  real(kind=8) a(n)
+  integer(kind=4) n1
 
   if ( n <= 1 ) then
     return
@@ -10304,25 +10317,25 @@ subroutine r8vec_sort_heap_index_a ( n, a, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), an array to be index-sorted.
+!    Input, real(kind=8) A(N), an array to be index-sorted.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sort index.  The
+!    Output, integer(kind=4) INDX(N), the sort index.  The
 !    I-th element of the sorted array is A(INDX(I)).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) aval
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indxt
-  integer ( kind = 4 ) ir
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) l
+  real(kind=8) a(n)
+  real(kind=8) aval
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) indxt
+  integer(kind=4) ir
+  integer(kind=4) j
+  integer(kind=4) l
 
   if ( n < 1 ) then
     return
@@ -10332,7 +10345,7 @@ subroutine r8vec_sort_heap_index_a ( n, a, indx )
     indx(i) = i
   end do
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     return
   end if
 
@@ -10354,7 +10367,7 @@ subroutine r8vec_sort_heap_index_a ( n, a, indx )
       indx(ir) = indx(1)
       ir = ir - 1
 
-      if ( ir == 1 ) then
+      if ( ir .eq. 1 ) then
         indx(1) = indxt
         exit
       end if
@@ -10428,25 +10441,25 @@ subroutine r8vec_sort_heap_index_d ( n, a, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), an array to be index-sorted.
+!    Input, real(kind=8) A(N), an array to be index-sorted.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sort index.  The
+!    Output, integer(kind=4) INDX(N), the sort index.  The
 !    I-th element of the sorted array is A(INDX(I)).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) aval
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indxt
-  integer ( kind = 4 ) ir
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) l
+  real(kind=8) a(n)
+  real(kind=8) aval
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) indxt
+  integer(kind=4) ir
+  integer(kind=4) j
+  integer(kind=4) l
 
   if ( n < 1 ) then
     return
@@ -10456,7 +10469,7 @@ subroutine r8vec_sort_heap_index_d ( n, a, indx )
     indx(i) = i
   end do
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     return
   end if
 
@@ -10478,7 +10491,7 @@ subroutine r8vec_sort_heap_index_d ( n, a, indx )
       indx(ir) = indx(1)
       ir = ir - 1
 
-      if ( ir == 1 ) then
+      if ( ir .eq. 1 ) then
         indx(1) = indxt
         exit
       end if
@@ -10552,34 +10565,34 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), an array to be index-sorted.
+!    Input, real(kind=8) A(N), an array to be index-sorted.
 !
-!    Input, integer ( kind = 4 ) MASK_NUM, the number of mask elements.
+!    Input, integer(kind=4) MASK_NUM, the number of mask elements.
 !
-!    Input, integer ( kind = 4 ) MASK(MASK_NUM), the mask array.  This is
+!    Input, integer(kind=4) MASK(MASK_NUM), the mask array.  This is
 !    simply a list of indices of A.  The entries of MASK should
 !    be unique, and each one should be between 1 and N.
 !
-!    Output, integer ( kind = 4 ) INDX(MASK_NUM), the sort index.  There are
+!    Output, integer(kind=4) INDX(MASK_NUM), the sort index.  There are
 !    MASK_NUM elements of A selected by MASK.  If we want to list those
 !    elements in order, then the I-th element is A(MASK(INDX(I))).
 !
   implicit none
 
-  integer ( kind = 4 ) mask_num
-  integer ( kind = 4 ) n
+  integer(kind=4) mask_num
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) aval
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(mask_num)
-  integer ( kind = 4 ) indxt
-  integer ( kind = 4 ) ir
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) mask(mask_num)
+  real(kind=8) a(n)
+  real(kind=8) aval
+  integer(kind=4) i
+  integer(kind=4) indx(mask_num)
+  integer(kind=4) indxt
+  integer(kind=4) ir
+  integer(kind=4) j
+  integer(kind=4) l
+  integer(kind=4) mask(mask_num)
 
   if ( n < 1 ) then
     return
@@ -10589,7 +10602,7 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
     return
   end if
 
-  if ( mask_num == 1 ) then
+  if ( mask_num .eq. 1 ) then
     indx(1) = 1
     return
   end if
@@ -10614,7 +10627,7 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
       indx(ir) = indx(1)
       ir = ir - 1
 
-      if ( ir == 1 ) then
+      if ( ir .eq. 1 ) then
         indx(1) = indxt
         exit
       end if
@@ -10679,21 +10692,21 @@ subroutine r8vec_sort_insert_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the vector.
+!    Input, integer(kind=4) N, the number of items in the vector.
 !    N must be positive.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, the array to be sorted;
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) x
 
   do i = 2, n
 
@@ -10749,23 +10762,23 @@ subroutine r8vec_sort_insert_index_a ( n, a, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the vector.
+!    Input, integer(kind=4) N, the number of items in the vector.
 !    N must be positive.
 !
-!    Input, real ( kind = 8 ) A(N), the array to be sorted.
+!    Input, real(kind=8) A(N), the array to be sorted.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sorted indices.  The array
+!    Output, integer(kind=4) INDX(N), the sorted indices.  The array
 !    is sorted when listed from A(INDX(1)) through A(INDX(N)).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) j
+  real(kind=8) x
 
   if ( n < 1 ) then
     return
@@ -10829,23 +10842,23 @@ subroutine r8vec_sort_insert_index_d ( n, a, indx )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the vector.
+!    Input, integer(kind=4) N, the number of items in the vector.
 !    N must be positive.
 !
-!    Input, real ( kind = 8 ) A(N), the array to be sorted.
+!    Input, real(kind=8) A(N), the array to be sorted.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sorted indices.  The array
+!    Output, integer(kind=4) INDX(N), the sorted indices.  The array
 !    is sorted when listed from A(INDX(1)) through A(INDX(N)).
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) indx(n)
+  integer(kind=4) j
+  real(kind=8) x
 
   if ( n < 1 ) then
     return
@@ -10913,24 +10926,24 @@ subroutine r8vec_sort_quick_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, the array to be sorted.
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ), parameter :: level_max = 30
-  integer ( kind = 4 ) n
+  integer(kind=4), parameter :: level_max = 30
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) base
-  integer ( kind = 4 ) l_segment
-  integer ( kind = 4 ) level
-  integer ( kind = 4 ) n_segment
-  integer ( kind = 4 ) rsave(level_max)
-  integer ( kind = 4 ) r_segment
+  real(kind=8) a(n)
+  integer(kind=4) base
+  integer(kind=4) l_segment
+  integer(kind=4) level
+  integer(kind=4) n_segment
+  integer(kind=4) rsave(level_max)
+  integer(kind=4) r_segment
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -10939,7 +10952,7 @@ subroutine r8vec_sort_quick_a ( n, a )
     stop
   end if
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     return
   end if
 
@@ -11027,25 +11040,25 @@ subroutine r8vec_sort_shell_a ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, an array to be sorted.
 !    On output, the sorted array.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) asave
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) ifree
-  integer ( kind = 4 ) inc
-  integer ( kind = 4 ) ipow
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) maxpow
+  real(kind=8) a(n)
+  real(kind=8) asave
+  integer(kind=4) i
+  integer(kind=4) ifree
+  integer(kind=4) inc
+  integer(kind=4) ipow
+  integer(kind=4) j
+  integer(kind=4) k
+  integer(kind=4) maxpow
 
   if ( n <= 1 ) then
     return
@@ -11143,24 +11156,24 @@ subroutine r8vec_sort2_a ( n, x, y )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, length of input array.
+!    Input, integer(kind=4) N, length of input array.
 !
-!    Input/output, real ( kind = 8 ) X(N).  On input, an unsorted array.
+!    Input/output, real(kind=8) X(N).  On input, an unsorted array.
 !    On output, X has been sorted.
 !
-!    Input/output, real ( kind = 8 ) Y(N), an array which is to be
+!    Input/output, real(kind=8) Y(N), an array which is to be
 !    shifted corresponding to the shifts made in X.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x(n)
-  real ( kind = 8 ) y(n)
+  integer(kind=4) i
+  integer(kind=4) indx
+  integer(kind=4) isgn
+  integer(kind=4) j
+  real(kind=8) x(n)
+  real(kind=8) y(n)
 
   if ( n <= 1 ) then
     return
@@ -11188,7 +11201,7 @@ subroutine r8vec_sort2_a ( n, x, y )
         isgn = + 1
       end if
 
-    else if ( indx == 0 ) then
+    else if ( indx .eq. 0 ) then
 
       exit
 
@@ -11229,36 +11242,36 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) NA, the dimension of A.
+!    Input, integer(kind=4) NA, the dimension of A.
 !
-!    Input, real ( kind = 8 ) A(NA), the first sorted array.
+!    Input, real(kind=8) A(NA), the first sorted array.
 !
-!    Input, integer ( kind = 4 ) NB, the dimension of B.
+!    Input, integer(kind=4) NB, the dimension of B.
 !
-!    Input, real ( kind = 8 ) B(NB), the second sorted array.
+!    Input, real(kind=8) B(NB), the second sorted array.
 !
-!    Output, integer ( kind = 4 ) NC, the number of elements in the output
+!    Output, integer(kind=4) NC, the number of elements in the output
 !    array.  Note that C should usually be dimensioned at least NA+NB in the
 !    calling routine.
 !
-!    Output, real ( kind = 8 ) C(NC), the merged unique sorted array.
+!    Output, real(kind=8) C(NC), the merged unique sorted array.
 !
   implicit none
 
-  integer ( kind = 4 ) na
-  integer ( kind = 4 ) nb
+  integer(kind=4) na
+  integer(kind=4) nb
 
-  real ( kind = 8 ) a(na)
-  real ( kind = 8 ) b(nb)
-  real ( kind = 8 ) c(na+nb)
-  real ( kind = 8 ) d(na+nb)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) ja
-  integer ( kind = 4 ) jb
-  integer ( kind = 4 ) na2
-  integer ( kind = 4 ) nb2
-  integer ( kind = 4 ) nc
-  integer ( kind = 4 ) order
+  real(kind=8) a(na)
+  real(kind=8) b(nb)
+  real(kind=8) c(na+nb)
+  real(kind=8) d(na+nb)
+  integer(kind=4) j
+  integer(kind=4) ja
+  integer(kind=4) jb
+  integer(kind=4) na2
+  integer(kind=4) nb2
+  integer(kind=4) nc
+  integer(kind=4) order
 
   na2 = na
   nb2 = nb
@@ -11293,7 +11306,7 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
 
       do j = 1, nb2 - jb
         jb = jb + 1
-        if ( nc == 0 ) then
+        if ( nc .eq. 0 ) then
           nc = nc + 1
           d(nc) = b(jb)
         else if ( d(nc) < b(jb) ) then
@@ -11312,7 +11325,7 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
 
       do j = 1, na2 - ja
         ja = ja + 1
-        if ( nc == 0 ) then
+        if ( nc .eq. 0 ) then
           nc = nc + 1
           d(nc) = a(ja)
         else if ( d(nc) < a(ja) ) then
@@ -11330,7 +11343,7 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
     else if ( a(ja+1) <= b(jb+1) ) then
 
       ja = ja + 1
-      if ( nc == 0 ) then
+      if ( nc .eq. 0 ) then
         nc = nc + 1
         d(nc) = a(ja)
       else if ( d(nc) < a(ja) ) then
@@ -11343,7 +11356,7 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
     else
 
       jb = jb + 1
-      if ( nc == 0 ) then
+      if ( nc .eq. 0 ) then
         nc = nc + 1
         d(nc) = b(jb)
       else if ( d(nc) < b(jb) ) then
@@ -11380,33 +11393,33 @@ function r8vec_sorted_nearest ( n, a, value )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), a sorted vector.
+!    Input, real(kind=8) A(N), a sorted vector.
 !
-!    Input, real ( kind = 8 ) VALUE, the value whose nearest vector
+!    Input, real(kind=8) VALUE, the value whose nearest vector
 !    entry is sought.
 !
-!    Output, integer ( kind = 4 ) R8VEC_SORTED_NEAREST, the index of the nearest
+!    Output, integer(kind=4) R8VEC_SORTED_NEAREST, the index of the nearest
 !    entry in the vector.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) r8vec_sorted_nearest
-  integer ( kind = 4 ) hi
-  integer ( kind = 4 ) lo
-  integer ( kind = 4 ) mid
-  real ( kind = 8 ) value
+  real(kind=8) a(n)
+  integer(kind=4) r8vec_sorted_nearest
+  integer(kind=4) hi
+  integer(kind=4) lo
+  integer(kind=4) mid
+  real(kind=8) value
 
   if ( n < 1 ) then
     r8vec_sorted_nearest = -1
     return
   end if
 
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     r8vec_sorted_nearest = 1
     return
   end if
@@ -11430,7 +11443,7 @@ function r8vec_sorted_nearest ( n, a, value )
 
       mid = ( lo + hi ) / 2
 
-      if ( value == a(mid) ) then
+      if ( value .eq. a(mid) ) then
         r8vec_sorted_nearest = mid
         return
       else if ( value < a(mid) ) then
@@ -11472,7 +11485,7 @@ function r8vec_sorted_nearest ( n, a, value )
 
       mid = ( lo + hi ) / 2
 
-      if ( value == a(mid) ) then
+      if ( value .eq. a(mid) ) then
         r8vec_sorted_nearest = mid
         return
       else if ( value < a(mid) ) then
@@ -11517,29 +11530,29 @@ subroutine r8vec_sorted_range ( n, r, r_lo, r_hi, i_lo, i_hi )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of items in the vector.
+!    Input, integer(kind=4) N, the number of items in the vector.
 !
-!    Input, real ( kind = 8 ) R(N), the sorted vector.
+!    Input, real(kind=8) R(N), the sorted vector.
 !
-!    Input, real ( kind = 8 ) R_LO, R_HI, the limits of the range.
+!    Input, real(kind=8) R_LO, R_HI, the limits of the range.
 !
-!    Output, integer ( kind = 4 ) I_LO, I_HI, the range of indices
+!    Output, integer(kind=4) I_LO, I_HI, the range of indices
 !    so that I_LO <= I <= I_HI => R_LO <= R(I) <= R_HI.  If no
 !    values in R lie in the range, then I_HI < I_LO will be returned.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i_hi
-  integer ( kind = 4 ) i_lo
-  integer ( kind = 4 ) i1
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  real ( kind = 8 ) r(n)
-  real ( kind = 8 ) r_hi
-  real ( kind = 8 ) r_lo
+  integer(kind=4) i_hi
+  integer(kind=4) i_lo
+  integer(kind=4) i1
+  integer(kind=4) i2
+  integer(kind=4) j1
+  integer(kind=4) j2
+  real(kind=8) r(n)
+  real(kind=8) r_hi
+  real(kind=8) r_lo
 !
 !  Cases we can handle immediately.
 !
@@ -11557,7 +11570,7 @@ subroutine r8vec_sorted_range ( n, r, r_lo, r_hi, i_lo, i_hi )
 !
 !  Are there are least two intervals?
 !
-  if ( n == 1 ) then
+  if ( n .eq. 1 ) then
     if ( r_lo <= r(1) .and. r(1) <= r_hi ) then
       i_lo = 1
       i_hi = 1
@@ -11690,35 +11703,35 @@ subroutine r8vec_sorted_split ( n, a, split, i_lt, i_gt )
 !
 !  Parameters
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in A.
+!    Input, integer(kind=4) N, the number of entries in A.
 !
-!    Input, real ( kind = 8 ) A(N), a sorted array.
+!    Input, real(kind=8) A(N), a sorted array.
 !
-!    Input, real ( kind = 8 ) SPLIT, a value to which the entries in A are
+!    Input, real(kind=8) SPLIT, a value to which the entries in A are
 !    to be compared.
 !
-!    Output, integer ( kind = 4 ) I_LT:
+!    Output, integer(kind=4) I_LT:
 !    0 if no entries are less than SPLIT;
 !    N if all entries are less than SPLIT;
 !    otherwise, the index of the last entry in A less than SPLIT.
 !
-!    Output, integer ( kind = 4 ) I_GT:
+!    Output, integer(kind=4) I_GT:
 !    1 if all entries are greater than SPLIT;
 !    N+1 if no entries are greater than SPLIT;
 !    otherwise the index of the first entry in A greater than SPLIT.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) hi
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i_gt
-  integer ( kind = 4 ) i_lt
-  integer ( kind = 4 ) lo
-  integer ( kind = 4 ) mid
-  real ( kind = 8 ) split
+  real(kind=8) a(n)
+  integer(kind=4) hi
+  integer(kind=4) i
+  integer(kind=4) i_gt
+  integer(kind=4) i_lt
+  integer(kind=4) lo
+  integer(kind=4) mid
+  real(kind=8) split
 
   if ( n < 1 ) then
     i_lt = -1
@@ -11743,7 +11756,7 @@ subroutine r8vec_sorted_split ( n, a, split, i_lt, i_gt )
 
   do
 
-    if ( lo + 1 == hi ) then
+    if ( lo + 1 .eq. hi ) then
       i_lt = lo
       exit
     end if
@@ -11849,31 +11862,31 @@ subroutine r8vec_sorted_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) X_NUM, the number of data values.
+!    Input, integer(kind=4) X_NUM, the number of data values.
 !
-!    Input, real ( kind = 8 ) X_VAL(X_NUM), the data values.
+!    Input, real(kind=8) X_VAL(X_NUM), the data values.
 !
-!    Input, integer ( kind = 4 ) X_UNIQUE_NUM, the number of unique values
+!    Input, integer(kind=4) X_UNIQUE_NUM, the number of unique values
 !    in X_VAL.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNDX(X_UNIQUE_NUM), the UNDX vector.
+!    Output, integer(kind=4) UNDX(X_UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(X_NUM), the XDNU vector.
+!    Output, integer(kind=4) XDNU(X_NUM), the XDNU vector.
 !
   implicit none
 
-  integer ( kind = 4 ) x_num
-  integer ( kind = 4 ) x_unique_num
+  integer(kind=4) x_num
+  integer(kind=4) x_unique_num
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(x_unique_num)
-  real ( kind = 8 ) x_val(x_num)
-  integer ( kind = 4 ) xdnu(x_num)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) tol
+  integer(kind=4) undx(x_unique_num)
+  real(kind=8) x_val(x_num)
+  integer(kind=4) xdnu(x_num)
 !
 !  Walk through the sorted array X.
 !
@@ -11921,26 +11934,26 @@ subroutine r8vec_sorted_unique ( n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input/output, real ( kind = 8 ) A(N).
+!    Input/output, real(kind=8) A(N).
 !    On input, the sorted array of N elements;
 !    On output, the sorted unique array of UNIQUE_NUM elements.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) TOL, a nonnegative tolerance for equality.
 !    Set it to 0.0 for the strictest test.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements
+!    Output, integer(kind=4) UNIQUE_NUM, the number of unique elements
 !    of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) unique_num
-  real ( kind = 8 ) tol
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) unique_num
+  real(kind=8) tol
 
   if ( n <= 0 ) then
     unique_num = 0
@@ -11986,24 +11999,24 @@ subroutine r8vec_sorted_unique_count ( n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the sorted array to examine.
+!    Input, real(kind=8) A(N), the sorted array to examine.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) TOL, a nonnegative tolerance for equality.
 !    Set it to 0.0 for the strictest test.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements
+!    Output, integer(kind=4) UNIQUE_NUM, the number of unique elements
 !    of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) unique_num
-  real ( kind = 8 ) tol
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) unique_num
+  real(kind=8) tol
 
   if ( n < 1 ) then
     unique_num = 0
@@ -12047,37 +12060,37 @@ subroutine r8vec_sorted_unique_hist ( n, a, tol, maxuniq, unique_num, &
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the array to examine.  The elements of A
+!    Input, real(kind=8) A(N), the array to examine.  The elements of A
 !    should have been sorted.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) TOL, a nonnegative tolerance for equality.
 !    Set it to 0.0 for the strictest test.
 !
-!    Input, integer ( kind = 4 ) MAXUNIQ, the maximum number of unique elements
+!    Input, integer(kind=4) MAXUNIQ, the maximum number of unique elements
 !    that can be handled.  If there are more than MAXUNIQ unique
 !    elements in A, the excess will be ignored.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements
+!    Output, integer(kind=4) UNIQUE_NUM, the number of unique elements
 !    of A.
 !
-!    Output, real ( kind = 8 ) AUNIQ(UNIQUE_NUM), the unique elements of A.
+!    Output, real(kind=8) AUNIQ(UNIQUE_NUM), the unique elements of A.
 !
-!    Output, integer ( kind = 4 ) ACOUNT(UNIQUE_NUM), the number of times
+!    Output, integer(kind=4) ACOUNT(UNIQUE_NUM), the number of times
 !    each element of AUNIQ occurs in A.
 !
   implicit none
 
-  integer ( kind = 4 ) maxuniq
-  integer ( kind = 4 ) n
+  integer(kind=4) maxuniq
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) acount(maxuniq)
-  real ( kind = 8 ) auniq(maxuniq)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) unique_num
-  real ( kind = 8 ) tol
+  real(kind=8) a(n)
+  integer(kind=4) acount(maxuniq)
+  real(kind=8) auniq(maxuniq)
+  integer(kind=4) i
+  integer(kind=4) unique_num
+  real(kind=8) tol
 !
 !  Start taking statistics.
 !
@@ -12085,7 +12098,7 @@ subroutine r8vec_sorted_unique_hist ( n, a, tol, maxuniq, unique_num, &
 
   do i = 1, n
 
-    if ( i == 1 ) then
+    if ( i .eq. 1 ) then
 
       unique_num = 1
       auniq(unique_num) = a(1)
@@ -12138,32 +12151,32 @@ subroutine r8vec_split ( n, a, split, isplit )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input/output, real ( kind = 8 ) A(N), the array to split.  On output,
+!    Input/output, real(kind=8) A(N), the array to split.  On output,
 !    all the entries of A that are less than or equal to SPLIT
 !    are in A(1:ISPLIT).
 !
-!    Input, real ( kind = 8 ) SPLIT, the value used to split the vector.
+!    Input, real(kind=8) SPLIT, the value used to split the vector.
 !    It is not necessary that any value of A actually equal SPLIT.
 !
-!    Output, integer ( kind = 4 ) ISPLIT, indicates the position of the last
+!    Output, integer(kind=4) ISPLIT, indicates the position of the last
 !    entry of the split vector that is less than or equal to SPLIT.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i1
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) i3
-  integer ( kind = 4 ) isplit
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  integer ( kind = 4 ) j3
-  real ( kind = 8 ) split
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) i1
+  integer(kind=4) i2
+  integer(kind=4) i3
+  integer(kind=4) isplit
+  integer(kind=4) j1
+  integer(kind=4) j2
+  integer(kind=4) j3
+  real(kind=8) split
 !
 !  Partition the vector into A1, A2, A3, where
 !    A1 = A(I1:J1) holds values <= SPLIT,
@@ -12229,24 +12242,24 @@ subroutine r8vec_std ( n, a, std )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !    N should be at least 2.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Output, real ( kind = 8 ) STD, the standard deviation of the vector.
+!    Output, real(kind=8) STD, the standard deviation of the vector.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) mean
-  real ( kind = 8 ) std
+  real(kind=8) a(n)
+  real(kind=8) mean
+  real(kind=8) std
 
   if ( n < 2 ) then
 
-    std = 0.0D+00
+    std = 0.0D+0
 
   else
 
@@ -12287,24 +12300,24 @@ subroutine r8vec_stutter ( n, a, m, am )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the size of the input vector.
+!    Input, integer(kind=4) N, the size of the input vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Input, integer ( kind = 4 ) M, the "stuttering factor".
+!    Input, integer(kind=4) M, the "stuttering factor".
 !
-!    Output, real ( kind = 8 ) AM(M*N), the stuttering vector.
+!    Output, real(kind=8) AM(M*N), the stuttering vector.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer(kind=4) m
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) am(m*n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) jhi
-  integer ( kind = 4 ) jlo
+  real(kind=8) a(n)
+  real(kind=8) am(m*n)
+  integer(kind=4) i
+  integer(kind=4) jhi
+  integer(kind=4) jlo
 
   do i = 1, n
     jlo = m * ( i - 1 ) + 1
@@ -12343,18 +12356,18 @@ function r8vec_sum ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the array.
+!    Input, integer(kind=4) N, the number of entries in the array.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Output, real ( kind = 8 ) R8VEC_SUM, the sum of the entries.
+!    Output, real(kind=8) R8VEC_SUM, the sum of the entries.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) r8vec_sum
+  real(kind=8) a(n)
+  real(kind=8) r8vec_sum
 
   r8vec_sum = sum ( a(1:n) )
 
@@ -12384,17 +12397,17 @@ subroutine r8vec_swap ( n, a1, a2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the arrays.
+!    Input, integer(kind=4) N, the number of entries in the arrays.
 !
-!    Input/output, real ( kind = 8 ) A1(N), A2(N), the vectors to swap.
+!    Input/output, real(kind=8) A1(N), A2(N), the vectors to swap.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a1(n)
-  real ( kind = 8 ) a2(n)
-  real ( kind = 8 ) a3(n)
+  real(kind=8) a1(n)
+  real(kind=8) a2(n)
+  real(kind=8) a3(n)
 
   a3(1:n) = a1(1:n)
   a1(1:n) = a2(1:n)
@@ -12437,19 +12450,19 @@ subroutine r8vec_transpose_print ( n, a, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of components of the vector.
+!    Input, integer(kind=4) N, the number of components of the vector.
 !
-!    Input, real ( kind = 8 ) A(N), the vector to be printed.
+!    Input, real(kind=8) A(N), the vector to be printed.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) ihi
-  integer ( kind = 4 ) ilo
+  real(kind=8) a(n)
+  integer(kind=4) ihi
+  integer(kind=4) ilo
   character ( len = * ) title
 
   write ( *, '(a)' ) ' '
@@ -12543,32 +12556,32 @@ subroutine r8vec_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) X_NUM, the number of data values.
+!    Input, integer(kind=4) X_NUM, the number of data values.
 !
-!    Input, real ( kind = 8 ) X_VAL(X_NUM), the data values.
+!    Input, real(kind=8) X_VAL(X_NUM), the data values.
 !
-!    Input, integer ( kind = 4 ) X_UNIQUE_NUM, the number of unique values
+!    Input, integer(kind=4) X_UNIQUE_NUM, the number of unique values
 !    in X_VAL.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNDX(X_UNIQUE_NUM), the UNDX vector.
+!    Output, integer(kind=4) UNDX(X_UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(X_NUM), the XDNU vector.
+!    Output, integer(kind=4) XDNU(X_NUM), the XDNU vector.
 !
   implicit none
 
-  integer ( kind = 4 ) x_num
-  integer ( kind = 4 ) x_unique_num
+  integer(kind=4) x_num
+  integer(kind=4) x_unique_num
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(x_num)
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(x_unique_num)
-  real ( kind = 8 ) x_val(x_num)
-  integer ( kind = 4 ) xdnu(x_num)
+  integer(kind=4) i
+  integer(kind=4) indx(x_num)
+  integer(kind=4) j
+  real(kind=8) tol
+  integer(kind=4) undx(x_unique_num)
+  real(kind=8) x_val(x_num)
+  integer(kind=4) xdnu(x_num)
 !
 !  Implicitly sort the array.
 !
@@ -12606,7 +12619,7 @@ subroutine r8vec_uniform_01 ( n, seed, r )
 !
 !    An R8VEC is a vector of R8's.
 !
-!    For now, the input quantity SEED is an integer ( kind = 4 ) variable.
+!    For now, the input quantity SEED is an integer(kind=4) variable.
 !
 !  Licensing:
 !
@@ -12640,23 +12653,23 @@ subroutine r8vec_uniform_01 ( n, seed, r )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input/output, integer ( kind = 4 ) SEED, the "seed" value, which
+!    Input/output, integer(kind=4) SEED, the "seed" value, which
 !    should NOT be 0.  On output, SEED has been updated.
 !
-!    Output, real ( kind = 8 ) R(N), the vector of pseudorandom values.
+!    Output, real(kind=8) R(N), the vector of pseudorandom values.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) r(n)
+  integer(kind=4) i
+  integer(kind=4) k
+  integer(kind=4) seed
+  real(kind=8) r(n)
 
-  if ( seed == 0 ) then
+  if ( seed .eq. 0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_UNIFORM_01 - Fatal error!'
     write ( *, '(a)' ) '  Input value of SEED = 0.'
@@ -12734,28 +12747,28 @@ subroutine r8vec_uniform_ab ( n, a, b, seed, r )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A, B, the lower and upper limits.
+!    Input, real(kind=8) A, B, the lower and upper limits.
 !
-!    Input/output, integer ( kind = 4 ) SEED, the "seed" value, which 
+!    Input/output, integer(kind=4) SEED, the "seed" value, which 
 !    should NOT be 0.  On output, SEED has been updated.
 !
-!    Output, real ( kind = 8 ) R(N), the vector of pseudorandom values.
+!    Output, real(kind=8) R(N), the vector of pseudorandom values.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a
-  real ( kind = 8 ) b
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ), parameter :: i4_huge = 2147483647
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) r(n)
+  real(kind=8) a
+  real(kind=8) b
+  integer(kind=4) i
+  integer(kind=4), parameter :: i4_huge = 2147483647
+  integer(kind=4) k
+  integer(kind=4) seed
+  real(kind=8) r(n)
 
-  if ( seed == 0 ) then
+  if ( seed .eq. 0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_UNIFORM_AB - Fatal error!'
     write ( *, '(a)' ) '  Input value of SEED = 0.'
@@ -12833,29 +12846,29 @@ subroutine r8vec_uniform_abvec ( n, a, b, seed, r )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Input, real ( kind = 8 ) A(N), B(N), the lower and upper limits
+!    Input, real(kind=8) A(N), B(N), the lower and upper limits
 !    for each dimension.
 !
-!    Input/output, integer ( kind = 4 ) SEED, the "seed" value, which 
+!    Input/output, integer(kind=4) SEED, the "seed" value, which 
 !    should NOT be 0.  On output, SEED has been updated.
 !
-!    Output, real ( kind = 8 ) R(N), the vector of pseudorandom values.
+!    Output, real(kind=8) R(N), the vector of pseudorandom values.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) b(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ), parameter :: i4_huge = 2147483647
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) r(n)
+  real(kind=8) a(n)
+  real(kind=8) b(n)
+  integer(kind=4) i
+  integer(kind=4), parameter :: i4_huge = 2147483647
+  integer(kind=4) k
+  integer(kind=4) seed
+  real(kind=8) r(n)
 
-  if ( seed == 0 ) then
+  if ( seed .eq. 0 ) then
     write ( *, '(a)' ) ' '
     write ( *, '(a)' ) 'R8VEC_UNIFORM_ABVEC - Fatal error!'
     write ( *, '(a)' ) '  Input value of SEED = 0.'
@@ -12904,25 +12917,25 @@ subroutine r8vec_unique_count ( n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the unsorted array to examine.
+!    Input, real(kind=8) A(N), the unsorted array to examine.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) TOL, a nonnegative tolerance for equality.
 !    Set it to 0.0 for the strictest test.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique elements
+!    Output, integer(kind=4) UNIQUE_NUM, the number of unique elements
 !    of A.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) unique_num
-  real ( kind = 8 ) tol
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  integer(kind=4) unique_num
+  real(kind=8) tol
 
   unique_num = 0
 
@@ -12973,31 +12986,31 @@ subroutine r8vec_unique_index ( n, a, tol, unique_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer(kind=4) N, the number of elements of A.
 !
-!    Input, real ( kind = 8 ) A(N), the array.
+!    Input, real(kind=8) A(N), the array.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_INDEX(N), the unique index.
+!    Output, integer(kind=4) UNIQUE_INDEX(N), the unique index.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) unique_index(n)
-  integer ( kind = 4 ) unique_num
+  real(kind=8) a(n)
+  integer(kind=4) i
+  integer(kind=4) j
+  real(kind=8) tol
+  integer(kind=4) unique_index(n)
+  integer(kind=4) unique_num
 
   unique_index(1:n) = -1
   unique_num = 0
 
   do i = 1, n
 
-    if ( unique_index(i) == -1 ) then
+    if ( unique_index(i) .eq. -1 ) then
 
       unique_num = unique_num + 1
       unique_index(i) = unique_num
@@ -13044,24 +13057,24 @@ subroutine r8vec_variance ( n, a, variance )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !    N should be at least 2.
 !
-!    Input, real ( kind = 8 ) A(N), the vector.
+!    Input, real(kind=8) A(N), the vector.
 !
-!    Output, real ( kind = 8 ) VARIANCE, the variance of the vector.
+!    Output, real(kind=8) VARIANCE, the variance of the vector.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
-  real ( kind = 8 ) mean
-  real ( kind = 8 ) variance
+  real(kind=8) a(n)
+  real(kind=8) mean
+  real(kind=8) variance
 
   if ( n < 2 ) then
 
-    variance = 0.0D+00
+    variance = 0.0D+0
 
   else
 
@@ -13103,17 +13116,17 @@ subroutine r8vec_vector_triple_product ( v1, v2, v3, v )
 !
 !  Parameters:
 !
-!    Input, real ( kind = 8 ) V1(3), V2(3), V3(3), three vectors.
+!    Input, real(kind=8) V1(3), V2(3), V3(3), three vectors.
 !
-!    Output, real ( kind = 8 ) V(3), the vector triple product.
+!    Output, real(kind=8) V(3), the vector triple product.
 !
   implicit none
 
-  real ( kind = 8 ) v(3)
-  real ( kind = 8 ) v1(3)
-  real ( kind = 8 ) v2(3)
-  real ( kind = 8 ) v3(3)
-  real ( kind = 8 ) v4(3)
+  real(kind=8) v(3)
+  real(kind=8) v1(3)
+  real(kind=8) v2(3)
+  real(kind=8) v3(3)
+  real(kind=8) v4(3)
 
   call r8vec_cross_product_3d ( v2, v3, v4 )
 
@@ -13145,21 +13158,21 @@ subroutine r8vec_write ( n, r, output_file )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the order of the matrix.
+!    Input, integer(kind=4) N, the order of the matrix.
 !
-!    Input, real ( kind = 8 ) R(N), the vector to be written.
+!    Input, real(kind=8) R(N), the vector to be written.
 !
 !    Input, character ( len = * ) OUTPUT_FILE, the name of the file to which
 !    the information is to be written.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  integer ( kind = 4 ) i
+  integer(kind=4) i
   character ( len = * ) output_file
-  integer ( kind = 4 ) output_unit
-  real ( kind = 8 ) r(n)
+  integer(kind=4) output_unit
+  real(kind=8) r(n)
 
   call get_unit ( output_unit )
 
@@ -13197,17 +13210,17 @@ subroutine r8vec_zero ( n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries in the vector.
+!    Input, integer(kind=4) N, the number of entries in the vector.
 !
-!    Output, real ( kind = 8 ) A(N), the vector to be zeroed.
+!    Output, real(kind=8) A(N), the vector to be zeroed.
 !
   implicit none
 
-  integer ( kind = 4 ) n
+  integer(kind=4) n
 
-  real ( kind = 8 ) a(n)
+  real(kind=8) a(n)
 
-  a(1:n) = 0.0D+00
+  a(1:n) = 0.0D+0
 
   return
 end
