@@ -10,6 +10,11 @@ module procedure r8row_compare
 end interface    r8row_compare
 public           r8row_compare
 
+interface        r8row_max
+module procedure r8row_max
+end interface    r8row_max
+public           r8row_max
+
 contains
 
 
@@ -120,8 +125,32 @@ subroutine r8row_compare ( m, n, a, i, j, value )
 
   return
 end
-subroutine r8row_max ( m, n, a, amax )
 
+
+
+!> @author John Burkardt
+!> @brief  R8ROW_MAX returns the maximums of an R8ROW.
+!> @date   2004-10-10
+!> @date   2020-02-06
+!> @see    
+subroutine     r8row_max (m, n, a, amax)
+implicit none
+   integer, intent(in) :: m
+   integer, intent(in) :: n
+   real(kind=8), intent(in) :: a(m,n)
+   real(kind=8), intent(out) :: amax(n)
+   integer :: i, j
+
+   amax = 0.0D+0
+   do i = 1, m
+      amax(i) = a(i,1)
+      do j = 2, n
+         if (amax(i) < a(i,j)) then
+             amax(i) = a(i,j)
+         end if
+      end do
+   end do
+end subroutine r8row_max
 !*****************************************************************************80
 !
 !! R8ROW_MAX returns the maximums of an R8ROW.
@@ -162,29 +191,9 @@ subroutine r8row_max ( m, n, a, amax )
 !
 !    Output, real(kind=8) :: AMAX(M), the maximums of the rows.
 !
-  implicit none
 
-  integer :: m
-  integer :: n
 
-  real(kind=8) :: a(m,n)
-  real(kind=8) :: amax(m)
-  integer :: i
-  integer :: j
 
-  do i = 1, m
-
-    amax(i) = a(i,1)
-    do j = 2, n
-      if ( amax(i) < a(i,j) ) then
-        amax(i) = a(i,j)
-      end if
-    end do
-
-  end do
-
-  return
-end
 subroutine r8row_mean ( m, n, a, mean )
 
 !*****************************************************************************80
