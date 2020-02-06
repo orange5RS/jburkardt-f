@@ -1,4 +1,4 @@
-module     jburk_r8poly_
+module     jburk_r8lib_r8poly_
 implicit none
 
 interface        r8poly_degree
@@ -38,6 +38,7 @@ contains
 !> @author John Burkardt
 !> @brief  R8POLY_DEGREE returns the degree of a polynomial.
 !> @date   2001-03-21
+!> @date   2020-02-05
 !> @see    
 subroutine     r8poly_degree (na, a, degree)
 implicit none
@@ -1764,7 +1765,7 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
   real(kind=8) :: d
   complex ( kind = 8 ) i
   complex ( kind = 8 ) one
-  real(kind=8) ::  parameter :: pi = 3.141592653589793D+0
+  real(kind=8), parameter :: pi = 3.141592653589793D+0
   real(kind=8) :: q
   real(kind=8) :: r
   complex ( kind = 8 ) r1
@@ -1927,4 +1928,4 @@ subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
   return
 end
 
-end module jburk_r8poly_
+end module jburk_r8lib_r8poly_
