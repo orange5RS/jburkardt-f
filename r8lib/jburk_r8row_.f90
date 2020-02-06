@@ -1,5 +1,5 @@
-module     jburk_r8row_
+module     jburk_r8lib_r8row_
 implicit none
 contains
 
-end module jburk_r8row_
+end module jburk_r8lib_r8row_
