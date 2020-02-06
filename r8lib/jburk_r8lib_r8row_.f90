@@ -1080,8 +1080,7 @@ subroutine r8row_variance ( m, n, a, variance )
 
   real ( kind = 8 ) a(m,n)
   integer ( kind = 4 ) i
-  integer (
- kind = 4 ) j
+  integer ( kind = 4 ) j
   real ( kind = 8 ) mean
   real ( kind = 8 ) variance(m)
 
