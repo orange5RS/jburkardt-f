@@ -6562,6 +6562,8 @@ end
 !
 subroutine test090 ( )
 use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8poly_, only: r8poly_print
+use jburk_r8lib_r8poly_, only: r8poly_deriv
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -6614,6 +6616,8 @@ end
 subroutine test091 ( )
 use jburk_r8lib_r8vec_, only: r8vec_indicator
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8poly_, only: r8poly_print
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_coef
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6664,9 +6668,10 @@ end
 subroutine test092 ( )
 use jburk_r8lib_r8vec_, only: r8vec_indicator
 use jburk_r8lib_r8vec_, only: r8vec_print
-
-  implicit none
-
+use jburk_r8lib_r8poly_, only: r8poly_print
+use jburk_r8lib_r8poly_, only: r8poly_deriv
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_coef
+implicit none
   integer ( kind = 4 ), parameter :: npol = 5
 
   integer ( kind = 4 ) d
@@ -6725,9 +6730,9 @@ subroutine test093 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8vec_, only: r8vec_even
 use jburk_r8lib_r8vec_, only: r8vec_even_select
-! use jburk_r8lib_r8poly_, only: r8poly_lagrange_0
-! use jburk_r8lib_r8poly_, only: r8poly_lagrange_1
-! use jburk_r8lib_r8poly_, only: r8poly_lagrange_2
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_0
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_1
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_2
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6805,7 +6810,7 @@ end
 subroutine test094 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8vec_, only: r8vec_even_select
-! use jburk_r8lib_r8poly_, only: r8poly_lagrange_factor
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_factor
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6879,7 +6884,7 @@ subroutine test095 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8vec_, only: r8vec_even
 use jburk_r8lib_r8vec_, only: r8vec_even_select
-! use jburk_r8lib_r8poly_, only: r8poly_lagrange_factor
+use jburk_r8lib_r8poly_, only: r8poly_lagrange_val
   implicit none
 
   integer ( kind = 4 ), parameter :: npol = 5
@@ -6956,7 +6961,8 @@ use jburk_r8lib_r8vec_, only: r8vec_even_select
 
   return
 end
-subroutine test098 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6974,7 +6980,10 @@ subroutine test098 ( )
 !
 !    John Burkardt
 !
-  implicit none
+subroutine test098 ( )
+use jburk_r8lib_r8poly_, only: r8poly_print
+use jburk_r8lib_r8poly_, only: r8poly_value_horner
+implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
 
@@ -7003,7 +7012,8 @@ subroutine test098 ( )
 
   return
 end
-subroutine test099 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7021,6 +7031,9 @@ subroutine test099 ( )
 !
 !    John Burkardt
 !
+subroutine test099 ( )
+use jburk_r8lib_r8poly_, only: r8poly2_ex
+use jburk_r8lib_r8poly_, only: r8poly2_ex2
   implicit none
 
   real ( kind = 8 ) a
@@ -7079,7 +7092,8 @@ subroutine test099 ( )
 
   return
 end
-subroutine test100 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7097,6 +7111,8 @@ subroutine test100 ( )
 !
 !    John Burkardt
 !
+subroutine test100 ( )
+use jburk_r8lib_r8poly_, only: r8poly2_val
   implicit none
 
   integer ( kind = 4 ) i
@@ -7227,7 +7243,8 @@ subroutine test100_f ( x, y, yp, ypp )
 
   return
 end
-subroutine test101 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7245,7 +7262,9 @@ subroutine test101 ( )
 !
 !    John Burkardt
 !
-  implicit none
+subroutine test101 ( )
+use jburk_r8lib_r8poly_, only: r8poly2_val2
+implicit none
 
   integer ( kind = 4 ), parameter :: ndata = 5
   integer ( kind = 4 ), parameter :: dim_num = 2
@@ -7290,7 +7309,8 @@ subroutine test101 ( )
 
   return
 end
-subroutine test102 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7308,6 +7328,8 @@ subroutine test102 ( )
 !
 !    John Burkardt
 !
+subroutine test102 ( )
+use jburk_r8lib_r8poly_, only: r8poly2_root
   implicit none
 
   integer ( kind = 4 ), parameter :: test_num = 3
@@ -7346,7 +7368,8 @@ subroutine test102 ( )
 
   return
 end
-subroutine test103 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7364,6 +7387,8 @@ subroutine test103 ( )
 !
 !    John Burkardt
 !
+subroutine test103 ( )
+use jburk_r8lib_r8poly_, only: r8poly3_root
   implicit none
 
   integer ( kind = 4 ), parameter :: test_num = 4
@@ -7420,7 +7445,8 @@ subroutine test103 ( )
 
   return
 end
-subroutine test104 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -7438,6 +7464,8 @@ subroutine test104 ( )
 !
 !    John Burkardt
 !
+subroutine test104 ( )
+use jburk_r8lib_r8poly_, only: r8poly4_root
   implicit none
 
   integer ( kind = 4 ), parameter :: test_num = 7
