@@ -187,6 +187,25 @@ end subroutine i4vec_permute
 
 
 
+!> @author John Burkardt
+!> @brief  I4VEC_PRINT prints an I4VEC.
+!> @date   2010-05-02
+!> @date   2020-02-06
+!> @see    
+subroutine i4vec_print (n, a, title)
+implicit none
+   integer, intent(in) :: n              !< N, the number of components of the vector.
+   integer, intent(in) :: a(n)           !< A(N), the vector to be printed.
+   character(len=*), intent(in) :: title !< TITLE, a title.
+   integer :: i
+
+   write (unit=*, fmt='(a)') ' '
+   write (unit=*, fmt='(a)') trim (title)
+   write (unit=*, fmt='(a)') ' '
+   do i = 1, n
+      write (unit=*, fmt='(2x,i8,a,2x,i12)') i, ':', a(i)
+   end do
+end subroutine i4vec_print
 !*****************************************************************************80
 !
 !! I4VEC_PRINT prints an I4VEC.
@@ -215,26 +234,6 @@ end subroutine i4vec_permute
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
-
-!> @author John Burkardt
-!> @brief  I4VEC_PRINT prints an I4VEC.
-!> @date   2010-05-02
-!> @date   2020-02-20
-!> @see    
-subroutine i4vec_print (n, a, title)
-implicit none
-   integer, intent(in) :: n
-   integer, intent(in) :: a(n)
-   character(len=*), intent(in) :: title
-   integer :: i
-
-   write (unit=*, fmt='(a)') ' '
-   write (unit=*, fmt='(a)') trim (title)
-   write (unit=*, fmt='(a)') ' '
-   do i = 1, n
-      write (unit=*, fmt='(2x,i8,a,2x,i12)') i, ':', a(i)
-   end do
-end subroutine i4vec_print
 
 
 
@@ -309,14 +308,15 @@ end subroutine perm_check
 
 
 
-!> @author   John Burkardt
-!> @brief    PERM_UNIFORM selects a random permutation of N objects.
-!> @date     2008-11-18
-!> @see      Albert Nijenhuis, Herbert Wilf,
-!!           Combinatorial Algorithms for Computers and Calculators,
-!!           Academic Press, 1978,
-!!           ISBN: 0-12-519260-6,
-!!           LC: QA164.N54.
+!> @author John Burkardt
+!> @brief  PERM_UNIFORM selects a random permutation of N objects.
+!> @date   2008-11-18
+!> @date   2020-02-05
+!> @see    Albert Nijenhuis, Herbert Wilf,
+!!         Combinatorial Algorithms for Computers and Calculators,
+!!         Academic Press, 1978,
+!!         ISBN: 0-12-519260-6,
+!!         LC: QA164.N54.
 subroutine perm_uniform (n, base, seed, p)
 !use jburk_i4lib, only: i4_uniform_ab
 implicit none
