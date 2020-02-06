@@ -70,9 +70,9 @@ end subroutine i4vec_indicator
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of elements of A.
+!    Input, integer :: N, the number of elements of A.
 !
-!    Output, integer ( kind = 4 ) A(N), the array to be initialized.
+!    Output, integer :: A(N), the array to be initialized.
 !
 
 
@@ -176,18 +176,16 @@ end subroutine i4vec_permute
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer :: N, the number of objects.
 !
-!    Input, integer ( kind = 4 ) P(N), the permutation.  P(I) = J means
+!    Input, integer :: P(N), the permutation.  P(I) = J means
 !    that the I-th element of the output array should be the J-th
 !    element of the input array.
 !
-!    Input/output, integer ( kind = 4 ) A(N), the array to be permuted.
+!    Input/output, integer :: A(N), the array to be permuted.
 !
 
 
-
-subroutine i4vec_print ( n, a, title )
 
 !*****************************************************************************80
 !
@@ -211,29 +209,32 @@ subroutine i4vec_print ( n, a, title )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of components of the vector.
+!    Input, integer :: N, the number of components of the vector.
 !
-!    Input, integer ( kind = 4 ) A(N), the vector to be printed.
+!    Input, integer :: A(N), the vector to be printed.
 !
 !    Input, character ( len = * ) TITLE, a title.
 !
-  implicit none
 
-  integer ( kind = 4 ) n
+!> @author John Burkardt
+!> @brief  I4VEC_PRINT prints an I4VEC.
+!> @date   2010-05-02
+!> @date   2020-02-20
+!> @see    
+subroutine i4vec_print (n, a, title)
+implicit none
+   integer, intent(in) :: n
+   integer, intent(in) :: a(n)
+   character(len=*), intent(in) :: title
+   integer :: i
 
-  integer ( kind = 4 ) a(n)
-  integer ( kind = 4 ) i
-  character ( len = * ) title
-
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) trim ( title )
-  write ( *, '(a)' ) ' '
-  do i = 1, n
-    write ( *, '(2x,i8,a,2x,i12)' ) i, ':', a(i)
-  end do
-
-  return
-end
+   write (unit=*, fmt='(a)') ' '
+   write (unit=*, fmt='(a)') trim (title)
+   write (unit=*, fmt='(a)') ' '
+   do i = 1, n
+      write (unit=*, fmt='(2x,i8,a,2x,i12)') i, ':', a(i)
+   end do
+end subroutine i4vec_print
 
 
 
@@ -294,13 +295,13 @@ end subroutine perm_check
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of entries.
+!    Input, integer :: N, the number of entries.
 !
-!    Input, integer ( kind = 4 ) P(N), the array to check.
+!    Input, integer :: P(N), the array to check.
 !
-!    Input, integer ( kind = 4 ) BASE, the index base.
+!    Input, integer :: BASE, the index base.
 !
-!    Output, integer ( kind = 4 ) IERROR, error flag.
+!    Output, integer :: IERROR, error flag.
 !    0, the array represents a permutation.
 !    nonzero, the array does not represent a permutation.  The smallest
 !    missing value is equal to IERROR.
@@ -337,7 +338,6 @@ implicit none
       p(i) = p(j)
       p(j) = k
    end do
-
 end subroutine perm_uniform
 !*****************************************************************************80
 !
@@ -365,15 +365,15 @@ end subroutine perm_uniform
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N, the number of objects to be permuted.
+!    Input, integer :: N, the number of objects to be permuted.
 !
-!    Input, integer ( kind = 4 ) BASE, is 0 for a 0-based permutation and 1 for
+!    Input, integer :: BASE, is 0 for a 0-based permutation and 1 for
 !    a 1-based permutation.
 !
-!    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+!    Input/output, integer :: SEED, a seed for the random
 !    number generator.
 !
-!    Output, integer ( kind = 4 ) P(N), the permutation.  P(I) is the "new"
+!    Output, integer :: P(N), the permutation.  P(I) is the "new"
 !    location of the object originally at I.
 
 
