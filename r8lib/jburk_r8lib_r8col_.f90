@@ -1,6 +1,28 @@
 !> @author [P. Jang](orange224factory@gmail.com)
 !> @date   2020-02-06
 !> @see    [Documenting Fortran with Doxygen](https://github.com/Mohid-Water-Modelling-System/Mohid/wiki/Documenting-Fortran-with-Doxygen)
+! 
+!> @definition
+!  row vector: 1 x n; a matrix with one row
+!  col vector: m x 1; a matrix with one col
+!      matrix: m rows x n columns
+
+!> @example: A is 2 by 3 matrix (2 rows and 3 columns).
+!  A[i,j] = | a11, a12, a13 |
+!           | a21, a22, a23 |
+
+!> @note
+!  column-major order, e.g. Fortran (one-indexed)
+!  [1, 2, 3, 4, 5, 6] = [a11, a21, a12, a22, a13, a23]
+!  
+!  row-major order, e.g. C (zero-indexed)
+!  [0, 1, 2, 3, 4, 5] = [a11, a12, a13, a21, a22, a23]
+!  
+!  row vector
+!  A[1,:] = [a11, a12, a13]
+!  
+!  column vector
+!  A[:,1] = [a11, a21]^T
 module     jburk_r8lib_r8col_
 use, intrinsic :: iso_fortran_env
 implicit none
@@ -225,28 +247,28 @@ subroutine r8col_compare ( m, n, a, i, j, value )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Input, integer ( kind = 4 ) I, J, the columns to be compared.
+!    Input, integer :: I, J, the columns to be compared.
 !    I and J must be between 1 and N.
 !
-!    Output, integer ( kind = 4 ) VALUE, the results of the comparison:
+!    Output, integer :: VALUE, the results of the comparison:
 !    -1, column I < column J,
 !     0, column I = column J,
 !    +1, column J < column I.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) value
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  integer :: k
+  integer :: value
 !
 !  Check.
 !
@@ -321,30 +343,30 @@ subroutine r8col_duplicates ( m, n, n_unique, seed, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows in each column of A.
+!    Input, integer :: M, the number of rows in each column of A.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns in A.
+!    Input, integer :: N, the number of columns in A.
 !
-!    Input, integer ( kind = 4 ) N_UNIQUE, the number of unique columns in A.
+!    Input, integer :: N_UNIQUE, the number of unique columns in A.
 !    1 <= N_UNIQUE <= N.
 !
-!    Input/output, integer ( kind = 4 ) SEED, a seed for the random
+!    Input/output, integer :: SEED, a seed for the random
 !    number generator.
 !
-!    Output, real ( kind = 8 ) A(M,N), the array.
+!    Output, real(kind=8) :: A(M,N), the array.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i4_uniform_ab
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  integer ( kind = 4 ) n_unique
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) temp(m)
+  real(kind=8) :: a(m,n)
+  integer :: i4_uniform_ab
+  integer :: j1
+  integer :: j2
+  integer :: n_unique
+  integer :: seed
+  real(kind=8) :: temp(m)
 
   if ( n_unique < 1 .or. n < n_unique ) then
     write ( *, '(a)' ) ' '
@@ -421,27 +443,27 @@ subroutine r8col_find ( m, n, a, x, col )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), a table of numbers, regarded as
+!    Input, real(kind=8) :: A(M,N), a table of numbers, regarded as
 !    N columns of vectors of length M.
 !
-!    Input, real ( kind = 8 ) X(M), a vector to be matched with a column of A.
+!    Input, real(kind=8) :: X(M), a vector to be matched with a column of A.
 !
-!    Output, integer ( kind = 4 ) COL, the index of the first column of A
+!    Output, integer :: COL, the index of the first column of A
 !    which exactly matches every entry of X, or -1 if no match
 !    could be found.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) col
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x(m)
+  real(kind=8) :: a(m,n)
+  integer :: col
+  integer :: i
+  integer :: j
+  real(kind=8) :: x(m)
 
   col = -1
 
@@ -495,25 +517,25 @@ subroutine r8col_first_index ( m, n, a, tol, first_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns of A.
+!    Input, integer :: M, N, the number of rows and columns of A.
 !    The length of an "element" of A, and the number of "elements".
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) FIRST_INDEX(N), the first occurrence index.
+!    Output, integer :: FIRST_INDEX(N), the first occurrence index.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) first_index(n)
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  real ( kind = 8 ) tol
+  real(kind=8) :: a(m,n)
+  integer :: first_index(n)
+  integer :: j1
+  integer :: j2
+  real(kind=8) :: tol
 
   first_index(1:n) = -1
 
@@ -589,40 +611,40 @@ subroutine r8col_insert ( n_max, m, n, a, x, col )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) N_MAX, the maximum number of columns in A.
+!    Input, integer :: N_MAX, the maximum number of columns in A.
 !
-!    Input, integer ( kind = 4 ) M, the number of rows.
+!    Input, integer :: M, the number of rows.
 !
-!    Input/output, integer ( kind = 4 ) N, the number of columns.
+!    Input/output, integer :: N, the number of columns.
 !    If the new column is inserted into the table, then the output
 !    value of N will be increased by 1.
 !
-!    Input/output, real ( kind = 8 ) A(M,N_MAX), a table of numbers, regarded
+!    Input/output, real(kind=8) :: A(M,N_MAX), a table of numbers, regarded
 !    as an array of columns.  The columns must have been sorted
 !    lexicographically.
 !
-!    Input, real ( kind = 8 ) X(M), a vector of data which will be inserted
+!    Input, real(kind=8) :: X(M), a vector of data which will be inserted
 !    into the table if it does not already occur.
 !
-!    Output, integer ( kind = 4 ) COL.
+!    Output, integer :: COL.
 !    I, X was inserted into column I.
 !    -I, column I was already equal to X.
 !    0, N = N_MAX.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n_max
+  integer :: m
+  integer :: n_max
 
-  real ( kind = 8 ) a(m,n_max)
-  integer ( kind = 4 ) col
-  integer ( kind = 4 ) high
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) low
-  integer ( kind = 4 ) mid
-  integer ( kind = 4 ) n
-  real ( kind = 8 ) x(m)
+  real(kind=8) :: a(m,n_max)
+  integer :: col
+  integer :: high
+  integer :: isgn
+  integer :: j
+  integer :: low
+  integer :: mid
+  integer :: n
+  real(kind=8) :: x(m)
 !
 !  Refuse to work if N_MAX <= N.
 !
@@ -679,7 +701,24 @@ end
 
 
 
-subroutine r8col_max ( m, n, a, amax )
+!> @author John Burkardt
+!> @brief  R8COL_MAX returns the maximums in an R8COL.
+!> @date   2004-10-10
+!> @date   2020-02-06
+!> @see    
+subroutine     r8col_max (m, n, a, amax)
+implicit none
+   integer, intent(in) :: m
+   integer, intent(in) :: n
+   real(kind=8), intent(in) :: a(m,n)
+   real(kind=8), intent(out) :: amax(n)
+   integer :: j
+
+   amax = 0.0D+0
+   do j = 1, n
+      amax(j) = maxval (a(1:m,j))
+   end do
+end subroutine r8col_max
 
 !*****************************************************************************80
 !
@@ -704,29 +743,12 @@ subroutine r8col_max ( m, n, a, amax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) AMAX(N), the maximums of the columns.
+!    Output, real(kind=8) :: AMAX(N), the maximums of the columns.
 !
-  implicit none
-
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amax(n)
-  integer ( kind = 4 ) j
-
-  do j = 1, n
-
-    amax(j) = maxval ( a(1:m,j) )
-
-  end do
-
-  return
-end
 
 
 
@@ -755,23 +777,23 @@ subroutine r8col_max_index ( m, n, a, imax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, integer ( kind = 4 ) IMAX(N); IMAX(I) is the row of A in which
+!    Output, integer :: IMAX(N); IMAX(I) is the row of A in which
 !    the maximum for column I occurs.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amax
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) imax(n)
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: amax
+  integer :: i
+  integer :: imax(n)
+  integer :: j
 
   do j = 1, n
 
@@ -815,19 +837,19 @@ subroutine r8col_max_one ( m, n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N), the array to be rescaled.
+!    Input/output, real(kind=8) :: A(M,N), the array to be rescaled.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i_big
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: i_big
+  integer :: j
 
   do j = 1, n
 
@@ -883,20 +905,20 @@ subroutine r8col_mean ( m, n, a, mean )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) MEAN(N), the means, or averages, of the columns.
+!    Output, real(kind=8) :: MEAN(N), the means, or averages, of the columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) mean(n)
+  real(kind=8) :: a(m,n)
+  integer :: j
+  real(kind=8) :: mean(n)
 
   do j = 1, n
     mean(j) = sum ( a(1:m,j) )
@@ -934,20 +956,20 @@ subroutine r8col_min ( m, n, a, amin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) AMIN(N), the minimums of the columns.
+!    Output, real(kind=8) :: AMIN(N), the minimums of the columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amin(n)
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: amin(n)
+  integer :: j
 
   do j = 1, n
 
@@ -985,23 +1007,23 @@ subroutine r8col_min_index ( m, n, a, imin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, integer ( kind = 4 ) IMIN(N); IMIN(I) is the row of A in which
+!    Output, integer :: IMIN(N); IMIN(I) is the row of A in which
 !    the minimum for column I occurs.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amin
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) imin(n)
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: amin
+  integer :: i
+  integer :: imin(n)
+  integer :: j
 
   do j = 1, n
 
@@ -1045,19 +1067,19 @@ subroutine r8col_normalize_li ( m, n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N), the array to be normalized.
+!    Input/output, real(kind=8) :: A(M,N), the array to be normalized.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) c
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: c
+  integer :: i
+  integer :: j
 
   do j = 1, n
 
@@ -1124,15 +1146,15 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the row dimension of A, and the length of
+!    Input, integer :: M, the row dimension of A, and the length of
 !    a column.
 !
-!    Input, integer ( kind = 4 ) N, the column dimension of A.
+!    Input, integer :: N, the column dimension of A.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).  On input, the array to be checked.
+!    Input/output, real(kind=8) :: A(M,N).  On input, the array to be checked.
 !    On output, A has been reordered as described above.
 !
-!    Output, integer ( kind = 4 ) L, R, the indices of A that define the three
+!    Output, integer :: L, R, the indices of A that define the three
 !    segments.  Let KEY = the input value of A(1:M,1).  Then
 !    I <= L                 A(1:M,I) < KEY;
 !         L < I < R         A(1:M,I) = KEY;
@@ -1145,15 +1167,15 @@ use jburk_r8lib_r8vec_, only: r8vec_gt
 use jburk_r8lib_r8vec_, only: r8vec_lt
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) key(m)
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) r
+  real(kind=8) :: a(m,n)
+  integer :: j
+  integer :: k
+  real(kind=8) :: key(m)
+  integer :: l
+  integer :: r
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -1256,31 +1278,31 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of objects.
+!    Input, integer :: M, the dimension of objects.
 !
-!    Input, integer ( kind = 4 ) N, the number of objects.
+!    Input, integer :: N, the number of objects.
 !
-!    Input, integer ( kind = 4 ) P(N), the permutation.  P(I) = J means
+!    Input, integer :: P(N), the permutation.  P(I) = J means
 !    that the I-th element of the output array should be the J-th
 !    element of the input array.
 !
-!    Input/output, real ( kind = 8 ) A(M,N), the array to be permuted.
+!    Input/output, real(kind=8) :: A(M,N), the array to be permuted.
 !
 subroutine r8col_permute ( m, n, p, a )
 use jburk_r8lib_i4vec_, only: perm_check
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) a_temp(m)
-  integer ( kind = 4 ), parameter :: base = 1
-  integer ( kind = 4 ) ierror
-  integer ( kind = 4 ) iget
-  integer ( kind = 4 ) iput
-  integer ( kind = 4 ) istart
-  integer ( kind = 4 ) p(n)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: a_temp(m)
+  integer ::  parameter :: base = 1
+  integer :: ierror
+  integer :: iget
+  integer :: iput
+  integer :: istart
+  integer :: p(n)
 
   call perm_check ( n, p, base, ierror )
 
@@ -1383,22 +1405,22 @@ subroutine r8col_sort_heap_a ( m, n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the array of N columns of M-vectors.
 !    On output, the columns of A have been sorted in lexicographic order.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: indx
+  integer :: isgn
+  integer :: j
 
   if ( m <= 0 ) then
     return
@@ -1482,31 +1504,31 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows in each column of A.
+!    Input, integer :: M, the number of rows in each column of A.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns in A.
+!    Input, integer :: N, the number of columns in A.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Output, integer ( kind = 4 ) INDX(N), the sort index.  The I-th element
+!    Output, integer :: INDX(N), the sort index.  The I-th element
 !    of the sorted array is column INDX(I).
 !
 subroutine r8col_sort_heap_index_a ( m, n, a, indx )
 use jburk_r8lib_r8vec_, only: r8vec_compare
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) column(m)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) indxt
-  integer ( kind = 4 ) ir
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) l
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: column(m)
+  integer :: i
+  integer :: indx(n)
+  integer :: indxt
+  integer :: ir
+  integer :: isgn
+  integer :: j
+  integer :: l
 
   if ( n < 1 ) then
     return
@@ -1606,28 +1628,28 @@ subroutine r8col_sort_quick_a ( m, n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the row order of A, and the length of
+!    Input, integer :: M, the row order of A, and the length of
 !    a column.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns of A.
+!    Input, integer :: N, the number of columns of A.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the array to be sorted.
 !    On output, the array has been sorted.
 !
   implicit none
 
-  integer ( kind = 4 ), parameter :: level_max = 30
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer ::  parameter :: level_max = 30
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) base
-  integer ( kind = 4 ) l_segment
-  integer ( kind = 4 ) level
-  integer ( kind = 4 ) n_segment
-  integer ( kind = 4 ) rsave(level_max)
-  integer ( kind = 4 ) r_segment
+  real(kind=8) :: a(m,n)
+  integer :: base
+  integer :: l_segment
+  integer :: level
+  integer :: n_segment
+  integer :: rsave(level_max)
+  integer :: r_segment
 
   if ( m <= 0 ) then
     return
@@ -1777,38 +1799,38 @@ subroutine r8col_sorted_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of the data values.
+!    Input, integer :: M, the dimension of the data values.
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer :: N, the number of data values.
 !
-!    Input, real ( kind = 8 ) A(M,N), the data values.
+!    Input, real(kind=8) :: A(M,N), the data values.
 !
-!    Input, integer ( kind = 4 ) UNIQUE_NUM, the number of unique values
+!    Input, integer :: UNIQUE_NUM, the number of unique values
 !    in A.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNDX(UNIQUE_NUM), the UNDX vector.
+!    Output, integer :: UNDX(UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(N), the XDNU vector.
+!    Output, integer :: XDNU(N), the XDNU vector.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) unique_num
+  integer :: m
+  integer :: n
+  integer :: unique_num
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(unique_num)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: i2
+  integer :: j
+  integer :: k
+  real(kind=8) :: tol
+  integer :: undx(unique_num)
   logical unique
-  integer ( kind = 4 ) xdnu(n)
+  integer :: xdnu(n)
 !
 !  Consider entry I = 1.
 !  It is unique, so set the number of unique items to K.
@@ -1882,28 +1904,28 @@ subroutine r8col_sorted_tol_unique ( m, n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the sorted array of N columns of M-vectors.
 !    On output, a sorted array of columns of M-vectors.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) tol
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: j
+  real(kind=8) :: tol
   logical unique
-  integer ( kind = 4 ) unique_num
+  integer :: unique_num
 
   if ( n <= 0 ) then
     unique_num = 0
@@ -1975,28 +1997,28 @@ subroutine r8col_sorted_tol_unique_count ( m, n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), a sorted array, containing
+!    Input, real(kind=8) :: A(M,N), a sorted array, containing
 !    N columns of data.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(n)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: i2
+  integer :: j
+  integer :: k
+  real(kind=8) :: tol
+  integer :: undx(n)
   logical unique
   integer unique_num
 !
@@ -2109,31 +2131,31 @@ subroutine r8col_sorted_undex ( m, n, a, unique_num, undx, xdnu )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of the data values.
+!    Input, integer :: M, the dimension of the data values.
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer :: N, the number of data values.
 !
-!    Input, real ( kind = 8 ) AL(M,N), the data values.
+!    Input, real(kind=8) :: AL(M,N), the data values.
 !
-!    Input, integer ( kind = 4 ) UNIQUE_NUM, the number of unique values
+!    Input, integer :: UNIQUE_NUM, the number of unique values
 !    in A.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Output, integer ( kind = 4 ) UNDX(UNIQUE_NUM), the UNDX vector.
+!    Output, integer :: UNDX(UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(N), the XDNU vector.
+!    Output, integer :: XDNU(N), the XDNU vector.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) unique_num
+  integer :: m
+  integer :: n
+  integer :: unique_num
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) undx(unique_num)
-  integer ( kind = 4 ) xdnu(n)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  integer :: undx(unique_num)
+  integer :: xdnu(n)
 !
 !  Walk through the sorted array.
 !
@@ -2185,23 +2207,23 @@ subroutine r8col_sorted_unique ( m, n, a, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the sorted array of N columns of M-vectors.
 !    On output, a sorted array of columns of M-vectors.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  integer ( kind = 4 ) unique_num
+  real(kind=8) :: a(m,n)
+  integer :: j1
+  integer :: j2
+  integer :: unique_num
 
   if ( n <= 0 ) then
     unique_num = 0
@@ -2253,22 +2275,22 @@ subroutine r8col_sorted_unique_count ( m, n, a, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), a sorted array, containing
+!    Input, real(kind=8) :: A(M,N), a sorted array, containing
 !    N columns of data.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  integer ( kind = 4 ) unique_num
+  real(kind=8) :: a(m,n)
+  integer :: j1
+  integer :: j2
+  integer :: unique_num
 
   unique_num = 0
 
@@ -2316,14 +2338,14 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, an unsorted M by N array.
 !    On output, rows of the array have been shifted in such
 !    a way that column KEY of the array is in nondecreasing order.
 !
-!    Input, integer ( kind = 4 ) KEY, the column in which the "key" value
+!    Input, integer :: KEY, the column in which the "key" value
 !    is stored.  On output, column KEY of the array will be
 !    in nondecreasing order.
 !
@@ -2331,15 +2353,15 @@ subroutine r8col_sortr_a ( m, n, a, key )
 use jburk_r8lib_r8row_, only: r8row_swap
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) key
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: indx
+  integer :: isgn
+  integer :: j
+  integer :: key
 
   if ( m <= 0 ) then
     return
@@ -2421,20 +2443,20 @@ subroutine r8col_sum ( m, n, a, colsum )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) COLSUM(N), the sums of the columns.
+!    Output, real(kind=8) :: COLSUM(N), the sums of the columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) colsum(n)
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: colsum(n)
+  integer :: j
 
   do j = 1, n
     colsum(j) = sum ( a(1:m,j) )
@@ -2488,21 +2510,21 @@ subroutine r8col_swap ( m, n, a, j1, j2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input/output, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Input, integer ( kind = 4 ) J1, J2, the columns to be swapped.
+!    Input, integer :: J1, J2, the columns to be swapped.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) col(m)
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: col(m)
+  integer :: j1
+  integer :: j2
 
   if ( j1 < 1 .or. n < j1 .or. j2 < 1 .or. n < j2 ) then
     write ( *, '(a)' ) ' '
@@ -2565,21 +2587,21 @@ subroutine r8col_to_r8vec ( m, n, a, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Output, real ( kind = 8 ) X(M*N), a vector containing the N columns of A.
+!    Output, real(kind=8) :: X(M*N), a vector containing the N columns of A.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) x(m*n)
+  real(kind=8) :: a(m,n)
+  integer :: j
+  integer :: k
+  real(kind=8) :: x(m*n)
 
   k = 1
   do j = 1, n
@@ -2672,39 +2694,39 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of the data values.
+!    Input, integer :: M, the dimension of the data values.
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer :: N, the number of data values.
 !
-!    Input, real ( kind = 8 ) A(M,N), the data values.
+!    Input, real(kind=8) :: A(M,N), the data values.
 !
-!    Input, integer ( kind = 4 ) UNIQUE_NUM, the number of unique values
+!    Input, integer :: UNIQUE_NUM, the number of unique values
 !    in A.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNDX(UNIQUE_NUM), the UNDX vector.
+!    Output, integer :: UNDX(UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(N), the XDNU vector.
+!    Output, integer :: XDNU(N), the XDNU vector.
 !
 subroutine r8col_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) unique_num
+  integer :: m
+  integer :: n
+  integer :: unique_num
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(unique_num)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: indx(n)
+  integer :: j
+  integer :: k
+  real(kind=8) :: tol
+  integer :: undx(unique_num)
   logical unique
-  integer ( kind = 4 ) xdnu(n)
+  integer :: xdnu(n)
 !
 !  Implicitly sort the array.
 !
@@ -2791,31 +2813,31 @@ subroutine r8col_tol_unique_count ( m, n, a, tol, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows.
+!    Input, integer :: M, the number of rows.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns.
+!    Input, integer :: N, the number of columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array of N columns of data.
+!    Input, real(kind=8) :: A(M,N), the array of N columns of data.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) :: TOL, a nonnegative tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) undx(n)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: indx(n)
+  integer :: j
+  integer :: k
+  real(kind=8) :: tol
+  integer :: undx(n)
   logical unique
-  integer ( kind = 4 ) unique_num
+  integer :: unique_num
 !
 !  Implicitly sort the array.
 !
@@ -2895,26 +2917,26 @@ subroutine r8col_tol_unique_index ( m, n, a, tol, unique_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns of A.
+!    Input, integer :: M, N, the number of rows and columns of A.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Input, real ( kind = 8 ) TOL, a tolerance for equality.
+!    Input, real(kind=8) :: TOL, a tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_INDEX(N), the first occurrence index.
+!    Output, integer :: UNIQUE_INDEX(N), the first occurrence index.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  real ( kind = 8 ) tol
-  integer ( kind = 4 ) unique_index(n)
-  integer ( kind = 4 ) unique_num
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: j1
+  integer :: j2
+  real(kind=8) :: tol
+  integer :: unique_index(n)
+  integer :: unique_num
 
   unique_index(1:n) = -1
   unique_num = 0
@@ -3024,33 +3046,33 @@ subroutine r8col_undex ( m, n, a, unique_num, undx, xdnu )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the dimension of the data values.
+!    Input, integer :: M, the dimension of the data values.
 !
-!    Input, integer ( kind = 4 ) N, the number of data values.
+!    Input, integer :: N, the number of data values.
 !
-!    Input, real ( kind = 8 ) A(M,N), the data values.
+!    Input, real(kind=8) :: A(M,N), the data values.
 !
-!    Input, integer ( kind = 4 ) UNIQUE_NUM, the number of unique values
+!    Input, integer :: UNIQUE_NUM, the number of unique values
 !    in A.  This value is only required for languages in which the size of
 !    UNDX must be known in advance.
 !
-!    Output, integer ( kind = 4 ) UNDX(UNIQUE_NUM), the UNDX vector.
+!    Output, integer :: UNDX(UNIQUE_NUM), the UNDX vector.
 !
-!    Output, integer ( kind = 4 ) XDNU(N), the XDNU vector.
+!    Output, integer :: XDNU(N), the XDNU vector.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-  integer ( kind = 4 ) unique_num
+  integer :: m
+  integer :: n
+  integer :: unique_num
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) undx(unique_num)
-  integer ( kind = 4 ) xdnu(n)
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: i
+  integer :: indx(n)
+  integer :: j
+  integer :: undx(unique_num)
+  integer :: xdnu(n)
 !
 !  Implicitly sort the array.
 !
@@ -3125,29 +3147,29 @@ subroutine r8col_uniform_abvec ( m, n, a, b, seed, r )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns in
+!    Input, integer :: M, N, the number of rows and columns in
 !    the array.
 !
-!    Input, real ( kind = 8 ) A(M), B(M), the lower and upper limits.
+!    Input, real(kind=8) :: A(M), B(M), the lower and upper limits.
 !
-!    Input/output, integer ( kind = 4 ) SEED, the "seed" value, which
+!    Input/output, integer :: SEED, the "seed" value, which
 !    should NOT be 0.  On output, SEED has been updated.
 !
-!    Output, real ( kind = 8 ) R(M,N), the array of pseudorandom values.
+!    Output, real(kind=8) :: R(M,N), the array of pseudorandom values.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m)
-  real ( kind = 8 ) b(m)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ), parameter :: i4_huge = 2147483647
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) seed
-  real ( kind = 8 ) r(m,n)
+  real(kind=8) :: a(m)
+  real(kind=8) :: b(m)
+  integer :: i
+  integer ::  parameter :: i4_huge = 2147483647
+  integer :: j
+  integer :: k
+  integer :: seed
+  real(kind=8) :: r(m,n)
 
   do j = 1, n
 
@@ -3199,27 +3221,27 @@ subroutine r8col_unique_count ( m, n, a, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows.
+!    Input, integer :: M, the number of rows.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns.
+!    Input, integer :: N, the number of columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array of N columns of data.
+!    Input, real(kind=8) :: A(M,N), the array of N columns of data.
 !
-!    Input, real ( kind = 8 ) TOL, a nonnegative tolerance for equality.
+!    Input, real(kind=8) :: TOL, a nonnegative tolerance for equality.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique columns.
+!    Output, integer :: UNIQUE_NUM, the number of unique columns.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: j1
+  integer :: j2
   logical unique(n)
-  integer ( kind = 4 ) unique_num
+  integer :: unique_num
 
   unique_num = 0
 
@@ -3279,24 +3301,24 @@ subroutine r8col_unique_index ( m, n, a, unique_index )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns of A.
+!    Input, integer :: M, N, the number of rows and columns of A.
 !    The length of an "element" of A, and the number of "elements".
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_INDEX(N), the first occurrence index.
+!    Output, integer :: UNIQUE_INDEX(N), the first occurrence index.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) diff
-  integer ( kind = 4 ) j1
-  integer ( kind = 4 ) j2
-  integer ( kind = 4 ) unique_index(n)
-  integer ( kind = 4 ) unique_num
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: diff
+  integer :: j1
+  integer :: j2
+  integer :: unique_index(n)
+  integer :: unique_num
 
   unique_index(1:n) = -1
   unique_num = 0
@@ -3348,23 +3370,23 @@ subroutine     r8col_variance ( m, n, a, variance )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns in
+!    Input, integer :: M, N, the number of rows and columns in
 !    the array.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array whose variances are desired.
+!    Input, real(kind=8) :: A(M,N), the array whose variances are desired.
 !
-!    Output, real ( kind = 8 ) VARIANCE(N), the variances of the rows.
+!    Output, real(kind=8) :: VARIANCE(N), the variances of the rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) mean
-  real ( kind = 8 ) variance(n)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  real(kind=8) :: mean
+  real(kind=8) :: variance(n)
 
   do j = 1, n
 
