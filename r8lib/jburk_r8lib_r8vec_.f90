@@ -8,6 +8,12 @@ interface        r8vec_correlation
 module procedure r8vec_correlation
 end interface    r8vec_correlation
 public           r8vec_correlation
+
+interface        r8vec_norm
+module procedure r8vec_norm
+end interface    r8vec_norm
+public           r8vec_norm
+
 contains
 
 
