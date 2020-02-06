@@ -2176,7 +2176,8 @@ subroutine test0365 ( )
 
   return
 end
-subroutine test037 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2194,6 +2195,8 @@ subroutine test037 ( )
 !
 !    John Burkardt
 !
+subroutine test037 ( )
+use jburk_r8lib_r8col_, only: r8col_find
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -2253,6 +2256,8 @@ end
 !
 subroutine test038 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8col_, only: r8col_sort_heap_a
+use jburk_r8lib_r8col_, only: r8col_insert
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2312,7 +2317,8 @@ use jburk_r8lib_r8vec_, only: r8vec_print
 
   return
 end
-subroutine test0383 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2330,6 +2336,8 @@ subroutine test0383 ( )
 !
 !    John Burkardt
 !
+subroutine test0383 ( )
+use jburk_r8lib_r8col_, only: r8col_part_quick_a
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 2
@@ -2366,7 +2374,8 @@ subroutine test0383 ( )
 
   return
 end
-subroutine test0385 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2384,6 +2393,8 @@ subroutine test0385 ( )
 !
 !    John Burkardt
 !
+subroutine test0385 ( )
+use jburk_r8lib_r8col_, only: r8col_sort_heap_index_a
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2429,7 +2440,8 @@ subroutine test0385 ( )
 
   return
 end
-subroutine test039 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2447,6 +2459,8 @@ subroutine test039 ( )
 !
 !    John Burkardt
 !
+subroutine test039 ( )
+use jburk_r8lib_r8col_, only: r8col_sort_quick_a
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2474,7 +2488,8 @@ subroutine test039 ( )
 
   return
 end
-subroutine test0393 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2492,6 +2507,9 @@ subroutine test0393 ( )
 !
 !    John Burkardt
 !
+subroutine test0393 ( )
+use jburk_r8lib_r8col_, only: r8col_sort_heap_a
+use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2550,7 +2568,8 @@ subroutine test0393 ( )
 
   return
 end
-subroutine test0395 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2568,6 +2587,9 @@ subroutine test0395 ( )
 !
 !    John Burkardt
 !
+subroutine test0395 ( )
+use jburk_r8lib_r8col_, only: r8col_sort_heap_a
+use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique_count
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2624,7 +2646,8 @@ subroutine test0395 ( )
 
   return
 end
-subroutine test0397 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2642,6 +2665,10 @@ subroutine test0397 ( )
 !
 !    John Burkardt
 !
+subroutine test0397 ( )
+use jburk_r8lib_r8col_, only: r8col_sort_heap_a
+use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique_count
+use jburk_r8lib_r8col_, only: r8col_sorted_tol_undex
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2734,7 +2761,8 @@ subroutine test0397 ( )
 
   return
 end
-subroutine test040 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2752,6 +2780,9 @@ subroutine test040 ( )
 !
 !    John Burkardt
 !
+subroutine test040 ( )
+use jburk_r8lib_r8col_, only: r8col_max
+use jburk_r8lib_r8col_, only: r8col_min
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2794,7 +2825,8 @@ subroutine test040 ( )
 
   return
 end
-subroutine test041 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2812,6 +2844,9 @@ subroutine test041 ( )
 !
 !    John Burkardt
 !
+subroutine test041 ( )
+use jburk_r8lib_r8col_, only: r8col_sum
+use jburk_r8lib_r8col_, only: r8col_mean
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2854,8 +2889,9 @@ subroutine test041 ( )
 
   return
 end
-subroutine test0415 ( )
-use jburk_r8lib_i4vec_, only: i4vec_print
+
+
+
 !*****************************************************************************80
 !
 !! TEST0415 tests R8COL_PERMUTE.
@@ -2872,6 +2908,9 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 !
 !    John Burkardt
 !
+subroutine test0415 ( )
+use jburk_r8lib_i4vec_, only: i4vec_print
+use jburk_r8lib_r8col_, only: r8col_permute
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2899,7 +2938,8 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 
   return
 end
-subroutine test042 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2917,6 +2957,8 @@ subroutine test042 ( )
 !
 !    John Burkardt
 !
+subroutine test042 ( )
+use jburk_r8lib_r8col_, only: r8col_sortr_a
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 10
@@ -2949,7 +2991,8 @@ subroutine test042 ( )
 
   return
 end
-subroutine test043 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2967,6 +3010,8 @@ subroutine test043 ( )
 !
 !    John Burkardt
 !
+subroutine test043 ( )
+use jburk_r8lib_r8col_, only: r8col_swap
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3026,6 +3071,7 @@ end
 !
 subroutine test044 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8col_, only: r8col_to_r8vec
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3055,7 +3101,8 @@ use jburk_r8lib_r8vec_, only: r8vec_print
 
   return
 end
-subroutine test0442 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3073,6 +3120,9 @@ subroutine test0442 ( )
 !
 !    John Burkardt
 !
+subroutine test0442 ( )
+use jburk_r8lib_r8col_, only: r8col_tol_unique_count
+use jburk_r8lib_r8col_, only: r8col_tol_undex
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3162,7 +3212,8 @@ subroutine test0442 ( )
 
   return
 end
-subroutine test0443 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3180,6 +3231,9 @@ subroutine test0443 ( )
 !
 !    John Burkardt
 !
+subroutine test0443 ( )
+use jburk_r8lib_r8col_, only: r8col_unique_count
+use jburk_r8lib_r8col_, only: r8col_undex
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3254,7 +3308,8 @@ subroutine test0443 ( )
 
   return
 end
-subroutine test0445 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3272,6 +3327,8 @@ subroutine test0445 ( )
 !
 !    John Burkardt
 !
+subroutine test0445 ( )
+use jburk_r8lib_r8col_, only: r8col_unique_count
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3309,7 +3366,8 @@ subroutine test0445 ( )
 
   return
 end
-subroutine test045 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3327,6 +3385,8 @@ subroutine test045 ( )
 !
 !    John Burkardt
 !
+subroutine test045 ( )
+use jburk_r8lib_r8col_, only: r8col_variance
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
