@@ -13,6 +13,7 @@ OBJS = jburk_r8lib_sort_.o \
        jburk_r8lib_i4vec_.o \
        jburk_r8lib_r8vec_.o \
        jburk_r8lib_r8mat_.o \
+       jburk_r8lib_r8poly_.o \
        r8lib.new.o \
        $(JOB).o
 
@@ -27,11 +28,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJS)
-	rm -f *.o *.mod
 	rm -f *__genmod.f90
+	rm -f *.o *.mod
 	chmod 700 $(TARGET)
 
 clean:
-	rm -f *.app *.log
 	rm -f *__genmod.f90
-
+	rm -f *.app *.o *.mod
+	rm -f *.log
