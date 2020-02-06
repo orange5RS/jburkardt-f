@@ -582,7 +582,8 @@ function r8vec_any_nonzero ( n, a )
 
   return
 end
-subroutine r8vec_any_normal ( dim_num, v1, v2 )
+
+
 
 !*****************************************************************************80
 !
@@ -618,6 +619,7 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
 !    Output, real ( kind = 8 ) V2(DIM_NUM), a vector that is
 !    normal to V2, and has unit Euclidean length.
 !
+subroutine r8vec_any_normal ( dim_num, v1, v2 )
   implicit none
 
   integer ( kind = 4 ) dim_num
@@ -625,7 +627,7 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
   integer ( kind = 4 ) i
   integer ( kind = 4 ) j
   integer ( kind = 4 ) k
-  real ( kind = 8 ) r8vec_norm
+!  real ( kind = 8 ) r8vec_norm
   real ( kind = 8 ) v1(dim_num)
   real ( kind = 8 ) v2(dim_num)
   real ( kind = 8 ) vj
@@ -2336,7 +2338,8 @@ subroutine r8vec_copy ( n, a1, a2 )
 
   return
 end
-subroutine r8vec_correlation ( n, x, y, correlation )
+
+
 
 !*****************************************************************************80
 !
@@ -2372,12 +2375,13 @@ subroutine r8vec_correlation ( n, x, y, correlation )
 !
 !    Output, real ( kind = 8 ) CORRELATION, the correlation of X and Y.
 !
+subroutine r8vec_correlation ( n, x, y, correlation )
   implicit none
 
   integer ( kind = 4 ) n
 
   real ( kind = 8 ) correlation
-  real ( kind = 8 ) r8vec_norm
+!  real ( kind = 8 ) r8vec_norm
   real ( kind = 8 ) x(n)
   real ( kind = 8 ) x_norm
   real ( kind = 8 ) xy_dot
@@ -7737,7 +7741,8 @@ subroutine r8vec_nint ( n, a )
 
   return
 end
-function r8vec_norm ( n, a )
+
+
 
 !*****************************************************************************80
 !
@@ -7771,6 +7776,7 @@ function r8vec_norm ( n, a )
 !
 !    Output, real ( kind = 8 ) R8VEC_NORM, the L2 norm of A.
 !
+function r8vec_norm ( n, a )
   implicit none
 
   integer ( kind = 4 ) n
@@ -7781,7 +7787,9 @@ function r8vec_norm ( n, a )
   r8vec_norm = sqrt ( sum ( a(1:n)**2 ) )
 
   return
-end
+end function r8vec_norm
+
+
 function r8vec_norm_affine ( n, v0, v1 )
 
 !*****************************************************************************80
