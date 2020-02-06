@@ -1212,8 +1212,6 @@ end
 
 
 
-subroutine r8col_permute ( m, n, p, a )
-
 !*****************************************************************************80
 !
 !! R8COL_PERMUTE permutes an R8COL in place.
@@ -1268,6 +1266,8 @@ subroutine r8col_permute ( m, n, p, a )
 !
 !    Input/output, real ( kind = 8 ) A(M,N), the array to be permuted.
 !
+subroutine r8col_permute ( m, n, p, a )
+use jburk_r8lib_i4vec_, only: perm_check
   implicit none
 
   integer ( kind = 4 ) m
@@ -2293,8 +2293,6 @@ end
 
 
 
-subroutine r8col_sortr_a ( m, n, a, key )
-
 !*****************************************************************************80
 !
 !! R8COL_SORTR_A ascending sorts one column of an R8COL, adjusting all columns.
@@ -2329,6 +2327,8 @@ subroutine r8col_sortr_a ( m, n, a, key )
 !    is stored.  On output, column KEY of the array will be
 !    in nondecreasing order.
 !
+subroutine r8col_sortr_a ( m, n, a, key )
+use jburk_r8lib_r8row_, only: r8row_swap
   implicit none
 
   integer ( kind = 4 ) m
