@@ -1080,8 +1080,6 @@ end
 
 
 
-subroutine r8col_part_quick_a ( m, n, a, l, r )
-
 !*****************************************************************************80
 !
 !! R8COL_PART_QUICK_A reorders the columns of an R8COL.
@@ -1140,6 +1138,11 @@ subroutine r8col_part_quick_a ( m, n, a, l, r )
 !         L < I < R         A(1:M,I) = KEY;
 !                 R <= I    KEY < A(1:M,I).
 !
+subroutine r8col_part_quick_a ( m, n, a, l, r )
+use jburk_r8lib_r8vec_, only: r8vec_swap
+use jburk_r8lib_r8vec_, only: r8vec_eq
+use jburk_r8lib_r8vec_, only: r8vec_gt
+use jburk_r8lib_r8vec_, only: r8vec_lt
   implicit none
 
   integer ( kind = 4 ) m
@@ -1151,9 +1154,6 @@ subroutine r8col_part_quick_a ( m, n, a, l, r )
   real ( kind = 8 ) key(m)
   integer ( kind = 4 ) l
   integer ( kind = 4 ) r
-  logical r8vec_eq
-  logical r8vec_gt
-  logical r8vec_lt
 
   if ( n < 1 ) then
     write ( *, '(a)' ) ' '
@@ -1446,8 +1446,6 @@ end
 
 
 
-subroutine r8col_sort_heap_index_a ( m, n, a, indx )
-
 !*****************************************************************************80
 !
 !! R8COL_SORT_HEAP_INDEX_A does an indexed heap ascending sort of an R8COL.
@@ -1493,6 +1491,8 @@ subroutine r8col_sort_heap_index_a ( m, n, a, indx )
 !    Output, integer ( kind = 4 ) INDX(N), the sort index.  The I-th element
 !    of the sorted array is column INDX(I).
 !
+subroutine r8col_sort_heap_index_a ( m, n, a, indx )
+use jburk_r8lib_r8vec_, only: r8vec_compare
   implicit none
 
   integer ( kind = 4 ) m
@@ -2592,8 +2592,6 @@ end
 
 
 
-subroutine r8col_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
-
 !*****************************************************************************80
 !
 !! R8COL_TOL_UNDEX indexes tolerably unique entries of an R8COL.
@@ -2690,6 +2688,7 @@ subroutine r8col_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
 !
 !    Output, integer ( kind = 4 ) XDNU(N), the XDNU vector.
 !
+subroutine r8col_tol_undex ( m, n, a, unique_num, tol, undx, xdnu )
   implicit none
 
   integer ( kind = 4 ) m
