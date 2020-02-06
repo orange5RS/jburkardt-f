@@ -684,6 +684,80 @@ end
 
 
 
+!> @author John Burkardt
+!> @brief  R8ROW_SORT_QUICK_A ascending quick sorts an R8ROW.
+!> @date   2012-05-21
+!> @date   2020-02-06
+!> @see    
+subroutine r8row_sort_quick_a (m, n, a)
+implicit none
+   integer, intent(in) :: m              !< M, the number of rows of A.
+   integer, intent(in) :: n              !< N, the number of columns of A, and the length of a row.
+   real(kind=8), intent(inout) :: a(m,n) !< A(M,N). On input, the array to be sorted.
+
+   integer, parameter :: level_max = 30
+   integer :: base
+   integer :: l_segment
+   integer :: level
+   integer :: m_segment
+   integer :: rsave(level_max)
+   integer :: r_segment
+
+   if (m .lt. 1) then
+      write (unit=*, fmt='(a)')    ' '
+      write (unit=*, fmt='(a)')    'R8ROW_SORT_QUICK_A - Fatal error!'
+      write (unit=*, fmt='(a)')    '  M < 1.'
+      write (unit=*, fmt='(a,i8)') '  M = ', m
+      stop
+   end if
+
+   if (n .le. 0) return
+   if (m .eq. 1) return
+
+   level = 1
+   rsave(level) = m + 1
+   base = 1
+   m_segment = m
+
+   do
+      ! Partition the segment.
+      call r8row_part_quick_a (m_segment, n, a(base:base+m_segment-1,1:n), l_segment, r_segment)
+
+      ! If the left segment has more than one element, we need to partition it.
+      if (1 < l_segment) then
+         if (level_max < level) then
+            write (unit=*, fmt='(a)') ' '
+            write (unit=*, fmt='(a)') 'R8ROW_SORT_QUICK_A - Fatal error!'
+            write (unit=*, fmt='(a,i8)') '  Exceeding recursion maximum of ', level_max
+            stop
+         end if
+
+         level = level + 1
+         m_segment = l_segment
+         rsave(level) = r_segment + base - 1
+
+      ! The left segment and the middle segment are sorted.
+      ! Must the right segment be partitioned?
+      else if ( r_segment < m_segment ) then
+         m_segment = m_segment + 1 - r_segment
+         base = base + r_segment - 1
+
+      ! Otherwise, we back up a level if there is an earlier one.
+      else
+         do
+            if (level <= 1) return
+
+            base = rsave(level)
+            m_segment = rsave(level-1) - rsave(level)
+            level = level - 1
+
+            if (0 < m_segment) exit
+         end do
+
+      end if
+  end do
+
+end subroutine r8row_sort_quick_a
 !*****************************************************************************80
 !
 !! R8ROW_SORT_QUICK_A ascending quick sorts an R8ROW.
@@ -716,92 +790,9 @@ end
 !    On input, the array to be sorted.
 !    On output, the array has been sorted.
 !
-subroutine r8row_sort_quick_a (m, n, a)
-implicit none
-   integer, intent(in) :: m              !< M, the number of rows of A.
-   integer, intent(in) :: n              !< N, the number of columns of A, and the length of a row.
-   real(kind=8), intent(inout) :: a(m,n) !< A(M,N). On input, the array to be sorted.
 
-   integer, parameter :: level_max = 30
-   integer :: base
-   integer :: l_segment
-   integer :: level
-   integer :: m_segment
-   integer :: rsave(level_max)
-   integer :: r_segment
 
-   if (m .lt. 1) then
-      write (unit=*, fmt='(a)')    ' '
-      write (unit=*, fmt='(a)')    'R8ROW_SORT_QUICK_A - Fatal error!'
-      write (unit=*, fmt='(a)')    '  M < 1.'
-      write (unit=*, fmt='(a,i8)') '  M = ', m
-      stop
-   end if
 
-   if (n .le. 0) return
-   if (m .eq. 1) return
-
-   level = 1
-   rsave(level) = m + 1
-   base = 1
-   m_segment = m
-
-  do
-!
-!  Partition the segment.
-!
-    call r8row_part_quick_a ( m_segment, n, a(base:base+m_segment-1,1:n), &
-      l_segment, r_segment )
-!
-!  If the left segment has more than one element, we need to partition it.
-!
-    if ( 1 < l_segment ) then
-
-      if ( level_max < level ) then
-        write (unit=*, fmt='(a)') ' '
-        write (unit=*, fmt='(a)') 'R8ROW_SORT_QUICK_A - Fatal error!'
-        write (unit=*, fmt='(a,i8)') '  Exceeding recursion maximum of ', level_max
-        stop
-      end if
-
-      level = level + 1
-      m_segment = l_segment
-      rsave(level) = r_segment + base - 1
-!
-!  The left segment and the middle segment are sorted.
-!  Must the right segment be partitioned?
-!
-    else if ( r_segment < m_segment ) then
-
-      m_segment = m_segment + 1 - r_segment
-      base = base + r_segment - 1
-!
-!  Otherwise, we back up a level if there is an earlier one.
-!
-    else
-
-      do
-
-        if ( level <= 1 ) then
-          return
-        end if
-
-        base = rsave(level)
-        m_segment = rsave(level-1) - rsave(level)
-        level = level - 1
-
-        if ( 0 < m_segment ) then
-          exit
-        end if
-
-      end do
-
-    end if
-
-  end do
-
-  return
-end
 subroutine r8row_sorted_unique_count ( m, n, a, unique_num )
 
 !*****************************************************************************80
