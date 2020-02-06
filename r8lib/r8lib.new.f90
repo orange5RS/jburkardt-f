@@ -13207,7 +13207,8 @@ subroutine r8mat_house_hxa ( n, a, v, ha )
 
   return
 end
-subroutine r8mat_house_post ( n, a, row, col, h )
+
+
 
 !*****************************************************************************80
 !
@@ -13249,6 +13250,8 @@ subroutine r8mat_house_post ( n, a, row, col, h )
 !
 !    Output, real ( kind = 8 ) H(N,N), the Householder matrix.
 !
+subroutine r8mat_house_post ( n, a, row, col, h )
+use jburk_r8lib_r8vec_, only: r8vec_house_column
   implicit none
 
   integer ( kind = 4 ) n
@@ -13273,7 +13276,8 @@ subroutine r8mat_house_post ( n, a, row, col, h )
 
   return
 end
-subroutine r8mat_house_pre ( n, a, row, col, h )
+
+
 
 !*****************************************************************************80
 !
@@ -13315,6 +13319,8 @@ subroutine r8mat_house_pre ( n, a, row, col, h )
 !
 !    Output, real ( kind = 8 ) H(N,N), the Householder matrix.
 !
+subroutine r8mat_house_pre ( n, a, row, col, h )
+use jburk_r8lib_r8vec_, only: r8vec_house_column
   implicit none
 
   integer ( kind = 4 ) n
@@ -16046,7 +16052,8 @@ subroutine r8mat_nullspace_size ( m, n, a, nullspace_size )
 
   return
 end
-subroutine r8mat_orth_uniform ( n, seed, a )
+
+
 
 !*****************************************************************************80
 !
@@ -16127,6 +16134,8 @@ subroutine r8mat_orth_uniform ( n, seed, a )
 !
 !    Output, real ( kind = 8 ) A(N,N), the orthogonal matrix.
 !
+subroutine r8mat_orth_uniform ( n, seed, a )
+use jburk_r8lib_r8vec_, only: r8vec_house_column
   implicit none
 
   integer ( kind = 4 ) n
@@ -16851,7 +16860,8 @@ subroutine r8mat_print2 ( m, n, a )
 
   return
 end
-subroutine r8mat_ref ( m, n, a )
+
+
 
 !*****************************************************************************80
 !
@@ -16906,6 +16916,7 @@ subroutine r8mat_ref ( m, n, a )
 !    Input/output, real ( kind = 8 ) A(M,N).  On input, the matrix to be
 !    analyzed.  On output, the REF form of the matrix.
 !
+subroutine r8mat_ref ( m, n, a )
   implicit none
 
   integer ( kind = 4 ) m
@@ -19490,7 +19501,8 @@ subroutine r8poly_lagrange_2 ( npol, xpol, xval, dw2dx2 )
 
   return
 end
-subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
+
+
 
 !*****************************************************************************80
 !
@@ -19538,6 +19550,8 @@ subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
 !    coefficients of the IPOL-th Lagrange polynomial:
 !      L(IPOL)(X) = SUM ( 0 <= I <= NPOL-1 ) PCOF(I) * X^I
 !
+subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
+use jburk_r8lib_r8vec_, only: r8vec_distinct
   implicit none
 
   integer ( kind = 4 ) npol
@@ -19547,7 +19561,7 @@ subroutine r8poly_lagrange_coef ( npol, ipol, xpol, pcof )
   integer ( kind = 4 ) ipol
   integer ( kind = 4 ) j
   real ( kind = 8 ) pcof(0:npol-1)
-  logical r8vec_distinct
+!  logical r8vec_distinct
   real ( kind = 8 ) xpol(npol)
 !
 !  Make sure IPOL is legal.
@@ -19703,7 +19717,8 @@ subroutine r8poly_lagrange_factor ( npol, xpol, xval, wval, dwdx )
 
   return
 end
-subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
+
+
 
 !*****************************************************************************80
 !
@@ -19753,6 +19768,8 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 !    Output, real ( kind = 8 ) DPDX, the derivative of the IPOL-th
 !    Lagrange polynomial at XVAL.
 !
+subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
+use jburk_r8lib_r8vec_, only: r8vec_distinct
   implicit none
 
   integer ( kind = 4 ) npol
@@ -19763,7 +19780,7 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
   integer ( kind = 4 ) j
   real ( kind = 8 ) p2
   real ( kind = 8 ) pval
-  logical r8vec_distinct
+!  logical r8vec_distinct
   real ( kind = 8 ) xpol(npol)
   real ( kind = 8 ) xval
 !
