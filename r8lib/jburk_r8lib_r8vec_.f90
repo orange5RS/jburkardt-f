@@ -3505,7 +3505,8 @@ function r8vec_distance ( dim_num, v1, v2 )
 
   return
 end
-function r8vec_distinct ( n, a )
+
+
 
 !*****************************************************************************80
 !
@@ -3535,6 +3536,7 @@ function r8vec_distinct ( n, a )
 !
 !    Output, logical R8VEC_DISTINCT is TRUE if the elements of A are distinct.
 !
+function r8vec_distinct ( n, a )
   implicit none
 
   integer(kind=4) n
