@@ -373,7 +373,6 @@ end subroutine r8poly_lagrange_2
 
 
 
-subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
 !*****************************************************************************80
 !
 !! R8POLY_LAGRANGE_COEF returns the coefficients of a Lagrange polynomial.
@@ -420,6 +419,8 @@ subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
 !    coefficients of the IPOL-th Lagrange polynomial:
 !      L(IPOL)(X) = SUM ( 0 <= I <= NPOL-1 ) PCOF(I) * X^I
 !
+subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
+use jburk_r8lib_r8vec_, only: r8vec_distinct
   implicit none
 
   integer(kind=4) :: npol
@@ -428,7 +429,6 @@ subroutine r8poly_lagrange_coef (npol, ipol, xpol, pcof)
   integer(kind=4) :: ipol
   integer(kind=4) :: j
   real(kind=8) :: pcof(0:npol-1)
-  logical r8vec_distinct
   real(kind=8) :: xpol(npol)
 !
 !  Make sure IPOL is legal.
@@ -590,8 +590,6 @@ end
 
 
 
-subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
-
 !*****************************************************************************80
 !
 !! R8POLY_LAGRANGE_VAL evaluates the IPOL-th Lagrange polynomial.
@@ -640,6 +638,8 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
 !    Output, real(kind=8) :: DPDX, the derivative of the IPOL-th
 !    Lagrange polynomial at XVAL.
 !
+subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
+use jburk_r8lib_r8vec_, only: r8vec_distinct
   implicit none
 
   integer(kind=4) :: npol
@@ -650,7 +650,6 @@ subroutine r8poly_lagrange_val ( npol, ipol, xpol, xval, pval, dpdx )
   integer(kind=4) :: j
   real(kind=8) :: p2
   real(kind=8) :: pval
-  logical r8vec_distinct
   real(kind=8) :: xpol(npol)
   real(kind=8) :: xval
 !
@@ -1818,6 +1817,8 @@ subroutine r8poly3_root ( a, b, c, d, r1, r2, r3 )
 
   return
 end
+
+
 subroutine r8poly4_root ( a, b, c, d, e, r1, r2, r3, r4 )
 
 !*****************************************************************************80
