@@ -3,7 +3,10 @@ module     jburk_r8lib_r8row_
 use, intrinsic :: iso_fortran_env
 implicit none
 
-
+interface        r8row_compare
+module procedure r8row_compare
+end interface    r8row_compare
+public           r8row_compare
 
 contains
 
@@ -50,44 +53,44 @@ subroutine r8row_compare ( m, n, a, i, j, value )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Input, integer ( kind = 4 ) I, J, the rows to be compared.
+!    Input, integer :: I, J, the rows to be compared.
 !    I and J must be between 1 and M.
 !
-!    Output, integer ( kind = 4 ) VALUE, the results of the comparison:
+!    Output, integer :: VALUE, the results of the comparison:
 !    -1, row I < row J,
 !     0, row I = row J,
 !    +1, row J < row I.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  integer ( kind = 4 ) value
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  integer :: k
+  integer :: value
 !
 !  Check.
 !
   if ( i < 1 .or. m < i ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_COMPARE - Fatal error!'
-    write ( *, '(a)' ) '  Row index I is out of bounds.'
-    write ( *, '(a,i8)' ) '  I = ', i
+    write (unit=*, fmt='(a)') ' '
+    write (unit=*, fmt='(a)') 'R8ROW_COMPARE - Fatal error!'
+    write (unit=*, fmt='(a)') '  Row index I is out of bounds.'
+    write (unit=*, fmt='(a,i8)') '  I = ', i
     stop
   end if
 
   if ( j < 1 .or. m < j ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_COMPARE - Fatal error!'
-    write ( *, '(a)' ) '  Row index J is out of bounds.'
-    write ( *, '(a,i8)' ) '  J = ', j
+    write (unit=*, fmt='(a)') ' '
+    write (unit=*, fmt='(a)') 'R8ROW_COMPARE - Fatal error!'
+    write (unit=*, fmt='(a)') '  Row index J is out of bounds.'
+    write (unit=*, fmt='(a,i8)') '  J = ', j
     stop
   end if
 
@@ -150,22 +153,22 @@ subroutine r8row_max ( m, n, a, amax )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns
+!    Input, integer :: M, N, the number of rows and columns
 !    in the array.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) AMAX(M), the maximums of the rows.
+!    Output, real(kind=8) :: AMAX(M), the maximums of the rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amax(m)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: amax(m)
+  integer :: i
+  integer :: j
 
   do i = 1, m
 
@@ -215,20 +218,20 @@ subroutine r8row_mean ( m, n, a, mean )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) MEAN(M), the means, or averages, of the rows.
+!    Output, real(kind=8) :: MEAN(M), the means, or averages, of the rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) mean(m)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  real(kind=8) :: mean(m)
 
   do i = 1, m
     mean(i) = sum ( a(i,1:n) ) / real ( n, kind = 8 )
@@ -271,22 +274,22 @@ subroutine r8row_min ( m, n, a, amin )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns
+!    Input, integer :: M, N, the number of rows and columns
 !    in the array.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array to be examined.
+!    Input, real(kind=8) :: A(M,N), the array to be examined.
 !
-!    Output, real ( kind = 8 ) AMIN(M), the minimums of the rows.
+!    Output, real(kind=8) :: AMIN(M), the minimums of the rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  real ( kind = 8 ) amin(m)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  real(kind=8) :: amin(m)
+  integer :: i
+  integer :: j
 
   do i = 1, m
 
@@ -359,15 +362,15 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the row dimension of A.
+!    Input, integer :: M, the row dimension of A.
 !
-!    Input, integer ( kind = 4 ) N, the column dimension of A, and the
+!    Input, integer :: N, the column dimension of A, and the
 !    length of a row.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).  On input, the array to be checked.
+!    Input/output, real(kind=8) :: A(M,N).  On input, the array to be checked.
 !    On output, A has been reordered as described above.
 !
-!    Output, integer ( kind = 4 ) L, R, the indices of A that define the three
+!    Output, integer :: L, R, the indices of A that define the three
 !    segments.  Let KEY = the input value of A(1,1:N).  Then
 !    I <= L                 A(I,1:N) < KEY;
 !         L < I < R         A(I,1:N) = KEY;
@@ -378,25 +381,24 @@ use jburk_r8lib_r8vec_, only: r8vec_swap
 use jburk_r8lib_r8vec_, only: r8vec_eq
 use jburk_r8lib_r8vec_, only: r8vec_gt
 use jburk_r8lib_r8vec_, only: r8vec_lt
-  implicit none
+implicit none
+  integer :: m
+  integer :: n
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
-
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) k
-  real ( kind = 8 ) key(n)
-  integer ( kind = 4 ) l
-  integer ( kind = 4 ) r
+  real(kind=8) :: a(m,n)
+  integer :: j
+  integer :: k
+  real(kind=8) :: key(n)
+  integer :: l
+  integer :: r
   ! logical r8vec_eq
   ! logical r8vec_gt
   ! logical r8vec_lt
 
   if ( m < 1 ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_PART_QUICK_A - Fatal error!'
-    write ( *, '(a)' ) '  M < 1.'
+    write (unit=*, fmt='(a)') ' '
+    write (unit=*, fmt='(a)') 'R8ROW_PART_QUICK_A - Fatal error!'
+    write (unit=*, fmt='(a)') '  M < 1.'
     return
   end if
 
@@ -483,23 +485,23 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the array of M rows of N-vectors.
 !    On output, the rows of A have been sorted in lexicographic order.
 !
 subroutine r8row_sort_heap_a ( m, n, a )
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: indx
+  integer :: isgn
+  integer :: j
 
   if ( m <= 0 ) then
     return
@@ -583,31 +585,31 @@ end
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows in each column of A.
+!    Input, integer :: M, the number of rows in each column of A.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns in A.
+!    Input, integer :: N, the number of columns in A.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array.
+!    Input, real(kind=8) :: A(M,N), the array.
 !
-!    Output, integer ( kind = 4 ) INDX(M), the sort index.  The I-th element
+!    Output, integer :: INDX(M), the sort index.  The I-th element
 !    of the sorted array is row INDX(I).
 !
 subroutine r8row_sort_heap_index_a ( m, n, a, indx )
 use jburk_r8lib_r8vec_, only: r8vec_compare
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) indx(m)
-  integer ( kind = 4 ) indxt
-  integer ( kind = 4 ) ir
-  integer ( kind = 4 ) isgn
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) l
-  real ( kind = 8 ) row(n)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: indx(m)
+  integer :: indxt
+  integer :: ir
+  integer :: isgn
+  integer :: j
+  integer :: l
+  real(kind=8) :: row(n)
 
   if ( n < 1 ) then
     return
@@ -679,7 +681,8 @@ use jburk_r8lib_r8vec_, only: r8vec_compare
 
   return
 end
-subroutine r8row_sort_quick_a ( m, n, a )
+
+
 
 !*****************************************************************************80
 !
@@ -704,49 +707,44 @@ subroutine r8row_sort_quick_a ( m, n, a )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, the number of rows of A.
+!    Input, integer :: M, the number of rows of A.
 !
-!    Input, integer ( kind = 4 ) N, the number of columns of A,
+!    Input, integer :: N, the number of columns of A,
 !    and the length of a row.
 !
-!    Input/output, real ( kind = 8 ) A(M,N).
+!    Input/output, real(kind=8) :: A(M,N).
 !    On input, the array to be sorted.
 !    On output, the array has been sorted.
 !
-  implicit none
+subroutine r8row_sort_quick_a (m, n, a)
+implicit none
+   integer, intent(in) :: m              !< M, the number of rows of A.
+   integer, intent(in) :: n              !< N, the number of columns of A, and the length of a row.
+   real(kind=8), intent(inout) :: a(m,n) !< A(M,N). On input, the array to be sorted.
 
-  integer ( kind = 4 ), parameter :: level_max = 30
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+   integer, parameter :: level_max = 30
+   integer :: base
+   integer :: l_segment
+   integer :: level
+   integer :: m_segment
+   integer :: rsave(level_max)
+   integer :: r_segment
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) base
-  integer ( kind = 4 ) l_segment
-  integer ( kind = 4 ) level
-  integer ( kind = 4 ) m_segment
-  integer ( kind = 4 ) rsave(level_max)
-  integer ( kind = 4 ) r_segment
+   if (m .lt. 1) then
+      write (unit=*, fmt='(a)')    ' '
+      write (unit=*, fmt='(a)')    'R8ROW_SORT_QUICK_A - Fatal error!'
+      write (unit=*, fmt='(a)')    '  M < 1.'
+      write (unit=*, fmt='(a,i8)') '  M = ', m
+      stop
+   end if
 
-  if ( n <= 0 ) then
-    return
-  end if
+   if (n .le. 0) return
+   if (m .eq. 1) return
 
-  if ( m < 1 ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_SORT_QUICK_A - Fatal error!'
-    write ( *, '(a)' ) '  M < 1.'
-    write ( *, '(a,i8)' ) '  M = ', m
-    stop
-  end if
-
-  if ( m == 1 ) then
-    return
-  end if
-
-  level = 1
-  rsave(level) = m + 1
-  base = 1
-  m_segment = m
+   level = 1
+   rsave(level) = m + 1
+   base = 1
+   m_segment = m
 
   do
 !
@@ -760,9 +758,9 @@ subroutine r8row_sort_quick_a ( m, n, a )
     if ( 1 < l_segment ) then
 
       if ( level_max < level ) then
-        write ( *, '(a)' ) ' '
-        write ( *, '(a)' ) 'R8ROW_SORT_QUICK_A - Fatal error!'
-        write ( *, '(a,i8)' ) '  Exceeding recursion maximum of ', level_max
+        write (unit=*, fmt='(a)') ' '
+        write (unit=*, fmt='(a)') 'R8ROW_SORT_QUICK_A - Fatal error!'
+        write (unit=*, fmt='(a,i8)') '  Exceeding recursion maximum of ', level_max
         stop
       end if
 
@@ -831,22 +829,22 @@ subroutine r8row_sorted_unique_count ( m, n, a, unique_num )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), a sorted array, containing
+!    Input, real(kind=8) :: A(M,N), a sorted array, containing
 !    M rows of data.
 !
-!    Output, integer ( kind = 4 ) UNIQUE_NUM, the number of unique rows.
+!    Output, integer :: UNIQUE_NUM, the number of unique rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i1
-  integer ( kind = 4 ) i2
-  integer ( kind = 4 ) unique_num
+  real(kind=8) :: a(m,n)
+  integer :: i1
+  integer :: i2
+  integer :: unique_num
 
   if ( n <= 0 ) then
     unique_num = 0
@@ -892,21 +890,21 @@ subroutine r8row_sum ( m, n, a, rowsum )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Output, real ( kind = 8 ) ROWSUM(M), the sum of the entries of
+!    Output, real(kind=8) :: ROWSUM(M), the sum of the entries of
 !    each row.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  real ( kind = 8 ) rowsum(m)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  real(kind=8) :: rowsum(m)
 
   do i = 1, m
     rowsum(i) = sum ( a(i,1:n) )
@@ -939,35 +937,35 @@ subroutine r8row_swap ( m, n, a, i1, i2 )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input/output, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input/output, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Input, integer ( kind = 4 ) I1, I2, the two rows to swap.
+!    Input, integer :: I1, I2, the two rows to swap.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i1
-  integer ( kind = 4 ) i2
-  real ( kind = 8 ) row(n)
+  real(kind=8) :: a(m,n)
+  integer :: i1
+  integer :: i2
+  real(kind=8) :: row(n)
 
   if ( i1 < 1 .or. m < i1 ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_SWAP - Fatal error!'
-    write ( *, '(a)' ) '  I1 is out of range.'
-    write ( *, '(a,i8)' ) '  I1 = ', i1
+    write (unit=*, fmt='(a)') ' '
+    write (unit=*, fmt='(a)') 'R8ROW_SWAP - Fatal error!'
+    write (unit=*, fmt='(a)') '  I1 is out of range.'
+    write (unit=*, fmt='(a,i8)') '  I1 = ', i1
     stop
   end if
 
   if ( i2 < 1 .or. m < i2 ) then
-    write ( *, '(a)' ) ' '
-    write ( *, '(a)' ) 'R8ROW_SWAP - Fatal error!'
-    write ( *, '(a)' ) '  I2 is out of range.'
-    write ( *, '(a,i8)' ) '  I2 = ', i2
+    write (unit=*, fmt='(a)') ' '
+    write (unit=*, fmt='(a)') 'R8ROW_SWAP - Fatal error!'
+    write (unit=*, fmt='(a)') '  I2 is out of range.'
+    write (unit=*, fmt='(a,i8)') '  I2 = ', i2
     stop
   end if
 
@@ -1017,21 +1015,21 @@ subroutine r8row_to_r8vec ( m, n, a, x )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns.
+!    Input, integer :: M, N, the number of rows and columns.
 !
-!    Input, real ( kind = 8 ) A(M,N), the M by N array.
+!    Input, real(kind=8) :: A(M,N), the M by N array.
 !
-!    Output, real ( kind = 8 ) X(M*N), a vector containing the M rows of A.
+!    Output, real(kind=8) :: X(M*N), a vector containing the M rows of A.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) x(m*n)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  real(kind=8) :: x(m*n)
 
   j = 1
   do i = 1, m
@@ -1066,23 +1064,23 @@ subroutine r8row_variance ( m, n, a, variance )
 !
 !  Parameters:
 !
-!    Input, integer ( kind = 4 ) M, N, the number of rows and columns
+!    Input, integer :: M, N, the number of rows and columns
 !    in the array.
 !
-!    Input, real ( kind = 8 ) A(M,N), the array whose variances are desired.
+!    Input, real(kind=8) :: A(M,N), the array whose variances are desired.
 !
-!    Output, real ( kind = 8 ) VARIANCE(M), the variances of the rows.
+!    Output, real(kind=8) :: VARIANCE(M), the variances of the rows.
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer :: m
+  integer :: n
 
-  real ( kind = 8 ) a(m,n)
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) j
-  real ( kind = 8 ) mean
-  real ( kind = 8 ) variance(m)
+  real(kind=8) :: a(m,n)
+  integer :: i
+  integer :: j
+  real(kind=8) :: mean
+  real(kind=8) :: variance(m)
 
   do i = 1, m
 
