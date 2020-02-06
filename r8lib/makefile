@@ -14,6 +14,7 @@ OBJS = jburk_r8lib_sort_.o \
        jburk_r8lib_r8vec_.o \
        jburk_r8lib_r8mat_.o \
        jburk_r8lib_r8row_.o \
+       jburk_r8lib_r8col_.o \
        jburk_r8lib_r8poly_.o \
        r8lib.new.o \
        $(JOB).o
