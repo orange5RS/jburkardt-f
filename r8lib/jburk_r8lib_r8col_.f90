@@ -812,6 +812,7 @@ subroutine r8col_max_index ( m, n, a, imax )
 end
 
 
+
 subroutine r8col_max_one ( m, n, a )
 
 !*****************************************************************************80
@@ -871,8 +872,26 @@ end
 
 
 
-subroutine r8col_mean ( m, n, a, mean )
+!> @author John Burkardt
+!> @brief  R8COL_MEAN returns the column means of an R8COL.
+!> @date   2004-12-05
+!> @date   2020-02-06
+!> @see    
+subroutine     r8col_mean ( m, n, a, mean )
+implicit none
+   integer, intent(in) :: m
+   integer, intent(in) :: n
+   real(kind=8), intent(in) :: a(m,n)
+   real(kind=8), intent(out) :: mean(n)
+   integer :: j
 
+   mean = 0.0D+0
+   do j = 1, n
+      mean(j) = sum (a(1:m,j))
+   end do
+
+   mean(1:n) = mean(1:n) * (1.0D+0/real(m, kind=8))
+end subroutine r8col_mean
 !*****************************************************************************80
 !
 !! R8COL_MEAN returns the column means of an R8COL.
@@ -911,23 +930,6 @@ subroutine r8col_mean ( m, n, a, mean )
 !
 !    Output, real(kind=8) :: MEAN(N), the means, or averages, of the columns.
 !
-  implicit none
-
-  integer :: m
-  integer :: n
-
-  real(kind=8) :: a(m,n)
-  integer :: j
-  real(kind=8) :: mean(n)
-
-  do j = 1, n
-    mean(j) = sum ( a(1:m,j) )
-  end do
-
-  mean(1:n) = mean(1:n) / real ( m, kind = 8  )
-
-  return
-end
 
 
 
