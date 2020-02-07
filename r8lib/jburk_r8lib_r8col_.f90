@@ -1299,7 +1299,7 @@ use jburk_r8lib_i4vec_, only: perm_check
 
   real(kind=8) :: a(m,n)
   real(kind=8) :: a_temp(m)
-  integer ::  parameter :: base = 1
+  integer, parameter :: base = 1
   integer :: ierror
   integer :: iget
   integer :: iput
@@ -1641,7 +1641,7 @@ subroutine r8col_sort_quick_a ( m, n, a )
 !
   implicit none
 
-  integer ::  parameter :: level_max = 30
+  integer, parameter :: level_max = 30
   integer :: m
   integer :: n
 
@@ -3167,7 +3167,7 @@ subroutine r8col_uniform_abvec ( m, n, a, b, seed, r )
   real(kind=8) :: a(m)
   real(kind=8) :: b(m)
   integer :: i
-  integer ::  parameter :: i4_huge = 2147483647
+  integer, parameter :: i4_huge = 2147483647
   integer :: j
   integer :: k
   integer :: seed
