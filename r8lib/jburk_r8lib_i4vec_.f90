@@ -39,9 +39,9 @@ contains
 !> @see    
 subroutine     i4vec_indicator (n, a)
 implicit none
-   integer(kind=4), intent(in) :: n
-   integer(kind=4), intent(out) :: a(n)
-   integer(kind=4) :: i
+   integer, intent(in) :: n
+   integer, intent(out) :: a(n)
+   integer :: i
 
    do i = 1, n
       a(i) = i
@@ -83,13 +83,13 @@ end subroutine i4vec_indicator
 !> @see    
 subroutine     i4vec_permute (n, p, a)
 implicit none
-   integer(kind=4), intent(in)    :: n
-   integer(kind=4), intent(inout) :: a(n)
-   integer(kind=4), intent(inout) :: p(n)
+   integer, intent(in)    :: n
+   integer, intent(inout) :: a(n)
+   integer, intent(inout) :: p(n)
 
-   integer(kind=4), parameter :: base = 1
-   integer(kind=4) :: a_temp
-   integer(kind=4) :: ierror, iget, iput, istart
+   integer, parameter :: base = 1
+   integer :: a_temp
+   integer :: ierror, iget, iput, istart
 
    call perm_check (n, p, base, ierror)
 
@@ -243,11 +243,11 @@ end subroutine i4vec_print
 !> @see      
 subroutine perm_check (n, p, base, ierror)
 implicit none
-   integer(kind=4), intent(in)  :: n      !< N, the number of entries.
-   integer(kind=4), intent(in)  :: base   !< BASE, the index base.
-   integer(kind=4), intent(out) :: ierror !< IERROR, error flag. 0, the array represents a permutation.
-   integer(kind=4), intent(in)  :: p(n)   !< P(N), the array to check.
-   integer(kind=4) :: seek, find
+   integer, intent(in)  :: n      !< N, the number of entries.
+   integer, intent(in)  :: base   !< BASE, the index base.
+   integer, intent(out) :: ierror !< IERROR, error flag. 0, the array represents a permutation.
+   integer, intent(in)  :: p(n)   !< P(N), the array to check.
+   integer :: seek, find
 
    ierror = 0
    do seek = base, base+n-1
@@ -320,12 +320,12 @@ end subroutine perm_check
 subroutine perm_uniform (n, base, seed, p)
 !use jburk_i4lib, only: i4_uniform_ab
 implicit none
-   integer(kind=4), intent(in)  :: n
-   integer(kind=4), intent(in)  :: base
-   integer(kind=4), intent(out) :: p(n)
-   integer(kind=4), intent(in)  :: seed
-   integer(kind=4) :: i4_uniform_ab
-   integer(kind=4) :: i, j, k
+   integer, intent(in)  :: n
+   integer, intent(in)  :: base
+   integer, intent(out) :: p(n)
+   integer, intent(in)  :: seed
+   integer :: i4_uniform_ab
+   integer :: i, j, k
 
    p = 0
    do i = 1, n
