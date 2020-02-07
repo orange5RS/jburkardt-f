@@ -1,3 +1,5 @@
+
+
 !> @author [P. Jang](orange224factory@gmail.com)
 !> @date   2020-02-06
 !> @see    [Documenting Fortran with Doxygen](https://github.com/Mohid-Water-Modelling-System/Mohid/wiki/Documenting-Fortran-with-Doxygen)
@@ -6,11 +8,11 @@
 !  row vector: 1 x n; a matrix with one row
 !  col vector: m x 1; a matrix with one col
 !      matrix: m rows x n columns
-
+! 
 !> @example: A is 2 by 3 matrix (2 rows and 3 columns).
 !  A[i,j] = | a11, a12, a13 |
 !           | a21, a22, a23 |
-
+! 
 !> @note
 !  column-major order, e.g. Fortran (one-indexed)
 !  [1, 2, 3, 4, 5, 6] = [a11, a21, a12, a22, a13, a23]
@@ -23,6 +25,7 @@
 !  
 !  column vector
 !  A[:,1] = [a11, a21]^T
+
 module     jburk_r8lib_r8col_
 use, intrinsic :: iso_fortran_env
 implicit none
