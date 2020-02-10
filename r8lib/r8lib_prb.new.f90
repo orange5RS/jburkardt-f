@@ -1847,7 +1847,8 @@ subroutine test031 ( )
 
   return
 end
-subroutine test032 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -1865,6 +1866,8 @@ subroutine test032 ( )
 !
 !    John Burkardt
 !
+subroutine test032 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -1903,7 +1906,8 @@ subroutine test032 ( )
 
   return
 end
-subroutine test033 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -1921,6 +1925,8 @@ subroutine test033 ( )
 !
 !    John Burkardt
 !
+subroutine test033 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 12
@@ -1957,7 +1963,8 @@ subroutine test033 ( )
 
   return
 end
-subroutine test034 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -1975,6 +1982,8 @@ subroutine test034 ( )
 !
 !    John Burkardt
 !
+subroutine test034 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 12
@@ -2026,7 +2035,8 @@ subroutine test034 ( )
 
   return
 end
-subroutine test035 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2044,6 +2054,8 @@ subroutine test035 ( )
 !
 !    John Burkardt
 !
+subroutine test035 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 12
@@ -2083,7 +2095,8 @@ subroutine test035 ( )
 
   return
 end
-subroutine test036 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -2101,6 +2114,7 @@ subroutine test036 ( )
 !
 !    John Burkardt
 !
+subroutine test036 ( )
   implicit none
 
   integer ( kind = 4 ), parameter :: l = 4
@@ -2258,6 +2272,7 @@ subroutine test038 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8col_, only: r8col_sort_heap_a
 use jburk_r8lib_r8col_, only: r8col_insert
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2338,6 +2353,7 @@ end
 !
 subroutine test0383 ( )
 use jburk_r8lib_r8col_, only: r8col_part_quick_a
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 2
@@ -2395,6 +2411,7 @@ end
 !
 subroutine test0385 ( )
 use jburk_r8lib_r8col_, only: r8col_sort_heap_index_a
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2461,6 +2478,8 @@ end
 !
 subroutine test039 ( )
 use jburk_r8lib_r8col_, only: r8col_sort_quick_a
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2510,6 +2529,7 @@ end
 subroutine test0393 ( )
 use jburk_r8lib_r8col_, only: r8col_sort_heap_a
 use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2590,6 +2610,7 @@ end
 subroutine test0395 ( )
 use jburk_r8lib_r8col_, only: r8col_sort_heap_a
 use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique_count
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2669,6 +2690,7 @@ subroutine test0397 ( )
 use jburk_r8lib_r8col_, only: r8col_sort_heap_a
 use jburk_r8lib_r8col_, only: r8col_sorted_tol_unique_count
 use jburk_r8lib_r8col_, only: r8col_sorted_tol_undex
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2783,6 +2805,7 @@ end
 subroutine test040 ( )
 use jburk_r8lib_r8col_, only: r8col_max
 use jburk_r8lib_r8col_, only: r8col_min
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2847,6 +2870,7 @@ end
 subroutine test041 ( )
 use jburk_r8lib_r8col_, only: r8col_sum
 use jburk_r8lib_r8col_, only: r8col_mean
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2911,6 +2935,7 @@ end
 subroutine test0415 ( )
 use jburk_r8lib_i4vec_, only: i4vec_print
 use jburk_r8lib_r8col_, only: r8col_permute
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -2959,6 +2984,8 @@ end
 !
 subroutine test042 ( )
 use jburk_r8lib_r8col_, only: r8col_sortr_a
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 10
@@ -3012,6 +3039,7 @@ end
 !
 subroutine test043 ( )
 use jburk_r8lib_r8col_, only: r8col_swap
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3072,6 +3100,7 @@ end
 subroutine test044 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
 use jburk_r8lib_r8col_, only: r8col_to_r8vec
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3123,6 +3152,7 @@ end
 subroutine test0442 ( )
 use jburk_r8lib_r8col_, only: r8col_tol_unique_count
 use jburk_r8lib_r8col_, only: r8col_tol_undex
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3234,6 +3264,7 @@ end
 subroutine test0443 ( )
 use jburk_r8lib_r8col_, only: r8col_unique_count
 use jburk_r8lib_r8col_, only: r8col_undex
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3329,6 +3360,7 @@ end
 !
 subroutine test0445 ( )
 use jburk_r8lib_r8col_, only: r8col_unique_count
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3387,6 +3419,7 @@ end
 !
 subroutine test045 ( )
 use jburk_r8lib_r8col_, only: r8col_variance
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -3682,9 +3715,10 @@ end
 !    John Burkardt
 !
 subroutine test049 ( )
-! use jburk_r8lib_r8mat_, only: r8mat_print
-! use jburk_r8lib_r8mat_, only: r8mat_cholesky_factor
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_cholesky_factor
+use jburk_r8lib_r8mat_, only: r8mat_cholesky_solve
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -3756,7 +3790,7 @@ use jburk_r8lib_r8vec_, only: r8vec_print
 
   return
 end
-subroutine test050 ( )
+
 
 !*****************************************************************************80
 !
@@ -3774,6 +3808,9 @@ subroutine test050 ( )
 !
 !    John Burkardt
 !
+subroutine test050 ( )
+use jburk_r8lib_r8mat_, only: r8mat_vand2
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 2
@@ -3811,7 +3848,8 @@ subroutine test050 ( )
 
   return
 end
-subroutine test051 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3829,6 +3867,10 @@ subroutine test051 ( )
 !
 !    John Burkardt
 !
+subroutine test051 ( )
+use jburk_r8lib_r8mat_, only: r8mat_vand2
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_det_3d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -3837,7 +3879,7 @@ subroutine test051 ( )
   real ( kind = 8 ) det
   integer ( kind = 4 ) i
   integer ( kind = 4 ) j
-  real ( kind = 8 ) r8mat_det_3d
+!  real ( kind = 8 ) r8mat_det_3d
   real ( kind = 8 ), dimension ( n ) :: x = (/ &
     1.0D+00, 10.0D+00, 4.0D+00 /)
 
@@ -3865,7 +3907,8 @@ subroutine test051 ( )
 
   return
 end
-subroutine test052 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3883,6 +3926,10 @@ subroutine test052 ( )
 !
 !    John Burkardt
 !
+subroutine test052 ( )
+use jburk_r8lib_r8mat_, only: r8mat_vand2
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_det_4d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -3891,7 +3938,7 @@ subroutine test052 ( )
   real ( kind = 8 ) det
   integer ( kind = 4 ) i
   integer ( kind = 4 ) j
-  real ( kind = 8 ) r8mat_det_4d
+!  real ( kind = 8 ) r8mat_det_4d
   real ( kind = 8 ), dimension ( n ) :: x = (/ &
     1.0D+00, 10.0D+00, 4.0D+00, 2.0D+00 /)
 
@@ -3919,7 +3966,8 @@ subroutine test052 ( )
 
   return
 end
-subroutine test053 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3937,6 +3985,10 @@ subroutine test053 ( )
 !
 !    John Burkardt
 !
+subroutine test053 ( )
+use jburk_r8lib_r8mat_, only: r8mat_vand2
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_det_5d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -3945,7 +3997,7 @@ subroutine test053 ( )
   real ( kind = 8 ) det
   integer ( kind = 4 ) i
   integer ( kind = 4 ) j
-  real ( kind = 8 ) r8mat_det_5d
+!  real ( kind = 8 ) r8mat_det_5d
   real ( kind = 8 ), dimension ( n ) :: x = (/ &
     1.0D+00, 10.0D+00, 4.0D+00, 2.0D+00, 3.0D+00 /)
 
@@ -3973,7 +4025,8 @@ subroutine test053 ( )
 
   return
 end
-subroutine test054 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -3991,6 +4044,9 @@ subroutine test054 ( )
 !
 !    John Burkardt
 !
+subroutine test054 ( )
+use jburk_r8lib_r8mat_, only: r8mat_expand_linear
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -4025,7 +4081,8 @@ subroutine test054 ( )
 
   return
 end
-subroutine test055 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4043,6 +4100,9 @@ subroutine test055 ( )
 !
 !    John Burkardt
 !
+subroutine test055 ( )
+use jburk_r8lib_r8mat_, only: r8mat_expand_linear2
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -4082,7 +4142,8 @@ subroutine test055 ( )
 
   return
 end
-subroutine test0555 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4100,6 +4161,11 @@ subroutine test0555 ( )
 !
 !    John Burkardt
 !
+subroutine test0555 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_mv
+use jburk_r8lib_r8mat_, only: r8mat_fss
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 10
@@ -4153,7 +4219,8 @@ subroutine test0555 ( )
 
   return
 end
-subroutine test056 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4171,6 +4238,9 @@ subroutine test056 ( )
 !
 !    John Burkardt
 !
+subroutine test056 ( )
+use jburk_r8lib_r8mat_, only: r8mat_givens_post
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -4212,7 +4282,8 @@ subroutine test056 ( )
 
   return
 end
-subroutine test057 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4230,6 +4301,9 @@ subroutine test057 ( )
 !
 !    John Burkardt
 !
+subroutine test057 ( )
+use jburk_r8lib_r8mat_, only: r8mat_givens_pre
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -4271,7 +4345,8 @@ subroutine test057 ( )
 
   return
 end
-subroutine test058 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4289,6 +4364,9 @@ subroutine test058 ( )
 !
 !    John Burkardt
 !
+subroutine test058 ( )
+use jburk_r8lib_r8mat_, only: r8mat_hess
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -4350,7 +4428,8 @@ subroutine test058_f ( n, x, f )
 
   return
 end
-subroutine test058_hess ( n, x, h )
+
+
 
 !*****************************************************************************80
 !
@@ -4376,6 +4455,7 @@ subroutine test058_hess ( n, x, h )
 !
 !    Output, real ( kind = 8 ) H(N,N), the Hessian values.
 !
+subroutine test058_hess ( n, x, h )
   implicit none
 
   integer ( kind = 4 ) n
@@ -4418,6 +4498,9 @@ end
 !
 subroutine test059 ( )
 use jburk_r8lib_r8vec_, only: r8vec_house_column
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_house_form
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -4490,6 +4573,8 @@ end
 !
 subroutine test060 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_house_form
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -4511,7 +4596,8 @@ use jburk_r8lib_r8vec_, only: r8vec_print
 
   return
 end
-subroutine test061 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4529,6 +4615,10 @@ subroutine test061 ( )
 !
 !    John Burkardt
 !
+subroutine test061 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_house_post
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -4569,7 +4659,8 @@ subroutine test061 ( )
 
   return
 end
-subroutine test062 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4587,6 +4678,10 @@ subroutine test062 ( )
 !
 !    John Burkardt
 !
+subroutine test062 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_house_pre
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -4626,7 +4721,8 @@ subroutine test062 ( )
 
   return
 end
-subroutine test063 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4644,6 +4740,11 @@ subroutine test063 ( )
 !
 !    John Burkardt
 !
+subroutine test063 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_max_index
+use jburk_r8lib_r8mat_, only: r8mat_min_index
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 5
@@ -4676,7 +4777,8 @@ subroutine test063 ( )
 
   return
 end
-subroutine test064 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4694,6 +4796,9 @@ subroutine test064 ( )
 !
 !    John Burkardt
 !
+subroutine test064 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_inverse_2d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 2
@@ -4732,7 +4837,8 @@ subroutine test064 ( )
 
   return
 end
-subroutine test065 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4750,6 +4856,9 @@ subroutine test065 ( )
 !
 !    John Burkardt
 !
+subroutine test065 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_inverse_3d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -4789,7 +4898,8 @@ subroutine test065 ( )
 
   return
 end
-subroutine test066 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4807,6 +4917,9 @@ subroutine test066 ( )
 !
 !    John Burkardt
 !
+subroutine test066 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_inverse_4d
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -4851,7 +4964,8 @@ subroutine test066 ( )
 
   return
 end
-subroutine test067 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -4869,6 +4983,8 @@ subroutine test067 ( )
 !
 !    John Burkardt
 !
+subroutine test067 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -4990,7 +5106,8 @@ subroutine test067_jac ( m, n, x, fprime )
 
   return
 end
-subroutine test068 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5008,6 +5125,8 @@ subroutine test068 ( )
 !
 !    John Burkardt
 !
+subroutine test068 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 4
@@ -5096,7 +5215,8 @@ subroutine test069 ( )
 
   return
 end
-subroutine test070 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5114,6 +5234,8 @@ subroutine test070 ( )
 !
 !    John Burkardt
 !
+subroutine test070 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 6
@@ -5146,7 +5268,8 @@ subroutine test070 ( )
 
   return
 end
-subroutine test071 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5164,6 +5287,8 @@ subroutine test071 ( )
 !
 !    John Burkardt
 !
+subroutine test071 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 5
@@ -5200,7 +5325,8 @@ subroutine test071 ( )
 
   return
 end
-subroutine test072 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5218,6 +5344,11 @@ subroutine test072 ( )
 !
 !    John Burkardt
 !
+subroutine test072 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_max
+use jburk_r8lib_r8mat_, only: r8mat_min
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 5
@@ -5226,8 +5357,8 @@ subroutine test072 ( )
   real ( kind = 8 ) a(m,n)
   real ( kind = 8 ), parameter :: b = 0.0D+00
   real ( kind = 8 ), parameter :: c = 10.0D+00
-  real ( kind = 8 ) r8mat_max
-  real ( kind = 8 ) r8mat_min
+  ! real ( kind = 8 ) r8mat_max
+  ! real ( kind = 8 ) r8mat_min
   integer ( kind = 4 ) seed
   real ( kind = 8 ) temp1
   real ( kind = 8 ) temp2
@@ -5253,7 +5384,8 @@ subroutine test072 ( )
 
   return
 end
-subroutine test073 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5271,6 +5403,13 @@ subroutine test073 ( )
 !
 !    John Burkardt
 !
+subroutine test073 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_maxcol_minrow
+use jburk_r8lib_r8mat_, only: r8mat_maxrow_mincol
+use jburk_r8lib_r8mat_, only: r8mat_mincol_maxrow
+use jburk_r8lib_r8mat_, only: r8mat_minrow_maxcol
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 5
@@ -5279,10 +5418,10 @@ subroutine test073 ( )
   real ( kind = 8 ) a(m,n)
   real ( kind = 8 ), parameter :: b = 0.0D+00
   real ( kind = 8 ), parameter :: c = 10.0D+00
-  real ( kind = 8 ) r8mat_maxcol_minrow
-  real ( kind = 8 ) r8mat_maxrow_mincol
-  real ( kind = 8 ) r8mat_mincol_maxrow
-  real ( kind = 8 ) r8mat_minrow_maxcol
+  ! real ( kind = 8 ) r8mat_maxcol_minrow
+  ! real ( kind = 8 ) r8mat_maxrow_mincol
+  ! real ( kind = 8 ) r8mat_mincol_maxrow
+  ! real ( kind = 8 ) r8mat_minrow_maxcol
   integer ( kind = 4 ) seed
   real ( kind = 8 ) temp1
   real ( kind = 8 ) temp2
@@ -5318,7 +5457,7 @@ subroutine test073 ( )
   return
 end
 
-subroutine test0737 ( )
+
 
 !*****************************************************************************80
 !
@@ -5336,6 +5475,10 @@ subroutine test0737 ( )
 !
 !    John Burkardt
 !
+subroutine test0737 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_nullspace_size
+use jburk_r8lib_r8mat_, only: r8mat_nullspace
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -5384,7 +5527,8 @@ subroutine test0737 ( )
 
   return
 end
-subroutine test074 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5402,6 +5546,9 @@ subroutine test074 ( )
 !
 !    John Burkardt
 !
+subroutine test074 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_orth_uniform
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -5582,6 +5729,7 @@ end
 !    John Burkardt
 !
 subroutine test0764 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -5628,6 +5776,7 @@ end
 !    John Burkardt
 !
 subroutine test0766 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -5654,7 +5803,8 @@ subroutine test0766 ( )
 
   return
 end
-subroutine test077 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -5672,6 +5822,8 @@ subroutine test077 ( )
 !
 !    John Burkardt
 !
+subroutine test077 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 3
@@ -5734,8 +5886,8 @@ end
 !
 subroutine test0775 ( )
 use jburk_r8lib_r8vec_, only: r8vec_uniform_01
-! use jburk_r8lib_r8mat_, only: r8mat_uniform_01
-! use jburk_r8lib_r8mat_, only: r8mat_solve_2d
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_solve_2d
   integer ( kind = 4 ), parameter :: n = 2
 
   real ( kind = 8 ), dimension (n,n) :: a
@@ -5795,8 +5947,8 @@ end
 !
 subroutine test0776 ( )
 use jburk_r8lib_r8vec_, only: r8vec_uniform_01
-! use jburk_r8lib_r8mat_, only: r8mat_uniform_01
-! use jburk_r8lib_r8mat_, only: r8mat_solve_3d
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_solve_3d
   integer ( kind = 4 ), parameter :: n = 3
 
   real ( kind = 8 ), dimension (n,n) :: a
@@ -5964,6 +6116,7 @@ end
 !
 subroutine test079 ( )
 use jburk_r8lib_r8vec_, only: r8vec_indicator
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6005,8 +6158,8 @@ use jburk_r8lib_r8vec_, only: r8vec_indicator
 
   return
 end
-subroutine test080 ( )
-use jburk_r8lib_i4vec_, only: i4vec_print
+
+
 
 !*****************************************************************************80
 !
@@ -6024,6 +6177,10 @@ use jburk_r8lib_i4vec_, only: i4vec_print
 !
 !    John Burkardt
 !
+subroutine test080 ( )
+use jburk_r8lib_i4vec_, only: i4vec_print
+use jburk_r8lib_r8mat_, only: r8mat_print
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6079,6 +6236,7 @@ use jburk_r8lib_i4vec_, only: i4vec_print
   return
 end
 subroutine test081 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
 
 !*****************************************************************************80
 !
@@ -6134,6 +6292,7 @@ subroutine test081 ( )
   return
 end
 subroutine test082 ( )
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
 
 !*****************************************************************************80
 !
@@ -6181,6 +6340,7 @@ subroutine test082 ( )
   return
 end
 subroutine test083 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
 
 !*****************************************************************************80
 !
@@ -6230,6 +6390,7 @@ subroutine test083 ( )
   return
 end
 subroutine test084 ( )
+use jburk_r8lib_r8mat_, only: r8mat_print
 
 !*****************************************************************************80
 !
@@ -6279,7 +6440,8 @@ subroutine test084 ( )
 
   return
 end
-subroutine test085 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6297,6 +6459,9 @@ subroutine test085 ( )
 !
 !    John Burkardt
 !
+subroutine test085 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 5
@@ -6320,7 +6485,8 @@ subroutine test085 ( )
 
   return
 end
-subroutine test086 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6338,6 +6504,9 @@ subroutine test086 ( )
 !
 !    John Burkardt
 !
+subroutine test086 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6383,7 +6552,8 @@ subroutine test086 ( )
 
   return
 end
-subroutine test087 ( )
+
+
 
 !*****************************************************************************80
 !
@@ -6401,6 +6571,9 @@ subroutine test087 ( )
 !
 !    John Burkardt
 !
+subroutine test087 ( )
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6474,6 +6647,8 @@ end
 !
 subroutine test088 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8mat_, only: r8mat_uniform_01
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -6544,6 +6719,7 @@ end
 !
 subroutine test089 ( )
 use jburk_r8lib_r8vec_, only: r8vec_print
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: n = 5
@@ -7620,6 +7796,7 @@ end
 subroutine test105 ( )
 use jburk_r8lib_r8row_, only: r8row_max
 use jburk_r8lib_r8row_, only: r8row_min
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -7683,6 +7860,7 @@ end
 subroutine test106 ( )
 use jburk_r8lib_r8row_, only: r8row_sum
 use jburk_r8lib_r8row_, only: r8row_mean
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -7745,6 +7923,7 @@ end
 !
 subroutine test1064 ( )
 use jburk_r8lib_r8row_, only: r8row_part_quick_a
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 8
@@ -7798,6 +7977,7 @@ end
 !
 subroutine test1065 ( )
 use jburk_r8lib_r8row_, only: r8row_sort_heap_a
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 4
@@ -7842,6 +8022,7 @@ end
 !
 subroutine test1066 ( )
 use jburk_r8lib_r8row_, only: r8row_sort_heap_index_a
+use jburk_r8lib_r8mat_, only: r8mat_transpose_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 15
@@ -7902,6 +8083,7 @@ end
 !
 subroutine test1067 ( )
 use jburk_r8lib_r8row_, only: r8row_sort_quick_a
+use jburk_r8lib_r8mat_, only: r8mat_uniform_ab
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 10
@@ -7950,6 +8132,7 @@ end
 !
 subroutine test107 ( )
 use jburk_r8lib_r8row_, only: r8row_swap
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
@@ -8060,6 +8243,7 @@ end
 !
 subroutine test109 ( )
 use jburk_r8lib_r8row_, only: r8row_variance
+use jburk_r8lib_r8mat_, only: r8mat_print
   implicit none
 
   integer ( kind = 4 ), parameter :: m = 3
