@@ -8,6 +8,36 @@ module     jburk_r8lib_r8vec_
 use, intrinsic :: iso_fortran_env
 implicit none
 
+interface        r8vec_uniform_unit
+module procedure r8vec_uniform_unit
+end interface    r8vec_uniform_unit
+public           r8vec_uniform_unit
+
+interface        r8vec_01_to_ab
+module procedure r8vec_01_to_ab
+end interface    r8vec_01_to_ab
+public           r8vec_01_to_ab
+
+interface        r8vec_ab_to_01
+module procedure r8vec_ab_to_01
+end interface    r8vec_ab_to_01
+public           r8vec_ab_to_01
+
+interface        r8vec_ab_to_cd
+module procedure r8vec_ab_to_cd
+end interface    r8vec_ab_to_cd
+public           r8vec_ab_to_cd
+
+interface        r8vec_all_nonpositive
+module procedure r8vec_all_nonpositive
+end interface    r8vec_all_nonpositive
+public           r8vec_all_nonpositive
+
+interface        r8vec_amax
+module procedure r8vec_amax
+end interface    r8vec_amax
+public           r8vec_amax
+
 interface        r8vec_correlation
 module procedure r8vec_correlation
 end interface    r8vec_correlation
@@ -149,6 +179,9 @@ subroutine r8vec_01_to_ab ( n, a, amax, amin )
 
   return
 end
+
+
+
 subroutine r8vec_ab_to_01 ( n, a )
 
 !*****************************************************************************80
@@ -203,6 +236,9 @@ subroutine r8vec_ab_to_01 ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_ab_to_cd ( n, a, bmin, bmax, b )
 
 !*****************************************************************************80
@@ -269,6 +305,9 @@ subroutine r8vec_ab_to_cd ( n, a, bmin, bmax, b )
 
   return
 end
+
+
+
 function r8vec_all_nonpositive ( n, a )
 
 !*****************************************************************************80
@@ -311,6 +350,9 @@ function r8vec_all_nonpositive ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_amax ( n, a, amax )
 
 !*****************************************************************************80
@@ -353,6 +395,9 @@ subroutine r8vec_amax ( n, a, amax )
 
   return
 end
+
+
+
 subroutine r8vec_amax_index ( n, a, amax_index )
 
 !*****************************************************************************80
@@ -413,6 +458,9 @@ subroutine r8vec_amax_index ( n, a, amax_index )
 
   return
 end
+
+
+
 subroutine r8vec_amin ( n, a, amin )
 
 !*****************************************************************************80
@@ -455,6 +503,9 @@ subroutine r8vec_amin ( n, a, amin )
 
   return
 end
+
+
+
 subroutine r8vec_amin_index ( n, a, amin_index )
 
 !*****************************************************************************80
@@ -515,6 +566,9 @@ subroutine r8vec_amin_index ( n, a, amin_index )
 
   return
 end
+
+
+
 function r8vec_any_negative ( n, a )
 
 !*****************************************************************************80
@@ -556,6 +610,9 @@ function r8vec_any_negative ( n, a )
 
   return
 end
+
+
+
 function r8vec_any_nonzero ( n, a )
 
 !*****************************************************************************80
@@ -701,6 +758,9 @@ subroutine r8vec_any_normal ( dim_num, v1, v2 )
 
   return
 end
+
+
+
 function r8vec_ascends ( n, x )
 
 !*****************************************************************************80
@@ -761,6 +821,9 @@ function r8vec_ascends ( n, x )
 
   return
 end
+
+
+
 function r8vec_ascends_strictly ( n, x )
 
 !*****************************************************************************80
@@ -821,6 +884,9 @@ function r8vec_ascends_strictly ( n, x )
 
   return
 end
+
+
+
 subroutine r8vec_bin ( n, x, bin_num, bin_min, bin_max, bin, bin_limit )
 
 !*****************************************************************************80
@@ -927,6 +993,9 @@ subroutine r8vec_bin ( n, x, bin_num, bin_min, bin_max, bin, bin_limit )
 
   return
 end
+
+
+
 subroutine r8vec_blend ( n, t1, x1, t2, x2, x )
 
 !*****************************************************************************80
@@ -981,6 +1050,9 @@ subroutine r8vec_blend ( n, t1, x1, t2, x2, x )
 
   return
 end
+
+
+
 subroutine r8vec_bracket ( n, x, xval, left, right )
 
 !*****************************************************************************80
@@ -1054,6 +1126,9 @@ subroutine r8vec_bracket ( n, x, xval, left, right )
 
   return
 end
+
+
+
 subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 
 !*****************************************************************************80
@@ -1252,6 +1327,9 @@ subroutine r8vec_bracket2 ( n, x, xval, start, left, right )
 
   return
 end
+
+
+
 subroutine r8vec_bracket3 ( n, t, tval, left )
 
 !*****************************************************************************80
@@ -1419,6 +1497,9 @@ subroutine r8vec_bracket3 ( n, t, tval, left )
 
   return
 end
+
+
+
 subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 
 !*****************************************************************************80
@@ -1586,6 +1667,9 @@ subroutine r8vec_bracket4 ( nt, t, ns, s, left )
 
   return
 end
+
+
+
 function r8vec_bracket5 ( nd, xd, xi )
 
 !*****************************************************************************80
@@ -1664,6 +1748,9 @@ function r8vec_bracket5 ( nd, xd, xi )
 
   return
 end
+
+
+
 subroutine r8vec_bracket6 ( nd, xd, ni, xi, b )
 
 !*****************************************************************************80
@@ -1747,6 +1834,9 @@ subroutine r8vec_bracket6 ( nd, xd, ni, xi, b )
 
   return
 end
+
+
+
 subroutine r8vec_ceiling ( n, r8vec, ceilingvec )
 
 !*****************************************************************************80
@@ -1809,6 +1899,9 @@ subroutine r8vec_ceiling ( n, r8vec, ceilingvec )
 
   return
 end
+
+
+
 subroutine r8vec_chebyspace ( n, a, b, x )
 
 !*****************************************************************************80
@@ -1880,6 +1973,9 @@ subroutine r8vec_chebyspace ( n, a, b, x )
 
   return
 end
+
+
+
 subroutine r8vec_cheby1space ( n, a, b, x )
 
 !*****************************************************************************80
@@ -1951,6 +2047,9 @@ subroutine r8vec_cheby1space ( n, a, b, x )
 
   return
 end
+
+
+
 subroutine r8vec_cheby2space ( n, a, b, x )
 
 !*****************************************************************************80
@@ -2021,6 +2120,9 @@ subroutine r8vec_cheby2space ( n, a, b, x )
 
   return
 end
+
+
+
 subroutine r8vec_circular_variance ( n, x, circular_variance )
 
 !*****************************************************************************80
@@ -2072,6 +2174,9 @@ subroutine r8vec_circular_variance ( n, x, circular_variance )
 
   return
 end
+
+
+
 subroutine r8vec_compare ( n, a1, a2, isgn )
 
 !*****************************************************************************80
@@ -2147,6 +2252,9 @@ subroutine r8vec_compare ( n, a1, a2, isgn )
 
   return
 end
+
+
+
 subroutine r8vec_convolution ( m, x, n, y, z )
 
 !*****************************************************************************80
@@ -2229,6 +2337,9 @@ subroutine r8vec_convolution ( m, x, n, y, z )
 
   return
 end
+
+
+
 subroutine r8vec_convolution_circ ( n, x, y, z )
 
 !*****************************************************************************80
@@ -2312,6 +2423,9 @@ subroutine r8vec_convolution_circ ( n, x, y, z )
 
   return
 end
+
+
+
 subroutine r8vec_copy ( n, a1, a2 )
 
 !*****************************************************************************80
@@ -2461,6 +2575,9 @@ function r8vec_cross_product_2d ( v1, v2 )
 
   return
 end
+
+
+
 function r8vec_cross_product_affine_2d ( v0, v1, v2 )
 
 !*****************************************************************************80
@@ -2508,6 +2625,9 @@ function r8vec_cross_product_affine_2d ( v0, v1, v2 )
 
   return
 end
+
+
+
 subroutine r8vec_cross_product_3d ( v1, v2, v3 )
 
 !*****************************************************************************80
@@ -2559,6 +2679,9 @@ subroutine r8vec_cross_product_3d ( v1, v2, v3 )
 
   return
 end
+
+
+
 subroutine r8vec_cross_product_affine_3d ( v0, v1, v2, v3 )
 
 !*****************************************************************************80
@@ -2620,6 +2743,9 @@ subroutine r8vec_cross_product_affine_3d ( v0, v1, v2, v3 )
 
   return
 end
+
+
+
 subroutine r8vec_cum ( n, a, a_cum )
 
 !*****************************************************************************80
@@ -2674,6 +2800,9 @@ subroutine r8vec_cum ( n, a, a_cum )
 
   return
 end
+
+
+
 subroutine r8vec_cum0 ( n, a, a_cum )
 
 !*****************************************************************************80
@@ -2728,6 +2857,9 @@ subroutine r8vec_cum0 ( n, a, a_cum )
 
   return
 end
+
+
+
 subroutine r8vec_dif ( n, h, cof )
 
 !*****************************************************************************80
@@ -2855,6 +2987,9 @@ subroutine r8vec_dif ( n, h, cof )
 
   return
 end
+
+
+
 function r8vec_diff_dot_product ( n, u1, v1, u2, v2 )
 
 !*****************************************************************************80
@@ -2909,6 +3044,9 @@ function r8vec_diff_dot_product ( n, u1, v1, u2, v2 )
 
   return
 end
+
+
+
 function r8vec_diff_norm ( n, a, b )
 
 !*****************************************************************************80
@@ -2955,6 +3093,9 @@ function r8vec_diff_norm ( n, a, b )
 
   return
 end
+
+
+
 function r8vec_diff_norm_l1 ( n, a, b )
 
 !*****************************************************************************80
@@ -3001,6 +3142,9 @@ function r8vec_diff_norm_l1 ( n, a, b )
 
   return
 end
+
+
+
 function r8vec_diff_norm_l2 ( n, a, b )
 
 !*****************************************************************************80
@@ -3047,6 +3191,9 @@ function r8vec_diff_norm_l2 ( n, a, b )
 
   return
 end
+
+
+
 function r8vec_diff_norm_li ( n, a, b )
 
 !*****************************************************************************80
@@ -3093,6 +3240,9 @@ function r8vec_diff_norm_li ( n, a, b )
 
   return
 end
+
+
+
 function r8vec_diff_norm_squared ( n, a, b )
 
 !*****************************************************************************80
@@ -3138,6 +3288,9 @@ function r8vec_diff_norm_squared ( n, a, b )
 
   return
 end
+
+
+
 subroutine r8vec_direct_product ( factor_index, factor_order, factor_value, &
   factor_num, point_num, x )
 
@@ -3301,6 +3454,9 @@ subroutine r8vec_direct_product ( factor_index, factor_order, factor_value, &
 
   return
 end
+
+
+
 subroutine r8vec_direct_product2 ( factor_index, factor_order, factor_value, &
   factor_num, point_num, w )
 
@@ -3466,6 +3622,9 @@ subroutine r8vec_direct_product2 ( factor_index, factor_order, factor_value, &
 
   return
 end
+
+
+
 function r8vec_distance ( dim_num, v1, v2 )
 
 !*****************************************************************************80
@@ -3564,6 +3723,9 @@ function r8vec_distinct ( n, a )
 
   return
 end
+
+
+
 function r8vec_dot_product ( n, v1, v2 )
 
 !*****************************************************************************80
@@ -3609,6 +3771,9 @@ function r8vec_dot_product ( n, v1, v2 )
 
   return
 end
+
+
+
 function r8vec_dot_product_affine ( n, v0, v1, v2 )
 
 !*****************************************************************************80
@@ -3652,6 +3817,9 @@ function r8vec_dot_product_affine ( n, v0, v1, v2 )
 
   return
 end
+
+
+
 function r8vec_eq ( n, a1, a2 )
 
 !*****************************************************************************80
@@ -3695,6 +3863,9 @@ function r8vec_eq ( n, a1, a2 )
 
   return
 end
+
+
+
 subroutine r8vec_even ( n, alo, ahi, a )
 
 !*****************************************************************************80
@@ -3757,6 +3928,9 @@ subroutine r8vec_even ( n, alo, ahi, a )
 
   return
 end
+
+
+
 subroutine r8vec_even_select ( n, xlo, xhi, ival, xval )
 
 !*****************************************************************************80
@@ -3820,6 +3994,9 @@ subroutine r8vec_even_select ( n, xlo, xhi, ival, xval )
 
   return
 end
+
+
+
 subroutine r8vec_even2 ( maxval, nfill, nold, xold, nval, xval )
 
 !*****************************************************************************80
@@ -3926,6 +4103,9 @@ subroutine r8vec_even2 ( maxval, nfill, nold, xold, nval, xval )
 
   return
 end
+
+
+
 subroutine r8vec_even2_select ( n, xlo, xhi, ival, xval )
 
 !*****************************************************************************80
@@ -3982,6 +4162,9 @@ subroutine r8vec_even2_select ( n, xlo, xhi, ival, xval )
 
   return
 end
+
+
+
 subroutine r8vec_even3 ( nold, nval, xold, xval )
 
 !*****************************************************************************80
@@ -4092,6 +4275,9 @@ subroutine r8vec_even3 ( nold, nval, xold, xval )
 
   return
 end
+
+
+
 subroutine r8vec_expand_linear ( n, x, fat, xfat )
 
 !*****************************************************************************80
@@ -4170,6 +4356,9 @@ subroutine r8vec_expand_linear ( n, x, fat, xfat )
 
   return
 end
+
+
+
 subroutine r8vec_expand_linear2 ( n, x, before, fat, after, xfat )
 
 !*****************************************************************************80
@@ -4288,6 +4477,9 @@ subroutine r8vec_expand_linear2 ( n, x, before, fat, after, xfat )
 
   return
 end
+
+
+
 subroutine r8vec_first_index ( n, a, tol, first_index )
 
 !*****************************************************************************80
@@ -4353,6 +4545,9 @@ subroutine r8vec_first_index ( n, a, tol, first_index )
 
   return
 end
+
+
+
 subroutine r8vec_floor ( n, r8vec, floorvec )
 
 !*****************************************************************************80
@@ -4419,6 +4614,9 @@ subroutine r8vec_floor ( n, r8vec, floorvec )
 
   return
 end
+
+
+
 subroutine r8vec_frac ( n, a, k, frac )
 
 !*****************************************************************************80
@@ -4547,6 +4745,9 @@ subroutine r8vec_frac ( n, a, k, frac )
 
   return
 end
+
+
+
 subroutine r8vec_fraction ( n, x, fraction )
 
 !*****************************************************************************80
@@ -4610,6 +4811,9 @@ subroutine r8vec_fraction ( n, x, fraction )
 
   return
 end
+
+
+
 function r8vec_gt ( n, a1, a2 )
 
 !*****************************************************************************80
@@ -4672,6 +4876,9 @@ function r8vec_gt ( n, a1, a2 )
 
   return
 end
+
+
+
 subroutine r8vec_heap_a ( n, a )
 
 !*****************************************************************************80
@@ -4789,6 +4996,9 @@ subroutine r8vec_heap_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_heap_d ( n, a )
 
 !*****************************************************************************80
@@ -4906,6 +5116,9 @@ subroutine r8vec_heap_d ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_heap_d_extract ( n, a, value )
 
 !*****************************************************************************80
@@ -4984,6 +5197,9 @@ subroutine r8vec_heap_d_extract ( n, a, value )
 
   return
 end
+
+
+
 subroutine r8vec_heap_d_insert ( n, a, value )
 
 !*****************************************************************************80
@@ -5052,6 +5268,9 @@ subroutine r8vec_heap_d_insert ( n, a, value )
 
   return
 end
+
+
+
 subroutine r8vec_heap_d_max ( n, a, value )
 
 !*****************************************************************************80
@@ -5103,6 +5322,9 @@ subroutine r8vec_heap_d_max ( n, a, value )
 
   return
 end
+
+
+
 subroutine r8vec_histogram ( n, a, a_lo, a_hi, histo_num, histo_gram )
 
 !*****************************************************************************80
@@ -5187,6 +5409,9 @@ subroutine r8vec_histogram ( n, a, a_lo, a_hi, histo_num, histo_gram )
 
   return
 end
+
+
+
 subroutine r8vec_house_column ( n, a, k, v )
 
 !*****************************************************************************80
@@ -5255,6 +5480,9 @@ subroutine r8vec_house_column ( n, a, k, v )
 
   return
 end
+
+
+
 function r8vec_i4vec_dot_product ( n, r8vec, i4vec )
 
 !*****************************************************************************80
@@ -5302,6 +5530,9 @@ function r8vec_i4vec_dot_product ( n, r8vec, i4vec )
 
   return
 end
+
+
+
 function r8vec_in_01 ( n, a )
 
 !*****************************************************************************80
@@ -5348,6 +5579,9 @@ function r8vec_in_01 ( n, a )
 
   return
 end
+
+
+
 function r8vec_in_ab ( n, x, a, b )
 
 !*****************************************************************************80
@@ -5398,6 +5632,9 @@ function r8vec_in_ab ( n, x, a, b )
 
   return
 end
+
+
+
 subroutine r8vec_index_delete_all ( n, x, indx, xval )
 
 !*****************************************************************************80
@@ -5617,6 +5854,9 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
 
   return
 end
+
+
+
 subroutine r8vec_index_delete_one ( n, x, indx, xval, n2, x2, indx2 )
 
 !*****************************************************************************80
@@ -5700,6 +5940,9 @@ subroutine r8vec_index_delete_one ( n, x, indx, xval, n2, x2, indx2 )
 
   return
 end
+
+
+
 subroutine r8vec_index_insert ( n, x, indx, xval )
 
 !*****************************************************************************80
@@ -5759,6 +6002,9 @@ subroutine r8vec_index_insert ( n, x, indx, xval )
 
   return
 end
+
+
+
 subroutine r8vec_index_insert_unique ( n, x, indx, xval )
 
 !*****************************************************************************80
@@ -5825,6 +6071,9 @@ subroutine r8vec_index_insert_unique ( n, x, indx, xval )
 
   return
 end
+
+
+
 subroutine r8vec_index_order ( n, x, indx )
 
 !*****************************************************************************80
@@ -5873,6 +6122,9 @@ subroutine r8vec_index_order ( n, x, indx )
 
   return
 end
+
+
+
 subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
 
 !*****************************************************************************80
@@ -5991,6 +6243,9 @@ subroutine r8vec_index_search ( n, x, indx, xval, less, equal, more )
 
   return
 end
+
+
+
 subroutine r8vec_index_sort_unique ( n, x, indx, n2 )
 
 !*****************************************************************************80
@@ -6047,6 +6302,9 @@ subroutine r8vec_index_sort_unique ( n, x, indx, n2 )
 
   return
 end
+
+
+
 subroutine r8vec_index_sorted_range ( n, r, indx, r_lo, r_hi, i_lo, i_hi )
 
 !*****************************************************************************80
@@ -6212,6 +6470,9 @@ subroutine r8vec_index_sorted_range ( n, r, indx, r_lo, r_hi, i_lo, i_hi )
 
   return
 end
+
+
+
 subroutine r8vec_indexed_heap_d ( n, a, indx )
 
 !*****************************************************************************80
@@ -6329,6 +6590,9 @@ subroutine r8vec_indexed_heap_d ( n, a, indx )
 
   return
 end
+
+
+
 subroutine r8vec_indexed_heap_d_extract ( n, a, indx, indx_extract )
 
 !*****************************************************************************80
@@ -6418,6 +6682,9 @@ subroutine r8vec_indexed_heap_d_extract ( n, a, indx, indx_extract )
 
   return
 end
+
+
+
 subroutine r8vec_indexed_heap_d_insert ( n, a, indx, indx_insert )
 
 !*****************************************************************************80
@@ -6498,6 +6765,9 @@ subroutine r8vec_indexed_heap_d_insert ( n, a, indx, indx_insert )
 
   return
 end
+
+
+
 subroutine r8vec_indexed_heap_d_max ( n, a, indx, indx_max )
 
 !*****************************************************************************80
@@ -6556,6 +6826,9 @@ subroutine r8vec_indexed_heap_d_max ( n, a, indx, indx_max )
 
   return
 end
+
+
+
 subroutine r8vec_indicator ( n, a )
 
 !*****************************************************************************80
@@ -6597,6 +6870,9 @@ subroutine r8vec_indicator ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_insert ( n, a, pos, value )
 
 !*****************************************************************************80
@@ -6660,6 +6936,9 @@ subroutine r8vec_insert ( n, a, pos, value )
 
   return
 end
+
+
+
 function r8vec_insignificant ( n, r, s )
 
 !*****************************************************************************80
@@ -6719,6 +6998,9 @@ function r8vec_insignificant ( n, r, s )
 
   return
 end
+
+
+
 function r8vec_is_int ( n, a )
 
 !*****************************************************************************80
@@ -6761,6 +7043,9 @@ function r8vec_is_int ( n, a )
 
   return
 end
+
+
+
 function r8vec_is_nonnegative ( n, a )
 
 !*****************************************************************************80
@@ -6802,6 +7087,9 @@ function r8vec_is_nonnegative ( n, a )
 
   return
 end
+
+
+
 function r8vec_is_zero ( n, a )
 
 !*****************************************************************************80
@@ -6843,6 +7131,9 @@ function r8vec_is_zero ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_legendre ( n, x_first, x_last, x )
 
 !*****************************************************************************80
@@ -6890,6 +7181,9 @@ subroutine r8vec_legendre ( n, x_first, x_last, x )
 
   return
 end
+
+
+
 subroutine r8vec_linspace ( n, a, b, x )
 
 !*****************************************************************************80
@@ -6950,6 +7244,9 @@ subroutine r8vec_linspace ( n, a, b, x )
 
   return
 end
+
+
+
 subroutine r8vec_linspace2 ( n, a, b, x )
 
 !*****************************************************************************80
@@ -7002,6 +7299,9 @@ subroutine r8vec_linspace2 ( n, a, b, x )
 
   return
 end
+
+
+
 function r8vec_lt ( n, a1, a2 )
 
 !*****************************************************************************80
@@ -7064,6 +7364,9 @@ function r8vec_lt ( n, a1, a2 )
 
   return
 end
+
+
+
 subroutine r8vec_mask_print ( n, a, mask_num, mask, title )
 
 !*****************************************************************************80
@@ -7121,6 +7424,9 @@ subroutine r8vec_mask_print ( n, a, mask_num, mask, title )
 
   return
 end
+
+
+
 subroutine r8vec_max ( n, a, amax )
 
 !*****************************************************************************80
@@ -7162,6 +7468,9 @@ subroutine r8vec_max ( n, a, amax )
 
   return
 end
+
+
+
 subroutine r8vec_max_abs_index ( n, a, max_index )
 
 !*****************************************************************************80
@@ -7218,6 +7527,9 @@ subroutine r8vec_max_abs_index ( n, a, max_index )
 
   return
 end
+
+
+
 subroutine r8vec_max_index ( n, a, max_index )
 
 !*****************************************************************************80
@@ -7274,6 +7586,9 @@ subroutine r8vec_max_index ( n, a, max_index )
 
   return
 end
+
+
+
 subroutine r8vec_mean ( n, a, mean )
 
 !*****************************************************************************80
@@ -7315,6 +7630,9 @@ subroutine r8vec_mean ( n, a, mean )
 
   return
 end
+
+
+
 subroutine r8vec_median ( n, a, median )
 
 !*****************************************************************************80
@@ -7359,6 +7677,9 @@ subroutine r8vec_median ( n, a, median )
 
   return
 end
+
+
+
 subroutine r8vec_midspace ( n, a, b, x )
 
 !*****************************************************************************80
@@ -7414,6 +7735,9 @@ subroutine r8vec_midspace ( n, a, b, x )
 
   return
 end
+
+
+
 subroutine r8vec_min ( n, a, amin )
 
 !*****************************************************************************80
@@ -7455,6 +7779,9 @@ subroutine r8vec_min ( n, a, amin )
 
   return
 end
+
+
+
 subroutine r8vec_min_index ( n, a, min_index )
 
 !*****************************************************************************80
@@ -7511,6 +7838,9 @@ subroutine r8vec_min_index ( n, a, min_index )
 
   return
 end
+
+
+
 function r8vec_min_pos ( n, a )
 
 !*****************************************************************************80
@@ -7564,6 +7894,9 @@ function r8vec_min_pos ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_mirror_next ( n, a, done )
 
 !*****************************************************************************80
@@ -7683,6 +8016,9 @@ subroutine r8vec_mirror_next ( n, a, done )
 
   return
 end
+
+
+
 function r8vec_negative_strict ( n, a )
 
 !*****************************************************************************80
@@ -7725,6 +8061,9 @@ function r8vec_negative_strict ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_nint ( n, a )
 
 !*****************************************************************************80
@@ -7864,6 +8203,9 @@ function r8vec_norm_affine ( n, v0, v1 )
 
   return
 end
+
+
+
 function r8vec_norm_l0 ( n, a )
 
 !*****************************************************************************80
@@ -7918,6 +8260,9 @@ function r8vec_norm_l0 ( n, a )
 
   return
 end
+
+
+
 function r8vec_norm_l1 ( n, a )
 
 !*****************************************************************************80
@@ -7963,6 +8308,9 @@ function r8vec_norm_l1 ( n, a )
 
   return
 end
+
+
+
 function r8vec_norm_l2 ( n, a )
 
 !*****************************************************************************80
@@ -8008,6 +8356,9 @@ function r8vec_norm_l2 ( n, a )
 
   return
 end
+
+
+
 function r8vec_norm_li ( n, a )
 
 !*****************************************************************************80
@@ -8053,6 +8404,9 @@ function r8vec_norm_li ( n, a )
 
   return
 end
+
+
+
 function r8vec_norm_lp ( n, a, p )
 
 !*****************************************************************************80
@@ -8118,6 +8472,9 @@ function r8vec_norm_lp ( n, a, p )
 
   return
 end
+
+
+
 function r8vec_norm_squared ( n, a )
 
 !*****************************************************************************80
@@ -8161,6 +8518,9 @@ function r8vec_norm_squared ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_normal_01 ( n, seed, x )
 
 !*****************************************************************************80
@@ -8358,6 +8718,9 @@ subroutine r8vec_normal_01 ( n, seed, x )
 
   return
 end
+
+
+
 subroutine r8vec_normalize ( n, a )
 
 !*****************************************************************************80
@@ -8404,6 +8767,9 @@ subroutine r8vec_normalize ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_normalize_l1 ( n, a )
 
 !*****************************************************************************80
@@ -8454,6 +8820,9 @@ subroutine r8vec_normalize_l1 ( n, a )
 
   return
 end
+
+
+
 function r8vec_normsq ( n, v )
 
 !*****************************************************************************80
@@ -8499,6 +8868,9 @@ function r8vec_normsq ( n, v )
 
   return
 end
+
+
+
 function r8vec_normsq_affine ( n, v0, v1 )
 
 !*****************************************************************************80
@@ -8548,6 +8920,9 @@ function r8vec_normsq_affine ( n, v0, v1 )
 
   return
 end
+
+
+
 subroutine r8vec_order_type ( n, a, order )
 
 !*****************************************************************************80
@@ -8673,6 +9048,9 @@ subroutine r8vec_order_type ( n, a, order )
 
   return
 end
+
+
+
 subroutine r8vec_part_quick_a ( n, a, l, r )
 
 !*****************************************************************************80
@@ -8791,6 +9169,9 @@ subroutine r8vec_part_quick_a ( n, a, l, r )
 
   return
 end
+
+
+
 subroutine r8vec_permute ( n, p, a )
 use jburk_r8lib_i4vec_, only: perm_check
 
@@ -8922,6 +9303,9 @@ use jburk_r8lib_i4vec_, only: perm_check
 
   return
 end
+
+
+
 subroutine r8vec_permute_cyclic ( n, k, a )
 
 !*****************************************************************************80
@@ -8977,6 +9361,9 @@ subroutine r8vec_permute_cyclic ( n, k, a )
 
   return
 end
+
+
+
 subroutine r8vec_permute_uniform ( n, a, seed )
 use jburk_r8lib_i4vec_, only: perm_check
 use jburk_r8lib_i4vec_, only: perm_uniform
@@ -9025,6 +9412,9 @@ use jburk_r8lib_i4vec_, only: perm_uniform
 
   return
 end
+
+
+
 subroutine r8vec_polarize ( n, a, p, a_normal, a_parallel )
 
 !*****************************************************************************80
@@ -9094,6 +9484,9 @@ subroutine r8vec_polarize ( n, a, p, a_normal, a_parallel )
 
   return
 end
+
+
+
 function r8vec_positive_strict ( n, a )
 
 !*****************************************************************************80
@@ -9136,6 +9529,9 @@ function r8vec_positive_strict ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_print ( n, a, title )
 
 !*****************************************************************************80
@@ -9184,6 +9580,9 @@ subroutine r8vec_print ( n, a, title )
 
   return
 end
+
+
+
 subroutine r8vec_print_part ( n, a, max_print, title )
 
 !*****************************************************************************80
@@ -9272,6 +9671,9 @@ subroutine r8vec_print_part ( n, a, max_print, title )
 
   return
 end
+
+
+
 subroutine r8vec_print_some ( n, a, i_lo, i_hi, title )
 
 !*****************************************************************************80
@@ -9325,6 +9727,9 @@ subroutine r8vec_print_some ( n, a, i_lo, i_hi, title )
 
   return
 end
+
+
+
 subroutine r8vec_print2 ( n, a )
 
 !*****************************************************************************80
@@ -9409,6 +9814,9 @@ subroutine r8vec_print2 ( n, a )
 
   return
 end
+
+
+
 function r8vec_product ( n, a )
 
 !*****************************************************************************80
@@ -9460,6 +9868,9 @@ function r8vec_product ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_range ( n, x, xmin, xmax, y, ymin, ymax )
 
 !*****************************************************************************80
@@ -9528,6 +9939,9 @@ subroutine r8vec_range ( n, x, xmin, xmax, y, ymin, ymax )
 
   return
 end
+
+
+
 subroutine r8vec_range_2 ( n, a, amin, amax )
 
 !*****************************************************************************80
@@ -9583,6 +9997,9 @@ subroutine r8vec_range_2 ( n, a, amin, amax )
 
   return
 end
+
+
+
 subroutine r8vec_reverse ( n, a )
 
 !*****************************************************************************80
@@ -9636,6 +10053,9 @@ subroutine r8vec_reverse ( n, a )
 
   return
 end
+
+
+
 function r8vec_rms ( n, a )
 
 !*****************************************************************************80
@@ -9681,6 +10101,9 @@ function r8vec_rms ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_rotate ( n, a, m )
 
 !*****************************************************************************80
@@ -9798,6 +10221,9 @@ subroutine r8vec_rotate ( n, a, m )
 
   return
 end
+
+
+
 function r8vec_scalar_triple_product ( v1, v2, v3 )
 
 !*****************************************************************************80
@@ -9844,6 +10270,9 @@ function r8vec_scalar_triple_product ( v1, v2, v3 )
 
   return
 end
+
+
+
 subroutine r8vec_search_binary_a ( n, a, aval, indx )
 
 !*****************************************************************************80
@@ -9921,6 +10350,9 @@ subroutine r8vec_search_binary_a ( n, a, aval, indx )
 
   return
 end
+
+
+
 subroutine r8vec_shift ( shift, n, x )
 
 !*****************************************************************************80
@@ -9973,6 +10405,9 @@ subroutine r8vec_shift ( shift, n, x )
 
   return
 end
+
+
+
 subroutine r8vec_shift_circular ( shift, n, x )
 
 !*****************************************************************************80
@@ -10024,6 +10459,9 @@ subroutine r8vec_shift_circular ( shift, n, x )
 
   return
 end
+
+
+
 subroutine r8vec_sort_bubble_a ( n, a )
 
 !*****************************************************************************80
@@ -10078,6 +10516,9 @@ subroutine r8vec_sort_bubble_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_bubble_d ( n, a )
 
 !*****************************************************************************80
@@ -10132,6 +10573,9 @@ subroutine r8vec_sort_bubble_d ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_heap_a ( n, a )
 
 !*****************************************************************************80
@@ -10213,6 +10657,9 @@ subroutine r8vec_sort_heap_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_heap_d ( n, a )
 
 !*****************************************************************************80
@@ -10289,6 +10736,9 @@ subroutine r8vec_sort_heap_d ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_heap_index_a ( n, a, indx )
 
 !*****************************************************************************80
@@ -10413,6 +10863,9 @@ subroutine r8vec_sort_heap_index_a ( n, a, indx )
 
   return
 end
+
+
+
 subroutine r8vec_sort_heap_index_d ( n, a, indx )
 
 !*****************************************************************************80
@@ -10537,6 +10990,9 @@ subroutine r8vec_sort_heap_index_d ( n, a, indx )
 
   return
 end
+
+
+
 subroutine r8vec_sort_heap_mask_a ( n, a, mask_num, mask, indx )
 use jburk_r8lib_i4vec_, only: i4vec_indicator
 
@@ -10673,6 +11129,9 @@ use jburk_r8lib_i4vec_, only: i4vec_indicator
 
   return
 end
+
+
+
 subroutine r8vec_sort_insert_a ( n, a )
 
 !*****************************************************************************80
@@ -10743,6 +11202,9 @@ subroutine r8vec_sort_insert_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_insert_index_a ( n, a, indx )
 
 !*****************************************************************************80
@@ -10823,6 +11285,9 @@ subroutine r8vec_sort_insert_index_a ( n, a, indx )
 
   return
 end
+
+
+
 subroutine r8vec_sort_insert_index_d ( n, a, indx )
 
 !*****************************************************************************80
@@ -10903,6 +11368,9 @@ subroutine r8vec_sort_insert_index_d ( n, a, indx )
 
   return
 end
+
+
+
 subroutine r8vec_sort_quick_a ( n, a )
 
 !*****************************************************************************80
@@ -11028,6 +11496,9 @@ subroutine r8vec_sort_quick_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort_shell_a ( n, a )
 
 !*****************************************************************************80
@@ -11134,6 +11605,9 @@ subroutine r8vec_sort_shell_a ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_sort2_a ( n, x, y )
 
 !*****************************************************************************80
@@ -11223,6 +11697,9 @@ subroutine r8vec_sort2_a ( n, x, y )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
 
 !*****************************************************************************80
@@ -11381,6 +11858,9 @@ subroutine r8vec_sorted_merge_a ( na, a, nb, b, nc, c )
 
   return
 end
+
+
+
 function r8vec_sorted_nearest ( n, a, value )
 
 !*****************************************************************************80
@@ -11522,6 +12002,9 @@ function r8vec_sorted_nearest ( n, a, value )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_range ( n, r, r_lo, r_hi, i_lo, i_hi )
 
 !*****************************************************************************80
@@ -11683,6 +12166,9 @@ subroutine r8vec_sorted_range ( n, r, r_lo, r_hi, i_lo, i_hi )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_split ( n, a, split, i_lt, i_gt )
 
 !*****************************************************************************80
@@ -11794,6 +12280,9 @@ subroutine r8vec_sorted_split ( n, a, split, i_lt, i_gt )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 
 !*****************************************************************************80
@@ -11922,6 +12411,9 @@ subroutine r8vec_sorted_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_unique ( n, a, tol, unique_num )
 
 !*****************************************************************************80
@@ -11985,6 +12477,9 @@ subroutine r8vec_sorted_unique ( n, a, tol, unique_num )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_unique_count ( n, a, tol, unique_num )
 
 !*****************************************************************************80
@@ -12047,6 +12542,9 @@ subroutine r8vec_sorted_unique_count ( n, a, tol, unique_num )
 
   return
 end
+
+
+
 subroutine r8vec_sorted_unique_hist ( n, a, tol, maxuniq, unique_num, &
   auniq, acount )
 
@@ -12132,6 +12630,9 @@ subroutine r8vec_sorted_unique_hist ( n, a, tol, maxuniq, unique_num, &
 
   return
 end
+
+
+
 subroutine r8vec_split ( n, a, split, isplit )
 
 !*****************************************************************************80
@@ -12224,6 +12725,9 @@ subroutine r8vec_split ( n, a, split, isplit )
 
   return
 end
+
+
+
 subroutine r8vec_std ( n, a, std )
 
 !*****************************************************************************80
@@ -12285,6 +12789,9 @@ subroutine r8vec_std ( n, a, std )
 
   return
 end
+
+
+
 subroutine r8vec_stutter ( n, a, m, am )
 
 !*****************************************************************************80
@@ -12339,6 +12846,9 @@ subroutine r8vec_stutter ( n, a, m, am )
 
   return
 end
+
+
+
 function r8vec_sum ( n, a )
 
 !*****************************************************************************80
@@ -12385,6 +12895,9 @@ function r8vec_sum ( n, a )
 
   return
 end
+
+
+
 subroutine r8vec_swap ( n, a1, a2 )
 
 !*****************************************************************************80
@@ -12427,6 +12940,9 @@ subroutine r8vec_swap ( n, a1, a2 )
 
   return
 end
+
+
+
 subroutine r8vec_transpose_print ( n, a, title )
 
 !*****************************************************************************80
@@ -12487,6 +13003,9 @@ subroutine r8vec_transpose_print ( n, a, title )
 
   return
 end
+
+
+
 subroutine r8vec_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 
 !*****************************************************************************80
@@ -12621,6 +13140,9 @@ subroutine r8vec_undex ( x_num, x_val, x_unique_num, tol, undx, xdnu )
 
   return
 end
+
+
+
 subroutine r8vec_uniform_01 ( n, seed, r )
 
 !*****************************************************************************80
@@ -12704,6 +13226,9 @@ subroutine r8vec_uniform_01 ( n, seed, r )
 
   return
 end
+
+
+
 subroutine r8vec_uniform_ab ( n, a, b, seed, r )
 
 !*****************************************************************************80
@@ -12803,6 +13328,9 @@ subroutine r8vec_uniform_ab ( n, a, b, seed, r )
 
   return
 end
+
+
+
 subroutine r8vec_uniform_abvec ( n, a, b, seed, r )
 
 !*****************************************************************************80
@@ -12903,6 +13431,9 @@ subroutine r8vec_uniform_abvec ( n, a, b, seed, r )
 
   return
 end
+
+
+
 subroutine r8vec_unique_count ( n, a, tol, unique_num )
 
 !*****************************************************************************80
@@ -12968,6 +13499,9 @@ subroutine r8vec_unique_count ( n, a, tol, unique_num )
 
   return
 end
+
+
+
 subroutine r8vec_unique_index ( n, a, tol, unique_index )
 
 !*****************************************************************************80
@@ -13039,6 +13573,9 @@ subroutine r8vec_unique_index ( n, a, tol, unique_index )
 
   return
 end
+
+
+
 subroutine r8vec_variance ( n, a, variance )
 
 !*****************************************************************************80
@@ -13100,6 +13637,9 @@ subroutine r8vec_variance ( n, a, variance )
 
   return
 end
+
+
+
 subroutine r8vec_vector_triple_product ( v1, v2, v3, v )
 
 !*****************************************************************************80
@@ -13146,6 +13686,9 @@ subroutine r8vec_vector_triple_product ( v1, v2, v3, v )
 
   return
 end
+
+
+
 subroutine r8vec_write ( n, r, output_file )
 
 !*****************************************************************************80
@@ -13198,6 +13741,9 @@ subroutine r8vec_write ( n, r, output_file )
 
   return
 end
+
+
+
 subroutine r8vec_zero ( n, a )
 
 !*****************************************************************************80
