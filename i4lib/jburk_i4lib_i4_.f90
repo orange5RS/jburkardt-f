@@ -1,4 +1,4 @@
-module     jburk_i4_
+module     jburk_i4lib_i4_
 use, intrinsic :: iso_fortran_env
 implicit none
 
@@ -3691,4 +3691,4 @@ function i4_bit_hi1 ( n )
       return
     end
 
-end module jburk_i4_
+end module jburk_i4lib_i4_

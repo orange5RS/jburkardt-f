@@ -1,4 +1,4 @@
-module     jburk_i4mat_
+module     jburk_i4lib_i4mat_
 use, intrinsic :: iso_fortran_env
 implicit none
 !   private
@@ -2085,4 +2085,4 @@ contains
       return
     end
 
-end module jburk_i4mat_
+end module jburk_i4lib_i4mat_

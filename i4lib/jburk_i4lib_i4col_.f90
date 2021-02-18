@@ -1,4 +1,4 @@
-module     jburk_i4col_
+module     jburk_i4lib_i4col_
 use, intrinsic :: iso_fortran_env
 implicit none
 !   private
@@ -1483,4 +1483,4 @@ contains
     
       return
     end
-end module jburk_i4col_
+end module jburk_i4lib_i4col_

@@ -1,4 +1,4 @@
-module     jburk_i4row_
+module     jburk_i4lib_i4row_
 use, intrinsic :: iso_fortran_env
 implicit none
 
@@ -1052,4 +1052,4 @@ contains
       return
     end
 
-end module jburk_i4row_
+end module jburk_i4lib_i4row_
