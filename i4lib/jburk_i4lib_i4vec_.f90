@@ -1,160 +1,159 @@
-module    jburk_i4vec_
+module    jburk_i4lib_i4vec_
 use, intrinsic :: iso_fortran_env
 implicit none
-   !private
 
-   interface          i4vec_add
+   interface           i4vec_add
       module procedure i4vec_add
    end interface       i4vec_add
-   public             i4vec_add
+   public              i4vec_add
 
-   interface          i4vec_all_nonpositive
+   interface           i4vec_all_nonpositive
       module procedure i4vec_all_nonpositive
    end interface       i4vec_all_nonpositive
-   public             i4vec_all_nonpositive
+   public              i4vec_all_nonpositive
 
-   interface          i4vec_amax
+   interface           i4vec_amax
       module procedure i4vec_amax
    end interface       i4vec_amax
-   public             i4vec_amax
+   public              i4vec_amax
 
-   interface          i4vec_amax_index
+   interface           i4vec_amax_index
       module procedure i4vec_amax_index
    end interface       i4vec_amax_index
-   public             i4vec_amax_index
+   public              i4vec_amax_index
 
-   interface          i4vec_amin
+   interface           i4vec_amin
       module procedure i4vec_amin
    end interface       i4vec_amin
-   public             i4vec_amin
+   public              i4vec_amin
 
-   interface          i4vec_amin_index
+   interface           i4vec_amin_index
       module procedure i4vec_amin_index
    end interface       i4vec_amin_index
-   public             i4vec_amin_index
+   public              i4vec_amin_index
 
-   interface          i4vec_aminz
+   interface           i4vec_aminz
       module procedure i4vec_aminz
    end interface       i4vec_aminz
-   public             i4vec_aminz
+   public              i4vec_aminz
 
-   interface          i4vec_aminz_index
+   interface           i4vec_aminz_index
       module procedure i4vec_aminz_index
    end interface       i4vec_aminz_index
-   public             i4vec_aminz_index
+   public              i4vec_aminz_index
 
-   interface          i4vec_any_lt
+   interface           i4vec_any_lt
       module procedure i4vec_any_lt
    end interface       i4vec_any_lt
-   public             i4vec_any_lt
+   public              i4vec_any_lt
 
-   interface          i4vec_any_negative
+   interface           i4vec_any_negative
       module procedure i4vec_any_negative
    end interface       i4vec_any_negative
-   public             i4vec_any_negative
+   public              i4vec_any_negative
 
-   interface          i4vec_any_nonzero
+   interface           i4vec_any_nonzero
       module procedure i4vec_any_nonzero
    end interface       i4vec_any_nonzero
-   public             i4vec_any_nonzero
+   public              i4vec_any_nonzero
 
-   interface          i4vec_ascend_sub
+   interface           i4vec_ascend_sub
       module procedure i4vec_ascend_sub
    end interface       i4vec_ascend_sub
-   public             i4vec_ascend_sub
+   public              i4vec_ascend_sub
 
-   interface          i4vec_ascends
+   interface           i4vec_ascends
       module procedure i4vec_ascends
    end interface       i4vec_ascends
-   public             i4vec_ascends
+   public              i4vec_ascends
 
-   interface          i4vec_axpy
+   interface           i4vec_axpy
       module procedure i4vec_axpy
    end interface       i4vec_axpy
-   public             i4vec_axpy
+   public              i4vec_axpy
 
-   interface          i4vec_bracket
+   interface           i4vec_bracket
       module procedure i4vec_bracket
    end interface       i4vec_bracket
-   public             i4vec_bracket
+   public              i4vec_bracket
 
-   interface          i4vec_compare
+   interface           i4vec_compare
       module procedure i4vec_compare
    end interface       i4vec_compare
-   public             i4vec_compare
+   public              i4vec_compare
 
-   interface          i4vec_copy
+   interface           i4vec_copy
       module procedure i4vec_copy
    end interface       i4vec_copy
-   public             i4vec_copy
+   public              i4vec_copy
 
-   interface          i4vec_cum
+   interface           i4vec_cum
       module procedure i4vec_cum
    end interface       i4vec_cum
-   public             i4vec_cum
+   public              i4vec_cum
 
-   interface          i4vec_cum0
+   interface           i4vec_cum0
       module procedure i4vec_cum0
    end interface       i4vec_cum0
-   public             i4vec_cum0
+   public              i4vec_cum0
 
-   interface          i4vec_descends
+   interface           i4vec_descends
       module procedure i4vec_descends
    end interface       i4vec_descends
-   public             i4vec_descends
+   public              i4vec_descends
 
-   interface          i4vec_direct_product
+   interface           i4vec_direct_product
       module procedure i4vec_direct_product
    end interface       i4vec_direct_product
-   public             i4vec_direct_product
+   public              i4vec_direct_product
 
-   interface          i4vec_dot_product
+   interface           i4vec_dot_product
       module procedure i4vec_dot_product
    end interface       i4vec_dot_product
-   public             i4vec_dot_product
+   public              i4vec_dot_product
 
 
 
 
-   interface          i4vec_frac
+   interface           i4vec_frac
       module procedure i4vec_frac
    end interface       i4vec_frac
-   public             i4vec_frac
+   public              i4vec_frac
 
-   interface          i4vec_heap_a
+   interface           i4vec_heap_a
       module procedure i4vec_heap_a
    end interface       i4vec_heap_a
-   public             i4vec_heap_a
+   public              i4vec_heap_a
 
-   interface          i4vec_heap_d
+   interface           i4vec_heap_d
       module procedure i4vec_heap_d
    end interface       i4vec_heap_d
-   public             i4vec_heap_d
+   public              i4vec_heap_d
 
-   interface          i4vec_heap_d_extract
+   interface           i4vec_heap_d_extract
       module procedure i4vec_heap_d_extract
    end interface       i4vec_heap_d_extract
-   public             i4vec_heap_d_extract
+   public              i4vec_heap_d_extract
 
-   interface          i4vec_heap_d_insert
+   interface           i4vec_heap_d_insert
       module procedure i4vec_heap_d_insert
    end interface       i4vec_heap_d_insert
-   public             i4vec_heap_d_insert
+   public              i4vec_heap_d_insert
 
    interface           i4vec_heap_d_max
       module procedure i4vec_heap_d_max
    end interface       i4vec_heap_d_max
    public              i4vec_heap_d_max
 
-   interface          i4vec_indicator
+   interface           i4vec_indicator
       module procedure i4vec_indicator
    end interface       i4vec_indicator
-   public             i4vec_indicator
+   public              i4vec_indicator
 
-   interface          i4vec_median
+   interface           i4vec_median
       module procedure i4vec_median
    end interface       i4vec_median
-   public             i4vec_median
+   public              i4vec_median
 
    ! interface           i4vec_pop
    !    module procedure i4vec_pop
@@ -185,7 +184,6 @@ implicit none
       module procedure i4vec_split_unsort
    end interface       i4vec_split_unsort
    public              i4vec_split_unsort
-
 
 contains
 
@@ -3191,6 +3189,7 @@ end subroutine i4vec_frac_2000
    
       return
    end
+
    subroutine i4vec_index_insert ( n, x, indx, xval )
    
    !*****************************************************************************80
@@ -3366,6 +3365,7 @@ end subroutine i4vec_frac_2000
    
       return
    end
+
    subroutine i4vec_index_search ( n, x, indx, xval, less, equal, more )
    
    !*****************************************************************************80
@@ -9627,26 +9627,22 @@ subroutine perm_random ( n, seed, p )
 !    Output, integer ( kind = 4 ) P(N), a permutation of the numbers
 !    from 1 to N.
 !
-  implicit none
+   implicit none
+   integer(kind=4) ::  n
+   integer(kind=4) ::  i
+   integer(kind=4) ::  i4_uniform
+   integer(kind=4) ::  j
+   integer(kind=4) ::  p(n)
+   integer(kind=4) ::  seed
 
-  integer ( kind = 4 ) n
+   call i4vec_indicator ( n, p )
 
-  integer ( kind = 4 ) i
-  integer ( kind = 4 ) i4_uniform
-  integer ( kind = 4 ) j
-  integer ( kind = 4 ) p(n)
-  integer ( kind = 4 ) seed
-
-  call i4vec_indicator ( n, p )
-
-  do i = n, 2, -1
-    j = i4_uniform ( 1, i, seed )
-    call i4_swap ( p(i), p(j) )
-  end do
-
-  return
+   do i = n, 2, -1
+      j = i4_uniform (1, i, seed)
+      call i4_swap ( p(i), p(j) )
+   end do
 end subroutine perm_random
 
 
-end module jburk_i4vec_
+end module jburk_i4lib_i4vec_
 
