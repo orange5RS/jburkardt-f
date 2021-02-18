@@ -2340,8 +2340,25 @@ end
 
 
 
-subroutine r8vec_convolution_circ ( n, x, y, z )
+!> @author John Burkardt
+!> @author [P. Jang](orange224factory@gmail.com)
+!> @brief  R8VEC_CONVOLUTION_CIRC: discrete circular convolution of two R8VEC's.
+!> @date   2000-09-23
+!> @date   2020-02-20
+!> @see    
+subroutine     r8vec_convolution_circ (n, x, y, z)
+implicit none
+   integer, intent(in) :: n
+   real(kind=8), intent(in) :: x(n)
+   real(kind=8), intent(in) :: y(n)
+   real(kind=8), intent(out) :: z(n)
+   integer :: m
 
+   do m = 1, n
+      z(m) = dot_product ( x(1:m), y(m:1:-1) ) &
+           + dot_product ( x(m+1:n), y(n:m+1:-1) )
+   end do
+end subroutine r8vec_convolution_circ
 !*****************************************************************************80
 !
 !! R8VEC_CONVOLUTION_CIRC: discrete circular convolution of two R8VEC's.
@@ -2407,22 +2424,6 @@ subroutine r8vec_convolution_circ ( n, x, y, z )
 !
 !    Output, real(kind=8) Z(N), the circular convolution of X and Y.
 !
-  implicit none
-
-  integer(kind=4) n
-
-  integer(kind=4) m
-  real(kind=8) x(n)
-  real(kind=8) y(n)
-  real(kind=8) z(n)
-
-  do m = 1, n
-    z(m) = dot_product ( x(1:m), y(m:1:-1) ) &
-         + dot_product ( x(m+1:n), y(n:m+1:-1) )
-  end do
-
-  return
-end
 
 
 
